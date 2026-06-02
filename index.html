@@ -1,0 +1,744 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Revisão de Matemática – 5º Ano</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&family=Syne:wght@700;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0d0d1a;
+  --surface: #13131f;
+  --panel: #1a1a2e;
+  --border: #2a2a45;
+  --accent: #6c63ff;
+  --accent2: #ff6584;
+  --accent3: #43e97b;
+  --accent4: #f7971e;
+  --text: #e8e8f0;
+  --muted: #8888aa;
+  --white: #fff;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'Space Grotesk', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+}
+
+/* HEADER */
+header {
+  background: linear-gradient(135deg, #0d0d1a 0%, #1a0a2e 50%, #0d1a1a 100%);
+  border-bottom: 1px solid var(--border);
+  padding: 2rem 1rem 1.5rem;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+header::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: 
+    radial-gradient(ellipse 60% 80% at 20% 50%, rgba(108,99,255,0.12) 0%, transparent 70%),
+    radial-gradient(ellipse 60% 80% at 80% 50%, rgba(67,233,123,0.08) 0%, transparent 70%);
+}
+.header-symbols {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+.sym {
+  position: absolute;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 1.1rem;
+  opacity: 0.06;
+  color: var(--accent);
+  animation: floatSym 8s ease-in-out infinite;
+}
+@keyframes floatSym {
+  0%,100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+header h1 {
+  font-family: 'Syne', sans-serif;
+  font-size: clamp(1.6rem, 5vw, 2.6rem);
+  font-weight: 800;
+  position: relative;
+  background: linear-gradient(90deg, #a78bfa, #6c63ff, #43e97b);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+header p {
+  font-size: .88rem;
+  color: var(--muted);
+  margin-top: .4rem;
+  position: relative;
+}
+
+.progress-wrap {
+  width: min(420px,85%);
+  margin: 1rem auto 0;
+  background: var(--border);
+  border-radius: 99px;
+  height: 6px;
+}
+.progress-fill {
+  height: 100%;
+  border-radius: 99px;
+  background: linear-gradient(90deg, var(--accent), var(--accent3));
+  transition: width .5s ease;
+}
+#prog-label { font-size: .75rem; color: var(--muted); margin-top: .35rem; }
+
+/* NAV */
+nav {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: .4rem;
+  padding: 1rem;
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+}
+nav button {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 600;
+  font-size: .78rem;
+  padding: .4rem .95rem;
+  border-radius: 6px;
+  border: 1px solid var(--border);
+  cursor: pointer;
+  background: var(--panel);
+  color: var(--muted);
+  transition: all .2s;
+  letter-spacing: .3px;
+}
+nav button:hover, nav button.active {
+  background: var(--accent);
+  color: #fff;
+  border-color: var(--accent);
+}
+
+main { max-width: 800px; margin: 0 auto; padding: 1.5rem 1rem 4rem; }
+
+.section { display: none; }
+.section.active { display: block; animation: fadeIn .35s ease; }
+@keyframes fadeIn { from { opacity:0; transform:translateY(10px); } to { opacity:1; transform:none; } }
+
+.sec-title {
+  font-family: 'Syne', sans-serif;
+  font-size: 1.3rem;
+  font-weight: 800;
+  color: var(--accent);
+  margin-bottom: 1.2rem;
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+}
+
+/* MOD TABS */
+.mod-tabs {
+  display: flex;
+  gap: .35rem;
+  flex-wrap: wrap;
+  margin-bottom: 1.2rem;
+}
+.mod-tab {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 700;
+  font-size: .76rem;
+  padding: .35rem .85rem;
+  border-radius: 4px;
+  border: 1px solid var(--border);
+  cursor: pointer;
+  background: transparent;
+  color: var(--muted);
+  transition: all .2s;
+  letter-spacing: .3px;
+}
+.mod-tab.active { background: var(--accent2); color: #fff; border-color: var(--accent2); }
+.mod-panel { display: none; }
+.mod-panel.active { display: block; animation: fadeIn .3s ease; }
+
+/* BLOCKS */
+.block {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 1.1rem 1.3rem;
+  margin-bottom: 1rem;
+  border-left: 3px solid var(--accent);
+}
+.block h3 {
+  font-family: 'Syne', sans-serif;
+  font-size: .95rem;
+  font-weight: 700;
+  color: var(--accent);
+  margin-bottom: .6rem;
+}
+.block ul { padding-left: 1.1rem; }
+.block li { font-size: .88rem; margin-bottom: .3rem; line-height: 1.6; color: var(--text); }
+.block.green { border-left-color: var(--accent3); }
+.block.green h3 { color: var(--accent3); }
+.block.red { border-left-color: var(--accent2); }
+.block.red h3 { color: var(--accent2); }
+.block.amber { border-left-color: var(--accent4); }
+.block.amber h3 { color: var(--accent4); }
+
+/* PLACE VALUE TABLE */
+.pv-scroll { overflow-x: auto; margin-bottom: 1rem; }
+.pv-table { border-collapse: collapse; min-width: 640px; font-size: .8rem; }
+.pv-table th, .pv-table td { padding: .45rem .6rem; text-align: center; border: 1px solid var(--border); }
+.pv-table .class-header { font-family: 'Syne', sans-serif; font-weight: 700; font-size: .85rem; }
+.cls-bi { background: rgba(108,99,255,0.25); color: #c4b5fd; }
+.cls-mi { background: rgba(67,233,123,0.2); color: #86efac; }
+.cls-mil { background: rgba(247,151,30,0.2); color: #fed7aa; }
+.cls-un { background: rgba(255,101,132,0.2); color: #fca5a5; }
+.pv-table .order { font-family: 'JetBrains Mono', monospace; font-size: .75rem; color: var(--muted); }
+.pv-table .name { font-weight: 600; font-size: .78rem; }
+
+/* ORDINALS GRID */
+.ord-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: .5rem; margin-bottom: 1rem; }
+.ord-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: .55rem .7rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: .83rem;
+}
+.ord-num { font-family: 'JetBrains Mono', monospace; font-weight: 700; color: var(--accent); }
+.ord-name { color: var(--text); font-size: .78rem; }
+
+/* ANGLE CARDS */
+.angle-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: .8rem; margin-bottom: 1rem; }
+.angle-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: .9rem;
+  text-align: center;
+}
+.angle-card .ang-visual {
+  width: 60px; height: 60px;
+  margin: 0 auto .6rem;
+  position: relative;
+}
+.angle-card svg { width: 100%; height: 100%; }
+.angle-card h4 { font-family: 'Syne', sans-serif; font-size: .9rem; font-weight: 700; margin-bottom: .2rem; }
+.angle-card p { font-size: .8rem; color: var(--muted); }
+.ac-reto h4 { color: var(--accent3); }
+.ac-agudo h4 { color: var(--accent); }
+.ac-obtuso h4 { color: var(--accent4); }
+.ac-raso h4 { color: var(--accent2); }
+
+/* COMBINATIONS */
+.combo-demo {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: .9rem;
+}
+.combo-eq { color: var(--accent3); font-size: 1.1rem; font-weight: 700; margin: .4rem 0; }
+.combo-op { color: var(--accent); }
+
+/* BALANCE VIZ */
+.balance-wrap { display: flex; gap: 1rem; flex-wrap: wrap; margin-bottom: 1rem; }
+.balance-card {
+  flex: 1;
+  min-width: 200px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 1rem;
+  text-align: center;
+}
+.balance-card .eq-sign { font-size: 2rem; font-weight: 700; margin: .4rem 0; display: block; }
+.eq-true .eq-sign { color: var(--accent3); }
+.eq-false .eq-sign { color: var(--accent2); }
+.balance-card .members { font-family: 'JetBrains Mono', monospace; font-size: .92rem; color: var(--text); }
+.balance-card p { font-size: .8rem; color: var(--muted); margin-top: .4rem; }
+
+/* FLASHCARDS */
+.fc-grid { display: grid; gap: .8rem; }
+.fc { perspective: 800px; cursor: pointer; min-height: 110px; }
+.fc-inner {
+  position: relative; width: 100%; min-height: 110px;
+  transform-style: preserve-3d; transition: transform .5s ease;
+}
+.fc.flipped .fc-inner { transform: rotateY(180deg); }
+.fc-front, .fc-back {
+  position: absolute; width: 100%; height: 100%;
+  backface-visibility: hidden; border-radius: 10px;
+  display: flex; flex-direction: column;
+  justify-content: center; align-items: center;
+  padding: 1.1rem; text-align: center; font-weight: 600;
+  border: 1px solid;
+}
+.fc-front {
+  background: var(--panel);
+  border-color: var(--accent);
+  color: var(--text);
+  font-size: .93rem;
+}
+.fc-front::after { content: '👆 toque para ver'; font-size: .68rem; opacity: .5; font-weight: 400; position: absolute; bottom: .6rem; }
+.fc-back {
+  background: linear-gradient(135deg, #1a1a35, #0d2a1a);
+  border-color: var(--accent3);
+  color: var(--accent3);
+  font-size: .88rem;
+  transform: rotateY(180deg);
+}
+
+/* QUIZ */
+.quiz-item {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 1.2rem;
+  margin-bottom: 1rem;
+}
+.quiz-item .q { font-weight: 700; font-size: .95rem; margin-bottom: .8rem; color: var(--text); }
+.opts { display: grid; gap: .4rem; }
+.opt {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: .88rem; text-align: left;
+  padding: .6rem 1rem; border-radius: 7px;
+  border: 1px solid var(--border);
+  background: var(--surface); cursor: pointer;
+  transition: all .2s; font-weight: 600; color: var(--text);
+}
+.opt:hover:not(:disabled) { border-color: var(--accent); background: rgba(108,99,255,0.1); }
+.opt.correct { background: rgba(67,233,123,0.15); border-color: var(--accent3); color: #a7f3d0; }
+.opt.wrong { background: rgba(255,101,132,0.15); border-color: var(--accent2); color: #fca5a5; }
+.fb { margin-top: .6rem; font-size: .83rem; font-weight: 700; padding: .45rem .7rem; border-radius: 6px; display: none; }
+.fb.show { display: block; }
+.fb.ok { background: rgba(67,233,123,0.15); color: #86efac; }
+.fb.no { background: rgba(255,101,132,0.15); color: #fca5a5; }
+
+#score-box {
+  background: var(--panel);
+  border: 1px solid var(--accent);
+  border-radius: 10px;
+  padding: 1.1rem;
+  text-align: center;
+  margin-bottom: 1.2rem;
+  font-family: 'Syne', sans-serif;
+}
+#score-box span { font-size: 1.8rem; font-weight: 800; display: block; color: var(--accent); }
+.btn-reset {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 700;
+  padding: .5rem 1.2rem;
+  border-radius: 6px;
+  border: 1px solid var(--accent);
+  background: transparent;
+  color: var(--accent);
+  cursor: pointer;
+  font-size: .85rem;
+  margin-top: .5rem;
+  transition: all .2s;
+}
+.btn-reset:hover { background: var(--accent); color: #fff; }
+
+code {
+  font-family: 'JetBrains Mono', monospace;
+  background: rgba(108,99,255,0.15);
+  color: var(--accent);
+  padding: .1em .35em;
+  border-radius: 4px;
+  font-size: .88em;
+}
+
+.tag {
+  display: inline-block;
+  font-size: .7rem;
+  font-weight: 700;
+  padding: .1rem .5rem;
+  border-radius: 99px;
+  margin-left: .4rem;
+  vertical-align: middle;
+}
+.tag-m1 { background: rgba(108,99,255,0.25); color: #c4b5fd; }
+.tag-m2 { background: rgba(67,233,123,0.2); color: #86efac; }
+.tag-m3 { background: rgba(247,151,30,0.25); color: #fed7aa; }
+</style>
+</head>
+<body>
+
+<!-- Floating symbols -->
+<div style="position:fixed;inset:0;pointer-events:none;overflow:hidden;z-index:0;">
+  <span class="sym" style="top:10%;left:5%;animation-delay:0s">+</span>
+  <span class="sym" style="top:30%;left:92%;animation-delay:1s">÷</span>
+  <span class="sym" style="top:60%;left:3%;animation-delay:2s">×</span>
+  <span class="sym" style="top:80%;left:88%;animation-delay:3s">=</span>
+  <span class="sym" style="top:50%;left:50%;animation-delay:1.5s">°</span>
+  <span class="sym" style="top:15%;left:75%;animation-delay:2.5s">∑</span>
+  <span class="sym" style="top:70%;left:40%;animation-delay:0.5s">≠</span>
+</div>
+
+<header>
+  <h1>∑ Revisão de Matemática – 5º Ano</h1>
+  <p style="position:relative">Módulos 1, 2 e 3 · Números · Geometria · Combinações · Equivalência</p>
+  <div class="progress-wrap">
+    <div class="progress-fill" id="progress-bar" style="width:0%"></div>
+  </div>
+  <p id="prog-label">0 de 12 questões respondidas</p>
+</header>
+
+<nav>
+  <button class="active" onclick="showSection('resumo',this)">📐 Resumo</button>
+  <button onclick="showSection('flashcards',this)">🃏 Flashcards</button>
+  <button onclick="showSection('quiz',this)">✏️ Quiz</button>
+</nav>
+
+<main style="position:relative;z-index:1">
+
+  <!-- RESUMO -->
+  <section class="section active" id="resumo">
+    <div class="sec-title">📐 Resumo por Módulo</div>
+    <div class="mod-tabs">
+      <button class="mod-tab active" onclick="showMod('m1',this)">Módulo 1 – Números</button>
+      <button class="mod-tab" onclick="showMod('m2',this)">Módulo 2 – Ângulos e Retas</button>
+      <button class="mod-tab" onclick="showMod('m3',this)">Módulo 3 – Combinações</button>
+    </div>
+
+    <!-- M1 -->
+    <div class="mod-panel active" id="m1">
+
+      <div class="block">
+        <h3>🔢 Classes e Ordens dos Números</h3>
+        <div class="pv-scroll">
+          <table class="pv-table">
+            <thead>
+              <tr>
+                <th colspan="3" class="class-header cls-bi">Classe dos Bilhões</th>
+                <th colspan="3" class="class-header cls-mi">Classe dos Milhões</th>
+                <th colspan="3" class="class-header cls-mil">Classe dos Milhares</th>
+                <th colspan="3" class="class-header cls-un">Unidades Simples</th>
+              </tr>
+              <tr>
+                <td class="order">12ª</td><td class="order">11ª</td><td class="order">10ª</td>
+                <td class="order">9ª</td><td class="order">8ª</td><td class="order">7ª</td>
+                <td class="order">6ª</td><td class="order">5ª</td><td class="order">4ª</td>
+                <td class="order">3ª</td><td class="order">2ª</td><td class="order">1ª</td>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="name cls-bi">C Bi</td><td class="name cls-bi">D Bi</td><td class="name cls-bi">U Bi</td>
+                <td class="name cls-mi">C Mi</td><td class="name cls-mi">D Mi</td><td class="name cls-mi">U Mi</td>
+                <td class="name cls-mil">C Mil</td><td class="name cls-mil">D Mil</td><td class="name cls-mil">U Mil</td>
+                <td class="name cls-un">C</td><td class="name cls-un">D</td><td class="name cls-un">U</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <ul>
+          <li>Cada <strong>classe</strong> tem 3 ordens: Unidade, Dezena e Centena.</li>
+          <li>Lemos os números da <strong>esquerda para direita</strong>, classe por classe.</li>
+        </ul>
+      </div>
+
+      <div class="block green">
+        <h3>🥇 Números Ordinais</h3>
+        <div class="ord-grid">
+          <div class="ord-card"><span class="ord-num">1º</span><span class="ord-name">Primeiro</span></div>
+          <div class="ord-card"><span class="ord-num">2º</span><span class="ord-name">Segundo</span></div>
+          <div class="ord-card"><span class="ord-num">3º</span><span class="ord-name">Terceiro</span></div>
+          <div class="ord-card"><span class="ord-num">4º</span><span class="ord-name">Quarto</span></div>
+          <div class="ord-card"><span class="ord-num">5º</span><span class="ord-name">Quinto</span></div>
+          <div class="ord-card"><span class="ord-num">6º</span><span class="ord-name">Sexto</span></div>
+          <div class="ord-card"><span class="ord-num">7º</span><span class="ord-name">Sétimo</span></div>
+          <div class="ord-card"><span class="ord-num">8º</span><span class="ord-name">Oitavo</span></div>
+          <div class="ord-card"><span class="ord-num">9º</span><span class="ord-name">Nono</span></div>
+          <div class="ord-card"><span class="ord-num">10º</span><span class="ord-name">Décimo</span></div>
+          <div class="ord-card"><span class="ord-num">100º</span><span class="ord-name">Centésimo</span></div>
+          <div class="ord-card"><span class="ord-num">1000º</span><span class="ord-name">Milésimo</span></div>
+        </div>
+        <ul>
+          <li>Ordinais indicam <strong>posição ou ordem</strong> em uma sequência.</li>
+        </ul>
+      </div>
+
+      <div class="block amber">
+        <h3>✖️ Multiplicação com 3 Algarismos</h3>
+        <ul>
+          <li>Alinhe os números verticalmente.</li>
+          <li>Multiplique o número de cima por cada algarismo de baixo, da <strong>direita para a esquerda</strong>.</li>
+          <li>Some os resultados parciais — atenção ao <strong>deslocamento</strong> de cada parcela.</li>
+          <li>Dica: verifique se o resultado faz sentido (estimativa).</li>
+        </ul>
+      </div>
+
+      <div class="block red">
+        <h3>➗ Divisão com 3 Algarismos</h3>
+        <ul>
+          <li>Compare o <strong>dividendo</strong> com o <strong>divisor</strong>.</li>
+          <li>Divida começando pela esquerda; anote o quociente.</li>
+          <li>Multiplique o quociente pelo divisor e subtraia do dividendo.</li>
+          <li>Desça o próximo algarismo e repita o processo.</li>
+          <li>O <strong>resto</strong> deve ser sempre menor que o divisor.</li>
+          <li>Verificação: <code>divisor × quociente + resto = dividendo</code></li>
+        </ul>
+      </div>
+
+    </div>
+
+    <!-- M2 -->
+    <div class="mod-panel" id="m2">
+      <div class="block">
+        <h3>📐 Tipos de Ângulos</h3>
+        <div class="angle-grid">
+          <div class="angle-card ac-reto">
+            <div class="ang-visual">
+              <svg viewBox="0 0 60 60">
+                <line x1="10" y1="50" x2="50" y2="50" stroke="#43e97b" stroke-width="2.5"/>
+                <line x1="10" y1="50" x2="10" y2="10" stroke="#43e97b" stroke-width="2.5"/>
+                <rect x="10" y="38" width="12" height="12" fill="none" stroke="#43e97b" stroke-width="1.5"/>
+              </svg>
+            </div>
+            <h4>Reto</h4>
+            <p>Exatamente <strong>90°</strong><br>igual ao canto de uma folha</p>
+          </div>
+          <div class="angle-card ac-agudo">
+            <div class="ang-visual">
+              <svg viewBox="0 0 60 60">
+                <line x1="10" y1="50" x2="50" y2="50" stroke="#6c63ff" stroke-width="2.5"/>
+                <line x1="10" y1="50" x2="35" y2="12" stroke="#6c63ff" stroke-width="2.5"/>
+                <path d="M 22 50 A 12 12 0 0 1 18 41" fill="none" stroke="#6c63ff" stroke-width="1.5"/>
+              </svg>
+            </div>
+            <h4>Agudo</h4>
+            <p>Menor que <strong>90°</strong><br>mais "fechado"</p>
+          </div>
+          <div class="angle-card ac-obtuso">
+            <div class="ang-visual">
+              <svg viewBox="0 0 60 60">
+                <line x1="10" y1="50" x2="50" y2="50" stroke="#f7971e" stroke-width="2.5"/>
+                <line x1="10" y1="50" x2="5" y2="15" stroke="#f7971e" stroke-width="2.5"/>
+                <path d="M 22 50 A 12 12 0 0 1 9.5 39" fill="none" stroke="#f7971e" stroke-width="1.5"/>
+              </svg>
+            </div>
+            <h4>Obtuso</h4>
+            <p>Maior que <strong>90°</strong><br>mais "aberto"</p>
+          </div>
+          <div class="angle-card ac-raso">
+            <div class="ang-visual">
+              <svg viewBox="0 0 60 60">
+                <line x1="5" y1="30" x2="55" y2="30" stroke="#ff6584" stroke-width="2.5"/>
+                <path d="M 20 30 A 15 15 0 0 1 5 30" fill="none" stroke="#ff6584" stroke-width="1.5"/>
+              </svg>
+            </div>
+            <h4>Raso</h4>
+            <p>Exatamente <strong>180°</strong><br>é uma linha reta</p>
+          </div>
+        </div>
+        <ul>
+          <li>Ângulo = abertura entre duas retas que se encontram no <strong>vértice</strong>.</li>
+          <li>Medimos com o <strong>transferidor</strong>: centro no vértice, linha de fé num lado, leia onde o outro lado aponta.</li>
+        </ul>
+      </div>
+
+      <div class="block green">
+        <h3>📏 Tipos de Retas</h3>
+        <ul>
+          <li><strong>Paralelas:</strong> nunca se cruzam, sempre na mesma distância (trilhos de trem).</li>
+          <li><strong>Perpendiculares:</strong> se cruzam formando exatamente 90°.</li>
+          <li><strong>Concorrentes:</strong> se encontram em um ponto qualquer (sem ser necessariamente 90°).</li>
+        </ul>
+      </div>
+
+      <div class="block amber">
+        <h3>🗺️ Coordenadas Cartesianas</h3>
+        <ul>
+          <li>O <strong>plano cartesiano</strong> é formado por dois eixos numéricos perpendiculares.</li>
+          <li>O ponto onde os eixos se cruzam é a <strong>origem</strong>.</li>
+          <li>Cada ponto é localizado por um <strong>par ordenado (x, y)</strong>.</li>
+          <li>Primeiro lemos o eixo horizontal (x), depois o vertical (y).</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- M3 -->
+    <div class="mod-panel" id="m3">
+      <div class="block">
+        <h3>🎲 Princípio Multiplicativo</h3>
+        <p style="font-size:.88rem;color:var(--muted);margin-bottom:.7rem">Quando escolhemos uma coisa <em>E</em> outra, <strong>multiplicamos</strong> as quantidades.</p>
+        <div class="combo-demo">
+          <div>2 camisetas <span class="combo-op">×</span> 4 calças</div>
+          <div class="combo-eq">= 8 combinações</div>
+          <div>5 camisetas <span class="combo-op">×</span> 4 calças</div>
+          <div class="combo-eq">= 20 combinações</div>
+          <div>10 figuras <span class="combo-op">×</span> 15 palavras (senha)</div>
+          <div class="combo-eq">= 150 combinações</div>
+        </div>
+        <ul>
+          <li>Dígitos 4, 5 e 6 formando números de 2 algarismos <strong>sem repetição</strong>: 45, 46, 54, 56, 64, 65 → <strong>6 combinações</strong>.</li>
+          <li>2 dados com soma 6: (1,5),(2,4),(3,3),(4,2),(5,1) → <strong>5 combinações</strong>.</li>
+        </ul>
+      </div>
+
+      <div class="block green">
+        <h3>🌳 Árvore de Possibilidades</h3>
+        <ul>
+          <li>Lista todas as possibilidades de forma <strong>organizada, seguindo caminhos</strong>.</li>
+          <li>3 livros (vermelho, azul, verde) empilhados: <strong>6 ordens diferentes</strong>.</li>
+          <li>Útil quando a <strong>ordem importa</strong>.</li>
+        </ul>
+      </div>
+
+      <div class="block amber">
+        <h3>⚖️ Equivalência e Igualdade</h3>
+        <div class="balance-wrap">
+          <div class="balance-card eq-true">
+            <div class="members">15 + 5 &nbsp;&nbsp;12 + 8</div>
+            <span class="eq-sign">=</span>
+            <p>Os dois lados valem 20 ✅</p>
+          </div>
+          <div class="balance-card eq-false">
+            <div class="members">18 + 2 &nbsp;&nbsp;10 + 5</div>
+            <span class="eq-sign">≠</span>
+            <p>20 ≠ 15 — desequilíbrio ❌</p>
+          </div>
+        </div>
+        <ul>
+          <li><strong>Preservação da igualdade:</strong> o que fizer de um lado, faz do outro também.</li>
+          <li>Se <code>4+6=10</code>, então <code>(4+6)×2 = 10×2 → 20=20</code> ✅</li>
+          <li><strong>Álgebra:</strong> letras representam valores desconhecidos. Ex: <code>Y + 7 = 13 → Y = 6</code></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- FLASHCARDS -->
+  <section class="section" id="flashcards">
+    <div class="sec-title">🃏 Flashcards</div>
+    <div class="fc-grid" id="fc-grid"></div>
+  </section>
+
+  <!-- QUIZ -->
+  <section class="section" id="quiz">
+    <div class="sec-title">✏️ Quiz</div>
+    <div id="score-box">
+      Pontuação <span id="score-num">0 / 12</span>
+      <button class="btn-reset" onclick="resetQuiz()">↺ Recomeçar</button>
+    </div>
+    <div id="quiz-wrap"></div>
+  </section>
+
+</main>
+
+<script>
+// FLASHCARDS
+const cards = [
+  { q:"Quantas ordens tem cada classe de números?", a:"Cada classe tem 3 ordens: Unidade, Dezena e Centena." },
+  { q:"O que os números ordinais indicam?", a:"Indicam posição ou ordem numa sequência. Ex: 1º primeiro, 2º segundo…" },
+  { q:"Como se verifica uma divisão?", a:"Divisor × Quociente + Resto = Dividendo." },
+  { q:"Qual é a medida de um ângulo reto?", a:"Exatamente 90° — igual ao canto de uma folha de papel." },
+  { q:"O que são retas paralelas?", a:"Retas que nunca se cruzam e mantêm sempre a mesma distância entre si." },
+  { q:"O que são retas perpendiculares?", a:"Retas que se cruzam formando um ângulo de 90°." },
+  { q:"O que é o plano cartesiano?", a:"Dois eixos numéricos perpendiculares. Cada ponto é localizado por um par ordenado (x, y)." },
+  { q:"Qual é o princípio multiplicativo nas combinações?", a:"Quando escolhemos uma coisa E outra, multiplicamos as quantidades. Ex: 3 × 4 = 12 combinações." },
+  { q:"Para que serve a árvore de possibilidades?", a:"Para listar todas as combinações possíveis de forma organizada, quando a ordem importa." },
+  { q:"O que é igualdade matemática?", a:"Quando os dois lados de uma expressão têm o mesmo valor (sinal =). Ex: 15+5 = 12+8 = 20." },
+  { q:"O que acontece com a igualdade se multiplicarmos só um lado?", a:"A igualdade se rompe — para manter o equilíbrio, devemos fazer a mesma operação nos dois lados." },
+  { q:"Y + 7 = 13. Qual é o valor de Y?", a:"Y = 6, pois 6 + 7 = 13." },
+];
+
+const grid = document.getElementById('fc-grid');
+cards.forEach(c => {
+  const el = document.createElement('div');
+  el.className = 'fc';
+  el.innerHTML = `<div class="fc-inner"><div class="fc-front">${c.q}</div><div class="fc-back">${c.a}</div></div>`;
+  el.addEventListener('click', () => el.classList.toggle('flipped'));
+  grid.appendChild(el);
+});
+
+// QUIZ
+const Q = [
+  { q:"O número 4.532.816 pertence a qual classe o algarismo 4?", opts:["Classe das unidades simples","Classe dos milhares","Classe dos milhões","Classe dos bilhões"], ans:2, exp:"O algarismo 4 está na 7ª ordem — Unidade de Milhão — portanto pertence à Classe dos Milhões.", tag:"M1" },
+  { q:"Qual é o ordinal correto para a posição 8?", opts:["Oitenta","Oitavo","Octingentésimo","Sétimo"], ans:1, exp:"A 8ª posição se escreve 8º e se lê 'oitavo'.", tag:"M1" },
+  { q:"Numa divisão: dividendo = 500, divisor = 125, quociente = 4. Qual é o resto?", opts:["0","5","25","125"], ans:0, exp:"125 × 4 = 500. 500 − 500 = 0. O resto é zero — divisão exata.", tag:"M1" },
+  { q:"245 × 312. Qual é a primeira parcela parcial (multiplicando por 2)?", opts:["490","2450","245","980"], ans:0, exp:"245 × 2 = 490. Essa é a primeira parcela (algarismo das unidades do 312).", tag:"M1" },
+  { q:"Um ângulo de 90° é chamado de:", opts:["Agudo","Obtuso","Reto","Raso"], ans:2, exp:"Ângulo reto mede exatamente 90° — igual ao canto de uma folha de papel.", tag:"M2" },
+  { q:"Dois trilhos de trem que nunca se encontram são exemplos de retas:", opts:["Perpendiculares","Concorrentes","Paralelas","Opostas"], ans:2, exp:"Retas paralelas nunca se cruzam e mantêm sempre a mesma distância entre si.", tag:"M2" },
+  { q:"Para medir um ângulo com o transferidor, onde colocamos o centro?", opts:["Na ponta de um dos lados","No meio de um dos lados","No vértice do ângulo","Em qualquer lugar"], ans:2, exp:"O centro do transferidor deve ser colocado exatamente no vértice — o ponto onde as duas retas se encontram.", tag:"M2" },
+  { q:"O ponto (3, 5) no plano cartesiano está:", opts:["3 no eixo y e 5 no eixo x","3 no eixo x e 5 no eixo y","Na origem","No eixo x apenas"], ans:1, exp:"Em um par ordenado (x, y): o primeiro valor é sempre x (horizontal) e o segundo é y (vertical). Logo x=3, y=5.", tag:"M2" },
+  { q:"Uma lanchonete tem 4 tipos de pão e 3 tipos de recheio. Quantos sanduíches diferentes é possível montar?", opts:["7","10","12","24"], ans:2, exp:"Princípio multiplicativo: 4 pães × 3 recheios = 12 combinações possíveis.", tag:"M3" },
+  { q:"K − 8 = 14. Qual é o valor de K?", opts:["K = 6","K = 22","K = 16","K = 8"], ans:1, exp:"K = 14 + 8 = 22. Verificação: 22 − 8 = 14 ✅", tag:"M3" },
+  { q:"Se 20 = 20, e dividirmos os dois lados por 4, o resultado é:", opts:["20 = 5","5 ≠ 5","5 = 5","4 = 20"], ans:2, exp:"20 ÷ 4 = 5 nos dois lados → 5 = 5. A igualdade é preservada quando fazemos a mesma operação nos dois membros.", tag:"M3" },
+  { q:"Usando as letras A, B e C para formar 'palavras' de 2 letras diferentes, quantas combinações existem?", opts:["3","4","6","9"], ans:2, exp:"AB, AC, BA, BC, CA, CB = 6 combinações. Para cada uma das 3 primeiras letras, existem 2 opções de segunda letra: 3 × 2 = 6.", tag:"M3" },
+];
+
+let score = 0, answered = 0;
+
+const tagColors = { M1:"tag-m1", M2:"tag-m2", M3:"tag-m3" };
+
+function buildQuiz() {
+  const c = document.getElementById('quiz-wrap');
+  c.innerHTML = '';
+  Q.forEach((item, i) => {
+    const d = document.createElement('div');
+    d.className = 'quiz-item';
+    d.id = `q${i}`;
+    d.innerHTML = `
+      <div class="q">${i+1}. ${item.q} <span class="tag ${tagColors[item.tag]}">${item.tag}</span></div>
+      <div class="opts">${item.opts.map((o,j)=>`<button class="opt" onclick="check(${i},${j})">${o}</button>`).join('')}</div>
+      <div class="fb" id="fb${i}"></div>`;
+    c.appendChild(d);
+  });
+  updateScore();
+}
+
+function check(qi, chosen) {
+  const item = Q[qi];
+  const btns = document.querySelectorAll(`#q${qi} .opt`);
+  btns.forEach(b => b.disabled = true);
+  btns[item.ans].classList.add('correct');
+  const fb = document.getElementById(`fb${qi}`);
+  if (chosen === item.ans) { score++; fb.className='fb show ok'; fb.textContent='✅ Correto! '+item.exp; }
+  else { btns[chosen].classList.add('wrong'); fb.className='fb show no'; fb.textContent='❌ Errado. '+item.exp; }
+  answered++;
+  updateScore();
+  document.getElementById('progress-bar').style.width = Math.round(answered/Q.length*100)+'%';
+  document.getElementById('prog-label').textContent = `${answered} de ${Q.length} questões respondidas`;
+}
+
+function updateScore() { document.getElementById('score-num').textContent = `${score} / ${Q.length}`; }
+
+function resetQuiz() {
+  score = 0; answered = 0; buildQuiz();
+  document.getElementById('progress-bar').style.width='0%';
+  document.getElementById('prog-label').textContent = `0 de ${Q.length} questões respondidas`;
+}
+
+buildQuiz();
+
+function showSection(id, btn) {
+  document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  document.querySelectorAll('nav button').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+}
+
+function showMod(id, btn) {
+  document.querySelectorAll('.mod-panel').forEach(p=>p.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  document.querySelectorAll('.mod-tab').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+}
+</script>
+</body>
+</html>
