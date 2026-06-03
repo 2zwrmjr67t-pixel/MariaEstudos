@@ -3,742 +3,654 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Revisão de Matemática – 5º Ano</title>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&family=Syne:wght@700;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="apple-mobile-web-app-title" content="Morgana">
+<link rel="manifest" href="manifest.json">
+<link rel="apple-touch-icon" href="icon-192.png">
+<meta name="theme-color" content="#c9a05a">
+<title>Morgana Workout</title>
 <style>
-:root {
-  --bg: #0d0d1a;
-  --surface: #13131f;
-  --panel: #1a1a2e;
-  --border: #2a2a45;
-  --accent: #6c63ff;
-  --accent2: #ff6584;
-  --accent3: #43e97b;
-  --accent4: #f7971e;
-  --text: #e8e8f0;
-  --muted: #8888aa;
-  --white: #fff;
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+:root{
+  --bg:#0d0c0a;--s1:#161513;--s2:#1e1c1a;--br:#232220;--br2:#2a2927;
+  --tx:#e8e2d8;--mt:#6b6760;--ac:#c9a05a;
+  --rose:#c07090;--teal:#5a8a7a;--purple:#a07aa0;--green:#6a9a6a;
 }
+html{height:100%}
+body{height:100%;display:flex;flex-direction:column;background:var(--bg);color:var(--tx);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif}
 
-* { box-sizing: border-box; margin: 0; padding: 0; }
+.hdr{padding:max(48px,env(safe-area-inset-top)) 20px 18px;border-bottom:1px solid var(--br);flex-shrink:0}
+.hdr-eyebrow{font-size:9px;letter-spacing:.22em;text-transform:uppercase;color:var(--mt);margin-bottom:8px}
+.hdr-title{font-size:28px;font-weight:300;color:var(--tx);line-height:1.05;letter-spacing:-.02em}
+.hdr-title strong{font-weight:600;color:var(--ac)}
+.hdr-title em{font-style:italic;font-weight:300;color:var(--ac)}
+.hdr-sub{font-size:11px;color:var(--mt);margin-top:8px;letter-spacing:.03em;line-height:1.5}
+.hdr-divider{width:32px;height:1px;background:var(--ac);opacity:.4;margin:12px 0 0}
 
-body {
-  font-family: 'Space Grotesk', sans-serif;
-  background: var(--bg);
-  color: var(--text);
-  min-height: 100vh;
-}
+.lgd{display:flex;gap:12px;padding:9px 20px;border-bottom:1px solid var(--br);flex-shrink:0;flex-wrap:wrap}
+.li{display:flex;align-items:center;gap:4px;font-size:10px;color:var(--mt)}
+.ld{width:5px;height:5px;border-radius:50%}
 
-/* HEADER */
-header {
-  background: linear-gradient(135deg, #0d0d1a 0%, #1a0a2e 50%, #0d1a1a 100%);
-  border-bottom: 1px solid var(--border);
-  padding: 2rem 1rem 1.5rem;
-  text-align: center;
-  position: relative;
-  overflow: hidden;
-}
-header::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: 
-    radial-gradient(ellipse 60% 80% at 20% 50%, rgba(108,99,255,0.12) 0%, transparent 70%),
-    radial-gradient(ellipse 60% 80% at 80% 50%, rgba(67,233,123,0.08) 0%, transparent 70%);
-}
-.header-symbols {
-  position: absolute;
-  inset: 0;
-  overflow: hidden;
-  pointer-events: none;
-}
-.sym {
-  position: absolute;
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 1.1rem;
-  opacity: 0.06;
-  color: var(--accent);
-  animation: floatSym 8s ease-in-out infinite;
-}
-@keyframes floatSym {
-  0%,100% { transform: translateY(0); }
-  50% { transform: translateY(-10px); }
-}
-header h1 {
-  font-family: 'Syne', sans-serif;
-  font-size: clamp(1.6rem, 5vw, 2.6rem);
-  font-weight: 800;
-  position: relative;
-  background: linear-gradient(90deg, #a78bfa, #6c63ff, #43e97b);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-header p {
-  font-size: .88rem;
-  color: var(--muted);
-  margin-top: .4rem;
-  position: relative;
-}
+.sticky-nav{position:sticky;top:0;z-index:10;background:var(--bg);flex-shrink:0}
+.day-tabs{display:flex;border-bottom:1px solid var(--br);overflow-x:auto;scrollbar-width:none}
+.day-tabs::-webkit-scrollbar{display:none}
+.day-tab{flex:1;min-width:58px;display:flex;flex-direction:column;align-items:center;padding:9px 6px 7px;cursor:pointer;border-bottom:2px solid transparent;transition:all .2s;background:none;border-top:none;border-left:none;border-right:none;color:var(--mt)}
+.day-tab.on{color:var(--tx)}
+.dtd{font-size:9px;letter-spacing:.08em;text-transform:uppercase}
+.dtn{font-size:11px;font-weight:500;margin-top:1px;white-space:nowrap}
 
-.progress-wrap {
-  width: min(420px,85%);
-  margin: 1rem auto 0;
-  background: var(--border);
-  border-radius: 99px;
-  height: 6px;
-}
-.progress-fill {
-  height: 100%;
-  border-radius: 99px;
-  background: linear-gradient(90deg, var(--accent), var(--accent3));
-  transition: width .5s ease;
-}
-#prog-label { font-size: .75rem; color: var(--muted); margin-top: .35rem; }
+.prog-wrap{padding:10px 20px;border-bottom:1px solid var(--br);display:flex;align-items:center;gap:10px}
+.prog-bar-bg{flex:1;height:3px;background:var(--br2);border-radius:2px;overflow:hidden}
+.prog-bar-fill{height:100%;background:var(--ac);border-radius:2px;transition:width .3s ease}
+.prog-label{font-size:10px;color:var(--mt);white-space:nowrap;min-width:40px;text-align:right}
+.prog-reset{font-size:9px;color:var(--mt);background:none;border:1px solid var(--br2);border-radius:4px;padding:3px 8px;cursor:pointer;letter-spacing:.06em;text-transform:uppercase;white-space:nowrap}
+.prog-reset:active{background:var(--br2);color:var(--tx)}
 
-/* NAV */
-nav {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: .4rem;
-  padding: 1rem;
-  background: var(--surface);
-  border-bottom: 1px solid var(--border);
+/* ── NOTIF BANNER ── */
+/* Aparece só na primeira série, pede permissão para notificação */
+.notif-banner{
+  display:none;
+  background:var(--s2);border-bottom:1px solid var(--br);
+  padding:10px 16px;align-items:center;gap:10px;flex-shrink:0;
 }
-nav button {
-  font-family: 'Space Grotesk', sans-serif;
-  font-weight: 600;
-  font-size: .78rem;
-  padding: .4rem .95rem;
-  border-radius: 6px;
-  border: 1px solid var(--border);
-  cursor: pointer;
-  background: var(--panel);
-  color: var(--muted);
-  transition: all .2s;
-  letter-spacing: .3px;
-}
-nav button:hover, nav button.active {
-  background: var(--accent);
-  color: #fff;
-  border-color: var(--accent);
-}
+.notif-banner.show{display:flex}
+.notif-banner-txt{flex:1;font-size:11px;color:var(--mt);line-height:1.4}
+.notif-banner-txt b{color:var(--tx)}
+.notif-banner-btn{font-size:10px;background:var(--ac);color:#0d0c0a;border:none;border-radius:6px;padding:7px 14px;cursor:pointer;font-weight:700;letter-spacing:.08em;font-family:inherit;white-space:nowrap;flex-shrink:0}
+.notif-banner-close{background:none;border:none;color:var(--mt);font-size:18px;cursor:pointer;padding:2px 8px;line-height:1;flex-shrink:0}
 
-main { max-width: 800px; margin: 0 auto; padding: 1.5rem 1rem 4rem; }
+/* ── TIMER BAR ── */
+/* Barra compacta no rodapé — não bloqueia a tela */
+.timer-bar{
+  position:fixed;bottom:0;left:0;right:0;z-index:100;
+  background:var(--s1);border-top:1px solid var(--br2);
+  padding:10px 20px max(16px,env(safe-area-inset-bottom));
+  display:flex;align-items:center;gap:12px;
+  transform:translateY(110%);
+  transition:transform .28s cubic-bezier(.4,0,.2,1);
+  box-shadow:0 -12px 40px rgba(0,0,0,.5);
+}
+.timer-bar.show{transform:translateY(0)}
 
-.section { display: none; }
-.section.active { display: block; animation: fadeIn .35s ease; }
-@keyframes fadeIn { from { opacity:0; transform:translateY(10px); } to { opacity:1; transform:none; } }
+.tbar-ring-wrap{position:relative;width:44px;height:44px;flex-shrink:0}
+.tbar-svg{transform:rotate(-90deg)}
+.tbar-ring-bg{fill:none;stroke:var(--br2);stroke-width:3.5}
+.tbar-ring-prog{fill:none;stroke:var(--ac);stroke-width:3.5;stroke-linecap:round;transition:stroke-dashoffset .85s linear,stroke .3s}
+.tbar-ring-prog.urgent{stroke:var(--rose)}
+.tbar-digits{
+  position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+  font-size:13px;font-weight:700;color:var(--tx);font-variant-numeric:tabular-nums;
+}
+.tbar-digits.urgent{color:var(--rose)}
 
-.sec-title {
-  font-family: 'Syne', sans-serif;
-  font-size: 1.3rem;
-  font-weight: 800;
-  color: var(--accent);
-  margin-bottom: 1.2rem;
-  display: flex;
-  align-items: center;
-  gap: .5rem;
-}
+.tbar-info{flex:1;min-width:0}
+.tbar-name{font-size:12px;font-weight:500;color:var(--tx);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-bottom:2px}
+.tbar-sub{font-size:10px;color:var(--mt);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 
-/* MOD TABS */
-.mod-tabs {
-  display: flex;
-  gap: .35rem;
-  flex-wrap: wrap;
-  margin-bottom: 1.2rem;
-}
-.mod-tab {
-  font-family: 'Space Grotesk', sans-serif;
-  font-weight: 700;
-  font-size: .76rem;
-  padding: .35rem .85rem;
-  border-radius: 4px;
-  border: 1px solid var(--border);
-  cursor: pointer;
-  background: transparent;
-  color: var(--muted);
-  transition: all .2s;
-  letter-spacing: .3px;
-}
-.mod-tab.active { background: var(--accent2); color: #fff; border-color: var(--accent2); }
-.mod-panel { display: none; }
-.mod-panel.active { display: block; animation: fadeIn .3s ease; }
+.tbar-btns{display:flex;gap:6px;flex-shrink:0}
+.tbar-btn{padding:8px 14px;border-radius:7px;border:none;cursor:pointer;font-size:10px;letter-spacing:.1em;text-transform:uppercase;font-family:inherit;transition:all .15s;font-weight:600}
+.tbar-btn.add{background:rgba(201,160,90,.15);color:var(--ac);border:1px solid rgba(201,160,90,.3)}
+.tbar-btn.add:active{background:rgba(201,160,90,.28)}
+.tbar-btn.skip{background:var(--br2);color:var(--mt)}
+.tbar-btn.skip:active{background:var(--br);color:var(--tx)}
 
-/* BLOCKS */
-.block {
-  background: var(--panel);
-  border: 1px solid var(--border);
-  border-radius: 10px;
-  padding: 1.1rem 1.3rem;
-  margin-bottom: 1rem;
-  border-left: 3px solid var(--accent);
-}
-.block h3 {
-  font-family: 'Syne', sans-serif;
-  font-size: .95rem;
-  font-weight: 700;
-  color: var(--accent);
-  margin-bottom: .6rem;
-}
-.block ul { padding-left: 1.1rem; }
-.block li { font-size: .88rem; margin-bottom: .3rem; line-height: 1.6; color: var(--text); }
-.block.green { border-left-color: var(--accent3); }
-.block.green h3 { color: var(--accent3); }
-.block.red { border-left-color: var(--accent2); }
-.block.red h3 { color: var(--accent2); }
-.block.amber { border-left-color: var(--accent4); }
-.block.amber h3 { color: var(--accent4); }
+/* ── PANELS ── */
+.panels-wrap{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;padding-bottom:80px}
+.panel{display:none;padding:16px 20px max(36px,env(safe-area-inset-bottom))}.panel.on{display:block}
 
-/* PLACE VALUE TABLE */
-.pv-scroll { overflow-x: auto; margin-bottom: 1rem; }
-.pv-table { border-collapse: collapse; min-width: 640px; font-size: .8rem; }
-.pv-table th, .pv-table td { padding: .45rem .6rem; text-align: center; border: 1px solid var(--border); }
-.pv-table .class-header { font-family: 'Syne', sans-serif; font-weight: 700; font-size: .85rem; }
-.cls-bi { background: rgba(108,99,255,0.25); color: #c4b5fd; }
-.cls-mi { background: rgba(67,233,123,0.2); color: #86efac; }
-.cls-mil { background: rgba(247,151,30,0.2); color: #fed7aa; }
-.cls-un { background: rgba(255,101,132,0.2); color: #fca5a5; }
-.pv-table .order { font-family: 'JetBrains Mono', monospace; font-size: .75rem; color: var(--muted); }
-.pv-table .name { font-weight: 600; font-size: .78rem; }
+.bdg{display:inline-block;font-size:9px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;padding:2px 9px;border-radius:20px;margin-bottom:6px}
+.ptl{font-size:19px;font-weight:300;color:var(--tx);letter-spacing:-.01em;margin-bottom:3px}
+.pfoc{font-size:11px;color:var(--mt);margin-bottom:14px;line-height:1.4}
 
-/* ORDINALS GRID */
-.ord-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: .5rem; margin-bottom: 1rem; }
-.ord-card {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  padding: .55rem .7rem;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  font-size: .83rem;
-}
-.ord-num { font-family: 'JetBrains Mono', monospace; font-weight: 700; color: var(--accent); }
-.ord-name { color: var(--text); font-size: .78rem; }
+.tl{display:flex;border-radius:8px;overflow:hidden;border:1px solid var(--br);margin-bottom:14px}
+.ts{flex:1;padding:6px 2px;text-align:center;font-size:8px;color:var(--mt);line-height:1.35;border-right:1px solid var(--br)}
+.ts:last-child{border-right:none}
+.ts.hi{background:var(--s1);color:var(--tx)}
+.tm{font-size:7px;color:var(--mt)}
 
-/* ANGLE CARDS */
-.angle-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: .8rem; margin-bottom: 1rem; }
-.angle-card {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: 10px;
-  padding: .9rem;
-  text-align: center;
-}
-.angle-card .ang-visual {
-  width: 60px; height: 60px;
-  margin: 0 auto .6rem;
-  position: relative;
-}
-.angle-card svg { width: 100%; height: 100%; }
-.angle-card h4 { font-family: 'Syne', sans-serif; font-size: .9rem; font-weight: 700; margin-bottom: .2rem; }
-.angle-card p { font-size: .8rem; color: var(--muted); }
-.ac-reto h4 { color: var(--accent3); }
-.ac-agudo h4 { color: var(--accent); }
-.ac-obtuso h4 { color: var(--accent4); }
-.ac-raso h4 { color: var(--accent2); }
+.ec{background:var(--s1);border-radius:10px;padding:12px 14px;margin-bottom:8px;border:1px solid var(--br);position:relative;overflow:hidden;transition:opacity .3s,background .3s}
+.ec.done{opacity:.4;background:var(--bg)}
+.ec.done .enm{text-decoration:line-through;color:var(--mt)}
+.ea{position:absolute;left:0;top:0;bottom:0;width:3px;transition:background .3s}
+.ec.done .ea{background:var(--green) !important}
+.en{font-size:9px;color:var(--mt);text-transform:uppercase;letter-spacing:.06em;margin-bottom:3px}
+.enm{font-size:14px;font-weight:500;color:var(--tx);line-height:1.3;margin-bottom:8px;transition:all .3s}
+.etgs{display:flex;gap:4px;flex-wrap:wrap;margin-bottom:8px}
+.etg{font-size:9px;font-weight:500;padding:2px 7px;border-radius:8px}
+.ep{background:rgba(201,160,90,.12);color:#c9a05a}
+.ec2{background:rgba(192,112,144,.12);color:#c07090}
+.ef{background:rgba(160,122,160,.12);color:#a07aa0}
+.ests{display:flex;gap:16px;margin-bottom:12px}
+.est{display:flex;flex-direction:column}
+.esl{font-size:9px;color:var(--mt);text-transform:uppercase;letter-spacing:.06em}
+.esv{font-size:17px;font-weight:500;color:var(--tx);line-height:1.2}
+.esv.sm{font-size:13px}
+.series-row{display:flex;align-items:center;gap:8px;margin-bottom:10px}
+.series-label{font-size:9px;color:var(--mt);text-transform:uppercase;letter-spacing:.06em;white-space:nowrap}
+.series-dots{display:flex;gap:6px;flex-wrap:wrap}
+.sdot{width:32px;height:32px;border-radius:50%;border:1.5px solid var(--br2);background:none;cursor:pointer;font-size:10px;font-weight:600;color:var(--mt);display:flex;align-items:center;justify-content:center;transition:all .2s;font-family:inherit;-webkit-tap-highlight-color:transparent}
+.sdot:active{transform:scale(.88)}
+.sdot.done{background:var(--green);border-color:var(--green);color:#fff}
+.sdot.active-dot{border-color:var(--ac);color:var(--ac)}
+.enote{font-size:11px;color:var(--mt);line-height:1.5;padding-top:8px;border-top:1px solid var(--br)}
+.ibox{background:var(--s2);border-radius:8px;padding:10px 12px;margin:4px 0 12px;font-size:11px;color:var(--mt);line-height:1.6}
+.ibox b{color:var(--tx);font-weight:500}
+.ftr{background:var(--s1);border-radius:10px;border:1px solid var(--br);padding:13px 14px;font-size:10px;color:var(--mt);line-height:1.7;margin-top:6px}
+.ftrtl{font-size:9px;font-weight:600;text-transform:uppercase;letter-spacing:.12em;color:var(--mt);margin-bottom:7px}
+.ftr-divider{width:20px;height:1px;background:var(--ac);opacity:.3;margin-bottom:10px}
+.done-banner{display:none;margin:0 0 12px;padding:12px 14px;background:rgba(106,154,106,.1);border:1px solid rgba(106,154,106,.3);border-radius:10px;font-size:12px;color:var(--green);text-align:center;letter-spacing:.05em}
+.done-banner.show{display:block}
 
-/* COMBINATIONS */
-.combo-demo {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: 10px;
-  padding: 1rem;
-  margin-bottom: 1rem;
-  font-family: 'JetBrains Mono', monospace;
-  font-size: .9rem;
+/* ── CARGA ── */
+.carga-row{display:flex;align-items:center;gap:8px;margin-bottom:10px}
+.carga-label{font-size:9px;color:var(--mt);text-transform:uppercase;letter-spacing:.06em;white-space:nowrap}
+.carga-wrap{display:flex;align-items:center;gap:6px;flex:1}
+.carga-input{
+  width:80px;background:var(--s2);border:1px solid var(--br2);
+  border-radius:7px;padding:6px 10px;
+  font-size:13px;font-weight:600;color:var(--tx);font-family:inherit;
+  text-align:center;outline:none;
+  -webkit-appearance:none;appearance:none;
+  transition:border-color .2s,background .2s;
 }
-.combo-eq { color: var(--accent3); font-size: 1.1rem; font-weight: 700; margin: .4rem 0; }
-.combo-op { color: var(--accent); }
-
-/* BALANCE VIZ */
-.balance-wrap { display: flex; gap: 1rem; flex-wrap: wrap; margin-bottom: 1rem; }
-.balance-card {
-  flex: 1;
-  min-width: 200px;
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: 10px;
-  padding: 1rem;
-  text-align: center;
-}
-.balance-card .eq-sign { font-size: 2rem; font-weight: 700; margin: .4rem 0; display: block; }
-.eq-true .eq-sign { color: var(--accent3); }
-.eq-false .eq-sign { color: var(--accent2); }
-.balance-card .members { font-family: 'JetBrains Mono', monospace; font-size: .92rem; color: var(--text); }
-.balance-card p { font-size: .8rem; color: var(--muted); margin-top: .4rem; }
-
-/* FLASHCARDS */
-.fc-grid { display: grid; gap: .8rem; }
-.fc { perspective: 800px; cursor: pointer; min-height: 110px; }
-.fc-inner {
-  position: relative; width: 100%; min-height: 110px;
-  transform-style: preserve-3d; transition: transform .5s ease;
-}
-.fc.flipped .fc-inner { transform: rotateY(180deg); }
-.fc-front, .fc-back {
-  position: absolute; width: 100%; height: 100%;
-  backface-visibility: hidden; border-radius: 10px;
-  display: flex; flex-direction: column;
-  justify-content: center; align-items: center;
-  padding: 1.1rem; text-align: center; font-weight: 600;
-  border: 1px solid;
-}
-.fc-front {
-  background: var(--panel);
-  border-color: var(--accent);
-  color: var(--text);
-  font-size: .93rem;
-}
-.fc-front::after { content: '👆 toque para ver'; font-size: .68rem; opacity: .5; font-weight: 400; position: absolute; bottom: .6rem; }
-.fc-back {
-  background: linear-gradient(135deg, #1a1a35, #0d2a1a);
-  border-color: var(--accent3);
-  color: var(--accent3);
-  font-size: .88rem;
-  transform: rotateY(180deg);
-}
-
-/* QUIZ */
-.quiz-item {
-  background: var(--panel);
-  border: 1px solid var(--border);
-  border-radius: 10px;
-  padding: 1.2rem;
-  margin-bottom: 1rem;
-}
-.quiz-item .q { font-weight: 700; font-size: .95rem; margin-bottom: .8rem; color: var(--text); }
-.opts { display: grid; gap: .4rem; }
-.opt {
-  font-family: 'Space Grotesk', sans-serif;
-  font-size: .88rem; text-align: left;
-  padding: .6rem 1rem; border-radius: 7px;
-  border: 1px solid var(--border);
-  background: var(--surface); cursor: pointer;
-  transition: all .2s; font-weight: 600; color: var(--text);
-}
-.opt:hover:not(:disabled) { border-color: var(--accent); background: rgba(108,99,255,0.1); }
-.opt.correct { background: rgba(67,233,123,0.15); border-color: var(--accent3); color: #a7f3d0; }
-.opt.wrong { background: rgba(255,101,132,0.15); border-color: var(--accent2); color: #fca5a5; }
-.fb { margin-top: .6rem; font-size: .83rem; font-weight: 700; padding: .45rem .7rem; border-radius: 6px; display: none; }
-.fb.show { display: block; }
-.fb.ok { background: rgba(67,233,123,0.15); color: #86efac; }
-.fb.no { background: rgba(255,101,132,0.15); color: #fca5a5; }
-
-#score-box {
-  background: var(--panel);
-  border: 1px solid var(--accent);
-  border-radius: 10px;
-  padding: 1.1rem;
-  text-align: center;
-  margin-bottom: 1.2rem;
-  font-family: 'Syne', sans-serif;
-}
-#score-box span { font-size: 1.8rem; font-weight: 800; display: block; color: var(--accent); }
-.btn-reset {
-  font-family: 'Space Grotesk', sans-serif;
-  font-weight: 700;
-  padding: .5rem 1.2rem;
-  border-radius: 6px;
-  border: 1px solid var(--accent);
-  background: transparent;
-  color: var(--accent);
-  cursor: pointer;
-  font-size: .85rem;
-  margin-top: .5rem;
-  transition: all .2s;
-}
-.btn-reset:hover { background: var(--accent); color: #fff; }
-
-code {
-  font-family: 'JetBrains Mono', monospace;
-  background: rgba(108,99,255,0.15);
-  color: var(--accent);
-  padding: .1em .35em;
-  border-radius: 4px;
-  font-size: .88em;
-}
-
-.tag {
-  display: inline-block;
-  font-size: .7rem;
-  font-weight: 700;
-  padding: .1rem .5rem;
-  border-radius: 99px;
-  margin-left: .4rem;
-  vertical-align: middle;
-}
-.tag-m1 { background: rgba(108,99,255,0.25); color: #c4b5fd; }
-.tag-m2 { background: rgba(67,233,123,0.2); color: #86efac; }
-.tag-m3 { background: rgba(247,151,30,0.25); color: #fed7aa; }
+.carga-input::placeholder{color:var(--br2);font-weight:400;font-size:12px}
+.carga-input:focus{border-color:var(--ac);background:var(--s1)}
+.carga-unit{font-size:11px;color:var(--mt)}
+.carga-saved{font-size:9px;color:var(--green);opacity:0;transition:opacity .4s;letter-spacing:.06em}
 </style>
 </head>
 <body>
 
-<!-- Floating symbols -->
-<div style="position:fixed;inset:0;pointer-events:none;overflow:hidden;z-index:0;">
-  <span class="sym" style="top:10%;left:5%;animation-delay:0s">+</span>
-  <span class="sym" style="top:30%;left:92%;animation-delay:1s">÷</span>
-  <span class="sym" style="top:60%;left:3%;animation-delay:2s">×</span>
-  <span class="sym" style="top:80%;left:88%;animation-delay:3s">=</span>
-  <span class="sym" style="top:50%;left:50%;animation-delay:1.5s">°</span>
-  <span class="sym" style="top:15%;left:75%;animation-delay:2.5s">∑</span>
-  <span class="sym" style="top:70%;left:40%;animation-delay:0.5s">≠</span>
+<!-- Banner de permissão de notificação — aparece inline, não bloqueia tela -->
+<div class="notif-banner" id="notifBanner">
+  <div class="notif-banner-txt"><b>Ativar aviso de descanso?</b><br>Notifica quando o timer terminar.</div>
+  <button class="notif-banner-btn" onclick="requestNotifPermission()">Ativar</button>
+  <button class="notif-banner-close" onclick="dismissNotifBanner()">✕</button>
 </div>
 
-<header>
-  <h1>∑ Revisão de Matemática – 5º Ano</h1>
-  <p style="position:relative">Módulos 1, 2 e 3 · Números · Geometria · Combinações · Equivalência</p>
-  <div class="progress-wrap">
-    <div class="progress-fill" id="progress-bar" style="width:0%"></div>
+<div class="hdr">
+  <div class="hdr-eyebrow">Programa de hipertrofia feminina</div>
+  <div class="hdr-title"><strong>Morgana</strong><br><em>Workout</em></div>
+  <div class="hdr-sub">Glúteo · Pernas · Abdômen · Costas &nbsp;—&nbsp; Avançada · Definição</div>
+  <div class="hdr-divider"></div>
+</div>
+
+<div class="lgd">
+  <div class="li"><div class="ld" style="background:var(--ac)"></div>◆ principal</div>
+  <div class="li"><div class="ld" style="background:var(--rose)"></div>⚡ glúteo</div>
+  <div class="li"><div class="ld" style="background:var(--purple)"></div>◎ core</div>
+</div>
+
+<div class="sticky-nav">
+  <div class="day-tabs" id="dtabs"></div>
+  <div class="prog-wrap">
+    <div class="prog-bar-bg"><div class="prog-bar-fill" id="progFill" style="width:0%"></div></div>
+    <span class="prog-label" id="progLabel">0 / 0</span>
+    <button class="prog-reset" onclick="resetDay()">Reset</button>
   </div>
-  <p id="prog-label">0 de 12 questões respondidas</p>
-</header>
+</div>
 
-<nav>
-  <button class="active" onclick="showSection('resumo',this)">📐 Resumo</button>
-  <button onclick="showSection('flashcards',this)">🃏 Flashcards</button>
-  <button onclick="showSection('quiz',this)">✏️ Quiz</button>
-</nav>
+<div class="panels-wrap" id="panelsWrap">
+  <div id="dpanels"></div>
+</div>
 
-<main style="position:relative;z-index:1">
-
-  <!-- RESUMO -->
-  <section class="section active" id="resumo">
-    <div class="sec-title">📐 Resumo por Módulo</div>
-    <div class="mod-tabs">
-      <button class="mod-tab active" onclick="showMod('m1',this)">Módulo 1 – Números</button>
-      <button class="mod-tab" onclick="showMod('m2',this)">Módulo 2 – Ângulos e Retas</button>
-      <button class="mod-tab" onclick="showMod('m3',this)">Módulo 3 – Combinações</button>
-    </div>
-
-    <!-- M1 -->
-    <div class="mod-panel active" id="m1">
-
-      <div class="block">
-        <h3>🔢 Classes e Ordens dos Números</h3>
-        <div class="pv-scroll">
-          <table class="pv-table">
-            <thead>
-              <tr>
-                <th colspan="3" class="class-header cls-bi">Classe dos Bilhões</th>
-                <th colspan="3" class="class-header cls-mi">Classe dos Milhões</th>
-                <th colspan="3" class="class-header cls-mil">Classe dos Milhares</th>
-                <th colspan="3" class="class-header cls-un">Unidades Simples</th>
-              </tr>
-              <tr>
-                <td class="order">12ª</td><td class="order">11ª</td><td class="order">10ª</td>
-                <td class="order">9ª</td><td class="order">8ª</td><td class="order">7ª</td>
-                <td class="order">6ª</td><td class="order">5ª</td><td class="order">4ª</td>
-                <td class="order">3ª</td><td class="order">2ª</td><td class="order">1ª</td>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td class="name cls-bi">C Bi</td><td class="name cls-bi">D Bi</td><td class="name cls-bi">U Bi</td>
-                <td class="name cls-mi">C Mi</td><td class="name cls-mi">D Mi</td><td class="name cls-mi">U Mi</td>
-                <td class="name cls-mil">C Mil</td><td class="name cls-mil">D Mil</td><td class="name cls-mil">U Mil</td>
-                <td class="name cls-un">C</td><td class="name cls-un">D</td><td class="name cls-un">U</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-        <ul>
-          <li>Cada <strong>classe</strong> tem 3 ordens: Unidade, Dezena e Centena.</li>
-          <li>Lemos os números da <strong>esquerda para direita</strong>, classe por classe.</li>
-        </ul>
-      </div>
-
-      <div class="block green">
-        <h3>🥇 Números Ordinais</h3>
-        <div class="ord-grid">
-          <div class="ord-card"><span class="ord-num">1º</span><span class="ord-name">Primeiro</span></div>
-          <div class="ord-card"><span class="ord-num">2º</span><span class="ord-name">Segundo</span></div>
-          <div class="ord-card"><span class="ord-num">3º</span><span class="ord-name">Terceiro</span></div>
-          <div class="ord-card"><span class="ord-num">4º</span><span class="ord-name">Quarto</span></div>
-          <div class="ord-card"><span class="ord-num">5º</span><span class="ord-name">Quinto</span></div>
-          <div class="ord-card"><span class="ord-num">6º</span><span class="ord-name">Sexto</span></div>
-          <div class="ord-card"><span class="ord-num">7º</span><span class="ord-name">Sétimo</span></div>
-          <div class="ord-card"><span class="ord-num">8º</span><span class="ord-name">Oitavo</span></div>
-          <div class="ord-card"><span class="ord-num">9º</span><span class="ord-name">Nono</span></div>
-          <div class="ord-card"><span class="ord-num">10º</span><span class="ord-name">Décimo</span></div>
-          <div class="ord-card"><span class="ord-num">100º</span><span class="ord-name">Centésimo</span></div>
-          <div class="ord-card"><span class="ord-num">1000º</span><span class="ord-name">Milésimo</span></div>
-        </div>
-        <ul>
-          <li>Ordinais indicam <strong>posição ou ordem</strong> em uma sequência.</li>
-        </ul>
-      </div>
-
-      <div class="block amber">
-        <h3>✖️ Multiplicação com 3 Algarismos</h3>
-        <ul>
-          <li>Alinhe os números verticalmente.</li>
-          <li>Multiplique o número de cima por cada algarismo de baixo, da <strong>direita para a esquerda</strong>.</li>
-          <li>Some os resultados parciais — atenção ao <strong>deslocamento</strong> de cada parcela.</li>
-          <li>Dica: verifique se o resultado faz sentido (estimativa).</li>
-        </ul>
-      </div>
-
-      <div class="block red">
-        <h3>➗ Divisão com 3 Algarismos</h3>
-        <ul>
-          <li>Compare o <strong>dividendo</strong> com o <strong>divisor</strong>.</li>
-          <li>Divida começando pela esquerda; anote o quociente.</li>
-          <li>Multiplique o quociente pelo divisor e subtraia do dividendo.</li>
-          <li>Desça o próximo algarismo e repita o processo.</li>
-          <li>O <strong>resto</strong> deve ser sempre menor que o divisor.</li>
-          <li>Verificação: <code>divisor × quociente + resto = dividendo</code></li>
-        </ul>
-      </div>
-
-    </div>
-
-    <!-- M2 -->
-    <div class="mod-panel" id="m2">
-      <div class="block">
-        <h3>📐 Tipos de Ângulos</h3>
-        <div class="angle-grid">
-          <div class="angle-card ac-reto">
-            <div class="ang-visual">
-              <svg viewBox="0 0 60 60">
-                <line x1="10" y1="50" x2="50" y2="50" stroke="#43e97b" stroke-width="2.5"/>
-                <line x1="10" y1="50" x2="10" y2="10" stroke="#43e97b" stroke-width="2.5"/>
-                <rect x="10" y="38" width="12" height="12" fill="none" stroke="#43e97b" stroke-width="1.5"/>
-              </svg>
-            </div>
-            <h4>Reto</h4>
-            <p>Exatamente <strong>90°</strong><br>igual ao canto de uma folha</p>
-          </div>
-          <div class="angle-card ac-agudo">
-            <div class="ang-visual">
-              <svg viewBox="0 0 60 60">
-                <line x1="10" y1="50" x2="50" y2="50" stroke="#6c63ff" stroke-width="2.5"/>
-                <line x1="10" y1="50" x2="35" y2="12" stroke="#6c63ff" stroke-width="2.5"/>
-                <path d="M 22 50 A 12 12 0 0 1 18 41" fill="none" stroke="#6c63ff" stroke-width="1.5"/>
-              </svg>
-            </div>
-            <h4>Agudo</h4>
-            <p>Menor que <strong>90°</strong><br>mais "fechado"</p>
-          </div>
-          <div class="angle-card ac-obtuso">
-            <div class="ang-visual">
-              <svg viewBox="0 0 60 60">
-                <line x1="10" y1="50" x2="50" y2="50" stroke="#f7971e" stroke-width="2.5"/>
-                <line x1="10" y1="50" x2="5" y2="15" stroke="#f7971e" stroke-width="2.5"/>
-                <path d="M 22 50 A 12 12 0 0 1 9.5 39" fill="none" stroke="#f7971e" stroke-width="1.5"/>
-              </svg>
-            </div>
-            <h4>Obtuso</h4>
-            <p>Maior que <strong>90°</strong><br>mais "aberto"</p>
-          </div>
-          <div class="angle-card ac-raso">
-            <div class="ang-visual">
-              <svg viewBox="0 0 60 60">
-                <line x1="5" y1="30" x2="55" y2="30" stroke="#ff6584" stroke-width="2.5"/>
-                <path d="M 20 30 A 15 15 0 0 1 5 30" fill="none" stroke="#ff6584" stroke-width="1.5"/>
-              </svg>
-            </div>
-            <h4>Raso</h4>
-            <p>Exatamente <strong>180°</strong><br>é uma linha reta</p>
-          </div>
-        </div>
-        <ul>
-          <li>Ângulo = abertura entre duas retas que se encontram no <strong>vértice</strong>.</li>
-          <li>Medimos com o <strong>transferidor</strong>: centro no vértice, linha de fé num lado, leia onde o outro lado aponta.</li>
-        </ul>
-      </div>
-
-      <div class="block green">
-        <h3>📏 Tipos de Retas</h3>
-        <ul>
-          <li><strong>Paralelas:</strong> nunca se cruzam, sempre na mesma distância (trilhos de trem).</li>
-          <li><strong>Perpendiculares:</strong> se cruzam formando exatamente 90°.</li>
-          <li><strong>Concorrentes:</strong> se encontram em um ponto qualquer (sem ser necessariamente 90°).</li>
-        </ul>
-      </div>
-
-      <div class="block amber">
-        <h3>🗺️ Coordenadas Cartesianas</h3>
-        <ul>
-          <li>O <strong>plano cartesiano</strong> é formado por dois eixos numéricos perpendiculares.</li>
-          <li>O ponto onde os eixos se cruzam é a <strong>origem</strong>.</li>
-          <li>Cada ponto é localizado por um <strong>par ordenado (x, y)</strong>.</li>
-          <li>Primeiro lemos o eixo horizontal (x), depois o vertical (y).</li>
-        </ul>
-      </div>
-    </div>
-
-    <!-- M3 -->
-    <div class="mod-panel" id="m3">
-      <div class="block">
-        <h3>🎲 Princípio Multiplicativo</h3>
-        <p style="font-size:.88rem;color:var(--muted);margin-bottom:.7rem">Quando escolhemos uma coisa <em>E</em> outra, <strong>multiplicamos</strong> as quantidades.</p>
-        <div class="combo-demo">
-          <div>2 camisetas <span class="combo-op">×</span> 4 calças</div>
-          <div class="combo-eq">= 8 combinações</div>
-          <div>5 camisetas <span class="combo-op">×</span> 4 calças</div>
-          <div class="combo-eq">= 20 combinações</div>
-          <div>10 figuras <span class="combo-op">×</span> 15 palavras (senha)</div>
-          <div class="combo-eq">= 150 combinações</div>
-        </div>
-        <ul>
-          <li>Dígitos 4, 5 e 6 formando números de 2 algarismos <strong>sem repetição</strong>: 45, 46, 54, 56, 64, 65 → <strong>6 combinações</strong>.</li>
-          <li>2 dados com soma 6: (1,5),(2,4),(3,3),(4,2),(5,1) → <strong>5 combinações</strong>.</li>
-        </ul>
-      </div>
-
-      <div class="block green">
-        <h3>🌳 Árvore de Possibilidades</h3>
-        <ul>
-          <li>Lista todas as possibilidades de forma <strong>organizada, seguindo caminhos</strong>.</li>
-          <li>3 livros (vermelho, azul, verde) empilhados: <strong>6 ordens diferentes</strong>.</li>
-          <li>Útil quando a <strong>ordem importa</strong>.</li>
-        </ul>
-      </div>
-
-      <div class="block amber">
-        <h3>⚖️ Equivalência e Igualdade</h3>
-        <div class="balance-wrap">
-          <div class="balance-card eq-true">
-            <div class="members">15 + 5 &nbsp;&nbsp;12 + 8</div>
-            <span class="eq-sign">=</span>
-            <p>Os dois lados valem 20 ✅</p>
-          </div>
-          <div class="balance-card eq-false">
-            <div class="members">18 + 2 &nbsp;&nbsp;10 + 5</div>
-            <span class="eq-sign">≠</span>
-            <p>20 ≠ 15 — desequilíbrio ❌</p>
-          </div>
-        </div>
-        <ul>
-          <li><strong>Preservação da igualdade:</strong> o que fizer de um lado, faz do outro também.</li>
-          <li>Se <code>4+6=10</code>, então <code>(4+6)×2 = 10×2 → 20=20</code> ✅</li>
-          <li><strong>Álgebra:</strong> letras representam valores desconhecidos. Ex: <code>Y + 7 = 13 → Y = 6</code></li>
-        </ul>
-      </div>
-    </div>
-  </section>
-
-  <!-- FLASHCARDS -->
-  <section class="section" id="flashcards">
-    <div class="sec-title">🃏 Flashcards</div>
-    <div class="fc-grid" id="fc-grid"></div>
-  </section>
-
-  <!-- QUIZ -->
-  <section class="section" id="quiz">
-    <div class="sec-title">✏️ Quiz</div>
-    <div id="score-box">
-      Pontuação <span id="score-num">0 / 12</span>
-      <button class="btn-reset" onclick="resetQuiz()">↺ Recomeçar</button>
-    </div>
-    <div id="quiz-wrap"></div>
-  </section>
-
-</main>
+<!-- Timer bar — rodapé persistente, não bloqueia conteúdo -->
+<div class="timer-bar" id="timerBar">
+  <div class="tbar-ring-wrap">
+    <svg class="tbar-svg" width="44" height="44" viewBox="0 0 44 44">
+      <circle class="tbar-ring-bg" cx="22" cy="22" r="18"/>
+      <circle class="tbar-ring-prog" id="tbarRing" cx="22" cy="22" r="18"
+        stroke-dasharray="113" stroke-dashoffset="0"/>
+    </svg>
+    <div class="tbar-digits" id="tbarDigits">0</div>
+  </div>
+  <div class="tbar-info">
+    <div class="tbar-name" id="tbarName"></div>
+    <div class="tbar-sub" id="tbarSub"></div>
+  </div>
+  <div class="tbar-btns">
+    <button class="tbar-btn add" onclick="addTime()">+30s</button>
+    <button class="tbar-btn skip" onclick="skipTimer()">Pular</button>
+  </div>
+</div>
 
 <script>
-// FLASHCARDS
-const cards = [
-  { q:"Quantas ordens tem cada classe de números?", a:"Cada classe tem 3 ordens: Unidade, Dezena e Centena." },
-  { q:"O que os números ordinais indicam?", a:"Indicam posição ou ordem numa sequência. Ex: 1º primeiro, 2º segundo…" },
-  { q:"Como se verifica uma divisão?", a:"Divisor × Quociente + Resto = Dividendo." },
-  { q:"Qual é a medida de um ângulo reto?", a:"Exatamente 90° — igual ao canto de uma folha de papel." },
-  { q:"O que são retas paralelas?", a:"Retas que nunca se cruzam e mantêm sempre a mesma distância entre si." },
-  { q:"O que são retas perpendiculares?", a:"Retas que se cruzam formando um ângulo de 90°." },
-  { q:"O que é o plano cartesiano?", a:"Dois eixos numéricos perpendiculares. Cada ponto é localizado por um par ordenado (x, y)." },
-  { q:"Qual é o princípio multiplicativo nas combinações?", a:"Quando escolhemos uma coisa E outra, multiplicamos as quantidades. Ex: 3 × 4 = 12 combinações." },
-  { q:"Para que serve a árvore de possibilidades?", a:"Para listar todas as combinações possíveis de forma organizada, quando a ordem importa." },
-  { q:"O que é igualdade matemática?", a:"Quando os dois lados de uma expressão têm o mesmo valor (sinal =). Ex: 15+5 = 12+8 = 20." },
-  { q:"O que acontece com a igualdade se multiplicarmos só um lado?", a:"A igualdade se rompe — para manter o equilíbrio, devemos fazer a mesma operação nos dois lados." },
-  { q:"Y + 7 = 13. Qual é o valor de Y?", a:"Y = 6, pois 6 + 7 = 13." },
+/* ── DATA ── */
+var DAYS=[
+  {
+    l:"Seg",n:"Glúteo A",c:"#c9a05a",
+    foc:"Ênfase em glúteo máximo e cadeia posterior — composto principal é o Hip Thrust",
+    tl:[{t:"Aquec.",m:"3min",h:0},{t:"Hip Thrust",m:"14min",h:1},{t:"Stiff",m:"11min",h:1},{t:"Sumô",m:"9min",h:1},{t:"Abdução",m:"7min",h:1},{t:"Mesa flex.",m:"7min",h:1},{t:"Elev. pélv.",m:"6min",h:1}],
+    ex:[
+      {n:"Hip Thrust com Barra",tg:["p","g"],s:4,r:"8–10",d:"90s",rest:90,nt:"Composto principal da semana — progrida carga toda semana. Queixo para o peito, core ativado, lombar neutra."},
+      {n:"Stiff com Barra ou Halteres",tg:["g"],s:4,r:"8–10",d:"75s",rest:75,nt:"Coluna neutra — não flexione lombar sob carga. Sinta o alongamento dos isquiotibiais."},
+      {n:"Agachamento Sumô com Halter",tg:[],s:3,r:"10–12",d:"75s",rest:75,nt:"Adutores + glúteo médio. Joelhos apontam para fora durante todo o movimento."},
+      {n:"Abdução no Cabo (pé no cabo)",tg:["g"],s:3,r:"15",d:"60s",rest:60,nt:"Cada lado. Glúteo médio e mínimo — estabilidade lateral do quadril."},
+      {n:"Mesa Flexora Bilateral",tg:[],s:3,r:"12–15",d:"60s",rest:60,nt:"Isquiotibiais — bilateral, sem assimetria. Amplitude total."},
+      {n:"Elevação Pélvica Unilateral",tg:["g"],s:3,r:"12",d:"60s",rest:60,nt:"Cada lado. Finisher de glúteo — apoio firme no banco, quadril alinha no topo."}
+    ],
+    info:"19 séries totais. Hip Thrust é o exercício mais importante de toda a semana."
+  },
+  {
+    l:"Ter",n:"Costas",c:"#5a8a7a",
+    foc:"Largura, espessura e postura — bíceps ao final + core integrado",
+    tl:[{t:"Aquec.",m:"3min",h:0},{t:"Barra fixa",m:"13min",h:1},{t:"Remada",m:"11min",h:1},{t:"Puxada",m:"9min",h:1},{t:"Rem. baixa",m:"8min",h:1},{t:"Face pull",m:"7min",h:1},{t:"Bíceps",m:"7min",h:1}],
+    ex:[
+      {n:"Barra Fixa ou Puxada Assistida",tg:["p"],s:4,r:"6–10",d:"90s",rest:90,nt:"Pegada aberta — largura. Cotovelos apontam para o chão na descida."},
+      {n:"Remada c/ Halteres (chest supported)",tg:[],s:4,r:"8–10",d:"75s",rest:75,nt:"Banco inclinado elimina variáveis lombares — foco total na espessura das costas."},
+      {n:"Puxada Fechada Supinada",tg:[],s:3,r:"10–12",d:"60s",rest:60,nt:"Bíceps + dorsal baixo. Cotovelos apontam para o chão ao final do movimento."},
+      {n:"Remada Baixa no Cabo",tg:[],s:3,r:"12",d:"60s",rest:60,nt:"Retração escapular completa. Postura — médio e inferior do trapézio."},
+      {n:"Face Pull com Corda",tg:[],s:3,r:"15–20",d:"60s",rest:60,nt:"Manguito rotador + postura. Puxe para a testa, não para o queixo."},
+      {n:"Rosca Direta com Barra EZ",tg:["p"],s:3,r:"10–12",d:"75s",rest:75,nt:"Sem balanço de tronco — isola bíceps com qualidade."},
+      {n:"Rosca Martelo Alternada",tg:[],s:3,r:"12",d:"60s",rest:60,nt:"Braquiorradial e bíceps. Alternada, não simultânea."},
+      {n:"Core: Prancha + Dead Bug",tg:["c"],s:3,r:"40s/10/lado",d:"45s",rest:45,nt:"Integrado ao final. Prancha ativa o anterior; dead bug treina controle lombar."}
+    ],
+    info:"Costas bem desenvolvidas criam a silhueta em V que valoriza cintura e quadril."
+  },
+  {
+    l:"Qua",n:"Quadríceps",c:"#7a6bbf",
+    foc:"Ênfase anterior + core com carga — maior volume de abdômen da semana",
+    tl:[{t:"Aquec.",m:"4min",h:0},{t:"Agachamento",m:"14min",h:1},{t:"Leg press",m:"11min",h:1},{t:"Búlgaro",m:"9min",h:1},{t:"Extensora",m:"7min",h:1},{t:"Panturrilha",m:"6min",h:1},{t:"Core",m:"8min",h:1}],
+    ex:[
+      {n:"Agachamento Livre",tg:["p"],s:4,r:"6–8",d:"90s",rest:90,nt:"Composto principal do dia. Descida controlada — 3s na descida. Aquecimento progressivo obrigatório."},
+      {n:"Leg Press 45° (pés baixos e fechados)",tg:[],s:3,r:"10–12",d:"75s",rest:75,nt:"Posição quadríceps dominante. Lombar colada ao banco durante toda a amplitude."},
+      {n:"Afundo Búlgaro com Halteres",tg:["g"],s:3,r:"10",d:"75s",rest:75,nt:"Cada lado. Glúteo + quadríceps unilateral. Tronco levemente inclinado para frente."},
+      {n:"Cadeira Extensora",tg:[],s:3,r:"12–15",d:"60s",rest:60,nt:"Isolamento de quadríceps sem carga axial na coluna. Pausa de 1s no topo."},
+      {n:"Panturrilha em Pé na Máquina",tg:[],s:4,r:"15–20",d:"45s",rest:45,nt:"Amplitude total — calcâneo abaixo da plataforma. Pausa de 1s no alongamento."},
+      {n:"Core: Pallof Press no Cabo",tg:["c"],s:3,r:"12/lado",d:"45s",rest:45,nt:"Anti-rotação — oblíquos. Braços estendidos na frente, resistir à rotação."},
+      {n:"Core: Prancha Lateral",tg:["c"],s:3,r:"35s/lado",d:"45s",rest:45,nt:"Oblíquos + estabilidade lateral. Quadril não cai."},
+      {n:"Core: Crunch no Cabo",tg:["c"],s:3,r:"15–20",d:"60s",rest:60,nt:"Reto abdominal com carga real — progressão de carga aqui gera resultado."}
+    ],
+    info:"Crunch no cabo com carga progressiva é um dos exercícios mais eficientes para definição abdominal."
+  },
+  {
+    l:"Qui",n:"Ombro",c:"#6a9a6a",
+    foc:"Ombros 3D + tríceps + core de força — base para a ilusão de cintura",
+    tl:[{t:"Aquec.",m:"3min",h:0},{t:"Desenvolv.",m:"13min",h:1},{t:"Elev. lat.",m:"9min",h:1},{t:"Elev. front.",m:"8min",h:1},{t:"Tríceps",m:"10min",h:1},{t:"Core",m:"7min",h:1}],
+    ex:[
+      {n:"Desenvolvimento com Halteres",tg:["p"],s:4,r:"8–10",d:"90s",rest:90,nt:"Sentada, encosto a 80°. Não eleve o cotovelo além do plano do ombro."},
+      {n:"Elevação Lateral (cabo unilateral)",tg:[],s:4,r:"15–20",d:"60s",rest:60,nt:"Tensão constante ao longo de toda a amplitude. Sem balanço — movimento controlado."},
+      {n:"Elevação Frontal com Anilha",tg:[],s:3,r:"12",d:"60s",rest:60,nt:"Feixe anterior do deltoide. Cotovelo levemente flexionado."},
+      {n:"Tríceps Corda no Cabo",tg:[],s:3,r:"12–15",d:"60s",rest:60,nt:"Cotovelos fixos ao lado do corpo. Extensão total na descida, abre a corda no final."},
+      {n:"Tríceps Testa com Barra EZ",tg:[],s:3,r:"10–12",d:"60s",rest:60,nt:"Úmero perpendicular ao chão — não deixe cair para trás."},
+      {n:"Tríceps Unilateral no Cabo",tg:[],s:3,r:"12/lado",d:"60s",rest:60,nt:"Finalização. Cada lado — simetria e volume de isolamento."},
+      {n:"Core: Ab Wheel",tg:["c"],s:3,r:"10",d:"60s",rest:60,nt:"Força de core total. Lombar não arqueie no retorno."},
+      {n:"Core: Elevação de Pernas",tg:["c"],s:3,r:"15",d:"60s",rest:60,nt:"Região abdominal inferior. Controle na descida — não deixe cair."}
+    ],
+    info:"Ombro bem desenvolvido cria ilusão de cintura mais fina — efeito estético que complementa diretamente glúteo e pernas."
+  },
+  {
+    l:"Sex",n:"Glúteo B",c:"#c07090",
+    foc:"2ª frequência de glúteo — estímulos diferentes da segunda + cardio LISS",
+    tl:[{t:"Aquec.",m:"3min",h:0},{t:"Leg press",m:"12min",h:1},{t:"Kickback",m:"9min",h:1},{t:"Abdução",m:"9min",h:1},{t:"Leg curl",m:"8min",h:1},{t:"Afundo",m:"7min",h:1},{t:"LISS",m:"25min",h:1}],
+    ex:[
+      {n:"Leg Press (pés altos e abertos)",tg:["p","g"],s:4,r:"10–12",d:"90s",rest:90,nt:"Posição glúteo dominante. Amplitude completa — quadril desce abaixo do joelho. Lombar colada ao banco."},
+      {n:"Extensão de Quadril no Cabo (kickback)",tg:["g"],s:3,r:"15",d:"60s",rest:60,nt:"Cada lado. Isolamento de glúteo máximo — core ativado para não compensar com lombar."},
+      {n:"Abdução na Máquina",tg:["g"],s:4,r:"15–20",d:"60s",rest:60,nt:"Glúteo médio — peso alto com controle total. Não balance o tronco para ajudar."},
+      {n:"Leg Curl Deitado Bilateral",tg:[],s:3,r:"12–15",d:"60s",rest:60,nt:"Isquiotibiais — bilateral, sem assimetria. Amplitude total."},
+      {n:"Afundo Caminhando com Halteres",tg:["g"],s:3,r:"10/lado",d:"75s",rest:75,nt:"Volume funcional — glúteo + quadríceps. Tronco levemente inclinado para frente."},
+      {n:"Cardio LISS — Bike ou Esteira inclinada",tg:[],s:1,r:"25–30 min",d:"—",rest:0,nt:"Zona 2 — 60–70% FCmax. Você deve conseguir manter uma conversa."}
+    ],
+    info:"Segunda frequência de glúteo com estímulos de encurtamento (abdução, kickback). O LISS em zona 2 acelera recuperação muscular sem catabolismo."
+  }
 ];
 
-const grid = document.getElementById('fc-grid');
-cards.forEach(c => {
-  const el = document.createElement('div');
-  el.className = 'fc';
-  el.innerHTML = `<div class="fc-inner"><div class="fc-front">${c.q}</div><div class="fc-back">${c.a}</div></div>`;
-  el.addEventListener('click', () => el.classList.toggle('flipped'));
-  grid.appendChild(el);
-});
+var TM={p:['ep','◆ principal'],g:['ec2','⚡ glúteo'],c:['ef','◎ core']};
+var currentDay=0;
+var state={};
 
-// QUIZ
-const Q = [
-  { q:"O número 4.532.816 pertence a qual classe o algarismo 4?", opts:["Classe das unidades simples","Classe dos milhares","Classe dos milhões","Classe dos bilhões"], ans:2, exp:"O algarismo 4 está na 7ª ordem — Unidade de Milhão — portanto pertence à Classe dos Milhões.", tag:"M1" },
-  { q:"Qual é o ordinal correto para a posição 8?", opts:["Oitenta","Oitavo","Octingentésimo","Sétimo"], ans:1, exp:"A 8ª posição se escreve 8º e se lê 'oitavo'.", tag:"M1" },
-  { q:"Numa divisão: dividendo = 500, divisor = 125, quociente = 4. Qual é o resto?", opts:["0","5","25","125"], ans:0, exp:"125 × 4 = 500. 500 − 500 = 0. O resto é zero — divisão exata.", tag:"M1" },
-  { q:"245 × 312. Qual é a primeira parcela parcial (multiplicando por 2)?", opts:["490","2450","245","980"], ans:0, exp:"245 × 2 = 490. Essa é a primeira parcela (algarismo das unidades do 312).", tag:"M1" },
-  { q:"Um ângulo de 90° é chamado de:", opts:["Agudo","Obtuso","Reto","Raso"], ans:2, exp:"Ângulo reto mede exatamente 90° — igual ao canto de uma folha de papel.", tag:"M2" },
-  { q:"Dois trilhos de trem que nunca se encontram são exemplos de retas:", opts:["Perpendiculares","Concorrentes","Paralelas","Opostas"], ans:2, exp:"Retas paralelas nunca se cruzam e mantêm sempre a mesma distância entre si.", tag:"M2" },
-  { q:"Para medir um ângulo com o transferidor, onde colocamos o centro?", opts:["Na ponta de um dos lados","No meio de um dos lados","No vértice do ângulo","Em qualquer lugar"], ans:2, exp:"O centro do transferidor deve ser colocado exatamente no vértice — o ponto onde as duas retas se encontram.", tag:"M2" },
-  { q:"O ponto (3, 5) no plano cartesiano está:", opts:["3 no eixo y e 5 no eixo x","3 no eixo x e 5 no eixo y","Na origem","No eixo x apenas"], ans:1, exp:"Em um par ordenado (x, y): o primeiro valor é sempre x (horizontal) e o segundo é y (vertical). Logo x=3, y=5.", tag:"M2" },
-  { q:"Uma lanchonete tem 4 tipos de pão e 3 tipos de recheio. Quantos sanduíches diferentes é possível montar?", opts:["7","10","12","24"], ans:2, exp:"Princípio multiplicativo: 4 pães × 3 recheios = 12 combinações possíveis.", tag:"M3" },
-  { q:"K − 8 = 14. Qual é o valor de K?", opts:["K = 6","K = 22","K = 16","K = 8"], ans:1, exp:"K = 14 + 8 = 22. Verificação: 22 − 8 = 14 ✅", tag:"M3" },
-  { q:"Se 20 = 20, e dividirmos os dois lados por 4, o resultado é:", opts:["20 = 5","5 ≠ 5","5 = 5","4 = 20"], ans:2, exp:"20 ÷ 4 = 5 nos dois lados → 5 = 5. A igualdade é preservada quando fazemos a mesma operação nos dois membros.", tag:"M3" },
-  { q:"Usando as letras A, B e C para formar 'palavras' de 2 letras diferentes, quantas combinações existem?", opts:["3","4","6","9"], ans:2, exp:"AB, AC, BA, BC, CA, CB = 6 combinações. Para cada uma das 3 primeiras letras, existem 2 opções de segunda letra: 3 × 2 = 6.", tag:"M3" },
-];
+/* ── PWA ── */
+if('serviceWorker' in navigator){
+  navigator.serviceWorker.register('sw.js').catch(function(){});
+}
 
-let score = 0, answered = 0;
+/* ── NOTIFICAÇÕES iOS
+   Regras reais do iOS Safari:
+   - Só funciona se o PWA estiver instalado na tela inicial (standalone)
+   - Precisa de gesto do usuário para pedir permissão
+   - new Notification() funciona quando o app está aberto ou recente
+   - Não há vibração no iOS via navigator.vibrate
+   - Não usamos SW para enviar notificação — não é confiável no iOS
+── */
+var notifEnabled = false;
+var _bannerShown = false;
 
-const tagColors = { M1:"tag-m1", M2:"tag-m2", M3:"tag-m3" };
+function initNotifications(){
+  if(!('Notification' in window)) return;
+  if(Notification.permission === 'granted'){
+    notifEnabled = true;
+  }
+  // Não pedimos permissão automaticamente — precisa de gesto do usuário
+}
 
-function buildQuiz() {
-  const c = document.getElementById('quiz-wrap');
-  c.innerHTML = '';
-  Q.forEach((item, i) => {
-    const d = document.createElement('div');
-    d.className = 'quiz-item';
-    d.id = `q${i}`;
-    d.innerHTML = `
-      <div class="q">${i+1}. ${item.q} <span class="tag ${tagColors[item.tag]}">${item.tag}</span></div>
-      <div class="opts">${item.opts.map((o,j)=>`<button class="opt" onclick="check(${i},${j})">${o}</button>`).join('')}</div>
-      <div class="fb" id="fb${i}"></div>`;
-    c.appendChild(d);
+function maybeShowNotifBanner(){
+  if(_bannerShown) return;
+  if(!('Notification' in window)) return;
+  if(Notification.permission !== 'default') return;
+  // Só mostra se estiver em modo standalone (instalado) ou desktop
+  var isStandalone = window.navigator.standalone === true
+    || window.matchMedia('(display-mode: standalone)').matches;
+  // Mostra em standalone OU em desktop (para testes)
+  if(!isStandalone && /iPhone|iPad|iPod/.test(navigator.userAgent)) return;
+  _bannerShown = true;
+  document.getElementById('notifBanner').classList.add('show');
+}
+
+function requestNotifPermission(){
+  dismissNotifBanner();
+  if(!('Notification' in window)) return;
+  Notification.requestPermission().then(function(p){
+    if(p === 'granted') notifEnabled = true;
   });
-  updateScore();
 }
 
-function check(qi, chosen) {
-  const item = Q[qi];
-  const btns = document.querySelectorAll(`#q${qi} .opt`);
-  btns.forEach(b => b.disabled = true);
-  btns[item.ans].classList.add('correct');
-  const fb = document.getElementById(`fb${qi}`);
-  if (chosen === item.ans) { score++; fb.className='fb show ok'; fb.textContent='✅ Correto! '+item.exp; }
-  else { btns[chosen].classList.add('wrong'); fb.className='fb show no'; fb.textContent='❌ Errado. '+item.exp; }
-  answered++;
-  updateScore();
-  document.getElementById('progress-bar').style.width = Math.round(answered/Q.length*100)+'%';
-  document.getElementById('prog-label').textContent = `${answered} de ${Q.length} questões respondidas`;
+function dismissNotifBanner(){
+  _bannerShown = true;
+  document.getElementById('notifBanner').classList.remove('show');
 }
 
-function updateScore() { document.getElementById('score-num').textContent = `${score} / ${Q.length}`; }
-
-function resetQuiz() {
-  score = 0; answered = 0; buildQuiz();
-  document.getElementById('progress-bar').style.width='0%';
-  document.getElementById('prog-label').textContent = `0 de ${Q.length} questões respondidas`;
+function fireNotification(body){
+  if(!notifEnabled) return;
+  if(Notification.permission !== 'granted') return;
+  try{
+    // Caminho direto — funciona no iOS Safari com PWA instalado e app ativo/recente
+    new Notification('Morgana Workout', {
+      body: body,
+      icon: 'icon-192.png',
+      tag: 'timer',
+      silent: false
+    });
+  }catch(e){}
 }
 
-buildQuiz();
+/* ── TIMER ── */
+var timerInterval = null;
+var timerEndTime = 0;   // timestamp absoluto — resistente a suspensão curta do iOS
+var timerTotal = 0;
+var timerLeft = 0;
+var timerNextInfo = '';
+var CIRC = 113; // 2*pi*18 ≈ 113
 
-function showSection(id, btn) {
-  document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
-  document.getElementById(id).classList.add('active');
-  document.querySelectorAll('nav button').forEach(b=>b.classList.remove('active'));
-  btn.classList.add('active');
+function startTimer(seconds, exName, serieLabel, nextInfo){
+  if(seconds <= 0) return;
+  clearInterval(timerInterval);
+  timerTotal = seconds;
+  timerLeft = seconds;
+  timerEndTime = Date.now() + seconds * 1000;
+  timerNextInfo = nextInfo || '';
+
+  document.getElementById('tbarName').textContent = exName;
+  document.getElementById('tbarSub').textContent = serieLabel + (nextInfo ? ' · A seguir: ' + nextInfo : '');
+  updateTimerBar();
+  document.getElementById('timerBar').classList.add('show');
+
+  // Poll a 500ms — usa timestamp absoluto para compensar
+  // se o iOS suspender o timer brevemente (ex: tela desligada por 5s)
+  timerInterval = setInterval(function(){
+    timerLeft = Math.max(0, Math.round((timerEndTime - Date.now()) / 1000));
+    updateTimerBar();
+    if(timerLeft <= 0){
+      clearInterval(timerInterval);
+      finishTimer();
+    }
+  }, 500);
 }
 
-function showMod(id, btn) {
-  document.querySelectorAll('.mod-panel').forEach(p=>p.classList.remove('active'));
-  document.getElementById(id).classList.add('active');
-  document.querySelectorAll('.mod-tab').forEach(b=>b.classList.remove('active'));
-  btn.classList.add('active');
+function updateTimerBar(){
+  var urgent = timerLeft <= 10;
+  var d = document.getElementById('tbarDigits');
+  var ring = document.getElementById('tbarRing');
+  d.textContent = timerLeft;
+  d.className = 'tbar-digits' + (urgent ? ' urgent' : '');
+  ring.className = 'tbar-ring-prog' + (urgent ? ' urgent' : '');
+  var prog = timerTotal > 0 ? (timerLeft / timerTotal) : 0;
+  ring.style.strokeDashoffset = CIRC * (1 - prog);
 }
+
+function finishTimer(){
+  document.getElementById('timerBar').classList.remove('show');
+  var body = 'Descanse concluído' + (timerNextInfo ? ' — ' + timerNextInfo : '');
+  fireNotification(body);
+}
+
+function skipTimer(){
+  clearInterval(timerInterval);
+  document.getElementById('timerBar').classList.remove('show');
+}
+
+function addTime(){
+  timerLeft += 30;
+  timerTotal += 30;
+  timerEndTime += 30000;
+  updateTimerBar();
+}
+
+/* ── STATE ── */
+function initState(i){
+  if(!state[i]) state[i] = DAYS[i].ex.map(function(){ return 0; });
+}
+function totalSeries(d){ return DAYS[d].ex.reduce(function(a,e){ return a+e.s; },0); }
+function doneSeries(d){ initState(d); return state[d].reduce(function(a,v){ return a+v; },0); }
+
+function updateProgress(i){
+  var total = totalSeries(i), done = doneSeries(i);
+  var pct = total > 0 ? Math.round(done/total*100) : 0;
+  document.getElementById('progFill').style.width = pct + '%';
+  document.getElementById('progLabel').textContent = done + ' / ' + total;
+}
+
+function markSerie(dayIdx, exIdx){
+  initState(dayIdx);
+  maybeShowNotifBanner(); // mostra banner na primeira série
+
+  var ex = DAYS[dayIdx].ex[exIdx];
+  var current = state[dayIdx][exIdx];
+  if(current >= ex.s) return;
+
+  var newCount = current + 1;
+  state[dayIdx][exIdx] = newCount;
+  var isLastSerie = (newCount === ex.s);
+
+  renderDots(dayIdx, exIdx);
+  if(isLastSerie){
+    var card = document.getElementById('ec-'+dayIdx+'-'+exIdx);
+    if(card) card.classList.add('done');
+  }
+
+  updateProgress(dayIdx);
+
+  var allDone = state[dayIdx].every(function(v,i){ return v >= DAYS[dayIdx].ex[i].s; });
+  var banner = document.getElementById('banner-'+dayIdx);
+  if(banner) banner.classList.toggle('show', allDone);
+
+  if(!allDone && ex.rest > 0){
+    var serieLabel = 'Série ' + newCount + '/' + ex.s;
+    var nextInfo = '';
+    if(isLastSerie){
+      var nextEx = DAYS[dayIdx].ex[exIdx+1];
+      if(nextEx) nextInfo = nextEx.n;
+    } else {
+      nextInfo = 'Série ' + (newCount+1) + ' de ' + ex.n;
+    }
+    startTimer(ex.rest, ex.n, serieLabel, nextInfo);
+  }
+}
+
+function renderDots(dayIdx, exIdx){
+  var ex = DAYS[dayIdx].ex[exIdx];
+  var done = state[dayIdx] ? state[dayIdx][exIdx] : 0;
+  var container = document.getElementById('dots-'+dayIdx+'-'+exIdx);
+  if(!container) return;
+  container.innerHTML = '';
+  for(var s = 1; s <= ex.s; s++){
+    var btn = document.createElement('button');
+    btn.className = 'sdot' + (s<=done?' done':(s===done+1?' active-dot':''));
+    btn.textContent = s<=done ? '✓' : s;
+    btn.setAttribute('aria-label','Série '+s);
+    if(s > done){
+      (function(si,di,ei){
+        btn.addEventListener('click',function(){ if(si===state[di][ei]+1) markSerie(di,ei); });
+      })(s, dayIdx, exIdx);
+    }
+    container.appendChild(btn);
+  }
+}
+
+function resetDay(){
+  initState(currentDay);
+  clearInterval(timerInterval);
+  document.getElementById('timerBar').classList.remove('show');
+  state[currentDay] = state[currentDay].map(function(){ return 0; });
+  DAYS[currentDay].ex.forEach(function(_,ei){
+    var card = document.getElementById('ec-'+currentDay+'-'+ei);
+    if(card) card.classList.remove('done');
+    renderDots(currentDay, ei);
+  });
+  var banner = document.getElementById('banner-'+currentDay);
+  if(banner) banner.classList.remove('show');
+  updateProgress(currentDay);
+}
+
+function selectDay(i){
+  currentDay = i;
+  document.querySelectorAll('#dtabs .day-tab').forEach(function(t,ti){
+    t.classList.toggle('on', ti===i);
+    t.style.borderBottomColor = ti===i ? DAYS[i].c : 'transparent';
+    t.style.color = ti===i ? 'var(--tx)' : 'var(--mt)';
+  });
+  document.querySelectorAll('#dpanels .panel').forEach(function(p,pi){
+    p.classList.toggle('on', pi===i);
+  });
+  document.getElementById('panelsWrap').scrollTop = 0;
+  updateProgress(i);
+}
+
+/* ── CARGA (localStorage) ── */
+function cargaKey(dayIdx, exIdx){
+  return 'carga_' + dayIdx + '_' + exIdx;
+}
+function loadCarga(dayIdx, exIdx){
+  try{ return localStorage.getItem(cargaKey(dayIdx,exIdx)) || ''; }catch(e){ return ''; }
+}
+function saveCarga(dayIdx, exIdx, val){
+  try{ localStorage.setItem(cargaKey(dayIdx,exIdx), val); }catch(e){}
+}
+
+function onCargaInput(dayIdx, exIdx, input){
+  var val = input.value.trim();
+  saveCarga(dayIdx, exIdx, val);
+  // flash "salvo"
+  var saved = document.getElementById('carga-saved-'+dayIdx+'-'+exIdx);
+  if(saved){
+    saved.style.opacity='1';
+    clearTimeout(saved._t);
+    saved._t = setTimeout(function(){ saved.style.opacity='0'; }, 1400);
+  }
+}
+
+/* ── BUILD ── */
+function build(){
+  var tabs = document.getElementById('dtabs');
+  var panels = document.getElementById('dpanels');
+
+  DAYS.forEach(function(d,i){
+    initState(i);
+
+    var tb = document.createElement('button');
+    tb.className = 'day-tab' + (i===0?' on':'');
+    tb.style.borderBottomColor = i===0 ? d.c : 'transparent';
+    tb.style.color = i===0 ? 'var(--tx)' : 'var(--mt)';
+    tb.innerHTML = '<span class="dtd">'+d.l+'</span><span class="dtn">'+d.n+'</span>';
+    tb.addEventListener('click', function(){ selectDay(i); });
+    tabs.appendChild(tb);
+
+    var pnl = document.createElement('div');
+    pnl.className = 'panel' + (i===0?' on':'');
+    pnl.id = 'dp'+i;
+
+    var tl = '<div class="tl">';
+    d.tl.forEach(function(s){ tl += '<div class="ts'+(s.h?' hi':'')+'">'+s.t+'<div class="tm">'+s.m+'</div></div>'; });
+    tl += '</div>';
+
+    var ex = '<div class="done-banner" id="banner-'+i+'">✓ Treino concluído — excelente sessão!</div>';
+    d.ex.forEach(function(e,ei){
+      var tgs = '';
+      if(e.tg && e.tg.length){
+        tgs = '<div class="etgs">';
+        e.tg.forEach(function(t){ var m=TM[t]; if(m) tgs+='<span class="etg '+m[0]+'">'+m[1]+'</span>'; });
+        tgs += '</div>';
+      }
+      var dots = '<div class="series-row">'
+        +'<span class="series-label">Séries</span>'
+        +'<div class="series-dots" id="dots-'+i+'-'+ei+'"></div>'
+        +'</div>';
+
+      var carga = '<div class="carga-row">'
+        +'<span class="carga-label">Carga</span>'
+        +'<div class="carga-wrap">'
+        +'<input class="carga-input" id="carga-'+i+'-'+ei+'" type="number" inputmode="decimal" placeholder="—" min="0" step="0.5">'
+        +'<span class="carga-unit">kg</span>'
+        +'<span class="carga-saved" id="carga-saved-'+i+'-'+ei+'">salvo ✓</span>'
+        +'</div>'
+        +'</div>';
+
+      ex += '<div class="ec" id="ec-'+i+'-'+ei+'">'
+        +'<div class="ea" style="background:'+d.c+'"></div>'
+        +'<div class="en">Exercício '+(ei+1)+' / '+d.ex.length+'</div>'
+        +'<div class="enm">'+e.n+'</div>'
+        +tgs
+        +'<div class="ests">'
+        +'<div class="est"><span class="esl">Reps</span><span class="esv sm">'+e.r+'</span></div>'
+        +'<div class="est"><span class="esl">Descanso</span><span class="esv sm">'+e.d+'</span></div>'
+        +'</div>'
+        +carga
+        +dots
+        +'<div class="enote">'+e.nt+'</div>'
+        +'</div>';
+    });
+
+    pnl.innerHTML =
+      '<span class="bdg" style="background:'+d.c+'22;color:'+d.c+'">'+d.n+'</span>'
+      +'<div class="ptl">'+d.n+'</div>'
+      +'<div class="pfoc">'+d.foc+'</div>'
+      +tl+ex
+      +'<div class="ibox"><b>Nota:</b> '+d.info+'</div>'
+      +'<div class="ftr">'
+      +'<div class="ftrtl">Diretrizes</div>'
+      +'<div class="ftr-divider"></div>'
+      +'Aquecimento: 3–4 min + 1 série leve (50%) no composto principal.<br>'
+      +'Progressão: sobe a carga quando completar todas as reps com técnica limpa por 2 sessões seguidas.<br>'
+      +'RIR: termine as séries com 1–2 reps no tanque — intensidade alta sem falha desnecessária.<br>'
+      +'Deload: a cada 6–8 semanas, reduza o volume em 40% mantendo a intensidade.'
+      +'</div>';
+
+    panels.appendChild(pnl);
+  });
+
+  DAYS.forEach(function(d,i){
+    d.ex.forEach(function(_,ei){ renderDots(i,ei); });
+  });
+
+  // Carregar e vincular campos de carga
+  DAYS.forEach(function(d,i){
+    d.ex.forEach(function(_,ei){
+      var inp = document.getElementById('carga-'+i+'-'+ei);
+      if(!inp) return;
+      var saved = loadCarga(i,ei);
+      if(saved !== '') inp.value = saved;
+      (function(di,eii,input){
+        input.addEventListener('change', function(){ onCargaInput(di,eii,input); });
+        input.addEventListener('blur',   function(){ onCargaInput(di,eii,input); });
+      })(i,ei,inp);
+    });
+  });
+
+  updateProgress(0);
+  initNotifications();
+}
+
+build();
 </script>
 </body>
 </html>
