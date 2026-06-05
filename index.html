@@ -3,654 +3,458 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black">
-<meta name="apple-mobile-web-app-title" content="Morgana">
-<link rel="manifest" href="manifest.json">
-<link rel="apple-touch-icon" href="icon-192.png">
-<meta name="theme-color" content="#c9a05a">
-<title>Morgana Workout</title>
+<title>Estudos da Maria</title>
 <style>
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+*{box-sizing:border-box;margin:0;padding:0}
 :root{
-  --bg:#0d0c0a;--s1:#161513;--s2:#1e1c1a;--br:#232220;--br2:#2a2927;
-  --tx:#e8e2d8;--mt:#6b6760;--ac:#c9a05a;
-  --rose:#c07090;--teal:#5a8a7a;--purple:#a07aa0;--green:#6a9a6a;
+  --rosa:#E91E8C;--rosa-light:#FCE4F3;--rosa-mid:#F48CBB;--rosa-dark:#B01068;
+  --branco:#FFFFFF;--cinza-soft:#F9F0F6;--cinza-borda:#EDD5E8;
+  --text-main:#2D1A26;--text-sec:#7A4A6A;--text-hint:#B08AA0;
+  --verde-ok:#1D9E75;--verde-bg:#E1F5EE;--vermelho-err:#C0392B;--vermelho-bg:#FCEBEB;
+  --page-bg:#FDF5FB;
 }
-html{height:100%}
-body{height:100%;display:flex;flex-direction:column;background:var(--bg);color:var(--tx);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:var(--page-bg);color:var(--text-main);min-height:100vh;padding:0}
 
-.hdr{padding:max(48px,env(safe-area-inset-top)) 20px 18px;border-bottom:1px solid var(--br);flex-shrink:0}
-.hdr-eyebrow{font-size:9px;letter-spacing:.22em;text-transform:uppercase;color:var(--mt);margin-bottom:8px}
-.hdr-title{font-size:28px;font-weight:300;color:var(--tx);line-height:1.05;letter-spacing:-.02em}
-.hdr-title strong{font-weight:600;color:var(--ac)}
-.hdr-title em{font-style:italic;font-weight:300;color:var(--ac)}
-.hdr-sub{font-size:11px;color:var(--mt);margin-top:8px;letter-spacing:.03em;line-height:1.5}
-.hdr-divider{width:32px;height:1px;background:var(--ac);opacity:.4;margin:12px 0 0}
+/* TOPO */
+.app-header{background:var(--branco);border-bottom:1px solid var(--cinza-borda);padding:16px 24px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100}
+.logo-area{display:flex;align-items:center;gap:10px}
+.logo-dot{width:34px;height:34px;border-radius:50%;background:var(--rosa);display:flex;align-items:center;justify-content:center;font-size:18px;color:#fff;flex-shrink:0}
+.app-title{font-size:17px;font-weight:600;color:var(--text-main)}
+.app-sub{font-size:12px;color:var(--text-sec)}
+.breadcrumb{font-size:13px;color:var(--text-hint);display:flex;align-items:center;gap:6px}
+.breadcrumb span{color:var(--rosa);font-weight:500}
 
-.lgd{display:flex;gap:12px;padding:9px 20px;border-bottom:1px solid var(--br);flex-shrink:0;flex-wrap:wrap}
-.li{display:flex;align-items:center;gap:4px;font-size:10px;color:var(--mt)}
-.ld{width:5px;height:5px;border-radius:50%}
+/* CONTAINER */
+.container{max-width:860px;margin:0 auto;padding:24px 20px}
 
-.sticky-nav{position:sticky;top:0;z-index:10;background:var(--bg);flex-shrink:0}
-.day-tabs{display:flex;border-bottom:1px solid var(--br);overflow-x:auto;scrollbar-width:none}
-.day-tabs::-webkit-scrollbar{display:none}
-.day-tab{flex:1;min-width:58px;display:flex;flex-direction:column;align-items:center;padding:9px 6px 7px;cursor:pointer;border-bottom:2px solid transparent;transition:all .2s;background:none;border-top:none;border-left:none;border-right:none;color:var(--mt)}
-.day-tab.on{color:var(--tx)}
-.dtd{font-size:9px;letter-spacing:.08em;text-transform:uppercase}
-.dtn{font-size:11px;font-weight:500;margin-top:1px;white-space:nowrap}
+/* PAINEL INICIAL */
+.dica-prof{background:var(--rosa-light);border:1px solid var(--cinza-borda);border-radius:12px;padding:12px 16px;margin-bottom:24px;display:flex;gap:10px;align-items:flex-start}
+.dica-prof .icon{font-size:18px;flex-shrink:0;margin-top:1px}
+.dica-prof p{font-size:13px;color:var(--rosa-dark);line-height:1.55}
+.dica-prof strong{font-weight:600}
 
-.prog-wrap{padding:10px 20px;border-bottom:1px solid var(--br);display:flex;align-items:center;gap:10px}
-.prog-bar-bg{flex:1;height:3px;background:var(--br2);border-radius:2px;overflow:hidden}
-.prog-bar-fill{height:100%;background:var(--ac);border-radius:2px;transition:width .3s ease}
-.prog-label{font-size:10px;color:var(--mt);white-space:nowrap;min-width:40px;text-align:right}
-.prog-reset{font-size:9px;color:var(--mt);background:none;border:1px solid var(--br2);border-radius:4px;padding:3px 8px;cursor:pointer;letter-spacing:.06em;text-transform:uppercase;white-space:nowrap}
-.prog-reset:active{background:var(--br2);color:var(--tx)}
+.subject-section{margin-bottom:28px}
+.subject-header{display:flex;align-items:center;gap:8px;margin-bottom:12px}
+.subject-pill{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:600;padding:5px 12px;border-radius:20px;letter-spacing:.02em}
+.subject-pill.geo{background:#E1F5EE;color:#085041}
+.subject-pill.mat{background:var(--rosa-light);color:var(--rosa-dark)}
+.subject-count{font-size:12px;color:var(--text-hint)}
 
-/* ── NOTIF BANNER ── */
-/* Aparece só na primeira série, pede permissão para notificação */
-.notif-banner{
-  display:none;
-  background:var(--s2);border-bottom:1px solid var(--br);
-  padding:10px 16px;align-items:center;gap:10px;flex-shrink:0;
-}
-.notif-banner.show{display:flex}
-.notif-banner-txt{flex:1;font-size:11px;color:var(--mt);line-height:1.4}
-.notif-banner-txt b{color:var(--tx)}
-.notif-banner-btn{font-size:10px;background:var(--ac);color:#0d0c0a;border:none;border-radius:6px;padding:7px 14px;cursor:pointer;font-weight:700;letter-spacing:.08em;font-family:inherit;white-space:nowrap;flex-shrink:0}
-.notif-banner-close{background:none;border:none;color:var(--mt);font-size:18px;cursor:pointer;padding:2px 8px;line-height:1;flex-shrink:0}
+.mod-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
+.mod-card{background:var(--branco);border:1px solid var(--cinza-borda);border-radius:14px;padding:16px;cursor:pointer;transition:border-color .15s,transform .1s,box-shadow .1s}
+.mod-card:hover{border-color:var(--rosa-mid);transform:translateY(-2px);box-shadow:0 4px 16px rgba(233,30,140,.08)}
+.mod-num{font-size:11px;color:var(--rosa);font-weight:600;margin-bottom:4px;text-transform:uppercase;letter-spacing:.04em}
+.mod-title{font-size:14px;font-weight:600;color:var(--text-main);line-height:1.35;margin-bottom:10px}
+.mod-tags{display:flex;gap:4px;flex-wrap:wrap}
+.tag{font-size:10px;padding:3px 8px;border-radius:20px;font-weight:500}
+.tag.geo{background:#E1F5EE;color:#085041}
+.tag.mat{background:var(--rosa-light);color:var(--rosa-dark)}
 
-/* ── TIMER BAR ── */
-/* Barra compacta no rodapé — não bloqueia a tela */
-.timer-bar{
-  position:fixed;bottom:0;left:0;right:0;z-index:100;
-  background:var(--s1);border-top:1px solid var(--br2);
-  padding:10px 20px max(16px,env(safe-area-inset-bottom));
-  display:flex;align-items:center;gap:12px;
-  transform:translateY(110%);
-  transition:transform .28s cubic-bezier(.4,0,.2,1);
-  box-shadow:0 -12px 40px rgba(0,0,0,.5);
-}
-.timer-bar.show{transform:translateY(0)}
+/* MÓDULO VIEW */
+.mod-view{display:none}
+.back-btn{display:inline-flex;align-items:center;gap:6px;font-size:13px;color:var(--text-sec);cursor:pointer;background:none;border:1px solid var(--cinza-borda);border-radius:8px;padding:7px 14px;margin-bottom:16px;transition:border-color .15s,color .15s}
+.back-btn:hover{border-color:var(--rosa);color:var(--rosa)}
+.mod-hero{background:linear-gradient(135deg,var(--rosa-light) 0%,#FFF0FA 100%);border:1px solid var(--cinza-borda);border-radius:14px;padding:18px 20px;margin-bottom:16px}
+.mod-hero-subject{font-size:11px;font-weight:600;color:var(--rosa);text-transform:uppercase;letter-spacing:.05em;margin-bottom:3px}
+.mod-hero-title{font-size:20px;font-weight:700;color:var(--text-main);margin-bottom:4px}
+.mod-hero-sub{font-size:13px;color:var(--text-sec)}
 
-.tbar-ring-wrap{position:relative;width:44px;height:44px;flex-shrink:0}
-.tbar-svg{transform:rotate(-90deg)}
-.tbar-ring-bg{fill:none;stroke:var(--br2);stroke-width:3.5}
-.tbar-ring-prog{fill:none;stroke:var(--ac);stroke-width:3.5;stroke-linecap:round;transition:stroke-dashoffset .85s linear,stroke .3s}
-.tbar-ring-prog.urgent{stroke:var(--rose)}
-.tbar-digits{
-  position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
-  font-size:13px;font-weight:700;color:var(--tx);font-variant-numeric:tabular-nums;
-}
-.tbar-digits.urgent{color:var(--rose)}
+/* TABS */
+.tabs{display:flex;gap:0;margin-bottom:20px;border-bottom:2px solid var(--cinza-borda)}
+.tab-btn{padding:10px 20px;font-size:14px;cursor:pointer;color:var(--text-sec);border:none;background:none;border-bottom:2.5px solid transparent;margin-bottom:-2px;font-family:inherit;display:flex;align-items:center;gap:6px;transition:color .15s}
+.tab-btn.active{color:var(--rosa);border-bottom-color:var(--rosa);font-weight:600}
+.tab-btn:hover:not(.active){color:var(--rosa-dark)}
+.tab-content{display:none}
+.tab-content.visible{display:block}
 
-.tbar-info{flex:1;min-width:0}
-.tbar-name{font-size:12px;font-weight:500;color:var(--tx);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-bottom:2px}
-.tbar-sub{font-size:10px;color:var(--mt);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+/* RESUMO */
+.resumo-block{background:var(--branco);border:1px solid var(--cinza-borda);border-radius:12px;padding:16px;margin-bottom:12px}
+.resumo-block h3{font-size:13px;font-weight:600;color:var(--rosa-dark);margin-bottom:8px;padding-bottom:6px;border-bottom:1px solid var(--cinza-borda)}
+.resumo-block p{font-size:14px;color:var(--text-main);line-height:1.7}
+.resumo-block ul{padding-left:1.2rem;font-size:14px;color:var(--text-main);line-height:1.9}
 
-.tbar-btns{display:flex;gap:6px;flex-shrink:0}
-.tbar-btn{padding:8px 14px;border-radius:7px;border:none;cursor:pointer;font-size:10px;letter-spacing:.1em;text-transform:uppercase;font-family:inherit;transition:all .15s;font-weight:600}
-.tbar-btn.add{background:rgba(201,160,90,.15);color:var(--ac);border:1px solid rgba(201,160,90,.3)}
-.tbar-btn.add:active{background:rgba(201,160,90,.28)}
-.tbar-btn.skip{background:var(--br2);color:var(--mt)}
-.tbar-btn.skip:active{background:var(--br);color:var(--tx)}
+/* FLASHCARDS */
+.fc-intro{font-size:13px;color:var(--text-hint);margin-bottom:12px}
+.fc-wrap{display:flex;flex-direction:column;gap:8px}
+.fc{background:var(--branco);border:1px solid var(--cinza-borda);border-radius:12px;padding:14px 16px;cursor:pointer;transition:border-color .15s}
+.fc:hover{border-color:var(--rosa-mid)}
+.fc.open{border-color:var(--rosa);border-width:1.5px}
+.fc-header{display:flex;justify-content:space-between;align-items:flex-start;gap:10px}
+.fc-q{font-size:14px;font-weight:600;color:var(--text-main);line-height:1.4;flex:1}
+.fc-chevron{font-size:16px;color:var(--text-hint);flex-shrink:0;transition:transform .2s;margin-top:1px}
+.fc.open .fc-chevron{transform:rotate(180deg);color:var(--rosa)}
+.fc-body{display:none;margin-top:12px;padding-top:12px;border-top:1px solid var(--cinza-borda)}
+.fc.open .fc-body{display:block}
+.fc-answer{font-size:14px;color:var(--text-main);line-height:1.6;margin-bottom:10px}
+.fc-context{font-size:12px;color:var(--rosa-dark);background:var(--rosa-light);border-radius:8px;padding:8px 12px;line-height:1.55}
+.fc-context-label{font-weight:600;margin-right:4px}
 
-/* ── PANELS ── */
-.panels-wrap{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;padding-bottom:80px}
-.panel{display:none;padding:16px 20px max(36px,env(safe-area-inset-bottom))}.panel.on{display:block}
+/* QUIZ */
+.quiz-wrap{display:flex;flex-direction:column;gap:14px}
+.q-block{background:var(--branco);border:1px solid var(--cinza-borda);border-radius:12px;padding:16px}
+.q-num{font-size:11px;color:var(--rosa);font-weight:600;text-transform:uppercase;letter-spacing:.04em;margin-bottom:5px}
+.q-text{font-size:14px;font-weight:600;color:var(--text-main);margin-bottom:14px;line-height:1.5}
+.q-opts{display:flex;flex-direction:column;gap:7px}
+.q-opt{font-size:13px;padding:10px 14px;border-radius:9px;border:1px solid var(--cinza-borda);cursor:pointer;color:var(--text-main);background:var(--cinza-soft);text-align:left;font-family:inherit;transition:border-color .1s,background .1s}
+.q-opt:hover:not(:disabled){border-color:var(--rosa-mid);background:var(--rosa-light)}
+.q-opt.correct{background:var(--verde-bg);border-color:var(--verde-ok);color:#085041;font-weight:500}
+.q-opt.wrong{background:var(--vermelho-bg);border-color:var(--vermelho-err);color:var(--vermelho-err)}
+.q-opt:disabled{cursor:default}
+.q-feedback{display:none;margin-top:12px;padding:11px 14px;border-radius:9px;font-size:13px;line-height:1.6}
+.q-feedback.show{display:block}
+.q-feedback.ok{background:var(--verde-bg);color:#085041;border:1px solid #9FE1CB}
+.q-feedback.err{background:var(--vermelho-bg);color:var(--vermelho-err);border:1px solid #F7C1C1}
+.q-feedback strong{font-weight:600}
 
-.bdg{display:inline-block;font-size:9px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;padding:2px 9px;border-radius:20px;margin-bottom:6px}
-.ptl{font-size:19px;font-weight:300;color:var(--tx);letter-spacing:-.01em;margin-bottom:3px}
-.pfoc{font-size:11px;color:var(--mt);margin-bottom:14px;line-height:1.4}
+.score-area{background:var(--rosa-light);border:1.5px solid var(--cinza-borda);border-radius:14px;padding:20px;margin-bottom:16px;display:none;text-align:center}
+.score-area.show{display:block}
+.score-big{font-size:36px;font-weight:700;color:var(--rosa);line-height:1}
+.score-label{font-size:13px;color:var(--text-sec);margin-top:4px}
+.score-msg{font-size:14px;color:var(--rosa-dark);margin-top:6px;font-weight:500}
+.reset-btn{margin-top:12px;padding:9px 22px;font-size:13px;border-radius:9px;border:1.5px solid var(--cinza-borda);background:var(--branco);cursor:pointer;color:var(--text-sec);font-family:inherit;transition:border-color .15s,color .15s}
+.reset-btn:hover{border-color:var(--rosa);color:var(--rosa)}
 
-.tl{display:flex;border-radius:8px;overflow:hidden;border:1px solid var(--br);margin-bottom:14px}
-.ts{flex:1;padding:6px 2px;text-align:center;font-size:8px;color:var(--mt);line-height:1.35;border-right:1px solid var(--br)}
-.ts:last-child{border-right:none}
-.ts.hi{background:var(--s1);color:var(--tx)}
-.tm{font-size:7px;color:var(--mt)}
-
-.ec{background:var(--s1);border-radius:10px;padding:12px 14px;margin-bottom:8px;border:1px solid var(--br);position:relative;overflow:hidden;transition:opacity .3s,background .3s}
-.ec.done{opacity:.4;background:var(--bg)}
-.ec.done .enm{text-decoration:line-through;color:var(--mt)}
-.ea{position:absolute;left:0;top:0;bottom:0;width:3px;transition:background .3s}
-.ec.done .ea{background:var(--green) !important}
-.en{font-size:9px;color:var(--mt);text-transform:uppercase;letter-spacing:.06em;margin-bottom:3px}
-.enm{font-size:14px;font-weight:500;color:var(--tx);line-height:1.3;margin-bottom:8px;transition:all .3s}
-.etgs{display:flex;gap:4px;flex-wrap:wrap;margin-bottom:8px}
-.etg{font-size:9px;font-weight:500;padding:2px 7px;border-radius:8px}
-.ep{background:rgba(201,160,90,.12);color:#c9a05a}
-.ec2{background:rgba(192,112,144,.12);color:#c07090}
-.ef{background:rgba(160,122,160,.12);color:#a07aa0}
-.ests{display:flex;gap:16px;margin-bottom:12px}
-.est{display:flex;flex-direction:column}
-.esl{font-size:9px;color:var(--mt);text-transform:uppercase;letter-spacing:.06em}
-.esv{font-size:17px;font-weight:500;color:var(--tx);line-height:1.2}
-.esv.sm{font-size:13px}
-.series-row{display:flex;align-items:center;gap:8px;margin-bottom:10px}
-.series-label{font-size:9px;color:var(--mt);text-transform:uppercase;letter-spacing:.06em;white-space:nowrap}
-.series-dots{display:flex;gap:6px;flex-wrap:wrap}
-.sdot{width:32px;height:32px;border-radius:50%;border:1.5px solid var(--br2);background:none;cursor:pointer;font-size:10px;font-weight:600;color:var(--mt);display:flex;align-items:center;justify-content:center;transition:all .2s;font-family:inherit;-webkit-tap-highlight-color:transparent}
-.sdot:active{transform:scale(.88)}
-.sdot.done{background:var(--green);border-color:var(--green);color:#fff}
-.sdot.active-dot{border-color:var(--ac);color:var(--ac)}
-.enote{font-size:11px;color:var(--mt);line-height:1.5;padding-top:8px;border-top:1px solid var(--br)}
-.ibox{background:var(--s2);border-radius:8px;padding:10px 12px;margin:4px 0 12px;font-size:11px;color:var(--mt);line-height:1.6}
-.ibox b{color:var(--tx);font-weight:500}
-.ftr{background:var(--s1);border-radius:10px;border:1px solid var(--br);padding:13px 14px;font-size:10px;color:var(--mt);line-height:1.7;margin-top:6px}
-.ftrtl{font-size:9px;font-weight:600;text-transform:uppercase;letter-spacing:.12em;color:var(--mt);margin-bottom:7px}
-.ftr-divider{width:20px;height:1px;background:var(--ac);opacity:.3;margin-bottom:10px}
-.done-banner{display:none;margin:0 0 12px;padding:12px 14px;background:rgba(106,154,106,.1);border:1px solid rgba(106,154,106,.3);border-radius:10px;font-size:12px;color:var(--green);text-align:center;letter-spacing:.05em}
-.done-banner.show{display:block}
-
-/* ── CARGA ── */
-.carga-row{display:flex;align-items:center;gap:8px;margin-bottom:10px}
-.carga-label{font-size:9px;color:var(--mt);text-transform:uppercase;letter-spacing:.06em;white-space:nowrap}
-.carga-wrap{display:flex;align-items:center;gap:6px;flex:1}
-.carga-input{
-  width:80px;background:var(--s2);border:1px solid var(--br2);
-  border-radius:7px;padding:6px 10px;
-  font-size:13px;font-weight:600;color:var(--tx);font-family:inherit;
-  text-align:center;outline:none;
-  -webkit-appearance:none;appearance:none;
-  transition:border-color .2s,background .2s;
-}
-.carga-input::placeholder{color:var(--br2);font-weight:400;font-size:12px}
-.carga-input:focus{border-color:var(--ac);background:var(--s1)}
-.carga-unit{font-size:11px;color:var(--mt)}
-.carga-saved{font-size:9px;color:var(--green);opacity:0;transition:opacity .4s;letter-spacing:.06em}
+/* PROGRESS BADGES */
+.mod-card .progress-dot{width:8px;height:8px;border-radius:50%;background:var(--cinza-borda);display:inline-block;margin-left:auto}
+.mod-card.has-progress .progress-dot{background:var(--verde-ok)}
 </style>
 </head>
 <body>
 
-<!-- Banner de permissão de notificação — aparece inline, não bloqueia tela -->
-<div class="notif-banner" id="notifBanner">
-  <div class="notif-banner-txt"><b>Ativar aviso de descanso?</b><br>Notifica quando o timer terminar.</div>
-  <button class="notif-banner-btn" onclick="requestNotifPermission()">Ativar</button>
-  <button class="notif-banner-close" onclick="dismissNotifBanner()">✕</button>
-</div>
-
-<div class="hdr">
-  <div class="hdr-eyebrow">Programa de hipertrofia feminina</div>
-  <div class="hdr-title"><strong>Morgana</strong><br><em>Workout</em></div>
-  <div class="hdr-sub">Glúteo · Pernas · Abdômen · Costas &nbsp;—&nbsp; Avançada · Definição</div>
-  <div class="hdr-divider"></div>
-</div>
-
-<div class="lgd">
-  <div class="li"><div class="ld" style="background:var(--ac)"></div>◆ principal</div>
-  <div class="li"><div class="ld" style="background:var(--rose)"></div>⚡ glúteo</div>
-  <div class="li"><div class="ld" style="background:var(--purple)"></div>◎ core</div>
-</div>
-
-<div class="sticky-nav">
-  <div class="day-tabs" id="dtabs"></div>
-  <div class="prog-wrap">
-    <div class="prog-bar-bg"><div class="prog-bar-fill" id="progFill" style="width:0%"></div></div>
-    <span class="prog-label" id="progLabel">0 / 0</span>
-    <button class="prog-reset" onclick="resetDay()">Reset</button>
+<div class="app-header">
+  <div class="logo-area">
+    <div class="logo-dot">★</div>
+    <div>
+      <div class="app-title">Estudos da Maria</div>
+      <div class="app-sub">Colégio Espírito Santo · 5º ano</div>
+    </div>
   </div>
+  <div class="breadcrumb" id="breadcrumb"></div>
 </div>
 
-<div class="panels-wrap" id="panelsWrap">
-  <div id="dpanels"></div>
-</div>
+<div class="container">
 
-<!-- Timer bar — rodapé persistente, não bloqueia conteúdo -->
-<div class="timer-bar" id="timerBar">
-  <div class="tbar-ring-wrap">
-    <svg class="tbar-svg" width="44" height="44" viewBox="0 0 44 44">
-      <circle class="tbar-ring-bg" cx="22" cy="22" r="18"/>
-      <circle class="tbar-ring-prog" id="tbarRing" cx="22" cy="22" r="18"
-        stroke-dasharray="113" stroke-dashoffset="0"/>
-    </svg>
-    <div class="tbar-digits" id="tbarDigits">0</div>
+  <!-- PAINEL -->
+  <div id="painel-view">
+    <div class="dica-prof">
+      <div class="icon">💡</div>
+      <p><strong>Dica da professora:</strong> Antes de responder, leia cada pergunta até o fim com calma. Palavras como <strong>"NÃO"</strong>, <strong>"causas"</strong> e <strong>"consequências"</strong> mudam completamente o que a questão está pedindo!</p>
+    </div>
+
+    <div class="subject-section">
+      <div class="subject-header">
+        <span class="subject-pill geo">🌍 Geografia</span>
+        <span class="subject-count">3 módulos</span>
+      </div>
+      <div class="mod-grid">
+        <div class="mod-card" onclick="openMod('geo',0)">
+          <div class="mod-num">Módulo 3</div>
+          <div class="mod-title">Indo e voltando na cidade</div>
+          <div class="mod-tags"><span class="tag geo">transporte</span><span class="tag geo">mobilidade</span></div>
+        </div>
+        <div class="mod-card" onclick="openMod('geo',1)">
+          <div class="mod-num">Módulo 4</div>
+          <div class="mod-title">Transformações dos espaços</div>
+          <div class="mod-tags"><span class="tag geo">urbanização</span><span class="tag geo">verticalização</span></div>
+        </div>
+        <div class="mod-card" onclick="openMod('geo',2)">
+          <div class="mod-num">Módulo 5</div>
+          <div class="mod-title">Recursos naturais e consumo</div>
+          <div class="mod-tags"><span class="tag geo">meio ambiente</span><span class="tag geo">sustentabilidade</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="subject-section">
+      <div class="subject-header">
+        <span class="subject-pill mat">📐 Matemática</span>
+        <span class="subject-count">3 módulos</span>
+      </div>
+      <div class="mod-grid">
+        <div class="mod-card" onclick="openMod('mat',0)">
+          <div class="mod-num">Módulo 3</div>
+          <div class="mod-title">Combinações e equivalências</div>
+          <div class="mod-tags"><span class="tag mat">combinações</span><span class="tag mat">igualdade</span></div>
+        </div>
+        <div class="mod-card" onclick="openMod('mat',1)">
+          <div class="mod-num">Módulo 4</div>
+          <div class="mod-title">Figuras geométricas planas</div>
+          <div class="mod-tags"><span class="tag mat">geometria</span><span class="tag mat">área e perímetro</span></div>
+        </div>
+        <div class="mod-card" onclick="openMod('mat',2)">
+          <div class="mod-num">Módulo 5</div>
+          <div class="mod-title">Múltiplos, divisores, MMC e MDC</div>
+          <div class="mod-tags"><span class="tag mat">números</span><span class="tag mat">fatoração</span></div>
+        </div>
+      </div>
+    </div>
   </div>
-  <div class="tbar-info">
-    <div class="tbar-name" id="tbarName"></div>
-    <div class="tbar-sub" id="tbarSub"></div>
+
+  <!-- MÓDULO VIEW -->
+  <div class="mod-view" id="mod-view">
+    <button class="back-btn" onclick="backToPainel()">← Voltar ao painel</button>
+    <div id="mod-hero" class="mod-hero"></div>
+    <div class="tabs">
+      <button class="tab-btn active" onclick="switchTab('resumo')">📖 Resumo</button>
+      <button class="tab-btn" onclick="switchTab('flashcards')">🃏 Flashcards</button>
+      <button class="tab-btn" onclick="switchTab('quiz')">✅ Quiz</button>
+    </div>
+    <div id="tab-resumo" class="tab-content visible"></div>
+    <div id="tab-flashcards" class="tab-content"></div>
+    <div id="tab-quiz" class="tab-content"></div>
   </div>
-  <div class="tbar-btns">
-    <button class="tbar-btn add" onclick="addTime()">+30s</button>
-    <button class="tbar-btn skip" onclick="skipTimer()">Pular</button>
-  </div>
+
 </div>
 
 <script>
-/* ── DATA ── */
-var DAYS=[
-  {
-    l:"Seg",n:"Glúteo A",c:"#c9a05a",
-    foc:"Ênfase em glúteo máximo e cadeia posterior — composto principal é o Hip Thrust",
-    tl:[{t:"Aquec.",m:"3min",h:0},{t:"Hip Thrust",m:"14min",h:1},{t:"Stiff",m:"11min",h:1},{t:"Sumô",m:"9min",h:1},{t:"Abdução",m:"7min",h:1},{t:"Mesa flex.",m:"7min",h:1},{t:"Elev. pélv.",m:"6min",h:1}],
-    ex:[
-      {n:"Hip Thrust com Barra",tg:["p","g"],s:4,r:"8–10",d:"90s",rest:90,nt:"Composto principal da semana — progrida carga toda semana. Queixo para o peito, core ativado, lombar neutra."},
-      {n:"Stiff com Barra ou Halteres",tg:["g"],s:4,r:"8–10",d:"75s",rest:75,nt:"Coluna neutra — não flexione lombar sob carga. Sinta o alongamento dos isquiotibiais."},
-      {n:"Agachamento Sumô com Halter",tg:[],s:3,r:"10–12",d:"75s",rest:75,nt:"Adutores + glúteo médio. Joelhos apontam para fora durante todo o movimento."},
-      {n:"Abdução no Cabo (pé no cabo)",tg:["g"],s:3,r:"15",d:"60s",rest:60,nt:"Cada lado. Glúteo médio e mínimo — estabilidade lateral do quadril."},
-      {n:"Mesa Flexora Bilateral",tg:[],s:3,r:"12–15",d:"60s",rest:60,nt:"Isquiotibiais — bilateral, sem assimetria. Amplitude total."},
-      {n:"Elevação Pélvica Unilateral",tg:["g"],s:3,r:"12",d:"60s",rest:60,nt:"Cada lado. Finisher de glúteo — apoio firme no banco, quadril alinha no topo."}
-    ],
-    info:"19 séries totais. Hip Thrust é o exercício mais importante de toda a semana."
-  },
-  {
-    l:"Ter",n:"Costas",c:"#5a8a7a",
-    foc:"Largura, espessura e postura — bíceps ao final + core integrado",
-    tl:[{t:"Aquec.",m:"3min",h:0},{t:"Barra fixa",m:"13min",h:1},{t:"Remada",m:"11min",h:1},{t:"Puxada",m:"9min",h:1},{t:"Rem. baixa",m:"8min",h:1},{t:"Face pull",m:"7min",h:1},{t:"Bíceps",m:"7min",h:1}],
-    ex:[
-      {n:"Barra Fixa ou Puxada Assistida",tg:["p"],s:4,r:"6–10",d:"90s",rest:90,nt:"Pegada aberta — largura. Cotovelos apontam para o chão na descida."},
-      {n:"Remada c/ Halteres (chest supported)",tg:[],s:4,r:"8–10",d:"75s",rest:75,nt:"Banco inclinado elimina variáveis lombares — foco total na espessura das costas."},
-      {n:"Puxada Fechada Supinada",tg:[],s:3,r:"10–12",d:"60s",rest:60,nt:"Bíceps + dorsal baixo. Cotovelos apontam para o chão ao final do movimento."},
-      {n:"Remada Baixa no Cabo",tg:[],s:3,r:"12",d:"60s",rest:60,nt:"Retração escapular completa. Postura — médio e inferior do trapézio."},
-      {n:"Face Pull com Corda",tg:[],s:3,r:"15–20",d:"60s",rest:60,nt:"Manguito rotador + postura. Puxe para a testa, não para o queixo."},
-      {n:"Rosca Direta com Barra EZ",tg:["p"],s:3,r:"10–12",d:"75s",rest:75,nt:"Sem balanço de tronco — isola bíceps com qualidade."},
-      {n:"Rosca Martelo Alternada",tg:[],s:3,r:"12",d:"60s",rest:60,nt:"Braquiorradial e bíceps. Alternada, não simultânea."},
-      {n:"Core: Prancha + Dead Bug",tg:["c"],s:3,r:"40s/10/lado",d:"45s",rest:45,nt:"Integrado ao final. Prancha ativa o anterior; dead bug treina controle lombar."}
-    ],
-    info:"Costas bem desenvolvidas criam a silhueta em V que valoriza cintura e quadril."
-  },
-  {
-    l:"Qua",n:"Quadríceps",c:"#7a6bbf",
-    foc:"Ênfase anterior + core com carga — maior volume de abdômen da semana",
-    tl:[{t:"Aquec.",m:"4min",h:0},{t:"Agachamento",m:"14min",h:1},{t:"Leg press",m:"11min",h:1},{t:"Búlgaro",m:"9min",h:1},{t:"Extensora",m:"7min",h:1},{t:"Panturrilha",m:"6min",h:1},{t:"Core",m:"8min",h:1}],
-    ex:[
-      {n:"Agachamento Livre",tg:["p"],s:4,r:"6–8",d:"90s",rest:90,nt:"Composto principal do dia. Descida controlada — 3s na descida. Aquecimento progressivo obrigatório."},
-      {n:"Leg Press 45° (pés baixos e fechados)",tg:[],s:3,r:"10–12",d:"75s",rest:75,nt:"Posição quadríceps dominante. Lombar colada ao banco durante toda a amplitude."},
-      {n:"Afundo Búlgaro com Halteres",tg:["g"],s:3,r:"10",d:"75s",rest:75,nt:"Cada lado. Glúteo + quadríceps unilateral. Tronco levemente inclinado para frente."},
-      {n:"Cadeira Extensora",tg:[],s:3,r:"12–15",d:"60s",rest:60,nt:"Isolamento de quadríceps sem carga axial na coluna. Pausa de 1s no topo."},
-      {n:"Panturrilha em Pé na Máquina",tg:[],s:4,r:"15–20",d:"45s",rest:45,nt:"Amplitude total — calcâneo abaixo da plataforma. Pausa de 1s no alongamento."},
-      {n:"Core: Pallof Press no Cabo",tg:["c"],s:3,r:"12/lado",d:"45s",rest:45,nt:"Anti-rotação — oblíquos. Braços estendidos na frente, resistir à rotação."},
-      {n:"Core: Prancha Lateral",tg:["c"],s:3,r:"35s/lado",d:"45s",rest:45,nt:"Oblíquos + estabilidade lateral. Quadril não cai."},
-      {n:"Core: Crunch no Cabo",tg:["c"],s:3,r:"15–20",d:"60s",rest:60,nt:"Reto abdominal com carga real — progressão de carga aqui gera resultado."}
-    ],
-    info:"Crunch no cabo com carga progressiva é um dos exercícios mais eficientes para definição abdominal."
-  },
-  {
-    l:"Qui",n:"Ombro",c:"#6a9a6a",
-    foc:"Ombros 3D + tríceps + core de força — base para a ilusão de cintura",
-    tl:[{t:"Aquec.",m:"3min",h:0},{t:"Desenvolv.",m:"13min",h:1},{t:"Elev. lat.",m:"9min",h:1},{t:"Elev. front.",m:"8min",h:1},{t:"Tríceps",m:"10min",h:1},{t:"Core",m:"7min",h:1}],
-    ex:[
-      {n:"Desenvolvimento com Halteres",tg:["p"],s:4,r:"8–10",d:"90s",rest:90,nt:"Sentada, encosto a 80°. Não eleve o cotovelo além do plano do ombro."},
-      {n:"Elevação Lateral (cabo unilateral)",tg:[],s:4,r:"15–20",d:"60s",rest:60,nt:"Tensão constante ao longo de toda a amplitude. Sem balanço — movimento controlado."},
-      {n:"Elevação Frontal com Anilha",tg:[],s:3,r:"12",d:"60s",rest:60,nt:"Feixe anterior do deltoide. Cotovelo levemente flexionado."},
-      {n:"Tríceps Corda no Cabo",tg:[],s:3,r:"12–15",d:"60s",rest:60,nt:"Cotovelos fixos ao lado do corpo. Extensão total na descida, abre a corda no final."},
-      {n:"Tríceps Testa com Barra EZ",tg:[],s:3,r:"10–12",d:"60s",rest:60,nt:"Úmero perpendicular ao chão — não deixe cair para trás."},
-      {n:"Tríceps Unilateral no Cabo",tg:[],s:3,r:"12/lado",d:"60s",rest:60,nt:"Finalização. Cada lado — simetria e volume de isolamento."},
-      {n:"Core: Ab Wheel",tg:["c"],s:3,r:"10",d:"60s",rest:60,nt:"Força de core total. Lombar não arqueie no retorno."},
-      {n:"Core: Elevação de Pernas",tg:["c"],s:3,r:"15",d:"60s",rest:60,nt:"Região abdominal inferior. Controle na descida — não deixe cair."}
-    ],
-    info:"Ombro bem desenvolvido cria ilusão de cintura mais fina — efeito estético que complementa diretamente glúteo e pernas."
-  },
-  {
-    l:"Sex",n:"Glúteo B",c:"#c07090",
-    foc:"2ª frequência de glúteo — estímulos diferentes da segunda + cardio LISS",
-    tl:[{t:"Aquec.",m:"3min",h:0},{t:"Leg press",m:"12min",h:1},{t:"Kickback",m:"9min",h:1},{t:"Abdução",m:"9min",h:1},{t:"Leg curl",m:"8min",h:1},{t:"Afundo",m:"7min",h:1},{t:"LISS",m:"25min",h:1}],
-    ex:[
-      {n:"Leg Press (pés altos e abertos)",tg:["p","g"],s:4,r:"10–12",d:"90s",rest:90,nt:"Posição glúteo dominante. Amplitude completa — quadril desce abaixo do joelho. Lombar colada ao banco."},
-      {n:"Extensão de Quadril no Cabo (kickback)",tg:["g"],s:3,r:"15",d:"60s",rest:60,nt:"Cada lado. Isolamento de glúteo máximo — core ativado para não compensar com lombar."},
-      {n:"Abdução na Máquina",tg:["g"],s:4,r:"15–20",d:"60s",rest:60,nt:"Glúteo médio — peso alto com controle total. Não balance o tronco para ajudar."},
-      {n:"Leg Curl Deitado Bilateral",tg:[],s:3,r:"12–15",d:"60s",rest:60,nt:"Isquiotibiais — bilateral, sem assimetria. Amplitude total."},
-      {n:"Afundo Caminhando com Halteres",tg:["g"],s:3,r:"10/lado",d:"75s",rest:75,nt:"Volume funcional — glúteo + quadríceps. Tronco levemente inclinado para frente."},
-      {n:"Cardio LISS — Bike ou Esteira inclinada",tg:[],s:1,r:"25–30 min",d:"—",rest:0,nt:"Zona 2 — 60–70% FCmax. Você deve conseguir manter uma conversa."}
-    ],
-    info:"Segunda frequência de glúteo com estímulos de encurtamento (abdução, kickback). O LISS em zona 2 acelera recuperação muscular sem catabolismo."
-  }
-];
-
-var TM={p:['ep','◆ principal'],g:['ec2','⚡ glúteo'],c:['ef','◎ core']};
-var currentDay=0;
-var state={};
-
-/* ── PWA ── */
-if('serviceWorker' in navigator){
-  navigator.serviceWorker.register('sw.js').catch(function(){});
-}
-
-/* ── NOTIFICAÇÕES iOS
-   Regras reais do iOS Safari:
-   - Só funciona se o PWA estiver instalado na tela inicial (standalone)
-   - Precisa de gesto do usuário para pedir permissão
-   - new Notification() funciona quando o app está aberto ou recente
-   - Não há vibração no iOS via navigator.vibrate
-   - Não usamos SW para enviar notificação — não é confiável no iOS
-── */
-var notifEnabled = false;
-var _bannerShown = false;
-
-function initNotifications(){
-  if(!('Notification' in window)) return;
-  if(Notification.permission === 'granted'){
-    notifEnabled = true;
-  }
-  // Não pedimos permissão automaticamente — precisa de gesto do usuário
-}
-
-function maybeShowNotifBanner(){
-  if(_bannerShown) return;
-  if(!('Notification' in window)) return;
-  if(Notification.permission !== 'default') return;
-  // Só mostra se estiver em modo standalone (instalado) ou desktop
-  var isStandalone = window.navigator.standalone === true
-    || window.matchMedia('(display-mode: standalone)').matches;
-  // Mostra em standalone OU em desktop (para testes)
-  if(!isStandalone && /iPhone|iPad|iPod/.test(navigator.userAgent)) return;
-  _bannerShown = true;
-  document.getElementById('notifBanner').classList.add('show');
-}
-
-function requestNotifPermission(){
-  dismissNotifBanner();
-  if(!('Notification' in window)) return;
-  Notification.requestPermission().then(function(p){
-    if(p === 'granted') notifEnabled = true;
-  });
-}
-
-function dismissNotifBanner(){
-  _bannerShown = true;
-  document.getElementById('notifBanner').classList.remove('show');
-}
-
-function fireNotification(body){
-  if(!notifEnabled) return;
-  if(Notification.permission !== 'granted') return;
-  try{
-    // Caminho direto — funciona no iOS Safari com PWA instalado e app ativo/recente
-    new Notification('Morgana Workout', {
-      body: body,
-      icon: 'icon-192.png',
-      tag: 'timer',
-      silent: false
-    });
-  }catch(e){}
-}
-
-/* ── TIMER ── */
-var timerInterval = null;
-var timerEndTime = 0;   // timestamp absoluto — resistente a suspensão curta do iOS
-var timerTotal = 0;
-var timerLeft = 0;
-var timerNextInfo = '';
-var CIRC = 113; // 2*pi*18 ≈ 113
-
-function startTimer(seconds, exName, serieLabel, nextInfo){
-  if(seconds <= 0) return;
-  clearInterval(timerInterval);
-  timerTotal = seconds;
-  timerLeft = seconds;
-  timerEndTime = Date.now() + seconds * 1000;
-  timerNextInfo = nextInfo || '';
-
-  document.getElementById('tbarName').textContent = exName;
-  document.getElementById('tbarSub').textContent = serieLabel + (nextInfo ? ' · A seguir: ' + nextInfo : '');
-  updateTimerBar();
-  document.getElementById('timerBar').classList.add('show');
-
-  // Poll a 500ms — usa timestamp absoluto para compensar
-  // se o iOS suspender o timer brevemente (ex: tela desligada por 5s)
-  timerInterval = setInterval(function(){
-    timerLeft = Math.max(0, Math.round((timerEndTime - Date.now()) / 1000));
-    updateTimerBar();
-    if(timerLeft <= 0){
-      clearInterval(timerInterval);
-      finishTimer();
+const data = {
+  geo: [
+    {
+      num:"Módulo 3", title:"Indo e voltando na cidade", sub:"Meios de transporte e mobilidade urbana",
+      resumo:[
+        {h:"Transporte coletivo",p:"O ônibus é o principal transporte coletivo nas cidades brasileiras — acessível e capaz de transportar muitas pessoas ao mesmo tempo. Trem e metrô funcionam sobre trilhos: o metrô opera subterrâneo ou elevado em grandes centros, enquanto o trem conecta cidades e regiões. Ambos reduzem congestionamentos."},
+        {h:"Automóveis e congestionamentos",p:"O automóvel oferece flexibilidade, mas causa congestionamentos, poluição e exige infraestrutura cara. Os congestionamentos surgem do excesso de veículos nos horários de pico e geram perda de tempo, estresse e prejuízos econômicos."},
+        {h:"Transporte aquático e aéreo",p:"Embarcações são essenciais na Amazônia e no litoral brasileiro. O avião é o mais rápido para longas distâncias, mas tem custo elevado e depende de aeroportos."},
+        {h:"Transporte de mercadorias",p:"Caminhões são o principal meio de carga no Brasil pela flexibilidade. Navios dominam o comércio internacional. Trens de carga são eficientes para grandes volumes em terra. Aviões de carga transportam itens urgentes ou perecíveis."},
+        {h:"Ontem e hoje",p:"Antes: tração animal, carroças, trens a vapor, cartas. Hoje: veículos motorizados, aviões a jato, comunicação instantânea. Os avanços trouxeram velocidade e alcance global, mas também poluição e congestionamentos."}
+      ],
+      flashcards:[
+        {q:"Qual é o principal transporte coletivo nas cidades brasileiras?",a:"O ônibus.",ctx:"Ele é o mais usado porque é acessível economicamente e consegue transportar muitas pessoas ao mesmo tempo, reduzindo o número de carros nas ruas."},
+        {q:"Qual a diferença entre metrô e trem?",a:"O metrô é subterrâneo ou elevado, usado em grandes centros. O trem conecta diferentes cidades e regiões.",ctx:"Os dois andam sobre trilhos, mas o metrô serve para circular dentro de uma cidade grande, enquanto o trem liga cidades diferentes."},
+        {q:"Por que os automóveis causam congestionamentos?",a:"Porque há mais veículos do que a infraestrutura suporta, especialmente nos horários de pico.",ctx:"Horário de pico = quando muitas pessoas saem para o trabalho/escola ou voltam para casa ao mesmo tempo."},
+        {q:"Cite 3 consequências dos congestionamentos.",a:"Perda de tempo, aumento da poluição e estresse para os motoristas (também: prejuízos econômicos).",ctx:"Atenção: causas são o que gera o congestionamento. Consequências são o que o congestionamento causa. São coisas diferentes!"},
+        {q:"Em que regiões o transporte aquático é essencial no Brasil?",a:"Na Amazônia e no litoral brasileiro.",ctx:"Nessas regiões há muita água — rios, lagos e mar — e o barco acaba sendo o único jeito de chegar a certos lugares."},
+        {q:"Qual o principal meio de transporte de cargas no Brasil?",a:"O caminhão.",ctx:"O Brasil tem uma malha rodoviária extensa, por isso o caminhão consegue chegar a praticamente qualquer lugar do país."}
+      ],
+      quiz:[
+        {q:"Qual meio de transporte é mais acessível economicamente para a população nas cidades brasileiras?",opts:["Automóvel","Avião","Ônibus","Navio"],c:2,feedback:"O ônibus é o transporte coletivo mais acessível. Automóveis têm custo alto de manutenção e combustível, e aviões são caros demais para o dia a dia."},
+        {q:"O metrô geralmente funciona de que forma?",opts:["Sobre estradas de terra","Subterrâneo ou elevado","Somente na superfície","Sobre a água"],c:1,feedback:"O metrô é construído subterrâneo (embaixo da terra) ou elevado (em cima de estruturas) para não interferir no trânsito das ruas."},
+        {q:"O que são 'horários de pico'?",opts:["Horários com menos trânsito","Horários noturnos vazios","Horários em que mais pessoas se deslocam ao mesmo tempo","Horários de manutenção das vias"],c:2,feedback:"'Pico' = momento de maior movimento — geralmente de manhã cedo e no fim da tarde, quando todos saem ou voltam ao mesmo tempo."},
+        {q:"Qual meio de transporte domina o comércio internacional de mercadorias?",opts:["Caminhão","Trem de carga","Navio cargueiro","Avião de carga"],c:2,feedback:"Navios cargueiros transportam enormes volumes entre países a um custo baixo por tonelada. Por isso dominam o comércio internacional."},
+        {q:"Qual era típico do passado e raramente visto hoje no transporte cotidiano?",opts:["Automóvel","Carroça de tração animal","Ônibus","Metrô"],c:1,feedback:"A carroça puxada por animais era o transporte comum antes dos motores. Hoje é raridade nas cidades, substituída por veículos motorizados."}
+      ]
+    },
+    {
+      num:"Módulo 4", title:"Transformações dos espaços pela sociedade", sub:"Urbanização e verticalização",
+      resumo:[
+        {h:"O espaço geográfico",p:"Desde sempre, os seres humanos modificam a natureza para atender suas necessidades. Ruas, pontes, encanamentos, iluminação e edifícios são exemplos. O resultado é o espaço geográfico — produto da interação entre elementos naturais e ações humanas."},
+        {h:"Cidades e transformações históricas",p:"A partir do século XVIII, as cidades foram transformadas com fábricas, locomotivas a vapor, casas operárias, postes de luz e infraestrutura moderna. O crescimento da frota de automóveis forçou o alargamento das ruas e criou novas profissões."},
+        {h:"Verticalização",p:"Verticalização é o processo de construção de edifícios altos para abrigar mais pessoas em menos espaço. Surgiu por dois motivos: aumento populacional nas cidades e escassez de terrenos. Gerou profissões como porteiros e zeladores."}
+      ],
+      flashcards:[
+        {q:"O que é espaço geográfico?",a:"O espaço resultante da interação entre elementos naturais e ações humanas.",ctx:"Espaço natural = natureza intocada. Espaço geográfico = quando as pessoas modificam esse espaço (constroem, plantam, etc.)."},
+        {q:"O que transformou radicalmente as cidades a partir do século XVIII?",a:"A Revolução Industrial: fábricas, locomotivas a vapor, casas operárias e infraestrutura moderna.",ctx:"Século XVIII = anos 1700. As máquinas mudaram tudo — as pessoas foram para as cidades trabalhar e elas cresceram rapidamente."},
+        {q:"O que é verticalização?",a:"O processo de construção de edifícios altos para abrigar mais pessoas em espaço reduzido.",ctx:"'Vertical' = para cima. Quando não há mais terreno disponível, a solução foi construir prédios cada vez mais altos."},
+        {q:"Quais as duas causas principais da verticalização?",a:"Aumento populacional acelerado e escassez de áreas para expansão horizontal.",ctx:"Mais gente + pouco espaço = construir para cima. Esse raciocínio de causa e efeito costuma cair em provas."},
+        {q:"Quais profissões surgiram com a verticalização?",a:"Porteiros, zeladores e profissionais de manutenção e administração de edifícios.",ctx:"Cada mudança na sociedade cria novas necessidades — e novas necessidades criam novos empregos."}
+      ],
+      quiz:[
+        {q:"O que é o espaço geográfico?",opts:["Apenas a natureza intocada","O resultado da interação entre natureza e ações humanas","Somente as cidades grandes","As áreas rurais do país"],c:1,feedback:"Espaço geográfico = natureza + ação humana. Quando o ser humano modifica a natureza (constrói uma rua, por ex.), aquele espaço vira geográfico."},
+        {q:"A verticalização surgiu como resposta a qual problema?",opts:["Desmatamento e poluição","Falta de trabalhadores","Aumento populacional e escassez de espaço","Crise no transporte"],c:2,feedback:"Com mais gente nas cidades e menos terrenos disponíveis, a solução foi construir para cima. É uma relação de causa e consequência — leia sempre esse tipo de questão com atenção."},
+        {q:"Por que as ruas das cidades precisaram ser alargadas?",opts:["Para plantação de árvores","Para o crescente uso de automóveis","Para passagem de trens","Para construção de calçadas"],c:1,feedback:"As ruas antigas eram estreitas para pedestres e carroças. Com os carros, precisaram ser ampliadas. Uma mudança na tecnologia muda a cidade inteira."},
+        {q:"Desde quando as cidades passaram por grandes transformações com fábricas e locomotivas?",opts:["Século XV","Século XVI","Século XVII","Século XVIII"],c:3,feedback:"Século XVIII = anos 1700. Foi quando a Revolução Industrial começou e as cidades começaram a se transformar rapidamente."},
+        {q:"Que nova profissão surgiu com a verticalização das cidades?",opts:["Mecânico de automóveis","Motorista de ônibus","Porteiro de edifício","Atendente de posto de gasolina"],c:2,feedback:"Prédios altos precisam de pessoas para controlar a entrada e fazer manutenção. Mecânicos e motoristas surgiram por causa dos automóveis — cada invenção cria empregos novos."}
+      ]
+    },
+    {
+      num:"Módulo 5", title:"Recursos naturais e consumo", sub:"Meio ambiente e sustentabilidade",
+      resumo:[
+        {h:"O que são recursos naturais",p:"Recursos naturais são elementos da natureza usados pelas pessoas no dia a dia: água, solo, ar, plantas e minerais. São essenciais para alimentação, produção de energia, construção de moradias e fabricação de produtos."},
+        {h:"Impactos ambientais",p:"Quando os recursos são usados em excesso ou sem cuidado, surgem impactos ambientais: desmatamento, poluição da água e do ar, perda da biodiversidade e mudanças climáticas."},
+        {h:"Sociedade de consumo e consumo consciente",p:"A sociedade de consumo é marcada pela compra frequente de produtos, gerando mais lixo e explorando mais recursos. A solução está no consumo consciente: reutilizar materiais, reciclar e comprar apenas o necessário."}
+      ],
+      flashcards:[
+        {q:"O que são recursos naturais? Dê três exemplos.",a:"Elementos da natureza usados pelas pessoas. Exemplos: água, solo, ar, plantas, minerais.",ctx:"Cuidado: recursos naturais vêm da natureza. Celular, plástico e tinta NÃO são recursos naturais — são produtos feitos COM recursos naturais."},
+        {q:"O que é impacto ambiental? Cite dois exemplos.",a:"Dano causado ao meio ambiente pelo uso excessivo ou descuidado dos recursos. Exemplos: desmatamento e poluição da água.",ctx:"Perguntas de prova costumam pedir que você cite exemplos — treinar essa lista ajuda muito."},
+        {q:"O que é a sociedade de consumo?",a:"Aquela caracterizada pela compra frequente de produtos e serviços, gerando mais lixo e maior exploração dos recursos naturais.",ctx:"'Caracterizada' = 'definida por', 'marcada por'. Quando uma pergunta usa esse termo, ela quer a definição principal do conceito."},
+        {q:"O que é consumo consciente? Cite três atitudes.",a:"Consumir de forma responsável: reutilizar materiais, reciclar e comprar apenas o necessário.",ctx:"Reutilizar = usar de novo. Reciclar = transformar em outro produto. Comprar menos = menos lixo. Cada atitude reduz o impacto no meio ambiente."},
+        {q:"Cite quatro impactos ambientais.",a:"Desmatamento, poluição da água, poluição do ar e perda da biodiversidade.",ctx:"Biodiversidade = variedade de seres vivos. Quando desmatamos, animais e plantas perdem seu habitat e podem desaparecer."}
+      ],
+      quiz:[
+        {q:"Qual dos itens abaixo NÃO é um recurso natural?",opts:["Água","Solo","Celular","Ar"],c:2,feedback:"O celular é fabricado pelo ser humano usando recursos naturais, mas ele mesmo não é um recurso natural. Atenção à palavra 'NÃO' nas questões — ela inverte completamente a resposta!"},
+        {q:"O desmatamento é um exemplo de:",opts:["Consumo consciente","Impacto ambiental","Recurso natural","Verticalização"],c:1,feedback:"O desmatamento é uma consequência do uso irresponsável dos recursos. Ele destrói florestas, prejudica animais e altera o clima — é um impacto ambiental."},
+        {q:"A sociedade de consumo é caracterizada por:",opts:["Uso sustentável da natureza","Reciclagem intensa","Compra frequente de produtos e serviços","Preservação da biodiversidade"],c:2,feedback:"'Caracterizada' pede a definição principal. A sociedade de consumo se define pela compra excessiva — que gera lixo e explora mais recursos."},
+        {q:"O que é correto fazer para reduzir o impacto ambiental do consumo?",opts:["Comprar mais produtos","Reutilizar e reciclar materiais","Ignorar os impactos","Aumentar a produção industrial"],c:1,feedback:"Reutilizar e reciclar são atitudes do consumo consciente. Quando reutiliza, evita que o item vire lixo. Quando recicla, o material volta para uso — menos recurso natural é explorado."},
+        {q:"Qual é a relação entre consumo excessivo e recursos naturais?",opts:["Não há relação","Consumo excessivo preserva os recursos","Consumo excessivo aumenta a exploração dos recursos","Consumo excessivo não gera lixo"],c:2,feedback:"Mais consumo → mais produção → mais exploração da natureza → mais lixo. É uma cadeia de causa e consequência. Entender essa relação é fundamental para questões de interpretação."}
+      ]
     }
-  }, 500);
-}
-
-function updateTimerBar(){
-  var urgent = timerLeft <= 10;
-  var d = document.getElementById('tbarDigits');
-  var ring = document.getElementById('tbarRing');
-  d.textContent = timerLeft;
-  d.className = 'tbar-digits' + (urgent ? ' urgent' : '');
-  ring.className = 'tbar-ring-prog' + (urgent ? ' urgent' : '');
-  var prog = timerTotal > 0 ? (timerLeft / timerTotal) : 0;
-  ring.style.strokeDashoffset = CIRC * (1 - prog);
-}
-
-function finishTimer(){
-  document.getElementById('timerBar').classList.remove('show');
-  var body = 'Descanse concluído' + (timerNextInfo ? ' — ' + timerNextInfo : '');
-  fireNotification(body);
-}
-
-function skipTimer(){
-  clearInterval(timerInterval);
-  document.getElementById('timerBar').classList.remove('show');
-}
-
-function addTime(){
-  timerLeft += 30;
-  timerTotal += 30;
-  timerEndTime += 30000;
-  updateTimerBar();
-}
-
-/* ── STATE ── */
-function initState(i){
-  if(!state[i]) state[i] = DAYS[i].ex.map(function(){ return 0; });
-}
-function totalSeries(d){ return DAYS[d].ex.reduce(function(a,e){ return a+e.s; },0); }
-function doneSeries(d){ initState(d); return state[d].reduce(function(a,v){ return a+v; },0); }
-
-function updateProgress(i){
-  var total = totalSeries(i), done = doneSeries(i);
-  var pct = total > 0 ? Math.round(done/total*100) : 0;
-  document.getElementById('progFill').style.width = pct + '%';
-  document.getElementById('progLabel').textContent = done + ' / ' + total;
-}
-
-function markSerie(dayIdx, exIdx){
-  initState(dayIdx);
-  maybeShowNotifBanner(); // mostra banner na primeira série
-
-  var ex = DAYS[dayIdx].ex[exIdx];
-  var current = state[dayIdx][exIdx];
-  if(current >= ex.s) return;
-
-  var newCount = current + 1;
-  state[dayIdx][exIdx] = newCount;
-  var isLastSerie = (newCount === ex.s);
-
-  renderDots(dayIdx, exIdx);
-  if(isLastSerie){
-    var card = document.getElementById('ec-'+dayIdx+'-'+exIdx);
-    if(card) card.classList.add('done');
-  }
-
-  updateProgress(dayIdx);
-
-  var allDone = state[dayIdx].every(function(v,i){ return v >= DAYS[dayIdx].ex[i].s; });
-  var banner = document.getElementById('banner-'+dayIdx);
-  if(banner) banner.classList.toggle('show', allDone);
-
-  if(!allDone && ex.rest > 0){
-    var serieLabel = 'Série ' + newCount + '/' + ex.s;
-    var nextInfo = '';
-    if(isLastSerie){
-      var nextEx = DAYS[dayIdx].ex[exIdx+1];
-      if(nextEx) nextInfo = nextEx.n;
-    } else {
-      nextInfo = 'Série ' + (newCount+1) + ' de ' + ex.n;
+  ],
+  mat: [
+    {
+      num:"Módulo 3", title:"Combinações e equivalências", sub:"Princípio multiplicativo e igualdade matemática",
+      resumo:[
+        {h:"Combinações e princípio multiplicativo",p:"Combinações são as possibilidades de escolha entre opções diferentes. Para calcular o total, usamos o Princípio Multiplicativo: multiplicamos o número de opções de cada grupo. Exemplo: 2 cores de camiseta × 4 cores de calça = 8 combinações."},
+        {h:"Árvore de possibilidades",p:"A árvore de possibilidades é um diagrama que lista todas as combinações de forma organizada. Para 3 livros em ordens diferentes: começa pelo primeiro e ramifica as opções restantes. Total: 3 × 2 × 1 = 6 ordens possíveis."},
+        {h:"Noção de equivalência",p:"A balança de dois pratos representa a igualdade matemática. Dois lados com mesmo valor = igualdade (=). Valores diferentes = desigualdade (≠). Para preservar a igualdade, tudo que fazemos de um lado devemos fazer do outro. Representação algébrica: letras representam valores desconhecidos. Exemplo: Y + 7 = 13 → Y = 6."}
+      ],
+      flashcards:[
+        {q:"O que é o Princípio Multiplicativo?",a:"É o método de calcular o total de combinações multiplicando o número de opções de cada grupo.",ctx:"Exemplo: 3 sabores de sorvete × 2 tipos de casquinha = 6 combinações. Sempre que tiver opções que se combinam, você multiplica — não soma!"},
+        {q:"Como calcular combinações com 4 camisetas e 3 calças?",a:"4 × 3 = 12 combinações possíveis.",ctx:"O princípio multiplicativo funciona para qualquer situação com escolhas independentes (uma não afeta a outra)."},
+        {q:"O que é uma árvore de possibilidades?",a:"Um diagrama que organiza e lista todas as combinações possíveis de forma visual.",ctx:"Útil para números pequenos. Para números grandes, o Princípio Multiplicativo é mais rápido. A prova pode pedir qualquer um dos dois."},
+        {q:"O que significa igualdade matemática?",a:"Que os dois lados de uma expressão têm o mesmo valor, representados pelo sinal '='.",ctx:"Pense na balança: dois pratos no mesmo nível = equilibrado = igualdade. Um prato descendo = desequilibrado = desigualdade (≠)."},
+        {q:"Se Y + 7 = 13, qual o valor de Y?",a:"Y = 6, pois 6 + 7 = 13.",ctx:"Para descobrir o valor da letra: 'qual número somado com 7 dá 13?' Ou faça: 13 − 7 = 6. Esse raciocínio vale para qualquer equação simples."}
+      ],
+      quiz:[
+        {q:"Uma lanchonete tem 3 tipos de suco e 4 tipos de sanduíche. Quantas combinações são possíveis?",opts:["7","12","3","4"],c:1,feedback:"3 × 4 = 12. O Princípio Multiplicativo diz: multiplique as opções de cada grupo. Não some — quando as escolhas se combinam, a operação é a multiplicação!"},
+        {q:"Usando os algarismos 1, 2 e 3 sem repetir, quantos números de 2 algarismos posso formar?",opts:["3","4","6","9"],c:2,feedback:"São: 12, 13, 21, 23, 31, 32 → 6 combinações. Você pode listar (como na árvore) ou calcular: 3 opções para o 1º algarismo × 2 restantes = 6."},
+        {q:"O sinal '≠' representa:",opts:["Igualdade","Desigualdade","Multiplicação","Soma"],c:1,feedback:"'≠' significa 'diferente de' — é o sinal de desigualdade. Quando os dois lados não têm o mesmo valor, usamos ≠."},
+        {q:"Se Y + 5 = 12, qual é o valor de Y?",opts:["5","6","7","17"],c:2,feedback:"Y = 7, porque 7 + 5 = 12. Para encontrar Y: 'qual número somado com 5 dá 12?' Ou faça: 12 − 5 = 7."},
+        {q:"Se 8 + 2 = 10, o que acontece se adicionarmos 3 nos dois lados?",opts:["A igualdade deixa de existir","Ficamos com 11 = 10","Ficamos com 13 = 13","Ficamos com 8 + 2 = 13"],c:2,feedback:"(8+2)+3 = 13 e 10+3 = 13. A igualdade se preserva porque fizemos a mesma coisa nos dois lados — como adicionar o mesmo peso nos dois pratos da balança."}
+      ]
+    },
+    {
+      num:"Módulo 4", title:"Figuras geométricas planas", sub:"Polígonos, triângulos, quadriláteros, área e perímetro",
+      resumo:[
+        {h:"Figuras planas e polígonos",p:"Figuras planas têm apenas duas dimensões: comprimento e largura. Polígonos são figuras planas fechadas formadas por segmentos de reta. Regulares: todos os lados e ângulos iguais (ex: quadrado, triângulo equilátero). Não regulares: lados ou ângulos diferentes (ex: retângulo, triângulo escaleno)."},
+        {h:"Triângulos",p:"Triângulos têm 3 lados, 3 vértices e 3 ângulos. Classificação pelos lados: Equilátero (3 lados iguais), Isósceles (2 lados iguais), Escaleno (3 lados diferentes)."},
+        {h:"Quadriláteros",p:"Quadriláteros têm 4 lados, 4 vértices e 4 ângulos. Tipos: Quadrado (4 lados iguais + 4 ângulos retos), Retângulo (lados opostos iguais + 4 ângulos retos), Losango (4 lados iguais + ângulos ≠ 90°), Trapézio (1 par de lados paralelos), Paralelogramo (lados opostos paralelos e iguais)."},
+        {h:"Perímetro e área",p:"Perímetro = medida do contorno → soma todos os lados. Área = medida da superfície ocupada. Área do quadrado = lado × lado. Área do retângulo = base × altura. Unidades: cm² para superfícies pequenas, m² para grandes (1 m² = 10.000 cm²)."}
+      ],
+      flashcards:[
+        {q:"Qual a diferença entre polígono regular e não regular?",a:"Regular: todos os lados e ângulos iguais. Não regular: lados ou ângulos diferentes.",ctx:"Cuidado: o retângulo tem 4 ângulos retos, mas não é regular — seus lados adjacentes têm medidas diferentes. O quadrado sim é regular."},
+        {q:"Como se classificam os triângulos quanto aos lados?",a:"Equilátero (3 lados iguais), Isósceles (2 lados iguais), Escaleno (3 lados diferentes).",ctx:"Dica: Equilátero = 'equi' (igual), todos iguais. Isósceles = 'iso' (mesmo), dois iguais. Escaleno = todos diferentes."},
+        {q:"Qual a diferença entre quadrado e losango?",a:"Os dois têm 4 lados iguais, mas o quadrado tem 4 ângulos retos (90°) e o losango tem ângulos diferentes de 90°.",ctx:"Essa diferença cai muito em prova. Quadrado: lados iguais E ângulos retos. Losango: lados iguais mas ângulos inclinados."},
+        {q:"Como calcular o perímetro de um retângulo com lados 6 cm e 4 cm?",a:"P = 6 + 4 + 6 + 4 = 20 cm.",ctx:"Perímetro é o contorno — como se você andasse em volta da figura. Retângulo tem 4 lados: 2 comprimentos e 2 larguras. Some todos."},
+        {q:"Como calcular a área de um quadrado de lado 5 cm?",a:"Área = 5 × 5 = 25 cm².",ctx:"Não confunda com perímetro (5+5+5+5 = 20 cm). Área mede a superfície; perímetro mede o contorno. São medidas totalmente diferentes!"}
+      ],
+      quiz:[
+        {q:"Um triângulo com 3 lados iguais é chamado de:",opts:["Isósceles","Escaleno","Equilátero","Retângulo"],c:2,feedback:"Equilátero vem de 'equi' (igual) + 'látero' (lado). Todos os 3 lados têm a mesma medida. Isósceles tem 2 lados iguais. Escaleno tem todos diferentes."},
+        {q:"O que diferencia o quadrado do losango?",opts:["O quadrado tem 4 lados iguais e o losango não","O quadrado tem 4 ângulos retos (90°) e o losango não","O losango tem mais lados","O quadrado não é um polígono"],c:1,feedback:"Tanto o quadrado quanto o losango têm 4 lados iguais. A diferença está nos ângulos: o quadrado tem todos em 90°, o losango tem ângulos inclinados."},
+        {q:"Um retângulo tem lados de 8 cm e 3 cm. Qual é o perímetro?",opts:["11 cm","22 cm","24 cm","16 cm"],c:1,feedback:"Perímetro = soma de todos os lados = 8 + 3 + 8 + 3 = 22 cm. Retângulo tem 4 lados: 2 de 8 cm e 2 de 3 cm. Não é só 8+3!"},
+        {q:"Um quadrado tem lado de 6 cm. Qual é a área?",opts:["12 cm²","24 cm²","36 cm²","18 cm²"],c:2,feedback:"Área do quadrado = lado × lado = 6 × 6 = 36 cm². Não confunda com perímetro (6×4 = 24 cm). Área = superfície; perímetro = contorno."},
+        {q:"Polígonos regulares são aqueles que possuem:",opts:["Apenas lados iguais","Apenas ângulos iguais","Todos os lados e ângulos iguais","Pelo menos um ângulo reto"],c:2,feedback:"Regular = lados E ângulos todos iguais. Se só um deles for igual, não é regular. O retângulo tem 4 ângulos retos mas lados diferentes — por isso não é regular."}
+      ]
+    },
+    {
+      num:"Módulo 5", title:"Múltiplos, divisores, MMC e MDC", sub:"Números primos, compostos e fatoração",
+      resumo:[
+        {h:"Múltiplos e divisores",p:"Múltiplos de um número: resultados de multiplicá-lo por 0, 1, 2, 3... São infinitos. Exemplo: múltiplos de 4 → 0, 4, 8, 12, 16... Divisores de um número: os que o dividem exatamente, sem resto. São finitos. Exemplo: divisores de 12 → 1, 2, 3, 4, 6, 12."},
+        {h:"Números primos e compostos",p:"Número primo: tem exatamente dois divisores — 1 e ele mesmo. Exemplos: 2, 3, 5, 7, 11, 13. Número composto: tem mais de dois divisores. Exemplos: 4, 6, 8, 9, 12. Atenção: o número 1 NÃO é primo nem composto!"},
+        {h:"MMC e MDC",p:"MMC (Mínimo Múltiplo Comum): o menor múltiplo que dois ou mais números têm em comum. Exemplo: MMC(4,6) = 12. MDC (Máximo Divisor Comum): o maior divisor que dois ou mais números têm em comum. Exemplo: MDC(12,18) = 6."}
+      ],
+      flashcards:[
+        {q:"Qual a diferença entre múltiplos e divisores?",a:"Múltiplos = resultados de multiplicar (infinitos). Divisores = os que dividem sem resto (finitos).",ctx:"Exemplo com o 6: Múltiplos de 6 → 0, 6, 12, 18... (infinitos). Divisores de 6 → 1, 2, 3, 6 (apenas 4). Prova pede muito essa diferença!"},
+        {q:"O que é um número primo? Cite três exemplos.",a:"Tem exatamente dois divisores: 1 e ele mesmo. Exemplos: 2, 3, 5 (ou 7, 11, 13...).",ctx:"Atenção: o número 1 NÃO é primo (tem só um divisor). O número 2 é o único primo par. Todos os outros primos são ímpares."},
+        {q:"O número 1 é primo, composto ou nenhum dos dois?",a:"Nenhum dos dois. O número 1 não é primo nem composto.",ctx:"Primo precisa de DOIS divisores. O 1 tem apenas um (ele mesmo). Por isso foi excluído. Essa é uma pergunta-armadilha clássica de prova!"},
+        {q:"O que é MMC? Dê um exemplo.",a:"Mínimo Múltiplo Comum — o menor múltiplo que dois números têm em comum. Ex: MMC(4,6) = 12.",ctx:"Múltiplos de 4: 4, 8, 12... Múltiplos de 6: 6, 12... O menor que aparece nos dois é 12. Cuidado para não confundir MMC com MDC!"},
+        {q:"O que é MDC? Dê um exemplo.",a:"Máximo Divisor Comum — o maior divisor que dois números têm em comum. Ex: MDC(12,18) = 6.",ctx:"Divisores de 12: 1,2,3,4,6,12. Divisores de 18: 1,2,3,6,9,18. Os comuns: 1,2,3,6. O maior é 6. MDC = o MAIOR divisor comum."}
+      ],
+      quiz:[
+        {q:"Quais são os múltiplos de 5 entre 10 e 30?",opts:["10, 15, 20, 25, 30","5, 10, 15, 20","15, 20, 25","10, 20, 30"],c:0,feedback:"Múltiplos de 5: 0, 5, 10, 15, 20, 25, 30... Entre 10 e 30 (incluindo): 10, 15, 20, 25, 30. Múltiplos de 5 sempre terminam em 0 ou 5."},
+        {q:"Qual dos números abaixo é primo?",opts:["4","6","9","7"],c:3,feedback:"7 é primo — seus únicos divisores são 1 e 7. Os outros: 4 = 2×2, 6 = 2×3, 9 = 3×3. Todos têm mais de dois divisores, portanto são compostos."},
+        {q:"O número 1 é:",opts:["Primo","Composto","Primo e composto","Nem primo nem composto"],c:3,feedback:"O 1 é um caso especial — não se encaixa em nenhuma das categorias. Primo precisa de dois divisores; o 1 só tem um (ele mesmo). Pegadinha clássica!"},
+        {q:"Qual é o MMC de 4 e 6?",opts:["2","6","10","12"],c:3,feedback:"Múltiplos de 4: 4, 8, 12... Múltiplos de 6: 6, 12... O menor múltiplo comum é 12. O 2 seria o MDC(4,6), não o MMC — cuidado para não confundir!"},
+        {q:"Qual é o MDC de 12 e 18?",opts:["2","3","6","9"],c:2,feedback:"Divisores de 12: 1,2,3,4,6,12. Divisores de 18: 1,2,3,6,9,18. Os comuns: 1,2,3,6. O MAIOR é 6. MDC = Máximo (maior) Divisor Comum."}
+      ]
     }
-    startTimer(ex.rest, ex.n, serieLabel, nextInfo);
+  ]
+};
+
+let scores={geo:[{c:0,t:0,d:false},{c:0,t:0,d:false},{c:0,t:0,d:false}],mat:[{c:0,t:0,d:false},{c:0,t:0,d:false},{c:0,t:0,d:false}]};
+let curSubj='geo',curIdx=0;
+
+function openMod(subj,idx){
+  curSubj=subj;curIdx=idx;
+  const m=data[subj][idx];
+  document.getElementById('painel-view').style.display='none';
+  document.getElementById('mod-view').style.display='block';
+  document.getElementById('breadcrumb').innerHTML=`<span>${subj==='geo'?'Geografia':'Matemática'}</span> › ${m.title}`;
+  document.getElementById('mod-hero').innerHTML=`<div class="mod-hero-subject">${subj==='geo'?'🌍 Geografia':'📐 Matemática'} · ${m.num}</div><div class="mod-hero-title">${m.title}</div><div class="mod-hero-sub">${m.sub}</div>`;
+  switchTab('resumo');
+  renderResumo();renderFlashcards();renderQuiz();
+}
+
+function backToPainel(){
+  document.getElementById('painel-view').style.display='block';
+  document.getElementById('mod-view').style.display='none';
+  document.getElementById('breadcrumb').innerHTML='';
+}
+
+function switchTab(name){
+  document.querySelectorAll('.tab-btn').forEach((t,i)=>t.classList.toggle('active',['resumo','flashcards','quiz'][i]===name));
+  ['resumo','flashcards','quiz'].forEach(n=>document.getElementById('tab-'+n).classList.toggle('visible',n===name));
+}
+
+function renderResumo(){
+  const m=data[curSubj][curIdx];
+  document.getElementById('tab-resumo').innerHTML=m.resumo.map(r=>`
+    <div class="resumo-block"><h3>${r.h}</h3><p>${r.p}</p></div>`).join('');
+}
+
+function renderFlashcards(){
+  const m=data[curSubj][curIdx];
+  document.getElementById('tab-flashcards').innerHTML=`
+    <p class="fc-intro">Clique em cada card para revelar a resposta.</p>
+    <div class="fc-wrap">${m.flashcards.map((fc,j)=>`
+      <div class="fc" onclick="toggleFC(${j})" id="fc-${j}">
+        <div class="fc-header">
+          <div class="fc-q">${fc.q}</div>
+          <span class="fc-chevron">▾</span>
+        </div>
+        <div class="fc-body">
+          <div class="fc-answer">${fc.a}</div>
+          <div class="fc-context"><span class="fc-context-label">💡 Dica:</span>${fc.ctx}</div>
+        </div>
+      </div>`).join('')}</div>`;
+}
+
+function toggleFC(j){document.getElementById('fc-'+j).classList.toggle('open')}
+
+function renderQuiz(){
+  const m=data[curSubj][curIdx];
+  const sc=scores[curSubj][curIdx];
+  document.getElementById('tab-quiz').innerHTML=`
+    <div id="score-area-main" class="score-area${sc.d?' show':''}">
+      <div class="score-big">${sc.c}/${m.quiz.length}</div>
+      <div class="score-label">questões corretas</div>
+      <div class="score-msg">${scoreMsg(sc.c,m.quiz.length)}</div>
+      <button class="reset-btn" onclick="resetQuiz()">Tentar novamente</button>
+    </div>
+    <div class="quiz-wrap">${m.quiz.map((q,j)=>`
+      <div class="q-block" id="qb-${j}">
+        <div class="q-num">Questão ${j+1}</div>
+        <div class="q-text">${q.q}</div>
+        <div class="q-opts">${q.opts.map((o,k)=>`
+          <button class="q-opt" onclick="answerQ(${j},${k})" id="qo-${j}-${k}">${o}</button>`).join('')}</div>
+        <div class="q-feedback" id="qf-${j}"></div>
+      </div>`).join('')}</div>`;
+}
+
+function scoreMsg(c,t){
+  const p=c/t;
+  if(p===1)return'🎉 Perfeito! Você acertou tudo!';
+  if(p>=0.8)return'🌟 Muito bem! Quase lá!';
+  if(p>=0.6)return'👍 Bom trabalho! Continue praticando.';
+  return'💪 Continue tentando — você está aprendendo!';
+}
+
+function answerQ(qi,oi){
+  const m=data[curSubj][curIdx];
+  const q=m.quiz[qi];
+  for(let k=0;k<q.opts.length;k++){
+    const b=document.getElementById(`qo-${qi}-${k}`);
+    b.disabled=true;
+    if(k===q.c)b.classList.add('correct');
+    else if(k===oi&&oi!==q.c)b.classList.add('wrong');
+  }
+  const fb=document.getElementById(`qf-${qi}`);
+  const ok=oi===q.c;
+  fb.className=`q-feedback show ${ok?'ok':'err'}`;
+  fb.innerHTML=`<strong>${ok?'✅ Correto!':'❌ Resposta incorreta.'}</strong> ${q.feedback}`;
+  const sc=scores[curSubj][curIdx];
+  if(ok)sc.c++;
+  sc.t++;
+  if(sc.t===m.quiz.length){
+    sc.d=true;
+    const sa=document.getElementById('score-area-main');
+    sa.querySelector('.score-big').textContent=`${sc.c}/${m.quiz.length}`;
+    sa.querySelector('.score-msg').textContent=scoreMsg(sc.c,m.quiz.length);
+    sa.classList.add('show');
+    sa.scrollIntoView({behavior:'smooth',block:'nearest'});
   }
 }
 
-function renderDots(dayIdx, exIdx){
-  var ex = DAYS[dayIdx].ex[exIdx];
-  var done = state[dayIdx] ? state[dayIdx][exIdx] : 0;
-  var container = document.getElementById('dots-'+dayIdx+'-'+exIdx);
-  if(!container) return;
-  container.innerHTML = '';
-  for(var s = 1; s <= ex.s; s++){
-    var btn = document.createElement('button');
-    btn.className = 'sdot' + (s<=done?' done':(s===done+1?' active-dot':''));
-    btn.textContent = s<=done ? '✓' : s;
-    btn.setAttribute('aria-label','Série '+s);
-    if(s > done){
-      (function(si,di,ei){
-        btn.addEventListener('click',function(){ if(si===state[di][ei]+1) markSerie(di,ei); });
-      })(s, dayIdx, exIdx);
-    }
-    container.appendChild(btn);
-  }
-}
-
-function resetDay(){
-  initState(currentDay);
-  clearInterval(timerInterval);
-  document.getElementById('timerBar').classList.remove('show');
-  state[currentDay] = state[currentDay].map(function(){ return 0; });
-  DAYS[currentDay].ex.forEach(function(_,ei){
-    var card = document.getElementById('ec-'+currentDay+'-'+ei);
-    if(card) card.classList.remove('done');
-    renderDots(currentDay, ei);
-  });
-  var banner = document.getElementById('banner-'+currentDay);
-  if(banner) banner.classList.remove('show');
-  updateProgress(currentDay);
-}
-
-function selectDay(i){
-  currentDay = i;
-  document.querySelectorAll('#dtabs .day-tab').forEach(function(t,ti){
-    t.classList.toggle('on', ti===i);
-    t.style.borderBottomColor = ti===i ? DAYS[i].c : 'transparent';
-    t.style.color = ti===i ? 'var(--tx)' : 'var(--mt)';
-  });
-  document.querySelectorAll('#dpanels .panel').forEach(function(p,pi){
-    p.classList.toggle('on', pi===i);
-  });
-  document.getElementById('panelsWrap').scrollTop = 0;
-  updateProgress(i);
-}
-
-/* ── CARGA (localStorage) ── */
-function cargaKey(dayIdx, exIdx){
-  return 'carga_' + dayIdx + '_' + exIdx;
-}
-function loadCarga(dayIdx, exIdx){
-  try{ return localStorage.getItem(cargaKey(dayIdx,exIdx)) || ''; }catch(e){ return ''; }
-}
-function saveCarga(dayIdx, exIdx, val){
-  try{ localStorage.setItem(cargaKey(dayIdx,exIdx), val); }catch(e){}
-}
-
-function onCargaInput(dayIdx, exIdx, input){
-  var val = input.value.trim();
-  saveCarga(dayIdx, exIdx, val);
-  // flash "salvo"
-  var saved = document.getElementById('carga-saved-'+dayIdx+'-'+exIdx);
-  if(saved){
-    saved.style.opacity='1';
-    clearTimeout(saved._t);
-    saved._t = setTimeout(function(){ saved.style.opacity='0'; }, 1400);
-  }
-}
-
-/* ── BUILD ── */
-function build(){
-  var tabs = document.getElementById('dtabs');
-  var panels = document.getElementById('dpanels');
-
-  DAYS.forEach(function(d,i){
-    initState(i);
-
-    var tb = document.createElement('button');
-    tb.className = 'day-tab' + (i===0?' on':'');
-    tb.style.borderBottomColor = i===0 ? d.c : 'transparent';
-    tb.style.color = i===0 ? 'var(--tx)' : 'var(--mt)';
-    tb.innerHTML = '<span class="dtd">'+d.l+'</span><span class="dtn">'+d.n+'</span>';
-    tb.addEventListener('click', function(){ selectDay(i); });
-    tabs.appendChild(tb);
-
-    var pnl = document.createElement('div');
-    pnl.className = 'panel' + (i===0?' on':'');
-    pnl.id = 'dp'+i;
-
-    var tl = '<div class="tl">';
-    d.tl.forEach(function(s){ tl += '<div class="ts'+(s.h?' hi':'')+'">'+s.t+'<div class="tm">'+s.m+'</div></div>'; });
-    tl += '</div>';
-
-    var ex = '<div class="done-banner" id="banner-'+i+'">✓ Treino concluído — excelente sessão!</div>';
-    d.ex.forEach(function(e,ei){
-      var tgs = '';
-      if(e.tg && e.tg.length){
-        tgs = '<div class="etgs">';
-        e.tg.forEach(function(t){ var m=TM[t]; if(m) tgs+='<span class="etg '+m[0]+'">'+m[1]+'</span>'; });
-        tgs += '</div>';
-      }
-      var dots = '<div class="series-row">'
-        +'<span class="series-label">Séries</span>'
-        +'<div class="series-dots" id="dots-'+i+'-'+ei+'"></div>'
-        +'</div>';
-
-      var carga = '<div class="carga-row">'
-        +'<span class="carga-label">Carga</span>'
-        +'<div class="carga-wrap">'
-        +'<input class="carga-input" id="carga-'+i+'-'+ei+'" type="number" inputmode="decimal" placeholder="—" min="0" step="0.5">'
-        +'<span class="carga-unit">kg</span>'
-        +'<span class="carga-saved" id="carga-saved-'+i+'-'+ei+'">salvo ✓</span>'
-        +'</div>'
-        +'</div>';
-
-      ex += '<div class="ec" id="ec-'+i+'-'+ei+'">'
-        +'<div class="ea" style="background:'+d.c+'"></div>'
-        +'<div class="en">Exercício '+(ei+1)+' / '+d.ex.length+'</div>'
-        +'<div class="enm">'+e.n+'</div>'
-        +tgs
-        +'<div class="ests">'
-        +'<div class="est"><span class="esl">Reps</span><span class="esv sm">'+e.r+'</span></div>'
-        +'<div class="est"><span class="esl">Descanso</span><span class="esv sm">'+e.d+'</span></div>'
-        +'</div>'
-        +carga
-        +dots
-        +'<div class="enote">'+e.nt+'</div>'
-        +'</div>';
-    });
-
-    pnl.innerHTML =
-      '<span class="bdg" style="background:'+d.c+'22;color:'+d.c+'">'+d.n+'</span>'
-      +'<div class="ptl">'+d.n+'</div>'
-      +'<div class="pfoc">'+d.foc+'</div>'
-      +tl+ex
-      +'<div class="ibox"><b>Nota:</b> '+d.info+'</div>'
-      +'<div class="ftr">'
-      +'<div class="ftrtl">Diretrizes</div>'
-      +'<div class="ftr-divider"></div>'
-      +'Aquecimento: 3–4 min + 1 série leve (50%) no composto principal.<br>'
-      +'Progressão: sobe a carga quando completar todas as reps com técnica limpa por 2 sessões seguidas.<br>'
-      +'RIR: termine as séries com 1–2 reps no tanque — intensidade alta sem falha desnecessária.<br>'
-      +'Deload: a cada 6–8 semanas, reduza o volume em 40% mantendo a intensidade.'
-      +'</div>';
-
-    panels.appendChild(pnl);
-  });
-
-  DAYS.forEach(function(d,i){
-    d.ex.forEach(function(_,ei){ renderDots(i,ei); });
-  });
-
-  // Carregar e vincular campos de carga
-  DAYS.forEach(function(d,i){
-    d.ex.forEach(function(_,ei){
-      var inp = document.getElementById('carga-'+i+'-'+ei);
-      if(!inp) return;
-      var saved = loadCarga(i,ei);
-      if(saved !== '') inp.value = saved;
-      (function(di,eii,input){
-        input.addEventListener('change', function(){ onCargaInput(di,eii,input); });
-        input.addEventListener('blur',   function(){ onCargaInput(di,eii,input); });
-      })(i,ei,inp);
-    });
-  });
-
-  updateProgress(0);
-  initNotifications();
-}
-
-build();
+function resetQuiz(){scores[curSubj][curIdx]={c:0,t:0,d:false};renderQuiz()}
 </script>
 </body>
 </html>
