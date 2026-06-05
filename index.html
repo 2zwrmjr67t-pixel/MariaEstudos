@@ -12,54 +12,96 @@
   --text-main:#2D1A26;--text-sec:#7A4A6A;--text-hint:#B08AA0;
   --verde-ok:#1D9E75;--verde-bg:#E1F5EE;--vermelho-err:#C0392B;--vermelho-bg:#FCEBEB;
   --page-bg:#FDF5FB;
+  --geo-bg:#E1F5EE;--geo-color:#085041;--geo-border:#A8DDD0;
+  --mat-bg:#FCE4F3;--mat-color:#B01068;--mat-border:#F48CBB;
+  --his-bg:#FEF3E2;--his-color:#7A4A00;--his-border:#F5C97A;
+  --por-bg:#EEF0FF;--por-color:#2D3A8C;--por-border:#9BA8E8;
 }
 body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:var(--page-bg);color:var(--text-main);min-height:100vh;padding:0}
 
-/* TOPO */
-.app-header{background:var(--branco);border-bottom:1px solid var(--cinza-borda);padding:16px 24px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100}
+/* ── HEADER ── */
+.app-header{background:var(--branco);border-bottom:1px solid var(--cinza-borda);position:sticky;top:0;z-index:100}
+.header-top{padding:12px 24px;display:flex;align-items:center;justify-content:space-between}
 .logo-area{display:flex;align-items:center;gap:10px}
-.logo-dot{width:34px;height:34px;border-radius:50%;background:var(--rosa);display:flex;align-items:center;justify-content:center;font-size:18px;color:#fff;flex-shrink:0}
-.app-title{font-size:17px;font-weight:600;color:var(--text-main)}
-.app-sub{font-size:12px;color:var(--text-sec)}
-.breadcrumb{font-size:13px;color:var(--text-hint);display:flex;align-items:center;gap:6px}
-.breadcrumb span{color:var(--rosa);font-weight:500}
+.logo-dot{width:32px;height:32px;border-radius:50%;background:var(--rosa);display:flex;align-items:center;justify-content:center;font-size:17px;color:#fff;flex-shrink:0}
+.app-title{font-size:16px;font-weight:700;color:var(--text-main)}
+.app-sub{font-size:11px;color:var(--text-sec)}
+.breadcrumb{font-size:12px;color:var(--text-hint);display:flex;align-items:center;gap:5px}
+.breadcrumb .bc-subj{font-weight:600}
+.breadcrumb .bc-sep{color:var(--cinza-borda)}
 
-/* CONTAINER */
-.container{max-width:860px;margin:0 auto;padding:24px 20px}
+/* ── SUBJECT TABS (header) ── */
+.subject-nav{display:flex;gap:0;padding:0 24px;overflow-x:auto;scrollbar-width:none}
+.subject-nav::-webkit-scrollbar{display:none}
+.snav-btn{display:flex;align-items:center;gap:5px;padding:9px 16px;font-size:13px;font-weight:500;cursor:pointer;border:none;background:none;color:var(--text-hint);border-bottom:2.5px solid transparent;margin-bottom:-1px;font-family:inherit;white-space:nowrap;transition:color .15s}
+.snav-btn.active{font-weight:700;border-bottom-color:currentColor}
+.snav-btn.geo{color:var(--geo-color)}
+.snav-btn.mat{color:var(--mat-color)}
+.snav-btn.his{color:var(--his-color)}
+.snav-btn.por{color:var(--por-color)}
+.snav-btn:not(.active){color:var(--text-hint)}
+.snav-btn:not(.active):hover{color:var(--text-sec)}
 
-/* PAINEL INICIAL */
-.dica-prof{background:var(--rosa-light);border:1px solid var(--cinza-borda);border-radius:12px;padding:12px 16px;margin-bottom:24px;display:flex;gap:10px;align-items:flex-start}
-.dica-prof .icon{font-size:18px;flex-shrink:0;margin-top:1px}
+/* ── CONTAINER ── */
+.container{max-width:860px;margin:0 auto;padding:20px 20px}
+
+/* ── DICA ── */
+.dica-prof{background:var(--rosa-light);border:1px solid var(--cinza-borda);border-radius:12px;padding:12px 16px;margin-bottom:20px;display:flex;gap:10px;align-items:flex-start}
+.dica-prof .icon{font-size:17px;flex-shrink:0;margin-top:1px}
 .dica-prof p{font-size:13px;color:var(--rosa-dark);line-height:1.55}
 .dica-prof strong{font-weight:600}
 
-.subject-section{margin-bottom:28px}
-.subject-header{display:flex;align-items:center;gap:8px;margin-bottom:12px}
-.subject-pill{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:600;padding:5px 12px;border-radius:20px;letter-spacing:.02em}
-.subject-pill.geo{background:#E1F5EE;color:#085041}
-.subject-pill.mat{background:var(--rosa-light);color:var(--rosa-dark)}
-.subject-count{font-size:12px;color:var(--text-hint)}
+/* ── SUBJECT PANEL ── */
+.subject-panel{display:none}
+.subject-panel.active{display:block}
+.panel-label{display:flex;align-items:center;gap:8px;margin-bottom:14px}
+.panel-pill{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:700;padding:5px 14px;border-radius:20px;letter-spacing:.02em}
+.panel-pill.geo{background:var(--geo-bg);color:var(--geo-color)}
+.panel-pill.mat{background:var(--mat-bg);color:var(--mat-color)}
+.panel-pill.his{background:var(--his-bg);color:var(--his-color)}
+.panel-pill.por{background:var(--por-bg);color:var(--por-color)}
+.panel-count{font-size:12px;color:var(--text-hint)}
 
-.mod-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
-.mod-card{background:var(--branco);border:1px solid var(--cinza-borda);border-radius:14px;padding:16px;cursor:pointer;transition:border-color .15s,transform .1s,box-shadow .1s}
-.mod-card:hover{border-color:var(--rosa-mid);transform:translateY(-2px);box-shadow:0 4px 16px rgba(233,30,140,.08)}
-.mod-num{font-size:11px;color:var(--rosa);font-weight:600;margin-bottom:4px;text-transform:uppercase;letter-spacing:.04em}
+.mod-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px;margin-bottom:28px}
+.mod-card{background:var(--branco);border:1.5px solid var(--cinza-borda);border-radius:14px;padding:16px;cursor:pointer;transition:border-color .15s,transform .1s,box-shadow .1s;position:relative}
+.mod-card:hover{transform:translateY(-2px);box-shadow:0 4px 16px rgba(233,30,140,.08)}
+.mod-card.geo:hover{border-color:var(--geo-border)}
+.mod-card.mat:hover{border-color:var(--mat-border)}
+.mod-card.his:hover{border-color:var(--his-border)}
+.mod-card.por:hover{border-color:var(--por-border)}
+.mod-num{font-size:11px;font-weight:600;margin-bottom:4px;text-transform:uppercase;letter-spacing:.04em}
+.mod-num.geo{color:var(--geo-color)}
+.mod-num.mat{color:var(--mat-color)}
+.mod-num.his{color:var(--his-color)}
+.mod-num.por{color:var(--por-color)}
 .mod-title{font-size:14px;font-weight:600;color:var(--text-main);line-height:1.35;margin-bottom:10px}
 .mod-tags{display:flex;gap:4px;flex-wrap:wrap}
 .tag{font-size:10px;padding:3px 8px;border-radius:20px;font-weight:500}
-.tag.geo{background:#E1F5EE;color:#085041}
-.tag.mat{background:var(--rosa-light);color:var(--rosa-dark)}
+.tag.geo{background:var(--geo-bg);color:var(--geo-color)}
+.tag.mat{background:var(--mat-bg);color:var(--mat-color)}
+.tag.his{background:var(--his-bg);color:var(--his-color)}
+.tag.por{background:var(--por-bg);color:var(--por-color)}
+.mod-done-badge{position:absolute;top:12px;right:12px;width:18px;height:18px;border-radius:50%;background:var(--verde-ok);display:flex;align-items:center;justify-content:center;font-size:10px;color:#fff;display:none}
+.mod-card.done .mod-done-badge{display:flex}
 
-/* MÓDULO VIEW */
+/* ── MÓDULO VIEW ── */
 .mod-view{display:none}
 .back-btn{display:inline-flex;align-items:center;gap:6px;font-size:13px;color:var(--text-sec);cursor:pointer;background:none;border:1px solid var(--cinza-borda);border-radius:8px;padding:7px 14px;margin-bottom:16px;transition:border-color .15s,color .15s}
 .back-btn:hover{border-color:var(--rosa);color:var(--rosa)}
-.mod-hero{background:linear-gradient(135deg,var(--rosa-light) 0%,#FFF0FA 100%);border:1px solid var(--cinza-borda);border-radius:14px;padding:18px 20px;margin-bottom:16px}
-.mod-hero-subject{font-size:11px;font-weight:600;color:var(--rosa);text-transform:uppercase;letter-spacing:.05em;margin-bottom:3px}
+.mod-hero{border:1px solid var(--cinza-borda);border-radius:14px;padding:18px 20px;margin-bottom:16px}
+.mod-hero.geo{background:linear-gradient(135deg,var(--geo-bg) 0%,#F0FBF8 100%)}
+.mod-hero.mat{background:linear-gradient(135deg,var(--mat-bg) 0%,#FFF0FA 100%)}
+.mod-hero.his{background:linear-gradient(135deg,var(--his-bg) 0%,#FFFAF0 100%)}
+.mod-hero.por{background:linear-gradient(135deg,var(--por-bg) 0%,#F5F6FF 100%)}
+.mod-hero-subject{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.05em;margin-bottom:3px}
+.mod-hero-subject.geo{color:var(--geo-color)}
+.mod-hero-subject.mat{color:var(--mat-color)}
+.mod-hero-subject.his{color:var(--his-color)}
+.mod-hero-subject.por{color:var(--por-color)}
 .mod-hero-title{font-size:20px;font-weight:700;color:var(--text-main);margin-bottom:4px}
 .mod-hero-sub{font-size:13px;color:var(--text-sec)}
 
-/* TABS */
+/* ── CONTENT TABS ── */
 .tabs{display:flex;gap:0;margin-bottom:20px;border-bottom:2px solid var(--cinza-borda)}
 .tab-btn{padding:10px 20px;font-size:14px;cursor:pointer;color:var(--text-sec);border:none;background:none;border-bottom:2.5px solid transparent;margin-bottom:-2px;font-family:inherit;display:flex;align-items:center;gap:6px;transition:color .15s}
 .tab-btn.active{color:var(--rosa);border-bottom-color:var(--rosa);font-weight:600}
@@ -67,13 +109,13 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .tab-content{display:none}
 .tab-content.visible{display:block}
 
-/* RESUMO */
+/* ── RESUMO ── */
 .resumo-block{background:var(--branco);border:1px solid var(--cinza-borda);border-radius:12px;padding:16px;margin-bottom:12px}
 .resumo-block h3{font-size:13px;font-weight:600;color:var(--rosa-dark);margin-bottom:8px;padding-bottom:6px;border-bottom:1px solid var(--cinza-borda)}
 .resumo-block p{font-size:14px;color:var(--text-main);line-height:1.7}
 .resumo-block ul{padding-left:1.2rem;font-size:14px;color:var(--text-main);line-height:1.9}
 
-/* FLASHCARDS */
+/* ── FLASHCARDS ── */
 .fc-intro{font-size:13px;color:var(--text-hint);margin-bottom:12px}
 .fc-wrap{display:flex;flex-direction:column;gap:8px}
 .fc{background:var(--branco);border:1px solid var(--cinza-borda);border-radius:12px;padding:14px 16px;cursor:pointer;transition:border-color .15s}
@@ -89,9 +131,15 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .fc-context{font-size:12px;color:var(--rosa-dark);background:var(--rosa-light);border-radius:8px;padding:8px 12px;line-height:1.55}
 .fc-context-label{font-weight:600;margin-right:4px}
 
-/* QUIZ */
+/* ── QUIZ ── */
+.quiz-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px}
+.quiz-header-label{font-size:13px;color:var(--text-hint)}
+.quiz-reset-top{display:inline-flex;align-items:center;gap:5px;font-size:12px;padding:6px 14px;border-radius:8px;border:1px solid var(--cinza-borda);background:var(--branco);cursor:pointer;color:var(--text-sec);font-family:inherit;transition:border-color .15s,color .15s}
+.quiz-reset-top:hover{border-color:var(--rosa);color:var(--rosa)}
+
 .quiz-wrap{display:flex;flex-direction:column;gap:14px}
 .q-block{background:var(--branco);border:1px solid var(--cinza-borda);border-radius:12px;padding:16px}
+.q-block.answered{border-color:var(--cinza-borda)}
 .q-num{font-size:11px;color:var(--rosa);font-weight:600;text-transform:uppercase;letter-spacing:.04em;margin-bottom:5px}
 .q-text{font-size:14px;font-weight:600;color:var(--text-main);margin-bottom:14px;line-height:1.5}
 .q-opts{display:flex;flex-direction:column;gap:7px}
@@ -113,23 +161,27 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .score-msg{font-size:14px;color:var(--rosa-dark);margin-top:6px;font-weight:500}
 .reset-btn{margin-top:12px;padding:9px 22px;font-size:13px;border-radius:9px;border:1.5px solid var(--cinza-borda);background:var(--branco);cursor:pointer;color:var(--text-sec);font-family:inherit;transition:border-color .15s,color .15s}
 .reset-btn:hover{border-color:var(--rosa);color:var(--rosa)}
-
-/* PROGRESS BADGES */
-.mod-card .progress-dot{width:8px;height:8px;border-radius:50%;background:var(--cinza-borda);display:inline-block;margin-left:auto}
-.mod-card.has-progress .progress-dot{background:var(--verde-ok)}
 </style>
 </head>
 <body>
 
 <div class="app-header">
-  <div class="logo-area">
-    <div class="logo-dot">★</div>
-    <div>
-      <div class="app-title">Estudos da Maria</div>
-      <div class="app-sub">Colégio Espírito Santo · 5º ano</div>
+  <div class="header-top">
+    <div class="logo-area">
+      <div class="logo-dot">★</div>
+      <div>
+        <div class="app-title">Estudos da Maria</div>
+        <div class="app-sub">Colégio Espírito Santo · 5º ano</div>
+      </div>
     </div>
+    <div class="breadcrumb" id="breadcrumb"></div>
   </div>
-  <div class="breadcrumb" id="breadcrumb"></div>
+  <div class="subject-nav" id="subject-nav">
+    <button class="snav-btn geo active" onclick="selectSubject('geo')">🌍 Geografia</button>
+    <button class="snav-btn mat" onclick="selectSubject('mat')">📐 Matemática</button>
+    <button class="snav-btn his" onclick="selectSubject('his')">📜 História</button>
+    <button class="snav-btn por" onclick="selectSubject('por')">📝 Português</button>
+  </div>
 </div>
 
 <div class="container">
@@ -141,58 +193,135 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
       <p><strong>Dica da professora:</strong> Antes de responder, leia cada pergunta até o fim com calma. Palavras como <strong>"NÃO"</strong>, <strong>"causas"</strong> e <strong>"consequências"</strong> mudam completamente o que a questão está pedindo!</p>
     </div>
 
-    <div class="subject-section">
-      <div class="subject-header">
-        <span class="subject-pill geo">🌍 Geografia</span>
-        <span class="subject-count">3 módulos</span>
+    <!-- GEO -->
+    <div id="panel-geo" class="subject-panel active">
+      <div class="panel-label">
+        <span class="panel-pill geo">🌍 Geografia</span>
+        <span class="panel-count">3 módulos</span>
       </div>
       <div class="mod-grid">
-        <div class="mod-card" onclick="openMod('geo',0)">
-          <div class="mod-num">Módulo 3</div>
+        <div class="mod-card geo" onclick="openMod('geo',0)">
+          <div class="mod-done-badge">✓</div>
+          <div class="mod-num geo">Módulo 3</div>
           <div class="mod-title">Indo e voltando na cidade</div>
           <div class="mod-tags"><span class="tag geo">transporte</span><span class="tag geo">mobilidade</span></div>
         </div>
-        <div class="mod-card" onclick="openMod('geo',1)">
-          <div class="mod-num">Módulo 4</div>
+        <div class="mod-card geo" onclick="openMod('geo',1)">
+          <div class="mod-done-badge">✓</div>
+          <div class="mod-num geo">Módulo 4</div>
           <div class="mod-title">Transformações dos espaços</div>
           <div class="mod-tags"><span class="tag geo">urbanização</span><span class="tag geo">verticalização</span></div>
         </div>
-        <div class="mod-card" onclick="openMod('geo',2)">
-          <div class="mod-num">Módulo 5</div>
+        <div class="mod-card geo" onclick="openMod('geo',2)">
+          <div class="mod-done-badge">✓</div>
+          <div class="mod-num geo">Módulo 5</div>
           <div class="mod-title">Recursos naturais e consumo</div>
           <div class="mod-tags"><span class="tag geo">meio ambiente</span><span class="tag geo">sustentabilidade</span></div>
         </div>
       </div>
     </div>
 
-    <div class="subject-section">
-      <div class="subject-header">
-        <span class="subject-pill mat">📐 Matemática</span>
-        <span class="subject-count">3 módulos</span>
+    <!-- MAT -->
+    <div id="panel-mat" class="subject-panel">
+      <div class="panel-label">
+        <span class="panel-pill mat">📐 Matemática</span>
+        <span class="panel-count">3 módulos</span>
       </div>
       <div class="mod-grid">
-        <div class="mod-card" onclick="openMod('mat',0)">
-          <div class="mod-num">Módulo 3</div>
+        <div class="mod-card mat" onclick="openMod('mat',0)">
+          <div class="mod-done-badge">✓</div>
+          <div class="mod-num mat">Módulo 3</div>
           <div class="mod-title">Combinações e equivalências</div>
           <div class="mod-tags"><span class="tag mat">combinações</span><span class="tag mat">igualdade</span></div>
         </div>
-        <div class="mod-card" onclick="openMod('mat',1)">
-          <div class="mod-num">Módulo 4</div>
+        <div class="mod-card mat" onclick="openMod('mat',1)">
+          <div class="mod-done-badge">✓</div>
+          <div class="mod-num mat">Módulo 4</div>
           <div class="mod-title">Figuras geométricas planas</div>
           <div class="mod-tags"><span class="tag mat">geometria</span><span class="tag mat">área e perímetro</span></div>
         </div>
-        <div class="mod-card" onclick="openMod('mat',2)">
-          <div class="mod-num">Módulo 5</div>
+        <div class="mod-card mat" onclick="openMod('mat',2)">
+          <div class="mod-done-badge">✓</div>
+          <div class="mod-num mat">Módulo 5</div>
           <div class="mod-title">Múltiplos, divisores, MMC e MDC</div>
           <div class="mod-tags"><span class="tag mat">números</span><span class="tag mat">fatoração</span></div>
         </div>
       </div>
     </div>
-  </div>
+
+    <!-- HIS -->
+    <div id="panel-his" class="subject-panel">
+      <div class="panel-label">
+        <span class="panel-pill his">📜 História</span>
+        <span class="panel-count">3 módulos</span>
+      </div>
+      <div class="mod-grid">
+        <div class="mod-card his" onclick="openMod('his',0)">
+          <div class="mod-done-badge">✓</div>
+          <div class="mod-num his">Módulo 3</div>
+          <div class="mod-title">A Escrita e o Registro Histórico</div>
+          <div class="mod-tags"><span class="tag his">escrita</span><span class="tag his">civilizações</span></div>
+        </div>
+        <div class="mod-card his" onclick="openMod('his',1)">
+          <div class="mod-done-badge">✓</div>
+          <div class="mod-num his">Módulo 4</div>
+          <div class="mod-title">Patrimônio Histórico e Cultural</div>
+          <div class="mod-tags"><span class="tag his">patrimônio</span><span class="tag his">identidade</span></div>
+        </div>
+        <div class="mod-card his" onclick="openMod('his',2)">
+          <div class="mod-done-badge">✓</div>
+          <div class="mod-num his">Módulo 5</div>
+          <div class="mod-title">Das primeiras comunidades ao comércio</div>
+          <div class="mod-tags"><span class="tag his">nomadismo</span><span class="tag his">sedentarismo</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- POR -->
+    <div id="panel-por" class="subject-panel">
+      <div class="panel-label">
+        <span class="panel-pill por">📝 Português</span>
+        <span class="panel-count">5 módulos</span>
+      </div>
+      <div class="mod-grid">
+        <div class="mod-card por" onclick="openMod('por',0)">
+          <div class="mod-done-badge">✓</div>
+          <div class="mod-num por">Módulo 6</div>
+          <div class="mod-title">Meios de comunicação, e-mail e crase</div>
+          <div class="mod-tags"><span class="tag por">comunicação</span><span class="tag por">crase</span></div>
+        </div>
+        <div class="mod-card por" onclick="openMod('por',1)">
+          <div class="mod-done-badge">✓</div>
+          <div class="mod-num por">Módulo 7</div>
+          <div class="mod-title">Cartão-postal e concordância</div>
+          <div class="mod-tags"><span class="tag por">concordância</span><span class="tag por">gênero textual</span></div>
+        </div>
+        <div class="mod-card por" onclick="openMod('por',2)">
+          <div class="mod-done-badge">✓</div>
+          <div class="mod-num por">Módulo 8</div>
+          <div class="mod-title">Conjunção, MAS/MAIS e texto opinativo</div>
+          <div class="mod-tags"><span class="tag por">conjunção</span><span class="tag por">opinião</span></div>
+        </div>
+        <div class="mod-card por" onclick="openMod('por',3)">
+          <div class="mod-done-badge">✓</div>
+          <div class="mod-num por">Módulo 9</div>
+          <div class="mod-title">Direitos das crianças e pontuação</div>
+          <div class="mod-tags"><span class="tag por">pontuação</span><span class="tag por">direitos</span></div>
+        </div>
+        <div class="mod-card por" onclick="openMod('por',4)">
+          <div class="mod-done-badge">✓</div>
+          <div class="mod-num por">Módulo 10</div>
+          <div class="mod-title">Imagem como texto, travessão e vírgula</div>
+          <div class="mod-tags"><span class="tag por">infográfico</span><span class="tag por">pontuação</span></div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /painel-view -->
 
   <!-- MÓDULO VIEW -->
   <div class="mod-view" id="mod-view">
-    <button class="back-btn" onclick="backToPainel()">← Voltar ao painel</button>
+    <button class="back-btn" onclick="backToPainel()">← Voltar</button>
     <div id="mod-hero" class="mod-hero"></div>
     <div class="tabs">
       <button class="tab-btn active" onclick="switchTab('resumo')">📖 Resumo</button>
@@ -347,45 +476,258 @@ const data = {
         {q:"Qual é o MDC de 12 e 18?",opts:["2","3","6","9"],c:2,feedback:"Divisores de 12: 1,2,3,4,6,12. Divisores de 18: 1,2,3,6,9,18. Os comuns: 1,2,3,6. O MAIOR é 6. MDC = Máximo (maior) Divisor Comum."}
       ]
     }
+  ],
+  his: [
+    {
+      num:"Módulo 3", title:"A Escrita e o Registro Histórico", sub:"Origem e evolução da escrita",
+      resumo:[
+        {h:"Por que a escrita surgiu?",p:"Os seres humanos sempre precisaram se comunicar. Antes da escrita, usavam a fala e faziam pinturas rupestres em pedras — algumas com mais de 50 mil anos (no Brasil, cerca de 15 mil anos). Com o desenvolvimento do comércio e das sociedades, surgiu a necessidade de registrar informações: compras, vendas, estoques, leis e ensinamentos religiosos."},
+        {h:"Os Sumérios e a escrita cuneiforme",p:"A escrita surgiu por volta de 3.300 a.C. com os sumérios, na Mesopotâmia (atual Iraque, Irã e Jordânia). Criaram a escrita cuneiforme — feita com uma ferramenta em forma de cunha em placas de argila. Foram um dos primeiros povos a desenvolver a escrita, mas não os únicos."},
+        {h:"Os Egípcios e seus três sistemas",p:"Os egípcios desenvolveram três tipos de escrita por volta de 3.000 a.C.: hieroglífica (desenhos e símbolos, usada em templos e textos religiosos), hierática (forma cursiva do dia a dia dos escribas) e demótica (mais simplificada, para atividades comuns). Pouquíssimas pessoas sabiam ler e escrever — era função dos escribas."},
+        {h:"Os Fenícios e o alfabeto",p:"O alfabeto fonético atual tem origem nos fenícios (por volta de 1200 a.C.), povo do Mediterrâneo (atual Líbano e Síria) que se destacava no comércio. Com apenas 22 letras, cada som (fonema) correspondia a uma letra. Os gregos acrescentaram as vogais, tornando-o mais parecido com o que usamos hoje."},
+        {h:"Código de Hamurabi e a escrita hoje",p:"O Código de Hamurabi é um dos primeiros conjuntos de leis da história — baseado na Lei de Talião ('olho por olho, dente por dente'). No mundo digital, a escrita continua presente em sites, redes sociais e blogs, com novas características: abreviações e emojis para agilizar a comunicação."}
+      ],
+      flashcards:[
+        {q:"Qual povo criou a escrita cuneiforme e onde viviam?",a:"Os sumérios, na Mesopotâmia (atual Iraque, Irã e Jordânia), por volta de 3.300 a.C.",ctx:"Cuneiforme vem de 'cunha' — a ferramenta usada para marcar símbolos nas placas de argila. É uma das escritas mais antigas do mundo."},
+        {q:"Quais os três tipos de escrita dos egípcios?",a:"Hieroglífica (templos/religião), hierática (escribas/dia a dia) e demótica (população/documentos comuns).",ctx:"Dica para memorizar: Hieroglífica = mais elaborada, religiosa. Hierática = mais simples. Demótica = mais popular. Cada uma tinha seu público."},
+        {q:"O que os fenícios criaram e por que foi importante?",a:"O alfabeto fonético com 22 letras, onde cada som corresponde a uma letra — facilitou muito a comunicação e o comércio.",ctx:"Os gregos melhoraram o alfabeto fenício acrescentando as vogais, criando a base do alfabeto que usamos até hoje."},
+        {q:"O que é a Lei de Talião e onde aparece?",a:"A ideia de que a punição deve ser proporcional ao crime ('olho por olho'). Aparece no Código de Hamurabi.",ctx:"Hamurabi foi um rei da Babilônia. O Código de Hamurabi é considerado um dos primeiros conjuntos de leis escritas da história."},
+        {q:"Por que a invenção da escrita foi uma revolução?",a:"Permitiu registrar e preservar informações ao longo do tempo, transmitindo conhecimento entre gerações e lugares.",ctx:"Antes da escrita, o conhecimento dependia da memória e da fala. Com ela, foi possível criar leis, registrar a história e comunicar a distância."}
+      ],
+      quiz:[
+        {q:"Qual povo é considerado um dos primeiros a desenvolver a escrita?",opts:["Egípcios","Fenícios","Sumérios","Gregos"],c:2,feedback:"Os sumérios criaram a escrita cuneiforme por volta de 3.300 a.C. na Mesopotâmia — uma das regiões mais antigas de civilização do mundo."},
+        {q:"A escrita hieroglífica egípcia era usada principalmente em:",opts:["Documentos comerciais","Registros de impostos","Templos e textos religiosos","Cartas pessoais"],c:2,feedback:"Os hieróglifos eram elaborados e de difícil execução — por isso usados em templos e textos sagrados. Para o dia a dia, os escribas usavam a escrita hierática, mais simples."},
+        {q:"O que os gregos acrescentaram ao alfabeto fenício?",opts:["As consoantes","As vogais","Os números","Os hieróglifos"],c:1,feedback:"O alfabeto fenício tinha 22 letras, mas usava principalmente consoantes. Os gregos incluíram as vogais, tornando o sistema mais completo e parecido com o que usamos hoje."},
+        {q:"O Código de Hamurabi se baseia em qual princípio?",opts:["Perdão e reconciliação","Punição proporcional ao crime (Lei de Talião)","Igualdade entre ricos e pobres","Libertação dos escravos"],c:1,feedback:"A Lei de Talião — 'olho por olho, dente por dente' — significa que a punição deve ser equivalente ao crime cometido. Foi um avanço para a época ao tentar padronizar a justiça."},
+        {q:"Como a escrita se transformou no ambiente digital?",opts:["Desapareceu completamente","Ficou restrita a poucos","Ganhou abreviações e emojis, mas continua presente","Voltou a ser apenas visual"],c:2,feedback:"A escrita digital não sumiu — adaptou-se! Abreviações agilizam a comunicação e emojis expressam emoções. A escrita continua sendo o principal meio de comunicação online."}
+      ]
+    },
+    {
+      num:"Módulo 4", title:"Patrimônio Histórico e Cultural", sub:"Preservação da memória e identidade",
+      resumo:[
+        {h:"O que é patrimônio?",p:"Patrimônio histórico e cultural é o conjunto de bens materiais e imateriais de uma família, instituição ou país transmitido entre gerações. É fundamental para preservar a memória individual e coletiva, contribuindo para a formação da identidade de um povo."},
+        {h:"Patrimônio material e imaterial",p:"Material: construções, monumentos, objetos, fotografias e bens físicos que contam a história de um povo. Imaterial: tradições, danças, festas, receitas, músicas, línguas e manifestações culturais que refletem os valores e formas de pensar de uma comunidade."},
+        {h:"O Iphan",p:"Criado em 1937, o Iphan (Instituto do Patrimônio Histórico e Artístico Nacional) é o órgão do governo brasileiro que seleciona e preserva o patrimônio cultural do país — protegendo bens, atendendo solicitações da sociedade e garantindo que as gerações futuras possam conhecer o patrimônio nacional."},
+        {h:"Exemplos e importância",p:"Exemplo de patrimônio imaterial: o frevo, dança carnavalesca de Pernambuco, inscrito pelo Iphan em 2007. Para minorias étnicas e povos indígenas, o patrimônio imaterial é fonte essencial de identidade. Preservar esses bens mantém vivas tradições e valores, contribuindo para a diversidade cultural."}
+      ],
+      flashcards:[
+        {q:"Qual a diferença entre patrimônio material e imaterial?",a:"Material = bens físicos (monumentos, objetos, fotografias). Imaterial = manifestações culturais (danças, festas, línguas, receitas).",ctx:"Um prédio histórico é material — você pode tocá-lo. O frevo é imaterial — é uma dança, uma tradição viva. Ambos são patrimônio!"},
+        {q:"O que é o Iphan e quando foi criado?",a:"Instituto do Patrimônio Histórico e Artístico Nacional, criado em 1937. Órgão do governo brasileiro que preserva o patrimônio cultural.",ctx:"O Iphan decide o que merece ser protegido como patrimônio nacional — desde monumentos até tradições culturais como o frevo."},
+        {q:"Cite um exemplo de patrimônio imaterial protegido pelo Iphan.",a:"O frevo — dança carnavalesca típica de Pernambuco, inscrito em 2007 no Livro de Registro das Formas de Expressão.",ctx:"O frevo é reconhecido pela sua importância para a identidade cultural brasileira. Os dançarinos seguram uma sombrinha e movimentam pernas e braços rapidamente."},
+        {q:"Por que preservar o patrimônio cultural é importante?",a:"Para manter a memória coletiva, a identidade dos povos e a diversidade cultural para as gerações presentes e futuras.",ctx:"Imagine se as tradições de um povo fossem esquecidas — seria perder parte da sua história e identidade. A preservação garante que isso não aconteça."},
+        {q:"Cite três das 7 Maravilhas do Mundo Moderno.",a:"Taj Mahal, Machu Picchu, Cristo Redentor, Chichén Itzá, Coliseu, Muralha da China, Ruínas de Petra (qualquer 3).",ctx:"O Cristo Redentor, no Brasil, é a única maravilha do mundo moderno nas Américas do Sul. Machu Picchu fica no Peru e Chichén Itzá no México."}
+      ],
+      quiz:[
+        {q:"Qual das opções abaixo é um exemplo de patrimônio IMATERIAL?",opts:["Uma ponte histórica","O Coliseu romano","O frevo pernambucano","Um museu de arte"],c:2,feedback:"O frevo é uma dança — uma tradição viva, não um bem físico. Por isso é imaterial. Pontes, o Coliseu e museus são estruturas físicas — patrimônio material."},
+        {q:"O Iphan foi criado em qual ano?",opts:["1822","1889","1937","1964"],c:2,feedback:"O Iphan foi criado em 1937, durante o governo Vargas, para proteger e promover o patrimônio histórico e artístico brasileiro."},
+        {q:"Qual é a principal função do Iphan?",opts:["Organizar festivais culturais","Construir novos monumentos","Selecionar e preservar o patrimônio cultural do Brasil","Ensinar história nas escolas"],c:2,feedback:"O Iphan protege bens culturais materiais e imateriais, garantindo que o patrimônio nacional seja preservado para as próximas gerações."},
+        {q:"O Cristo Redentor pertence a qual lista?",opts:["Patrimônios da UNESCO","7 Maravilhas do Mundo Antigo","7 Maravilhas do Mundo Moderno","Patrimônio Imaterial Brasileiro"],c:2,feedback:"O Cristo Redentor é uma das 7 Maravilhas do Mundo Moderno — eleito em 2007 por votação mundial. É o símbolo mais reconhecido do Brasil no exterior."},
+        {q:"Por que o patrimônio imaterial é especialmente importante para povos indígenas e minorias étnicas?",opts:["Porque é mais fácil de preservar","Porque é fonte essencial de identidade e carrega sua própria história","Porque tem mais valor econômico","Porque é registrado em livros"],c:1,feedback:"Para comunidades que muitas vezes não têm monumentos ou registros escritos, as tradições, línguas e danças são o principal elo com sua história e identidade cultural."}
+      ]
+    },
+    {
+      num:"Módulo 5", title:"Das primeiras comunidades ao comércio", sub:"Nomadismo, sedentarismo e surgimento das civilizações",
+      resumo:[
+        {h:"Primeiras comunidades humanas",p:"Os primeiros seres humanos viviam da caça, da pesca e da coleta de frutos. Dependiam da natureza para sobreviver e utilizavam ferramentas simples feitas de pedra, madeira e ossos."},
+        {h:"Os nômades",p:"Os grupos humanos eram nômades — mudavam de lugar constantemente em busca de alimentos, água e abrigo. Não tinham moradia fixa."},
+        {h:"Agricultura e domesticação dos animais",p:"Com o tempo, as pessoas aprenderam a cultivar plantas e a domesticar animais (cabras, ovelhas, bois). Isso garantiu uma fonte mais estável de alimento e mudou tudo."},
+        {h:"Comunidades sedentárias",p:"A prática da agricultura permitiu que os grupos se fixassem em um mesmo lugar, formando comunidades sedentárias. Surgiram aldeias, casas permanentes e novas formas de organização social."},
+        {h:"O surgimento do comércio e povos nômades hoje",p:"Com a produção de excedentes (alimentos além do necessário), as pessoas passaram a trocar mercadorias — dando origem ao comércio. Ainda existem povos nômades hoje, como beduínos no deserto e pastores da África e da Ásia, que se deslocam em busca de água e pastagens."}
+      ],
+      flashcards:[
+        {q:"O que eram os grupos nômades?",a:"Grupos que mudavam de lugar constantemente em busca de alimentos, água e abrigo — sem moradia fixa.",ctx:"Nômade = sem lugar fixo. Pense em 'nomear' um destino diferente todo dia. O oposto é sedentário — quem fica parado no mesmo lugar."},
+        {q:"O que permitiu que os humanos se tornassem sedentários?",a:"A descoberta da agricultura e a domesticação de animais, que garantiram uma fonte estável de alimento.",ctx:"Causa e efeito: agricultura → alimento garantido → não precisam mais se deslocar → fixam-se em um lugar → surgem aldeias. Cada etapa leva à próxima!"},
+        {q:"O que são comunidades sedentárias?",a:"Comunidades que se fixaram em um mesmo lugar, formando aldeias com casas permanentes e organização social.",ctx:"'Sedentário' vem do latim 'sedere' = sentar. Quem é sedentário 'senta' no mesmo lugar. Com as aldeias surgiram regras, líderes e divisão de tarefas."},
+        {q:"Como surgiu o comércio nas primeiras civilizações?",a:"Com a produção de excedentes (mais alimento do que o necessário), as pessoas passaram a trocar mercadorias entre si.",ctx:"Excedente = sobra. Quando você produz mais do que precisa, pode trocar o que sobra por outra coisa. Essa troca é a origem do comércio — e do dinheiro, muito depois."},
+        {q:"Cite um exemplo de povo nômade que ainda existe hoje.",a:"Beduínos (deserto) e pastores de regiões da África e da Ásia, que se deslocam em busca de água e pastagens.",ctx:"O nomadismo não desapareceu totalmente — apenas ficou raro. Esses povos mantêm sua forma de vida tradicional, deslocando-se conforme as estações e recursos disponíveis."}
+      ],
+      quiz:[
+        {q:"O que caracterizava os grupos humanos nômades?",opts:["Viviam em cidades grandes","Mudavam de lugar em busca de alimentos e abrigo","Praticavam agricultura intensiva","Tinham casas permanentes"],c:1,feedback:"Nômades não tinham lugar fixo — se deslocavam constantemente atrás de alimento, água e abrigo. Só paravam quando encontravam o que precisavam."},
+        {q:"O que tornou possível o surgimento de comunidades sedentárias?",opts:["A invenção da escrita","O comércio com outros povos","A agricultura e a domesticação de animais","A construção de cidades"],c:2,feedback:"Com a agricultura, as pessoas garantiram alimento sem precisar se deslocar. Isso permitiu fixar-se em um lugar e formar as primeiras aldeias."},
+        {q:"O que é 'excedente' de produção?",opts:["A falta de alimentos","A produção além do necessário para consumo","O lixo gerado na colheita","A divisão igualitária dos alimentos"],c:1,feedback:"Excedente = sobra. Quando produzem mais do que precisam consumir, as pessoas têm algo para trocar com outros — o que originou o comércio."},
+        {q:"Qual foi uma consequência direta da formação de comunidades sedentárias?",opts:["O fim do comércio","O retorno ao nomadismo","O surgimento de aldeias e novas formas de organização social","A extinção da caça e pesca"],c:2,feedback:"Ao se fixar, as comunidades precisaram se organizar — surgiram aldeias, regras de convivência, divisão de trabalho e lideranças. É o início da vida em sociedade."},
+        {q:"Povos nômades ainda existem hoje?",opts:["Não, o nomadismo desapareceu completamente","Sim, como beduínos e pastores da África e da Ásia","Apenas na América do Sul","Somente em regiões árticas"],c:1,feedback:"Grupos como os beduínos no deserto e pastores africanos e asiáticos continuam nômades — deslocando-se conforme as estações em busca de água e pastagens para seus rebanhos."}
+      ]
+    }
+  ],
+  por: [
+    {
+      num:"Módulo 6", title:"Meios de comunicação, e-mail e crase", sub:"Comunicação digital e gramática",
+      resumo:[
+        {h:"Mudança nos meios de comunicação",p:"Antigamente: cartas, rádio e telefone fixo — mensagens demoravam mais. Hoje: celulares, internet e aplicativos permitem comunicação instantânea com qualquer pessoa do mundo em segundos."},
+        {h:"O que é e-mail?",p:"O e-mail (correio eletrônico) é uma forma de enviar mensagens pela internet — formais ou informais, com arquivos anexos. Um e-mail tem: destinatário (endereço de quem recebe), assunto (título/resumo), mensagem (corpo com texto e arquivos) e despedida/saudação."},
+        {h:"Uso da crase (à)",p:"A crase acontece quando se junta a preposição 'a' + o artigo feminino 'a/as', formando 'à' (singular) ou 'às' (plural). Use antes de palavras femininas (Vou à escola), para indicar horas (Cheguei às 8 horas) e em expressões (à noite, às vezes). NÃO use antes de palavras masculinas (Vou a pé), verbos (Começou a estudar) ou nomes de cidades sem artigo (Vou a Curitiba)."}
+      ],
+      flashcards:[
+        {q:"Qual a diferença entre comunicação 'de antigamente' e hoje?",a:"Antes: cartas, rádio, telefone fixo — lento. Hoje: celular, internet, mensagens instantâneas — comunicação em segundos com qualquer lugar.",ctx:"A mudança mais importante foi a velocidade e o alcance. Antes, uma carta levava dias. Hoje, uma mensagem chega em segundos."},
+        {q:"Quais são as partes de um e-mail?",a:"Destinatário, assunto, mensagem (corpo do e-mail) e despedida/saudação.",ctx:"O assunto é como um 'título' — deve ser claro para convencer o destinatário a abrir o e-mail. Em situações formais (escola, trabalho), caprichar no assunto é importante."},
+        {q:"Quando usar a crase (à)?",a:"Antes de palavras femininas (à escola), para indicar horas (às 8h) e em expressões fixas (à noite, às vezes).",ctx:"Dica: tente substituir por 'ao' (masculino). Se fizer sentido com 'ao', use 'à' no feminino. Ex: 'Fui ao mercado / Fui à escola'."},
+        {q:"Quando NÃO usar a crase?",a:"Antes de palavras masculinas (a pé), de verbos (começou a estudar) e de nomes de cidades sem artigo (a Curitiba).",ctx:"Cidades com artigo: 'Fui à Bahia' (a Bahia). Cidades sem artigo: 'Fui a Brasília'. Quando em dúvida, pense se a cidade usa 'a/o' antes do nome."},
+        {q:"O que representa 'à' (acento grave)?",a:"A junção da preposição 'a' com o artigo feminino 'a' — formando o acento grave (crase).",ctx:"Sem a preposição, não há crase. Exemplo: 'Ela foi à escola' (preposição + artigo). 'A escola é boa' (só artigo, sem crase)."}
+      ],
+      quiz:[
+        {q:"Qual frase usa a crase CORRETAMENTE?",opts:["Fui à pé","Comecei à estudar","Cheguei às 9 horas","Viajei à Curitiba"],c:2,feedback:"'Às 9 horas' está correto — indica hora e usa o artigo feminino plural 'as'. 'À pé' (errado: palavra masculina), 'à estudar' (errado: verbo), 'à Curitiba' (errado: cidade sem artigo)."},
+        {q:"Qual das partes do e-mail funciona como um 'título'?",opts:["Destinatário","Assunto","Mensagem","Despedida"],c:1,feedback:"O assunto é o resumo do conteúdo — é o que aparece na caixa de entrada e convence o leitor a abrir o e-mail. Um bom assunto é claro e direto."},
+        {q:"O que é o 'destinatário' em um e-mail?",opts:["O texto da mensagem","O título do e-mail","O endereço de e-mail de quem vai receber","A assinatura de quem envia"],c:2,feedback:"Destinatário = quem recebe. Remetente = quem envia. São conceitos opostos — muito cobrados em provas de interpretação de texto."},
+        {q:"Em qual dessas frases a crase está INCORRETA?",opts:["Fui à padaria","Escrevi à minha amiga","Comecei à ler o livro","Chegamos às três horas"],c:2,feedback:"'Comecei à ler' está errado — não se usa crase antes de verbo. O correto é 'comecei a ler'. Verbos nunca aceitam crase!"},
+        {q:"Qual foi a principal mudança nos meios de comunicação com a tecnologia?",opts:["As mensagens ficaram mais longas","A comunicação ficou mais lenta","A comunicação ficou mais rápida e alcançou o mundo inteiro","As cartas deixaram de existir"],c:2,feedback:"A grande revolução foi a velocidade e o alcance global. Hoje é possível falar com alguém no Japão em tempo real — algo impossível na era das cartas."}
+      ]
+    },
+    {
+      num:"Módulo 7", title:"Cartão-postal e concordância", sub:"Gênero textual e concordância verbal e nominal",
+      resumo:[
+        {h:"Cartão-postal",p:"O cartão-postal é um gênero textual para mensagens curtas, geralmente durante uma viagem. Características: texto curto e simples, linguagem informal, pode ter imagem na frente. Estrutura: saudação (Olá, família!), mensagem, despedida (Abraços!) e nome do remetente."},
+        {h:"Concordância verbal",p:"A concordância verbal acontece entre o verbo e o sujeito. O verbo deve concordar em número (singular/plural) e pessoa (eu, tu, ele, nós...). Exemplos: 'O menino brinca' (singular) → 'Os meninos brincam' (plural). O verbo muda conforme quem faz a ação."},
+        {h:"Concordância nominal",p:"A concordância nominal acontece entre o substantivo e suas características (artigo, adjetivo, numeral). As palavras devem concordar em gênero (masculino/feminino) e número (singular/plural). Exemplos: 'Menino alto / Menina alta / Meninos altos / Meninas altas'."}
+      ],
+      flashcards:[
+        {q:"Quais são as características do cartão-postal?",a:"Texto curto, linguagem informal, pode ter imagem. Tem saudação, mensagem, despedida e nome do remetente.",ctx:"Gênero textual = tipo de texto com características próprias. O cartão-postal é informal e afetivo — diferente de uma carta formal ou um e-mail profissional."},
+        {q:"O que é concordância verbal?",a:"A relação de harmonia entre o verbo e o sujeito em número (singular/plural) e pessoa.",ctx:"Se o sujeito está no plural, o verbo também vai. 'Os alunos estudam' (certo) — 'Os alunos estuda' (errado). O verbo segue o sujeito!"},
+        {q:"O que é concordância nominal?",a:"A relação entre o substantivo e as palavras que o acompanham (artigo, adjetivo, numeral) em gênero e número.",ctx:"Tudo precisa 'combinar': 'aquele menino educado' (masculino singular) → 'aquelas meninas educadas' (feminino plural). Gênero e número sempre juntos."},
+        {q:"Corrija: 'Os aluno estuda muito.'",a:"'Os alunos estudam muito.' — sujeito e verbo concordam no plural.",ctx:"Dois erros: 'aluno' sem 's' (plural errado) e 'estuda' sem concordar com o plural. Em prova, podem aparecer frases com um ou os dois erros."},
+        {q:"'Menina bonita' → como fica no plural?",a:"'Meninas bonitas' — artigo, substantivo e adjetivo todos no feminino plural.",ctx:"Na concordância nominal, TODAS as palavras que acompanham o substantivo precisam concordar com ele. É uma regra que vale para toda a cadeia de palavras."}
+      ],
+      quiz:[
+        {q:"Qual frase está com concordância verbal CORRETA?",opts:["Os meninos corre no parque","A professora ensinam bem","As crianças brincam felizes","O cachorro latiu muito ruidosa"],c:2,feedback:"'As crianças brincam' — sujeito plural + verbo plural. 'Os meninos corre' (errado: plural + singular), 'A professora ensinam' (errado: singular + plural)."},
+        {q:"Qual frase apresenta concordância nominal CORRETA?",opts:["Aquele meninas são educadas","Aquelas meninas são educadas","Aquelas menina são educada","Aqueles meninas são educados"],c:1,feedback:"'Aquelas meninas são educadas' — tudo no feminino plural. Artigo (aquelas), substantivo (meninas) e adjetivo (educadas) concordam em gênero e número."},
+        {q:"O cartão-postal usa qual tipo de linguagem?",opts:["Formal e técnica","Científica","Informal e afetiva","Jornalística"],c:2,feedback:"O cartão-postal é uma mensagem pessoal e afetiva — por isso usa linguagem informal. É bem diferente de um e-mail profissional ou de um artigo de jornal."},
+        {q:"O que é o 'remetente' em um cartão-postal?",opts:["Quem recebe a mensagem","O local de onde foi enviado","Quem enviou a mensagem","O assunto do cartão"],c:2,feedback:"Remetente = quem envia. Destinatário = quem recebe. São os dois lados de qualquer comunicação — cartão, carta, e-mail."},
+        {q:"Escolha a opção com concordância CORRETA:",opts:["O aluno novo chegou","Os aluno novos chegou","O alunos novo chegaram","Os aluno novo chegou"],c:0,feedback:"'O aluno novo chegou' — tudo no masculino singular. As outras opções misturam singular e plural de forma incorreta."}
+      ]
+    },
+    {
+      num:"Módulo 8", title:"Conjunção, MAS/MAIS e texto opinativo", sub:"Coesão textual e escrita argumentativa",
+      resumo:[
+        {h:"Conjunções",p:"Conjunções ligam ideias, palavras ou frases, garantindo a coesão (boa ligação) do texto. Principais: 'e' (soma/adição), 'mas' (ideia contrária), 'porque' (explicação), 'ou' (escolha). Locução conjuntiva: duas ou mais palavras com função de conjunção — 'por causa de', 'já que', 'assim que', 'para que'."},
+        {h:"MAS × MAIS × MÁS",p:"MAS (conjunção adversativa): indica oposição/contraste. Substitua por 'porém'. Ex: 'Queria sair, mas estava cansado.' MAIS (advérbio/adição): indica quantidade ou intensidade. Antônimo de 'menos'. Ex: 'Quero mais comida.' MÁS (adjetivo plural feminino): qualidade negativa. Ex: 'Aquelas meninas são más.'"},
+        {h:"Texto opinativo",p:"O texto opinativo expressa a opinião do autor sobre um assunto. Características: apresenta uma opinião, traz argumentos (explicações/justificativas) e pode tentar convencer o leitor. Dica: use conjunções para ligar ideias e explique sua opinião com clareza."}
+      ],
+      flashcards:[
+        {q:"O que são conjunções? Dê dois exemplos.",a:"Palavras que ligam ideias ou frases. Exemplos: 'e' (adição) e 'mas' (oposição).",ctx:"Conjunções são a 'cola' do texto — sem elas, as frases ficam soltas e sem sentido de relação. 'Estudei muito e passei na prova' — o 'e' mostra consequência."},
+        {q:"Qual a diferença entre MAS e MAIS?",a:"MAS indica oposição (substitua por 'porém'). MAIS indica quantidade ou intensidade (antônimo de 'menos').",ctx:"Dica rápida: se você pode substituir por 'porém', use MAS. Se você pode substituir por 'menos', use MAIS. Ex: 'Queria ir, mas estava cansado.' / 'Quero mais bolo.'"},
+        {q:"O que é uma locução conjuntiva? Dê um exemplo.",a:"Conjunto de duas ou mais palavras com função de conjunção. Ex: 'por causa de', 'já que', 'para que'.",ctx:"'Por causa de' funciona como conjunção explicativa — igual a 'porque', mas formada por três palavras. A função é a mesma, só a forma é diferente."},
+        {q:"Quais são as características do texto opinativo?",a:"Apresenta uma opinião do autor, traz argumentos que justificam a opinião e pode tentar convencer o leitor.",ctx:"Em provas de redação, você será pedido para escrever textos opinativos. Lembre-se: não basta dar a opinião — você precisa argumentar, explicar o porquê."},
+        {q:"Complete com MAS ou MAIS: 'Queria brincar, ___ tinha lição.'",a:"MAS — indica oposição entre querer brincar e ter que fazer a lição.",ctx:"'Queria brincar, PORÉM tinha lição' funciona? Sim! Então é MAS. Se fosse quantidade: 'Quero MAIS tempo para brincar' — aí seria MAIS."}
+      ],
+      quiz:[
+        {q:"Qual conjunção indica ideia de OPOSIÇÃO?",opts:["e","ou","mas","porque"],c:2,feedback:"'Mas' é a conjunção adversativa — indica contraste entre duas ideias. 'e' soma, 'ou' dá escolha, 'porque' explica. Cada conjunção tem sua função específica."},
+        {q:"Escolha a frase com uso CORRETO de MAS/MAIS:",opts:["Quero mais bolo, mais estou de dieta","Quero mas bolo, mas estou de dieta","Quero mais bolo, mas estou de dieta","Quero mas bolo, mais estou de dieta"],c:2,feedback:"'Mais bolo' = quantidade (correto). 'Mas estou de dieta' = oposição (correto). As outras opções trocam os dois — que é o erro mais comum nesse conteúdo."},
+        {q:"O texto opinativo tem como objetivo principal:",opts:["Apenas narrar um fato","Descrever um lugar","Expressar e defender uma opinião com argumentos","Dar instruções de como fazer algo"],c:2,feedback:"Texto opinativo = opinião + argumentos. Não basta dizer 'eu acho' — é preciso justificar com razões. É a base da redação argumentativa."},
+        {q:"'Não fui à festa ____ estava doente.' Qual conjunção completa corretamente?",opts:["e","mas","ou","porque"],c:3,feedback:"'Porque' introduz uma explicação — explica o motivo de não ter ido à festa. 'Mas' indicaria oposição (não faz sentido aqui). 'E' soma. 'Ou' dá alternativa."},
+        {q:"'Por causa de' é um exemplo de:",opts:["Adjetivo","Advérbio","Conjunção simples","Locução conjuntiva"],c:3,feedback:"Locução conjuntiva = duas ou mais palavras com função de conjunção. 'Por causa de' funciona como 'porque' — é uma locução conjuntiva explicativa."}
+      ]
+    },
+    {
+      num:"Módulo 9", title:"Direitos das crianças e sinais de pontuação", sub:"Cidadania e língua portuguesa",
+      resumo:[
+        {h:"Direitos fundamentais das crianças",p:"Toda criança tem direito a ser criança: educação, saúde, alimentação, lazer, proteção e convivência familiar. Esses direitos garantem crescer com segurança, respeito e felicidade. Direitos fundamentais: vida, educação, saúde, proteção contra a violência, identidade e participação."},
+        {h:"Sinais de pontuação",p:"Aspas (\" \"): destacam falas, títulos ou palavras especiais. Reticências (...): indicam pausa, dúvida, suspense ou ideia incompleta. Dois-pontos (:): anunciam explicação, lista ou fala. Parênteses ( ): acrescentam informações extras. Ponto e vírgula (;): pausa maior que a vírgula. Travessão (—): indica fala de personagem."},
+        {h:"Traz, trás, atrás e detrás",p:"Traz: vem do verbo trazer (Minha mãe traz o lanche). Trás: aparece na expressão 'para trás' (Olhe para trás). Atrás: indica posição posterior ou perseguição (O cachorro correu atrás da bola). Detrás: significa 'atrás de' (O gato estava detrás da porta)."}
+      ],
+      flashcards:[
+        {q:"Cite quatro direitos fundamentais das crianças.",a:"Vida, educação, saúde, proteção contra a violência, identidade e participação (qualquer 4).",ctx:"Esses direitos estão no Estatuto da Criança e do Adolescente (ECA). Em prova, podem pedir exemplos ou perguntar se uma situação respeita ou viola esses direitos."},
+        {q:"Quando se usam as reticências (...)?",a:"Para indicar pausa, dúvida, suspense ou que a ideia ficou incompleta.",ctx:"'Eu pensei, pensei e…' — as reticências criam suspense, como se a frase continuasse no ar. Muito usadas em narrativas para criar tensão."},
+        {q:"Qual a diferença entre 'traz' e 'trás'?",a:"Traz vem do verbo trazer (ação). Trás aparece na expressão 'para trás' (posição).",ctx:"Dica: 'traz' tem ação — você pode substituir por outro verbo ('ele traz = ele carrega'). 'Para trás' indica direção, não ação."},
+        {q:"Para que servem os dois-pontos (:)?",a:"Para anunciar uma explicação, uma lista ou a fala de alguém.",ctx:"Exemplos: 'Levei três coisas: lápis, borracha e caderno' (lista). 'Ela disse: Vou embora' (fala). 'O problema é simples: falta de atenção' (explicação)."},
+        {q:"Qual a diferença entre 'atrás' e 'detrás'?",a:"Atrás indica posição posterior ou perseguição. Detrás significa 'atrás de' (seguido de objeto).",ctx:"'O cachorro correu atrás' (sem especificar de quê). 'O gato estava detrás da porta' (especificando onde). 'Detrás' sempre vem acompanhado de um complemento."}
+      ],
+      quiz:[
+        {q:"Qual sinal de pontuação é usado para indicar a fala de um personagem em diálogo?",opts:["Reticências","Parênteses","Travessão","Dois-pontos"],c:2,feedback:"O travessão (—) é o sinal padrão para introduzir falas de personagens em narrativas. Os dois-pontos também anunciam falas, mas o travessão é específico para diálogos."},
+        {q:"'Ela disse: Parabéns pela atividade!' — Os dois-pontos indicam:",opts:["Uma pausa longa","O início de uma fala","Uma informação extra","Suspense"],c:1,feedback:"Os dois-pontos anunciam o que vem a seguir — neste caso, a fala da pessoa. Também são usados antes de listas e explicações."},
+        {q:"Qual frase usa 'traz' CORRETAMENTE?",opts:["Olhe para traz","Ele traz o livro todo dia","Fique para traz","Ela foi traz da escola"],c:1,feedback:"'Traz' vem do verbo trazer — indica ação. 'Olhe para trás' e 'fique para trás' usam 'trás' (expressão de posição). 'Atrás da escola' seria o correto na última."},
+        {q:"As reticências (...) indicam:",opts:["Fim de uma ideia","Pausa, dúvida ou ideia incompleta","Início de uma lista","Fala de personagem"],c:1,feedback:"Reticências = ideia suspensa, dúvida ou suspense. 'Eu queria ir, mas…' — o leitor sente que algo ficou por dizer. São muito usadas para criar efeito dramático."},
+        {q:"Qual é um direito fundamental das crianças?",opts:["Trabalhar desde os 5 anos","Ter acesso à educação e saúde","Ficar sem supervisão de adultos","Não precisar estudar"],c:1,feedback:"Educação e saúde são direitos fundamentais garantidos pelo ECA. Crianças têm o direito de crescer com segurança, respeito e acesso a cuidados básicos."}
+      ]
+    },
+    {
+      num:"Módulo 10", title:"Imagem como texto, travessão e vírgula", sub:"Leitura de imagens e pontuação avançada",
+      resumo:[
+        {h:"Imagem também é texto",p:"As imagens comunicam ideias, sentimentos e informações — mesmo sem palavras. Infográficos combinam textos, imagens, gráficos e números para apresentar informações de forma clara, rápida e organizada."},
+        {h:"Travessão (—)",p:"O travessão indica a fala de personagens em diálogos ou destaca uma informação no texto. Exemplo: '— Vamos ao parque amanhã? — perguntou Ana.'"},
+        {h:"Vírgula (,)",p:"A vírgula separa elementos de uma lista, marca pausas e organiza informações. Exemplo: 'Comprei maçãs, bananas, laranjas e peras.'"},
+        {h:"Ponto e vírgula (;)",p:"O ponto e vírgula indica uma pausa maior que a vírgula e menor que o ponto final. Pode separar partes de uma frase que já possuem vírgulas. Exemplo: 'Na excursão estavam alunos de Porto Alegre, RS; Curitiba, PR; e Florianópolis, SC.'"}
+      ],
+      flashcards:[
+        {q:"O que é um infográfico?",a:"Uma combinação de textos, imagens, gráficos e números para apresentar informações de forma clara, rápida e organizada.",ctx:"Infográficos são muito usados em jornais, revistas e sites para explicar dados complexos de forma visual. Você já viu tabelas com ícones e porcentagens — isso é um infográfico!"},
+        {q:"Para que serve o travessão em um diálogo?",a:"Para indicar a fala de um personagem — substitui as aspas nos diálogos de narrativas.",ctx:"Compare: com aspas → Ana disse: \"Vamos brincar?\". Com travessão → — Vamos brincar? — disse Ana. O travessão é mais comum em narrativas literárias."},
+        {q:"Quando usamos a vírgula?",a:"Para separar elementos de uma lista, marcar pausas e organizar informações.",ctx:"'Comprei pão, leite, ovos e queijo.' — a vírgula separa cada item da lista. Antes do 'e' final, normalmente não se usa vírgula em listas simples."},
+        {q:"Qual a diferença entre vírgula e ponto e vírgula?",a:"A vírgula faz uma pausa curta. O ponto e vírgula faz uma pausa maior — útil quando a frase já tem várias vírgulas.",ctx:"'Alunos de Porto Alegre, RS; Curitiba, PR; e Florianópolis, SC.' — o ponto e vírgula separa os grupos para não confundir com as vírgulas dentro de cada grupo."},
+        {q:"Imagens podem 'falar'? Explique.",a:"Sim — imagens comunicam ideias, sentimentos e informações mesmo sem palavras escritas.",ctx:"Uma foto de uma criança chorando comunica tristeza. Um gráfico com setas vermelhas comunica queda. A imagem é uma linguagem — só não usa letras para isso."}
+      ],
+      quiz:[
+        {q:"O que os infográficos têm de especial em relação a textos comuns?",opts:["Usam apenas imagens, sem texto","Combinam texto, imagens e dados para facilitar a compreensão","São mais longos e detalhados","Só aparecem em livros científicos"],c:1,feedback:"Infográficos são multimídia — texto + imagem + dados juntos. Isso facilita a compreensão de informações complexas de forma rápida e visual."},
+        {q:"'— Preciso de ajuda! — gritou Pedro.' O travessão nessa frase indica:",opts:["Uma lista de itens","Uma pausa longa","A fala de um personagem","Uma informação extra"],c:2,feedback:"O travessão introduz e encerra a fala do personagem Pedro. É o uso clássico do travessão em narrativas — diferente das aspas, que cumprem função similar."},
+        {q:"'Comprei caderno, lápis, borracha e régua.' A vírgula nessa frase serve para:",opts:["Indicar uma pausa dramática","Separar os itens de uma lista","Introduzir uma fala","Substituir o ponto final"],c:1,feedback:"A vírgula separa cada item da lista de materiais comprados. Sem ela, a frase ficaria confusa: 'Comprei caderno lápis borracha e régua.'"},
+        {q:"Quando é mais adequado usar o ponto e vírgula?",opts:["Para terminar uma frase","Para separar itens numa lista que já tem vírgulas internas","Para indicar fala de personagem","Para marcar uma pausa muito curta"],c:1,feedback:"O ponto e vírgula organiza listas complexas onde vírgulas já estão sendo usadas. Exemplo clássico: cidades com estados — 'São Paulo, SP; Rio de Janeiro, RJ.'"},
+        {q:"Uma imagem pode comunicar uma ideia mesmo sem palavras?",opts:["Não, só o texto comunica","Sim, imagens são uma forma de linguagem","Apenas se tiver legenda","Somente em filmes"],c:1,feedback:"Imagens são linguagem! Uma foto, um ícone, um gráfico — todos comunicam ideias. O conceito de 'imagem como texto' reconhece que a leitura vai além das palavras escritas."}
+      ]
+    }
   ]
 };
 
-let scores={geo:[{c:0,t:0,d:false},{c:0,t:0,d:false},{c:0,t:0,d:false}],mat:[{c:0,t:0,d:false},{c:0,t:0,d:false},{c:0,t:0,d:false}]};
-let curSubj='geo',curIdx=0;
+// ── estado ──
+const subjKeys = ['geo','mat','his','por'];
+let scores = {
+  geo: [{c:0,t:0,d:false},{c:0,t:0,d:false},{c:0,t:0,d:false}],
+  mat: [{c:0,t:0,d:false},{c:0,t:0,d:false},{c:0,t:0,d:false}],
+  his: [{c:0,t:0,d:false},{c:0,t:0,d:false},{c:0,t:0,d:false}],
+  por: [{c:0,t:0,d:false},{c:0,t:0,d:false},{c:0,t:0,d:false},{c:0,t:0,d:false},{c:0,t:0,d:false}]
+};
+let curSubj='geo', curIdx=0, curActiveSubj='geo';
 
-function openMod(subj,idx){
-  curSubj=subj;curIdx=idx;
-  const m=data[subj][idx];
-  document.getElementById('painel-view').style.display='none';
-  document.getElementById('mod-view').style.display='block';
-  document.getElementById('breadcrumb').innerHTML=`<span>${subj==='geo'?'Geografia':'Matemática'}</span> › ${m.title}`;
-  document.getElementById('mod-hero').innerHTML=`<div class="mod-hero-subject">${subj==='geo'?'🌍 Geografia':'📐 Matemática'} · ${m.num}</div><div class="mod-hero-title">${m.title}</div><div class="mod-hero-sub">${m.sub}</div>`;
+const subjLabels = {geo:'🌍 Geografia', mat:'📐 Matemática', his:'📜 História', por:'📝 Português'};
+
+// ── navegação de matéria (header) ──
+function selectSubject(subj) {
+  curActiveSubj = subj;
+  document.querySelectorAll('.snav-btn').forEach(b => b.classList.remove('active'));
+  document.querySelector(`.snav-btn.${subj}`).classList.add('active');
+  document.querySelectorAll('.subject-panel').forEach(p => p.classList.remove('active'));
+  document.getElementById('panel-'+subj).classList.add('active');
+  // se estiver no módulo view, volta ao painel
+  if (document.getElementById('mod-view').style.display === 'block') {
+    backToPainel();
+  }
+}
+
+function openMod(subj, idx) {
+  curSubj = subj; curIdx = idx;
+  const m = data[subj][idx];
+  document.getElementById('painel-view').style.display = 'none';
+  document.getElementById('mod-view').style.display = 'block';
+  document.getElementById('breadcrumb').innerHTML =
+    `<span class="bc-subj" style="color:var(--${subj}-color)">${subjLabels[subj]}</span><span class="bc-sep">›</span>${m.title}`;
+  const hero = document.getElementById('mod-hero');
+  hero.className = `mod-hero ${subj}`;
+  hero.innerHTML = `<div class="mod-hero-subject ${subj}">${subjLabels[subj]} · ${m.num}</div><div class="mod-hero-title">${m.title}</div><div class="mod-hero-sub">${m.sub}</div>`;
   switchTab('resumo');
-  renderResumo();renderFlashcards();renderQuiz();
+  renderResumo(); renderFlashcards(); renderQuiz();
 }
 
-function backToPainel(){
-  document.getElementById('painel-view').style.display='block';
-  document.getElementById('mod-view').style.display='none';
-  document.getElementById('breadcrumb').innerHTML='';
+function backToPainel() {
+  document.getElementById('painel-view').style.display = 'block';
+  document.getElementById('mod-view').style.display = 'none';
+  document.getElementById('breadcrumb').innerHTML = '';
 }
 
-function switchTab(name){
-  document.querySelectorAll('.tab-btn').forEach((t,i)=>t.classList.toggle('active',['resumo','flashcards','quiz'][i]===name));
-  ['resumo','flashcards','quiz'].forEach(n=>document.getElementById('tab-'+n).classList.toggle('visible',n===name));
+function switchTab(name) {
+  document.querySelectorAll('.tab-btn').forEach((t,i) =>
+    t.classList.toggle('active', ['resumo','flashcards','quiz'][i] === name));
+  ['resumo','flashcards','quiz'].forEach(n =>
+    document.getElementById('tab-'+n).classList.toggle('visible', n === name));
 }
 
-function renderResumo(){
-  const m=data[curSubj][curIdx];
-  document.getElementById('tab-resumo').innerHTML=m.resumo.map(r=>`
-    <div class="resumo-block"><h3>${r.h}</h3><p>${r.p}</p></div>`).join('');
+function renderResumo() {
+  const m = data[curSubj][curIdx];
+  document.getElementById('tab-resumo').innerHTML =
+    m.resumo.map(r => `<div class="resumo-block"><h3>${r.h}</h3><p>${r.p}</p></div>`).join('');
 }
 
-function renderFlashcards(){
-  const m=data[curSubj][curIdx];
-  document.getElementById('tab-flashcards').innerHTML=`
+function renderFlashcards() {
+  const m = data[curSubj][curIdx];
+  document.getElementById('tab-flashcards').innerHTML = `
     <p class="fc-intro">Clique em cada card para revelar a resposta.</p>
-    <div class="fc-wrap">${m.flashcards.map((fc,j)=>`
+    <div class="fc-wrap">${m.flashcards.map((fc,j) => `
       <div class="fc" onclick="toggleFC(${j})" id="fc-${j}">
         <div class="fc-header">
           <div class="fc-q">${fc.q}</div>
@@ -398,63 +740,70 @@ function renderFlashcards(){
       </div>`).join('')}</div>`;
 }
 
-function toggleFC(j){document.getElementById('fc-'+j).classList.toggle('open')}
+function toggleFC(j) { document.getElementById('fc-'+j).classList.toggle('open'); }
 
-function renderQuiz(){
-  const m=data[curSubj][curIdx];
-  const sc=scores[curSubj][curIdx];
-  document.getElementById('tab-quiz').innerHTML=`
-    <div id="score-area-main" class="score-area${sc.d?' show':''}">
+function renderQuiz() {
+  const m = data[curSubj][curIdx];
+  const sc = scores[curSubj][curIdx];
+  document.getElementById('tab-quiz').innerHTML = `
+    <div class="quiz-header">
+      <span class="quiz-header-label">${m.quiz.length} questões</span>
+      <button class="quiz-reset-top" onclick="resetQuiz()">↺ Reiniciar quiz</button>
+    </div>
+    <div id="score-area-main" class="score-area${sc.d ? ' show' : ''}">
       <div class="score-big">${sc.c}/${m.quiz.length}</div>
       <div class="score-label">questões corretas</div>
-      <div class="score-msg">${scoreMsg(sc.c,m.quiz.length)}</div>
+      <div class="score-msg">${scoreMsg(sc.c, m.quiz.length)}</div>
       <button class="reset-btn" onclick="resetQuiz()">Tentar novamente</button>
     </div>
-    <div class="quiz-wrap">${m.quiz.map((q,j)=>`
+    <div class="quiz-wrap">${m.quiz.map((q,j) => `
       <div class="q-block" id="qb-${j}">
         <div class="q-num">Questão ${j+1}</div>
         <div class="q-text">${q.q}</div>
-        <div class="q-opts">${q.opts.map((o,k)=>`
+        <div class="q-opts">${q.opts.map((o,k) => `
           <button class="q-opt" onclick="answerQ(${j},${k})" id="qo-${j}-${k}">${o}</button>`).join('')}</div>
         <div class="q-feedback" id="qf-${j}"></div>
       </div>`).join('')}</div>`;
 }
 
-function scoreMsg(c,t){
-  const p=c/t;
-  if(p===1)return'🎉 Perfeito! Você acertou tudo!';
-  if(p>=0.8)return'🌟 Muito bem! Quase lá!';
-  if(p>=0.6)return'👍 Bom trabalho! Continue praticando.';
-  return'💪 Continue tentando — você está aprendendo!';
+function scoreMsg(c, t) {
+  const p = c/t;
+  if (p === 1) return '🎉 Perfeito! Você acertou tudo!';
+  if (p >= 0.8) return '🌟 Muito bem! Quase lá!';
+  if (p >= 0.6) return '👍 Bom trabalho! Continue praticando.';
+  return '💪 Continue tentando — você está aprendendo!';
 }
 
-function answerQ(qi,oi){
-  const m=data[curSubj][curIdx];
-  const q=m.quiz[qi];
-  for(let k=0;k<q.opts.length;k++){
-    const b=document.getElementById(`qo-${qi}-${k}`);
-    b.disabled=true;
-    if(k===q.c)b.classList.add('correct');
-    else if(k===oi&&oi!==q.c)b.classList.add('wrong');
+function answerQ(qi, oi) {
+  const m = data[curSubj][curIdx];
+  const q = m.quiz[qi];
+  for (let k = 0; k < q.opts.length; k++) {
+    const b = document.getElementById(`qo-${qi}-${k}`);
+    b.disabled = true;
+    if (k === q.c) b.classList.add('correct');
+    else if (k === oi && oi !== q.c) b.classList.add('wrong');
   }
-  const fb=document.getElementById(`qf-${qi}`);
-  const ok=oi===q.c;
-  fb.className=`q-feedback show ${ok?'ok':'err'}`;
-  fb.innerHTML=`<strong>${ok?'✅ Correto!':'❌ Resposta incorreta.'}</strong> ${q.feedback}`;
-  const sc=scores[curSubj][curIdx];
-  if(ok)sc.c++;
+  const fb = document.getElementById(`qf-${qi}`);
+  const ok = oi === q.c;
+  fb.className = `q-feedback show ${ok ? 'ok' : 'err'}`;
+  fb.innerHTML = `<strong>${ok ? '✅ Correto!' : '❌ Resposta incorreta.'}</strong> ${q.feedback}`;
+  const sc = scores[curSubj][curIdx];
+  if (ok) sc.c++;
   sc.t++;
-  if(sc.t===m.quiz.length){
-    sc.d=true;
-    const sa=document.getElementById('score-area-main');
-    sa.querySelector('.score-big').textContent=`${sc.c}/${m.quiz.length}`;
-    sa.querySelector('.score-msg').textContent=scoreMsg(sc.c,m.quiz.length);
+  if (sc.t === m.quiz.length) {
+    sc.d = true;
+    const sa = document.getElementById('score-area-main');
+    sa.querySelector('.score-big').textContent = `${sc.c}/${m.quiz.length}`;
+    sa.querySelector('.score-msg').textContent = scoreMsg(sc.c, m.quiz.length);
     sa.classList.add('show');
-    sa.scrollIntoView({behavior:'smooth',block:'nearest'});
+    sa.scrollIntoView({ behavior:'smooth', block:'nearest' });
   }
 }
 
-function resetQuiz(){scores[curSubj][curIdx]={c:0,t:0,d:false};renderQuiz()}
+function resetQuiz() {
+  scores[curSubj][curIdx] = {c:0, t:0, d:false};
+  renderQuiz();
+}
 </script>
 </body>
 </html>
