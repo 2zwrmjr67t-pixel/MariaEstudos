@@ -33,7 +33,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 
 /* ── HEADER ── */
 .app-header{background:var(--branco);border-bottom:1px solid var(--cinza-borda);position:sticky;top:0;z-index:100}
-.header-top{padding:12px 24px;display:flex;align-items:center;justify-content:space-between}
+.header-top{padding:10px 20px;display:flex;align-items:center;justify-content:space-between}
 .logo-area{display:flex;align-items:center;gap:10px}
 .logo-dot{width:32px;height:32px;border-radius:50%;background:var(--rosa);display:flex;align-items:center;justify-content:center;font-size:17px;color:#fff;flex-shrink:0}
 .app-title{font-size:16px;font-weight:700;color:var(--text-main)}
@@ -43,9 +43,9 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .breadcrumb .bc-sep{color:var(--cinza-borda)}
 
 /* ── SUBJECT TABS (header) ── */
-.subject-nav{display:flex;gap:0;padding:0 24px;overflow-x:auto;scrollbar-width:none}
+.subject-nav{display:flex;gap:0;padding:0 16px;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch}
 .subject-nav::-webkit-scrollbar{display:none}
-.snav-btn{display:flex;align-items:center;gap:5px;padding:9px 16px;font-size:13px;font-weight:500;cursor:pointer;border:none;background:none;color:var(--text-hint);border-bottom:2.5px solid transparent;margin-bottom:-1px;font-family:inherit;white-space:nowrap;transition:color .15s}
+.snav-btn{display:flex;align-items:center;gap:5px;padding:9px 14px;font-size:13px;font-weight:500;cursor:pointer;border:none;background:none;color:var(--text-hint);border-bottom:2.5px solid transparent;margin-bottom:-1px;font-family:inherit;white-space:nowrap;transition:color .15s;flex-shrink:0}
 .snav-btn.active{font-weight:700;border-bottom-color:currentColor}
 .snav-btn.geo{color:var(--geo-color)}
 .snav-btn.mat{color:var(--mat-color)}
@@ -54,9 +54,17 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .snav-btn.cie{color:var(--cie-color)}
 .snav-btn:not(.active){color:var(--text-hint)}
 .snav-btn:not(.active):hover{color:var(--text-sec)}
+@media(max-width:600px){
+  .header-top{padding:8px 14px}
+  .app-sub{display:none}
+  .breadcrumb{display:none}
+  .subject-nav{padding:0 4px}
+  .snav-btn{padding:8px 10px;font-size:12px;gap:3px}
+}
 
 /* ── CONTAINER ── */
 .container{max-width:860px;margin:0 auto;padding:20px 20px}
+@media(max-width:600px){.container{padding:14px 12px}}
 
 /* ── DICA ── */
 .dica-prof{background:var(--rosa-light);border:1px solid var(--cinza-borda);border-radius:12px;padding:12px 16px;margin-bottom:20px;display:flex;gap:10px;align-items:flex-start}
@@ -296,8 +304,8 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
     <button class="snav-btn his" onclick="selectSubject('his')">📜 História</button>
     <button class="snav-btn por" onclick="selectSubject('por')">📝 Português</button>
     <button class="snav-btn cie" onclick="selectSubject('cie')">🔬 Ciências</button>
-    <button class="snav-btn notas" onclick="selectNotas()">📊 Desempenho</button>
     <button class="snav-btn int" onclick="selectInt()">🧠 Interpretação</button>
+    <button class="snav-btn notas" onclick="selectNotas()">📊 Desempenho</button>
   </div>
 </div>
 
