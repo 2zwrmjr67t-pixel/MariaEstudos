@@ -213,6 +213,68 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .summary-label{color:var(--text-sec)}
 .summary-val{font-weight:700;color:var(--notas-color)}
 .notas-pending{background:#FFF3E0;border:1px solid #FFB74D;border-radius:10px;padding:10px 14px;font-size:12px;color:#E65100;margin-bottom:16px}
+
+/* ── INTERPRETAÇÃO ── */
+:root{--int-color:#6B21A8;--int-bg:#F5F3FF;--int-border:#A78BFA}
+.snav-btn.int{color:var(--int-color)}
+.int-view{display:none}
+.int-view.active{display:block}
+.int-hero{background:linear-gradient(135deg,#F5F3FF 0%,#EDE9FE 100%);border:1px solid var(--int-border);border-radius:14px;padding:18px 20px;margin-bottom:18px}
+.int-hero-title{font-size:20px;font-weight:700;color:var(--int-color);margin-bottom:3px}
+.int-hero-sub{font-size:13px;color:#7C3AED}
+.int-mode-tabs{display:flex;gap:8px;margin-bottom:20px}
+.int-mode-btn{flex:1;padding:11px 10px;border-radius:12px;border:2px solid var(--cinza-borda);background:var(--branco);cursor:pointer;font-family:inherit;font-size:13px;font-weight:600;color:var(--text-sec);transition:all .15s;text-align:center}
+.int-mode-btn.active{border-color:var(--int-color);background:var(--int-bg);color:var(--int-color)}
+.int-mode-btn:hover:not(.active){border-color:var(--int-border);color:var(--int-color)}
+.int-mode-desc{font-size:12px;font-weight:400;display:block;margin-top:3px;opacity:.8}
+.int-exercise{background:var(--branco);border:1.5px solid var(--cinza-borda);border-radius:14px;margin-bottom:14px;overflow:hidden}
+.int-ex-header{background:var(--int-bg);padding:12px 16px;display:flex;align-items:center;justify-content:space-between}
+.int-ex-label{font-size:11px;font-weight:700;color:var(--int-color);text-transform:uppercase;letter-spacing:.05em}
+.int-ex-badge{font-size:11px;padding:3px 10px;border-radius:20px;background:var(--branco);border:1px solid var(--int-border);color:var(--int-color);font-weight:600}
+.int-text-box{background:#FDFBFF;border-bottom:1px solid var(--cinza-borda);padding:14px 18px;font-size:14px;line-height:1.75;color:var(--text-main)}
+.int-text-box em{font-style:normal;background:#FEF9C3;padding:1px 3px;border-radius:3px}
+.int-pergunta-box{padding:14px 18px}
+.int-pergunta-label{font-size:11px;font-weight:700;color:var(--text-hint);text-transform:uppercase;letter-spacing:.04em;margin-bottom:8px}
+
+/* Modo Detetive */
+.det-question{font-size:14px;font-weight:600;color:var(--text-main);line-height:1.5;margin-bottom:14px;padding:12px 14px;background:var(--cinza-soft);border-radius:9px;border-left:3px solid var(--int-color)}
+.det-opts{display:flex;flex-direction:column;gap:7px;margin-bottom:12px}
+.det-opt{font-size:13px;padding:10px 14px;border-radius:9px;border:1px solid var(--cinza-borda);cursor:pointer;background:var(--cinza-soft);text-align:left;font-family:inherit;color:var(--text-main);transition:all .1s}
+.det-opt:hover:not(:disabled){border-color:var(--int-border);background:var(--int-bg)}
+.det-opt.correct{background:#E0F2FE;border-color:#0EA5E9;color:#0C4A6E;font-weight:500}
+.det-opt.wrong{background:var(--vermelho-bg);border-color:var(--vermelho-err);color:var(--vermelho-err)}
+.det-opt:disabled{cursor:default}
+.det-tip{font-size:12px;padding:10px 13px;border-radius:8px;margin-top:8px;line-height:1.6;display:none}
+.det-tip.show{display:block}
+.det-tip.ok{background:#E0F2FE;color:#0C4A6E;border:1px solid #BAE6FD}
+.det-tip.err{background:var(--vermelho-bg);color:var(--vermelho-err);border:1px solid #FCA5A5}
+
+/* Modo Prova */
+.prova-question{font-size:14px;font-weight:600;color:var(--text-main);line-height:1.5;margin-bottom:12px}
+.prova-keyword{background:#FEF9C3;padding:1px 4px;border-radius:3px;font-style:normal}
+.prova-opts{display:flex;flex-direction:column;gap:7px}
+.prova-opt{font-size:13px;padding:10px 14px;border-radius:9px;border:1px solid var(--cinza-borda);cursor:pointer;background:var(--cinza-soft);text-align:left;font-family:inherit;color:var(--text-main);transition:all .1s;display:flex;gap:8px;align-items:flex-start}
+.prova-opt:hover:not(:disabled){border-color:var(--int-border);background:var(--int-bg)}
+.prova-opt.correct{background:var(--verde-bg);border-color:var(--verde-ok);color:#085041;font-weight:500}
+.prova-opt.wrong{background:var(--vermelho-bg);border-color:var(--vermelho-err);color:var(--vermelho-err)}
+.prova-opt:disabled{cursor:default}
+.prova-opt-letter{flex-shrink:0;width:20px;height:20px;border-radius:50%;background:var(--cinza-borda);display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;margin-top:1px}
+.prova-feedback{display:none;margin-top:12px;padding:12px 14px;border-radius:9px;font-size:13px;line-height:1.65}
+.prova-feedback.show{display:block}
+.prova-feedback.ok{background:var(--verde-bg);color:#085041;border:1px solid #9FE1CB}
+.prova-feedback.err{background:var(--vermelho-bg);color:var(--vermelho-err);border:1px solid #FCA5A5}
+.int-progress{display:flex;align-items:center;gap:10px;margin-bottom:16px;padding:10px 16px;background:var(--branco);border:1px solid var(--cinza-borda);border-radius:10px}
+.int-progress-bar{flex:1;height:6px;background:var(--cinza-borda);border-radius:3px;overflow:hidden}
+.int-progress-fill{height:100%;background:var(--int-color);border-radius:3px;transition:width .3s}
+.int-progress-label{font-size:12px;color:var(--text-hint);white-space:nowrap}
+.int-reset{display:inline-flex;align-items:center;gap:5px;font-size:12px;padding:6px 14px;border-radius:8px;border:1px solid var(--cinza-borda);background:var(--branco);cursor:pointer;color:var(--text-sec);font-family:inherit;transition:all .15s;margin-left:auto}
+.int-reset:hover{border-color:var(--int-color);color:var(--int-color)}
+.int-result{background:var(--int-bg);border:1.5px solid var(--int-border);border-radius:14px;padding:22px;text-align:center;margin-bottom:16px;display:none}
+.int-result.show{display:block}
+.int-result-big{font-size:38px;font-weight:700;color:var(--int-color);line-height:1}
+.int-result-label{font-size:13px;color:#7C3AED;margin-top:4px}
+.int-result-msg{font-size:14px;color:var(--int-color);margin-top:8px;font-weight:500}
+.int-result-insight{font-size:13px;color:var(--text-sec);margin-top:10px;padding:10px 14px;background:var(--branco);border-radius:9px;text-align:left;line-height:1.6}
 </style>
 </head>
 <body>
@@ -235,6 +297,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
     <button class="snav-btn por" onclick="selectSubject('por')">📝 Português</button>
     <button class="snav-btn cie" onclick="selectSubject('cie')">🔬 Ciências</button>
     <button class="snav-btn notas" onclick="selectNotas()">📊 Desempenho</button>
+    <button class="snav-btn int" onclick="selectInt()">🧠 Interpretação</button>
   </div>
 </div>
 
@@ -400,6 +463,25 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
     </div>
 
   </div><!-- /painel-view -->
+
+  <!-- INTERPRETAÇÃO VIEW -->
+  <div class="int-view" id="int-view">
+    <div class="int-hero">
+      <div class="int-hero-title">🧠 Treino de Interpretação</div>
+      <div class="int-hero-sub">Leia com calma · Analise a pergunta · Marque a resposta</div>
+    </div>
+    <div class="int-mode-tabs">
+      <button class="int-mode-btn active" id="int-btn-det" onclick="setIntMode('det')">
+        🔍 Modo Detetive
+        <span class="int-mode-desc">O que a pergunta está pedindo?</span>
+      </button>
+      <button class="int-mode-btn" id="int-btn-prova" onclick="setIntMode('prova')">
+        📄 Modo Prova
+        <span class="int-mode-desc">Texto + questões estilo prova real</span>
+      </button>
+    </div>
+    <div id="int-content"></div>
+  </div>
 
   <!-- NOTAS VIEW -->
   <div class="notas-view" id="notas-view">
@@ -855,6 +937,7 @@ function selectSubject(subj) {
   document.querySelectorAll('.subject-panel').forEach(p => p.classList.remove('active'));
   document.getElementById('panel-'+subj).classList.add('active');
   document.getElementById('notas-view').classList.remove('active');
+  document.getElementById('int-view').classList.remove('active');
   document.getElementById('painel-view').style.display = 'block';
   // se estiver no módulo view, volta ao painel
   if (document.getElementById('mod-view').style.display === 'block') {
@@ -1064,6 +1147,434 @@ function notaCard(m, i) {
       ${n!==null?`<div style="font-size:10px;color:var(--text-hint)">/100</div>`:''}
     </div>
   </div>`;
+}
+
+function selectNotas() {
+  document.querySelectorAll('.snav-btn').forEach(b => b.classList.remove('active'));
+  document.querySelector('.snav-btn.notas').classList.add('active');
+  document.getElementById('painel-view').style.display = 'none';
+  document.getElementById('mod-view').style.display = 'none';
+  document.getElementById('notas-view').classList.add('active');
+  document.getElementById('int-view').classList.remove('active');
+  document.getElementById('breadcrumb').innerHTML = '<span style="color:var(--notas-color);font-weight:600">📊 Desempenho</span>';
+  renderNotas();
+}
+
+// ── INTERPRETAÇÃO ─────────────────────────────────────────────────────────────
+
+const intData = {
+  // MODO DETETIVE: treina identificar o que a pergunta pede ANTES de responder
+  det: [
+    {
+      tema: "Sistema Digestório",
+      texto: "O processo de digestão começa na boca, onde os dentes trituram o alimento e a saliva o umedece. O alimento passa a se chamar bolo alimentar. Depois, segue pelo esôfago até o estômago, onde fica por cerca de três horas em contato com o suco gástrico. Em seguida, vai para o intestino delgado, onde os nutrientes são absorvidos pelo sangue. O que não foi absorvido segue para o intestino grosso.",
+      pergunta: "Segundo o texto, o que NÃO acontece no estômago?",
+      tipo: "Palavra-chave: NÃO — a resposta certa é o que o estômago NÃO faz.",
+      opts: [
+        "O alimento fica por cerca de três horas",
+        "O alimento é misturado com o suco gástrico",
+        "Os nutrientes são absorvidos pelo sangue",
+        "Ocorre uma digestão mais intensa"
+      ],
+      correta: 2,
+      explicacao: "A absorção dos nutrientes acontece no intestino delgado, não no estômago. A palavra 'NÃO' na pergunta inverte tudo — a resposta certa é justamente o que o texto coloca em outro órgão. Sempre sublinhe NÃO, EXCETO e INCORRETO antes de ler as alternativas."
+    },
+    {
+      tema: "Transporte Urbano",
+      texto: "Os meios de transporte coletivo, como ônibus e metrô, conseguem transportar muitas pessoas ao mesmo tempo, reduzindo a quantidade de veículos nas ruas. Já o automóvel particular, apesar de oferecer flexibilidade, é um dos principais causadores de congestionamentos nos horários de pico, quando muitas pessoas se deslocam ao mesmo tempo.",
+      pergunta: "A pergunta pede a CAUSA dos congestionamentos. Qual alternativa responde corretamente?",
+      tipo: "Palavra-chave: CAUSA — o que gera o congestionamento, não o que ele provoca.",
+      opts: [
+        "Perda de tempo e estresse dos motoristas",
+        "Grande quantidade de automóveis nos horários de pico",
+        "Falta de ônibus e metrô nas cidades",
+        "Presença de pedestres nas vias"
+      ],
+      correta: 1,
+      explicacao: "A alternativa A descreve uma consequência (o que o congestionamento causa), não a causa. Causas e consequências são conceitos opostos — quando a pergunta pede causa, a resposta explica 'por quê acontece'. Quando pede consequência, explica 'o que gerou'."
+    },
+    {
+      tema: "Patrimônio Cultural",
+      texto: "O patrimônio cultural pode ser material ou imaterial. O patrimônio material inclui construções, monumentos e objetos físicos. Já o imaterial abrange tradições, danças, receitas e línguas — manifestações vivas que são transmitidas de geração em geração. O frevo, dança típica de Pernambuco, é um exemplo de patrimônio imaterial protegido pelo Iphan.",
+      pergunta: "De acordo com o texto, qual é a DIFERENÇA entre patrimônio material e imaterial?",
+      tipo: "Palavra-chave: DIFERENÇA — a resposta precisa contrastar os dois, não explicar só um.",
+      opts: [
+        "O material é mais importante que o imaterial",
+        "O imaterial só existe no Nordeste do Brasil",
+        "O material é composto por bens físicos; o imaterial por manifestações culturais vivas",
+        "O Iphan protege apenas o patrimônio material"
+      ],
+      correta: 2,
+      explicacao: "Quando a pergunta pede 'diferença', você precisa de uma alternativa que mencione os dois lados. A alternativa C contrasta bens físicos (material) com manifestações vivas (imaterial) — exatamente o que o texto distingue. As outras falam de apenas um lado ou inventam informações."
+    },
+    {
+      tema: "Recursos Naturais",
+      texto: "Recursos naturais renováveis são aqueles que a natureza é capaz de repor em um tempo razoável, como a água, o sol e o vento. Já os não renováveis, como o petróleo e o carvão mineral, levaram milhões de anos para se formar e não podem ser repostos em escala humana. Por isso, o uso consciente desses recursos é fundamental para as gerações futuras.",
+      pergunta: "Qual é a principal CARACTERÍSTICA que diferencia um recurso renovável de um não renovável, segundo o texto?",
+      tipo: "Palavra-chave: CARACTERÍSTICA — a resposta deve ser um atributo, não um exemplo.",
+      opts: [
+        "Os renováveis são mais caros de explorar",
+        "Os não renováveis causam mais poluição",
+        "Os renováveis podem ser repostos pela natureza; os não renováveis, não",
+        "Os renováveis incluem petróleo e carvão"
+      ],
+      correta: 2,
+      explicacao: "A pergunta pede a CARACTERÍSTICA — o atributo que define cada tipo. O texto deixa claro: renovável = a natureza repõe. Não renovável = não dá para repor. A alternativa C captura exatamente essa distinção. Exemplos (petróleo, água) não são características — são apenas casos de cada tipo."
+    },
+    {
+      tema: "Primeiras Civilizações",
+      texto: "Os primeiros grupos humanos eram nômades: mudavam de lugar constantemente em busca de alimentos, água e abrigo. Com o surgimento da agricultura e a domesticação de animais, as pessoas passaram a ter uma fonte estável de alimento e puderam se fixar em um lugar. Assim surgiram as primeiras comunidades sedentárias, com aldeias, casas permanentes e novas formas de organização social.",
+      pergunta: "Qual foi a CONSEQUÊNCIA do surgimento da agricultura para os grupos humanos?",
+      tipo: "Palavra-chave: CONSEQUÊNCIA — o que a agricultura provocou, não o que a causou.",
+      opts: [
+        "Os grupos passaram a ser mais nômades",
+        "A caça e a pesca desapareceram completamente",
+        "Os grupos puderam se fixar e formar comunidades sedentárias",
+        "Surgiram os recursos naturais não renováveis"
+      ],
+      correta: 2,
+      explicacao: "A consequência da agricultura foi permitir que as pessoas se fixassem — formando aldeias e comunidades sedentárias. Isso é o que o texto descreve como efeito. A alternativa A é o oposto do que aconteceu. A B inventa informação. A D não tem relação. CONSEQUÊNCIA = o que aconteceu depois, por causa de algo."
+    },
+    {
+      tema: "Escrita e Comunicação",
+      texto: "Antes da escrita, as pessoas dependiam da fala e de pinturas rupestres para se comunicar. Com o desenvolvimento das sociedades e do comércio, surgiu a necessidade de registrar informações de forma permanente. A escrita permitiu guardar leis, ensinamentos religiosos e registros históricos. Hoje, no ambiente digital, a escrita continua presente em sites, blogs e redes sociais.",
+      pergunta: "Segundo o texto, POR QUE a escrita surgiu?",
+      tipo: "Palavra-chave: POR QUE — a resposta deve indicar uma razão/motivo, não um resultado.",
+      opts: [
+        "Para substituir as pinturas rupestres por algo mais bonito",
+        "Porque as pessoas queriam se comunicar mais rapidamente",
+        "Por causa da necessidade de registrar informações de forma permanente com o desenvolvimento do comércio",
+        "Para criar o alfabeto fenício com 22 letras"
+      ],
+      correta: 2,
+      explicacao: "A pergunta 'por que' pede a motivação — o motivo que levou ao surgimento da escrita. O texto diz claramente: foi a necessidade de registrar informações com o desenvolvimento do comércio e das sociedades. A alternativa A confunde causa com estética. A B não está no texto. A D é uma consequência posterior, não a causa."
+    }
+  ],
+
+  // MODO PROVA: texto completo + questões estilo avaliação real
+  prova: [
+    {
+      tema: "Sistema Respiratório",
+      badge: "Ciências · 5º ano",
+      texto: `O sistema respiratório é responsável por captar o oxigênio do ar e eliminar o gás carbônico produzido pelo organismo. O ar entra pelo nariz, onde é aquecido, umedecido e filtrado. Em seguida, passa pela faringe e pela laringe — onde ficam as pregas vocais, responsáveis pela fala. Depois, segue pela traqueia, que se divide em dois brônquios, um para cada pulmão. Dentro dos pulmões, os brônquios se ramificam em bronquíolos, que terminam nos alvéolos. É nos alvéolos que ocorre a troca gasosa: o oxigênio passa para o sangue e o gás carbônico é eliminado do organismo. Esse processo acontece graças aos movimentos de inspiração (o ar entra) e expiração (o ar sai), controlados principalmente pelo diafragma e pelos músculos intercostais.`,
+      questoes: [
+        {
+          enunciado: "Qual é a função principal do sistema respiratório, segundo o texto?",
+          keyword: null,
+          opts: [
+            "Produzir o gás carbônico necessário ao organismo",
+            "Captar o oxigênio e eliminar o gás carbônico",
+            "Aquecer e filtrar o sangue nos pulmões",
+            "Controlar os movimentos do diafragma"
+          ],
+          correta: 1,
+          feedback: "✅ Correto! O texto começa explicando exatamente isso: captar oxigênio e eliminar gás carbônico. Em provas, a resposta para 'qual é a função principal' costuma estar na primeira frase do texto — é lá que o autor apresenta o conceito central.",
+          feedbackErro: "❌ Releia a primeira frase do texto — ela define a função principal do sistema. Em interpretação, a introdução do texto quase sempre responde 'o que é' ou 'para que serve'."
+        },
+        {
+          enunciado: "De acordo com o texto, onde ficam as pregas vocais?",
+          keyword: null,
+          opts: [
+            "Na traqueia",
+            "Nos alvéolos",
+            "Na laringe",
+            "No diafragma"
+          ],
+          correta: 2,
+          feedback: "✅ Correto! O texto diz: 'laringe — onde ficam as pregas vocais'. Esse tipo de pergunta testa se você leu com atenção os detalhes, não só a ideia geral. Vale reler o trecho específico antes de responder.",
+          feedbackErro: "❌ O texto menciona as pregas vocais em um trecho específico. Releia com calma: 'passa pela faringe e pela laringe — onde ficam as pregas vocais'. A resposta estava no detalhe."
+        },
+        {
+          enunciado: "O que acontece nos alvéolos, segundo o texto?",
+          keyword: null,
+          opts: [
+            "O ar é aquecido e filtrado",
+            "Os brônquios se dividem em bronquíolos",
+            "O diafragma controla a respiração",
+            "O oxigênio passa para o sangue e o gás carbônico é eliminado"
+          ],
+          correta: 3,
+          feedback: "✅ Correto! A troca gasosa acontece nos alvéolos — é o momento mais importante do processo respiratório. O texto descreve exatamente isso. Quando uma pergunta usa 'segundo o texto', a resposta está literalmente escrita — não precisa inventar nada.",
+          feedbackErro: "❌ O texto tem um trecho específico sobre os alvéolos: 'É nos alvéolos que ocorre a troca gasosa'. A resposta estava escrita — basta localizar o trecho que fala sobre o órgão mencionado na pergunta."
+        },
+        {
+          enunciado: "Qual NÃO é uma função descrita no texto para o nariz?",
+          keyword: "NÃO",
+          opts: [
+            "Aquecer o ar",
+            "Filtrar o ar",
+            "Realizar a troca gasosa",
+            "Umedecer o ar"
+          ],
+          correta: 2,
+          feedback: "✅ Correto! O nariz aquece, umedece e filtra o ar — mas a troca gasosa acontece nos alvéolos. A palavra NÃO inverte a lógica da questão: você precisa encontrar o que o nariz NÃO faz, não o que faz. Sempre destaque o NÃO antes de ler as alternativas.",
+          feedbackErro: "❌ A palavra NÃO é a chave da questão. O texto diz que o nariz aquece, umedece e filtra. A troca gasosa acontece nos alvéolos — então o nariz NÃO realiza troca gasosa. Sublinhe sempre o NÃO, EXCETO e INCORRETO nas perguntas."
+        }
+      ]
+    },
+    {
+      tema: "Nomadismo e Sedentarismo",
+      badge: "História · 5º ano",
+      texto: `Durante milhares de anos, os seres humanos viveram como nômades: grupos que se deslocavam constantemente em busca de alimentos, água e abrigo. Essa forma de vida dependia completamente da natureza — quando os recursos de uma região se esgotavam, o grupo se movia para outro lugar. Com o tempo, as pessoas descobriram que podiam cultivar plantas e domesticar animais. Essa mudança foi fundamental: ao garantir uma fonte estável de alimento, os grupos deixaram de precisar se deslocar o tempo todo. Passaram a se fixar em um lugar, construir habitações permanentes e organizar comunidades — dando origem ao que chamamos de vida sedentária. Com a fixação, surgiu outro fenômeno importante: a produção de excedentes. Quando um grupo produzia mais alimento do que precisava consumir, o excedente podia ser trocado com outros grupos. Essas trocas deram origem ao comércio.`,
+      questoes: [
+        {
+          enunciado: "Por que os grupos nômades se deslocavam constantemente?",
+          keyword: "Por que",
+          opts: [
+            "Para conhecer novas regiões e culturas",
+            "Porque preferiam não construir habitações",
+            "Em busca de alimentos, água e abrigo",
+            "Para escapar de grupos inimigos"
+          ],
+          correta: 2,
+          feedback: "✅ Correto! O texto diz claramente: 'grupos que se deslocavam constantemente em busca de alimentos, água e abrigo'. Perguntas com 'por que' pedem motivação — e o texto deu a resposta logo na primeira linha. Treine localizar a resposta no texto antes de escolher.",
+          feedbackErro: "❌ A pergunta pede o motivo do deslocamento. Releia o início do texto — ele explica exatamente por que os nômades se moviam. Alternativas que não estão no texto são armadilhas."
+        },
+        {
+          enunciado: "Qual foi a CAUSA que permitiu o surgimento das comunidades sedentárias?",
+          keyword: "CAUSA",
+          opts: [
+            "O esgotamento dos recursos naturais",
+            "A descoberta da agricultura e domesticação de animais",
+            "O surgimento do comércio entre grupos",
+            "A construção de habitações permanentes"
+          ],
+          correta: 1,
+          feedback: "✅ Correto! A causa foi a agricultura e domesticação de animais — isso gerou alimento estável, que eliminou a necessidade de se deslocar. O comércio e as habitações permanentes são consequências, não causas. CAUSA = o que veio antes e gerou o efeito.",
+          feedbackErro: "❌ CAUSA e CONSEQUÊNCIA são opostos. A causa é o que veio primeiro e gerou a mudança. O texto mostra a sequência: agricultura → alimento estável → fixação → comunidades sedentárias. O comércio e as habitações vieram depois — são consequências."
+        },
+        {
+          enunciado: "O que eram os 'excedentes', segundo o texto?",
+          keyword: null,
+          opts: [
+            "Os animais domesticados pelos grupos",
+            "As habitações construídas permanentemente",
+            "Os alimentos produzidos além do necessário para consumo",
+            "Os grupos que continuaram sendo nômades"
+          ],
+          correta: 2,
+          feedback: "✅ Correto! O texto define excedente com clareza: 'mais alimento do que precisava consumir'. Quando o texto define um termo, a alternativa correta costuma parafrasear essa definição — não inventa outra.",
+          feedbackErro: "❌ O texto define 'excedente' diretamente: 'quando um grupo produzia mais alimento do que precisava consumir'. Em interpretação, nunca invente o significado — sempre encontre a definição no texto."
+        },
+        {
+          enunciado: "Qual foi a CONSEQUÊNCIA direta da produção de excedentes, segundo o texto?",
+          keyword: "CONSEQUÊNCIA",
+          opts: [
+            "Os grupos voltaram a ser nômades",
+            "As pessoas pararam de domesticar animais",
+            "Surgiu o comércio através da troca de excedentes",
+            "Os grupos começaram a cultivar plantas"
+          ],
+          correta: 2,
+          feedback: "✅ Correto! O texto mostra a sequência: excedente → troca → comércio. CONSEQUÊNCIA é o que aconteceu depois, em resultado de algo. Cultivar plantas é a causa do excedente — não sua consequência. A sequência importa muito em perguntas de causa e efeito.",
+          feedbackErro: "❌ CONSEQUÊNCIA = o que aconteceu depois, por causa de algo. O texto mostra: excedentes → trocas → comércio. Cultivar plantas veio antes dos excedentes — é a causa, não a consequência. Atenção à ordem dos eventos no texto."
+        }
+      ]
+    },
+    {
+      tema: "Alimentação e Nutrientes",
+      badge: "Ciências · 5º ano",
+      texto: `Os alimentos que ingerimos fornecem ao nosso organismo substâncias chamadas nutrientes. Cada nutriente tem uma função específica: as proteínas constroem e reparam os tecidos do corpo; os carboidratos são a principal fonte de energia para as atividades do dia a dia; os lipídios (gorduras) também fornecem energia e participam da estrutura das células; as vitaminas e os minerais regulam o funcionamento do organismo e ajudam a proteger contra doenças. Uma alimentação equilibrada deve incluir todos esses grupos de nutrientes nas quantidades adequadas. Quando a alimentação é pobre em nutrientes essenciais, o organismo pode desenvolver a desnutrição. Quando há consumo excessivo de calorias, pode ocorrer a obesidade. Ambas as condições prejudicam a saúde e podem ser prevenidas com escolhas alimentares conscientes.`,
+      questoes: [
+        {
+          enunciado: "Segundo o texto, qual é a função dos carboidratos?",
+          keyword: null,
+          opts: [
+            "Construir e reparar os tecidos do corpo",
+            "Regular o funcionamento do organismo",
+            "Ser a principal fonte de energia",
+            "Participar da estrutura das células"
+          ],
+          correta: 2,
+          feedback: "✅ Correto! O texto é direto: 'os carboidratos são a principal fonte de energia para as atividades do dia a dia'. Quando a pergunta cita um nutriente específico, localize o trecho do texto que fala sobre ele — a resposta estará ali.",
+          feedbackErro: "❌ O texto lista a função de cada nutriente. Releia com calma o trecho sobre carboidratos: 'os carboidratos são a principal fonte de energia'. Construir tecidos é função das proteínas — é fácil confundir quando não se lê com atenção."
+        },
+        {
+          enunciado: "De acordo com o texto, o que DIFERENCIA desnutrição de obesidade?",
+          keyword: "DIFERENCIA",
+          opts: [
+            "A desnutrição afeta crianças; a obesidade afeta adultos",
+            "A desnutrição vem da falta de nutrientes; a obesidade do excesso de calorias",
+            "Ambas têm as mesmas causas, mas efeitos diferentes",
+            "A obesidade é causada pela falta de proteínas"
+          ],
+          correta: 1,
+          feedback: "✅ Correto! O texto diferencia claramente: 'alimentação pobre em nutrientes → desnutrição' e 'consumo excessivo de calorias → obesidade'. Perguntas sobre diferença exigem que a resposta mencione os dois lados — alternativas que falam só de um não respondem à pergunta.",
+          feedbackErro: "❌ A pergunta pede a diferença entre os dois — então a resposta deve mencionar ambos. Releia os dois últimos períodos do texto: cada um explica uma condição. A alternativa certa contrasta as causas de cada uma."
+        },
+        {
+          enunciado: "Qual alternativa apresenta uma informação que NÃO está no texto?",
+          keyword: "NÃO está no texto",
+          opts: [
+            "As proteínas constroem e reparam os tecidos",
+            "Os carboidratos são a principal fonte de energia",
+            "A melhor dieta é a que elimina completamente os lipídios",
+            "Vitaminas e minerais protegem contra doenças"
+          ],
+          correta: 2,
+          feedback: "✅ Correto! O texto nunca diz que se deve eliminar os lipídios — ao contrário, coloca-os como nutrientes necessários. Questões que pedem o que 'NÃO está no texto' testam se você inventou informação ou se leu com cuidado. Desconfie de alternativas com palavras absolutas como 'completamente', 'sempre', 'nunca'.",
+          feedbackErro: "❌ Essa questão pede o que NÃO está no texto. Releia cada alternativa e verifique se ela aparece no texto. A alternativa sobre 'eliminar completamente os lipídios' nunca foi mencionada — e contradiz o texto, que coloca os lipídios como nutrientes importantes."
+        }
+      ]
+    }
+  ]
+};
+
+let intMode = 'det';
+let detScores = { acertos: 0, total: 0, erros: [] };
+let provaIdx = 0;
+let provaScores = [];
+
+function setIntMode(mode) {
+  intMode = mode;
+  document.getElementById('int-btn-det').classList.toggle('active', mode === 'det');
+  document.getElementById('int-btn-prova').classList.toggle('active', mode === 'prova');
+  if (mode === 'det') renderDet();
+  else renderProva();
+}
+
+function selectInt() {
+  document.querySelectorAll('.snav-btn').forEach(b => b.classList.remove('active'));
+  document.querySelector('.snav-btn.int').classList.add('active');
+  document.getElementById('painel-view').style.display = 'none';
+  document.getElementById('mod-view').style.display = 'none';
+  document.getElementById('notas-view').classList.remove('active');
+  document.getElementById('int-view').classList.add('active');
+  document.getElementById('breadcrumb').innerHTML = '<span style="color:var(--int-color);font-weight:600">🧠 Interpretação</span>';
+  renderDet();
+}
+
+// ── MODO DETETIVE ──
+function renderDet() {
+  const ex = intData.det;
+  const total = ex.length;
+  const respondidos = detScores.total;
+  let html = `
+    <div class="int-progress">
+      <div class="int-progress-bar"><div class="int-progress-fill" style="width:${Math.round(respondidos/total*100)}%"></div></div>
+      <span class="int-progress-label">${respondidos}/${total} respondidas</span>
+      <button class="int-reset" onclick="resetDet()">↺ Reiniciar</button>
+    </div>`;
+
+  if (respondidos === total) {
+    const pct = Math.round(detScores.acertos / total * 100);
+    let msg = pct === 100 ? '🎉 Perfeito! Você identificou tudo!' : pct >= 70 ? '🌟 Muito bem! Continue treinando.' : '💪 Continue praticando — o padrão vem com o treino.';
+    let insight = '';
+    if (detScores.erros.length > 0) {
+      const tipos = detScores.erros.map(i => ex[i].tipo.split(':')[0]);
+      insight = `<div class="int-result-insight">📌 <strong>O que praticar mais:</strong> Você teve dificuldade com questões de ${[...new Set(tipos)].join(', ')}. Releia as explicações dos exercícios que errou — cada uma tem uma dica específica para esse tipo de pergunta.</div>`;
+    }
+    html += `<div class="int-result show"><div class="int-result-big">${detScores.acertos}/${total}</div><div class="int-result-label">identificações corretas</div><div class="int-result-msg">${msg}</div>${insight}</div>`;
+  }
+
+  html += ex.map((e, i) => `
+    <div class="int-exercise" id="det-ex-${i}">
+      <div class="int-ex-header">
+        <span class="int-ex-label">🔍 Exercício ${i+1}</span>
+        <span class="int-ex-badge">${e.tema}</span>
+      </div>
+      <div class="int-text-box">${e.texto}</div>
+      <div class="int-pergunta-box">
+        <div class="int-pergunta-label">O que esta pergunta está pedindo?</div>
+        <div class="det-question">❓ ${e.pergunta}</div>
+        <div style="font-size:12px;color:var(--text-hint);margin-bottom:10px;padding:6px 10px;background:var(--int-bg);border-radius:7px">💡 Dica: ${e.tipo}</div>
+        <div class="det-opts" id="det-opts-${i}">
+          ${e.opts.map((o, j) => `<button class="det-opt" onclick="answerDet(${i},${j})" id="det-o-${i}-${j}">${o}</button>`).join('')}
+        </div>
+        <div class="det-tip" id="det-tip-${i}"></div>
+      </div>
+    </div>`).join('');
+
+  document.getElementById('int-content').innerHTML = html;
+}
+
+function answerDet(ei, oi) {
+  const e = intData.det[ei];
+  const opts = document.querySelectorAll(`#det-opts-${ei} .det-opt`);
+  opts.forEach(b => b.disabled = true);
+  const ok = oi === e.correta;
+  opts[e.correta].classList.add('correct');
+  if (!ok) opts[oi].classList.add('wrong');
+  const tip = document.getElementById(`det-tip-${ei}`);
+  tip.className = `det-tip show ${ok ? 'ok' : 'err'}`;
+  tip.innerHTML = `<strong>${ok ? '✅ Correto!' : '❌ Não é bem isso.'}</strong> ${e.explicacao}`;
+  detScores.total++;
+  if (ok) detScores.acertos++;
+  else detScores.erros.push(ei);
+  if (detScores.total === intData.det.length) renderDet();
+}
+
+function resetDet() {
+  detScores = { acertos: 0, total: 0, erros: [] };
+  renderDet();
+}
+
+// ── MODO PROVA ──
+function renderProva() {
+  if (provaScores.length === 0) provaScores = intData.prova.map(p => ({ respondidas: 0, acertos: 0, total: p.questoes.length }));
+  const provas = intData.prova;
+  let html = '';
+
+  provas.forEach((prova, pi) => {
+    const sc = provaScores[pi];
+    const pct = sc.total > 0 ? Math.round(sc.respondidas / sc.total * 100) : 0;
+    html += `
+      <div class="int-exercise">
+        <div class="int-ex-header">
+          <span class="int-ex-label">📄 Texto ${pi + 1}</span>
+          <span class="int-ex-badge">${prova.badge}</span>
+        </div>
+        <div class="int-text-box">${prova.texto}</div>
+        <div class="int-pergunta-box">
+          <div class="int-progress" style="margin-bottom:12px">
+            <div class="int-progress-bar"><div class="int-progress-fill" style="width:${pct}%"></div></div>
+            <span class="int-progress-label">${sc.respondidas}/${sc.total} questões</span>
+            <button class="int-reset" onclick="resetProva(${pi})">↺</button>
+          </div>
+          ${prova.questoes.map((q, qi) => `
+            <div style="margin-bottom:18px" id="prova-q-${pi}-${qi}">
+              <div class="prova-question">
+                ${qi+1}. ${q.keyword ? q.enunciado.replace(q.keyword, `<em>${q.keyword}</em>`) : q.enunciado}
+              </div>
+              <div class="prova-opts" id="prova-opts-${pi}-${qi}">
+                ${q.opts.map((o,oi) => `
+                  <button class="prova-opt" onclick="answerProva(${pi},${qi},${oi})" id="prova-o-${pi}-${qi}-${oi}">
+                    <span class="prova-opt-letter">${['A','B','C','D'][oi]}</span>
+                    <span>${o}</span>
+                  </button>`).join('')}
+              </div>
+              <div class="prova-feedback" id="prova-fb-${pi}-${qi}"></div>
+            </div>`).join('')}
+        </div>
+      </div>`;
+  });
+
+  html += `<div style="text-align:center;margin-top:4px"><button class="int-reset" style="margin:0 auto" onclick="resetAllProva()">↺ Reiniciar todos os textos</button></div>`;
+  document.getElementById('int-content').innerHTML = html;
+}
+
+function answerProva(pi, qi, oi) {
+  const q = intData.prova[pi].questoes[qi];
+  const opts = document.querySelectorAll(`#prova-opts-${pi}-${qi} .prova-opt`);
+  opts.forEach(b => b.disabled = true);
+  const ok = oi === q.correta;
+  opts[q.correta].classList.add('correct');
+  if (!ok) opts[oi].classList.add('wrong');
+  const fb = document.getElementById(`prova-fb-${pi}-${qi}`);
+  fb.className = `prova-feedback show ${ok ? 'ok' : 'err'}`;
+  fb.innerHTML = ok ? q.feedback : q.feedbackErro;
+  provaScores[pi].respondidas++;
+  if (ok) provaScores[pi].acertos++;
+}
+
+function resetProva(pi) {
+  provaScores[pi] = { respondidas: 0, acertos: 0, total: intData.prova[pi].questoes.length };
+  renderProva();
+}
+
+function resetAllProva() {
+  provaScores = [];
+  renderProva();
 }
 
 function selectNotas() {
