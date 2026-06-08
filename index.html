@@ -180,6 +180,39 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .score-msg{font-size:14px;color:var(--rosa-dark);margin-top:6px;font-weight:500}
 .reset-btn{margin-top:12px;padding:9px 22px;font-size:13px;border-radius:9px;border:1.5px solid var(--cinza-borda);background:var(--branco);cursor:pointer;color:var(--text-sec);font-family:inherit;transition:border-color .15s,color .15s}
 .reset-btn:hover{border-color:var(--rosa);color:var(--rosa)}
+
+/* ── NOTAS PANEL ── */
+.snav-btn.notas{color:#5B2D8E}
+:root{--notas-color:#5B2D8E;--notas-bg:#F3E8FF;--notas-border:#C084FC}
+.notas-view{display:none}
+.notas-view.active{display:block}
+.notas-header{background:linear-gradient(135deg,#F3E8FF 0%,#EDE9FE 100%);border:1px solid var(--notas-border);border-radius:14px;padding:18px 20px;margin-bottom:20px}
+.notas-student{font-size:18px;font-weight:700;color:var(--notas-color);margin-bottom:2px}
+.notas-meta{font-size:12px;color:#7C3AED;opacity:.8}
+.notas-trimester-tabs{display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap}
+.tri-tab{padding:7px 16px;font-size:13px;border-radius:20px;border:1.5px solid var(--cinza-borda);cursor:pointer;background:var(--branco);color:var(--text-sec);font-family:inherit;font-weight:500;transition:all .15s}
+.tri-tab.active{background:var(--notas-color);border-color:var(--notas-color);color:#fff;font-weight:600}
+.tri-tab:hover:not(.active){border-color:var(--notas-color);color:var(--notas-color)}
+.notas-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:20px}
+@media(max-width:500px){.notas-grid{grid-template-columns:1fr}}
+.nota-card{background:var(--branco);border:1.5px solid var(--cinza-borda);border-radius:12px;padding:14px 16px;display:flex;align-items:center;justify-content:space-between;gap:10px}
+.nota-card.highlight{border-color:var(--notas-border);background:var(--notas-bg)}
+.nota-materia{font-size:13px;font-weight:600;color:var(--text-main)}
+.nota-sub{font-size:11px;color:var(--text-hint);margin-top:1px}
+.nota-valor{font-size:22px;font-weight:700;line-height:1}
+.nota-valor.excelente{color:#1D9E75}
+.nota-valor.bom{color:#2563EB}
+.nota-valor.atencao{color:#D97706}
+.nota-valor.vazio{color:var(--text-hint);font-size:14px;font-weight:400}
+.nota-faltas{font-size:10px;margin-top:3px;color:var(--text-hint)}
+.nota-faltas.tem{color:#C0392B}
+.notas-summary{background:var(--branco);border:1.5px solid var(--cinza-borda);border-radius:14px;padding:16px 20px;margin-bottom:16px}
+.notas-summary-title{font-size:13px;font-weight:700;color:var(--notas-color);margin-bottom:12px}
+.summary-row{display:flex;justify-content:space-between;align-items:center;padding:7px 0;border-bottom:1px solid var(--cinza-borda);font-size:13px}
+.summary-row:last-child{border-bottom:none}
+.summary-label{color:var(--text-sec)}
+.summary-val{font-weight:700;color:var(--notas-color)}
+.notas-pending{background:#FFF3E0;border:1px solid #FFB74D;border-radius:10px;padding:10px 14px;font-size:12px;color:#E65100;margin-bottom:16px}
 </style>
 </head>
 <body>
@@ -201,6 +234,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
     <button class="snav-btn his" onclick="selectSubject('his')">📜 História</button>
     <button class="snav-btn por" onclick="selectSubject('por')">📝 Português</button>
     <button class="snav-btn cie" onclick="selectSubject('cie')">🔬 Ciências</button>
+    <button class="snav-btn notas" onclick="selectNotas()">📊 Desempenho</button>
   </div>
 </div>
 
@@ -366,6 +400,20 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
     </div>
 
   </div><!-- /painel-view -->
+
+  <!-- NOTAS VIEW -->
+  <div class="notas-view" id="notas-view">
+    <div class="notas-header">
+      <div class="notas-student">Maria Valentina Marques da Silva</div>
+      <div class="notas-meta">Matrícula: 20200154 &nbsp;·&nbsp; 5ºA4/T &nbsp;·&nbsp; Colégio Espírito Santo &nbsp;·&nbsp; 2026</div>
+    </div>
+    <div class="notas-trimester-tabs">
+      <button class="tri-tab active" onclick="showTri(1)">1º Trimestre</button>
+      <button class="tri-tab" onclick="showTri(2)">2º Trimestre</button>
+      <button class="tri-tab" onclick="showTri(3)">3º Trimestre</button>
+    </div>
+    <div id="notas-tri-content"></div>
+  </div>
 
   <!-- MÓDULO VIEW -->
   <div class="mod-view" id="mod-view">
@@ -925,6 +973,113 @@ function answerQ(qi, oi) {
 function resetQuiz() {
   scores[curSubj][curIdx] = {c:0, t:0, d:false};
   renderQuiz();
+}
+
+// ── NOTAS ──
+const notasData = {
+  materias: [
+    {nome:'Língua Portuguesa', icon:'📝', tri:[80,null,null], faltas:[0,null,null], destaque:true},
+    {nome:'Matemática',        icon:'📐', tri:[85,null,null], faltas:[0,null,null], destaque:true},
+    {nome:'História',          icon:'📜', tri:[92,null,null], faltas:[0,null,null], destaque:true},
+    {nome:'Geografia',         icon:'🌍', tri:[85,null,null], faltas:[0,null,null], destaque:true},
+    {nome:'Ciências',          icon:'🔬', tri:[80,null,null], faltas:[0,null,null], destaque:true},
+    {nome:'Língua Inglesa',    icon:'🇬🇧', tri:[96,null,null], faltas:[1,null,null], destaque:false},
+    {nome:'Língua Espanhola',  icon:'🇪🇸', tri:[100,null,null],faltas:[0,null,null], destaque:false},
+    {nome:'Educação Física',   icon:'⚽', tri:[100,null,null], faltas:[1,null,null], destaque:false},
+    {nome:'Arte',              icon:'🎨', tri:[100,null,null], faltas:[0,null,null], destaque:false},
+    {nome:'Educação Musical',  icon:'🎵', tri:[100,null,null], faltas:[0,null,null], destaque:false},
+    {nome:'Ensino Religioso',  icon:'✝️', tri:[88,null,null],  faltas:[0,null,null], destaque:false},
+    {nome:'Filosofia',         icon:'💭', tri:[100,null,null], faltas:[0,null,null], destaque:false},
+  ]
+};
+let triAtivo = 1;
+
+function notaClass(n) {
+  if (n === null) return 'vazio';
+  if (n >= 90) return 'excelente';
+  if (n >= 80) return 'bom';
+  return 'atencao';
+}
+function notaDisplay(n) { return n === null ? '—' : n; }
+
+function showTri(t) {
+  triAtivo = t;
+  document.querySelectorAll('.tri-tab').forEach((b,i) => b.classList.toggle('active', i+1===t));
+  renderNotas();
+}
+
+function renderNotas() {
+  const i = triAtivo - 1;
+  const notas = notasData.materias;
+  const notasComValor = notas.filter(m => m.tri[i] !== null);
+  const media = notasComValor.length
+    ? (notasComValor.reduce((a,m) => a + m.tri[i], 0) / notasComValor.length).toFixed(1)
+    : null;
+  const totalFaltas = notasComValor.reduce((a,m) => a + (m.faltas[i] || 0), 0);
+  const pendentes = notas.filter(m => m.tri[i] === null).length;
+
+  let html = '';
+
+  if (pendentes > 0) {
+    html += `<div class="notas-pending">⏳ ${pendentes} matéria${pendentes>1?'s':''} ainda sem nota lançada para o ${triAtivo}º trimestre.</div>`;
+  }
+
+  if (media !== null) {
+    html += `<div class="notas-summary">
+      <div class="notas-summary-title">📈 Resumo — ${triAtivo}º Trimestre</div>
+      <div class="summary-row"><span class="summary-label">Média geral</span><span class="summary-val">${media}</span></div>
+      <div class="summary-row"><span class="summary-label">Maior nota</span><span class="summary-val">${Math.max(...notasComValor.map(m=>m.tri[i]))}</span></div>
+      <div class="summary-row"><span class="summary-label">Menor nota</span><span class="summary-val">${Math.min(...notasComValor.map(m=>m.tri[i]))}</span></div>
+      <div class="summary-row"><span class="summary-label">Total de faltas</span><span class="summary-val">${totalFaltas}</span></div>
+    </div>`;
+  }
+
+  // Matérias do app primeiro (destaques), depois as demais
+  const destacadas = notas.filter(m=>m.destaque);
+  const outras = notas.filter(m=>!m.destaque);
+
+  html += `<div style="font-size:12px;font-weight:700;color:var(--notas-color);text-transform:uppercase;letter-spacing:.04em;margin-bottom:8px">Matérias do App</div>`;
+  html += `<div class="notas-grid">` + destacadas.map(m => notaCard(m, i)).join('') + `</div>`;
+  html += `<div style="font-size:12px;font-weight:700;color:var(--text-hint);text-transform:uppercase;letter-spacing:.04em;margin-bottom:8px">Demais matérias</div>`;
+  html += `<div class="notas-grid">` + outras.map(m => notaCard(m, i)).join('') + `</div>`;
+
+  document.getElementById('notas-tri-content').innerHTML = html;
+}
+
+function notaCard(m, i) {
+  const n = m.tri[i];
+  const f = m.faltas[i];
+  const faltasHtml = f !== null
+    ? `<div class="nota-faltas${f>0?' tem':''}">🕐 ${f} falta${f!==1?'s':''}</div>`
+    : `<div class="nota-faltas">—</div>`;
+  return `<div class="nota-card${m.destaque?' highlight':''}">
+    <div>
+      <div class="nota-materia">${m.icon} ${m.nome}</div>
+      ${faltasHtml}
+    </div>
+    <div style="text-align:right">
+      <div class="nota-valor ${notaClass(n)}">${notaDisplay(n)}</div>
+      ${n!==null?`<div style="font-size:10px;color:var(--text-hint)">/100</div>`:''}
+    </div>
+  </div>`;
+}
+
+function selectNotas() {
+  document.querySelectorAll('.snav-btn').forEach(b => b.classList.remove('active'));
+  document.querySelector('.snav-btn.notas').classList.add('active');
+  document.getElementById('painel-view').style.display = 'none';
+  document.getElementById('mod-view').style.display = 'none';
+  document.getElementById('notas-view').classList.add('active');
+  document.getElementById('breadcrumb').innerHTML = '<span style="color:var(--notas-color);font-weight:600">📊 Desempenho</span>';
+  renderNotas();
+}
+
+// patch selectSubject to also hide notas
+const _origSelect = selectSubject;
+function selectSubject(subj) {
+  document.getElementById('notas-view').classList.remove('active');
+  document.getElementById('painel-view').style.display = 'block';
+  _origSelect(subj);
 }
 </script>
 </body>
