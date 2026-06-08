@@ -16,7 +16,19 @@
   --mat-bg:#FCE4F3;--mat-color:#B01068;--mat-border:#F48CBB;
   --his-bg:#FEF3E2;--his-color:#7A4A00;--his-border:#F5C97A;
   --por-bg:#EEF0FF;--por-color:#2D3A8C;--por-border:#9BA8E8;
+  --cie-bg:#E8F5E9;--cie-color:#1B5E20;--cie-border:#81C784;
 }
+
+/* ── DIAGRAMA SISTEMAS ── */
+.diagram-wrap{margin:16px 0 8px;border:1px solid var(--cinza-borda);border-radius:14px;overflow:hidden;background:#fff}
+.diagram-title{font-size:12px;font-weight:700;text-align:center;padding:10px;letter-spacing:.04em;text-transform:uppercase}
+.diagram-title.digestorio{background:#FFF3E0;color:#E65100}
+.diagram-title.respiratorio{background:#E3F2FD;color:#0D47A1}
+.diagram-svg{width:100%;display:block}
+.diagram-step{margin:0 12px 12px;padding:10px 12px;border-radius:9px;font-size:13px;line-height:1.55;color:var(--text-main);display:flex;gap:10px;align-items:flex-start}
+.diagram-step .step-num{flex-shrink:0;width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:#fff;margin-top:1px}
+.digestorio .step-num{background:#E65100}
+.respiratorio .step-num{background:#1565C0}
 body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:var(--page-bg);color:var(--text-main);min-height:100vh;padding:0}
 
 /* ── HEADER ── */
@@ -39,6 +51,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .snav-btn.mat{color:var(--mat-color)}
 .snav-btn.his{color:var(--his-color)}
 .snav-btn.por{color:var(--por-color)}
+.snav-btn.cie{color:var(--cie-color)}
 .snav-btn:not(.active){color:var(--text-hint)}
 .snav-btn:not(.active):hover{color:var(--text-sec)}
 
@@ -60,6 +73,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .panel-pill.mat{background:var(--mat-bg);color:var(--mat-color)}
 .panel-pill.his{background:var(--his-bg);color:var(--his-color)}
 .panel-pill.por{background:var(--por-bg);color:var(--por-color)}
+.panel-pill.cie{background:var(--cie-bg);color:var(--cie-color)}
 .panel-count{font-size:12px;color:var(--text-hint)}
 
 .mod-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px;margin-bottom:28px}
@@ -69,11 +83,13 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .mod-card.mat:hover{border-color:var(--mat-border)}
 .mod-card.his:hover{border-color:var(--his-border)}
 .mod-card.por:hover{border-color:var(--por-border)}
+.mod-card.cie:hover{border-color:var(--cie-border)}
 .mod-num{font-size:11px;font-weight:600;margin-bottom:4px;text-transform:uppercase;letter-spacing:.04em}
 .mod-num.geo{color:var(--geo-color)}
 .mod-num.mat{color:var(--mat-color)}
 .mod-num.his{color:var(--his-color)}
 .mod-num.por{color:var(--por-color)}
+.mod-num.cie{color:var(--cie-color)}
 .mod-title{font-size:14px;font-weight:600;color:var(--text-main);line-height:1.35;margin-bottom:10px}
 .mod-tags{display:flex;gap:4px;flex-wrap:wrap}
 .tag{font-size:10px;padding:3px 8px;border-radius:20px;font-weight:500}
@@ -81,6 +97,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .tag.mat{background:var(--mat-bg);color:var(--mat-color)}
 .tag.his{background:var(--his-bg);color:var(--his-color)}
 .tag.por{background:var(--por-bg);color:var(--por-color)}
+.tag.cie{background:var(--cie-bg);color:var(--cie-color)}
 .mod-done-badge{position:absolute;top:12px;right:12px;width:18px;height:18px;border-radius:50%;background:var(--verde-ok);display:flex;align-items:center;justify-content:center;font-size:10px;color:#fff;display:none}
 .mod-card.done .mod-done-badge{display:flex}
 
@@ -93,11 +110,13 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .mod-hero.mat{background:linear-gradient(135deg,var(--mat-bg) 0%,#FFF0FA 100%)}
 .mod-hero.his{background:linear-gradient(135deg,var(--his-bg) 0%,#FFFAF0 100%)}
 .mod-hero.por{background:linear-gradient(135deg,var(--por-bg) 0%,#F5F6FF 100%)}
+.mod-hero.cie{background:linear-gradient(135deg,var(--cie-bg) 0%,#F1F8E9 100%)}
 .mod-hero-subject{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.05em;margin-bottom:3px}
 .mod-hero-subject.geo{color:var(--geo-color)}
 .mod-hero-subject.mat{color:var(--mat-color)}
 .mod-hero-subject.his{color:var(--his-color)}
 .mod-hero-subject.por{color:var(--por-color)}
+.mod-hero-subject.cie{color:var(--cie-color)}
 .mod-hero-title{font-size:20px;font-weight:700;color:var(--text-main);margin-bottom:4px}
 .mod-hero-sub{font-size:13px;color:var(--text-sec)}
 
@@ -181,6 +200,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
     <button class="snav-btn mat" onclick="selectSubject('mat')">📐 Matemática</button>
     <button class="snav-btn his" onclick="selectSubject('his')">📜 História</button>
     <button class="snav-btn por" onclick="selectSubject('por')">📝 Português</button>
+    <button class="snav-btn cie" onclick="selectSubject('cie')">🔬 Ciências</button>
   </div>
 </div>
 
@@ -313,6 +333,34 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
           <div class="mod-num por">Módulo 10</div>
           <div class="mod-title">Imagem como texto, travessão e vírgula</div>
           <div class="mod-tags"><span class="tag por">infográfico</span><span class="tag por">pontuação</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CIE -->
+    <div id="panel-cie" class="subject-panel">
+      <div class="panel-label">
+        <span class="panel-pill cie">🔬 Ciências</span>
+        <span class="panel-count">3 módulos</span>
+      </div>
+      <div class="mod-grid">
+        <div class="mod-card cie" onclick="openMod('cie',0)">
+          <div class="mod-done-badge">✓</div>
+          <div class="mod-num cie">Módulo 3</div>
+          <div class="mod-title">Sistema Digestório e Respiratório</div>
+          <div class="mod-tags"><span class="tag cie">digestão</span><span class="tag cie">respiração</span></div>
+        </div>
+        <div class="mod-card cie" onclick="openMod('cie',1)">
+          <div class="mod-done-badge">✓</div>
+          <div class="mod-num cie">Módulo 4</div>
+          <div class="mod-title">Hábitos saudáveis e alimentação</div>
+          <div class="mod-tags"><span class="tag cie">saúde</span><span class="tag cie">nutrição</span></div>
+        </div>
+        <div class="mod-card cie" onclick="openMod('cie',2)">
+          <div class="mod-done-badge">✓</div>
+          <div class="mod-num cie">Módulo 5</div>
+          <div class="mod-title">Recursos naturais</div>
+          <div class="mod-tags"><span class="tag cie">meio ambiente</span><span class="tag cie">energia</span></div>
         </div>
       </div>
     </div>
@@ -662,20 +710,94 @@ const data = {
         {q:"Uma imagem pode comunicar uma ideia mesmo sem palavras?",opts:["Não, só o texto comunica","Sim, imagens são uma forma de linguagem","Apenas se tiver legenda","Somente em filmes"],c:1,feedback:"Imagens são linguagem! Uma foto, um ícone, um gráfico — todos comunicam ideias. O conceito de 'imagem como texto' reconhece que a leitura vai além das palavras escritas."}
       ]
     }
+  ],
+  cie: [
+    {
+      num:"Módulo 3", title:"Sistema Digestório e Respiratório", sub:"Origem dos alimentos e funcionamento dos sistemas",
+      resumo:[
+        {h:"Origem dos alimentos",p:"Os alimentos podem ter três origens: <strong>Vegetal</strong> (frutas, verduras, legumes e grãos — vêm das plantas), <strong>Animal</strong> (carne, leite e ovos — vêm dos animais) e <strong>Mineral</strong> (como o sal — vêm de minerais da natureza). Alguns são consumidos naturalmente; outros passam por transformações, como o pão (processado) ou os biscoitos (ultraprocessados)."},
+        {h:"Alimentos e nutrientes",p:"Os alimentos fornecem nutrientes essenciais: <strong>Proteínas</strong> — constroem e reparam os tecidos (carnes, ovos, leite). <strong>Carboidratos</strong> — principal fonte de energia (arroz, batata). <strong>Lipídios</strong> — fornecem energia e estrutura (óleos e gorduras). <strong>Vitaminas e minerais</strong> — regulam o organismo e protegem contra doenças (frutas e verduras)."},
+        {h:"🫁 Sistema Digestório — como funciona",p:'<div class="diagram-wrap"><div class="diagram-title digestorio">🫁 Sistema Digestório — 5 etapas</div><svg class="diagram-svg" viewBox="0 0 560 220" xmlns="http://www.w3.org/2000/svg"><defs><marker id="arr-d" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3 z" fill="#E65100"/></marker></defs><rect x="10" y="10" width="100" height="60" rx="10" fill="#FFF3E0" stroke="#E65100" stroke-width="1.5"/><text x="60" y="30" text-anchor="middle" font-size="11" font-weight="700" fill="#E65100">① Boca</text><text x="60" y="46" text-anchor="middle" font-size="9" fill="#5D4037">Dentes trituram</text><text x="60" y="58" text-anchor="middle" font-size="9" fill="#5D4037">Saliva umidece</text><line x1="110" y1="40" x2="148" y2="40" stroke="#E65100" stroke-width="1.5" marker-end="url(#arr-d)"/><rect x="150" y="10" width="100" height="60" rx="10" fill="#FFF3E0" stroke="#E65100" stroke-width="1.5"/><text x="200" y="30" text-anchor="middle" font-size="11" font-weight="700" fill="#E65100">② Faringe/Esôfago</text><text x="200" y="46" text-anchor="middle" font-size="9" fill="#5D4037">Bolo alimentar</text><text x="200" y="58" text-anchor="middle" font-size="9" fill="#5D4037">desce até estômago</text><line x1="250" y1="40" x2="288" y2="40" stroke="#E65100" stroke-width="1.5" marker-end="url(#arr-d)"/><rect x="290" y="10" width="100" height="60" rx="10" fill="#FFF3E0" stroke="#E65100" stroke-width="1.5"/><text x="340" y="30" text-anchor="middle" font-size="11" font-weight="700" fill="#E65100">③ Estômago</text><text x="340" y="46" text-anchor="middle" font-size="9" fill="#5D4037">Suco gástrico</text><text x="340" y="58" text-anchor="middle" font-size="9" fill="#5D4037">Digestão intensa (~3h)</text><line x1="390" y1="40" x2="428" y2="40" stroke="#E65100" stroke-width="1.5" marker-end="url(#arr-d)"/><rect x="430" y="10" width="120" height="60" rx="10" fill="#FFF3E0" stroke="#E65100" stroke-width="1.5"/><text x="490" y="26" text-anchor="middle" font-size="11" font-weight="700" fill="#E65100">④ Int. Delgado</text><text x="490" y="40" text-anchor="middle" font-size="9" fill="#5D4037">Pâncreas, fígado e bile</text><text x="490" y="52" text-anchor="middle" font-size="9" fill="#5D4037">Nutrientes → sangue</text><text x="490" y="64" text-anchor="middle" font-size="9" fill="#5D4037">Digestão concluída</text><line x1="490" y1="72" x2="490" y2="118" stroke="#E65100" stroke-width="1.5" marker-end="url(#arr-d)"/><rect x="370" y="120" width="240" height="60" rx="10" fill="#FFF8E1" stroke="#E65100" stroke-width="1.5"/><text x="490" y="140" text-anchor="middle" font-size="11" font-weight="700" fill="#E65100">⑤ Intestino Grosso</text><text x="490" y="156" text-anchor="middle" font-size="9" fill="#5D4037">Absorção de água e sais minerais</text><text x="490" y="168" text-anchor="middle" font-size="9" fill="#5D4037">Bolo fecal → ânus</text><rect x="10" y="120" width="340" height="90" rx="10" fill="#FBE9E7" stroke="#BF360C" stroke-width="1"/><text x="20" y="140" font-size="10" font-weight="700" fill="#BF360C">💡 Órgãos auxiliares:</text><text x="20" y="156" font-size="9" fill="#4E342E">• Pâncreas → suco pancreático + regula açúcar no sangue</text><text x="20" y="170" font-size="9" fill="#4E342E">• Fígado → produz bile (digere gorduras)</text><text x="20" y="184" font-size="9" fill="#4E342E">• Vesícula biliar → armazena e libera a bile no int. delgado</text><text x="20" y="198" font-size="9" fill="#4E342E">• Bolo alimentar → nome dado ao alimento após a mastigação</text></svg></div>'},
+        {h:"🌬️ Sistema Respiratório — como funciona",p:'<div class="diagram-wrap"><div class="diagram-title respiratorio">🌬️ Sistema Respiratório — 5 etapas</div><svg class="diagram-svg" viewBox="0 0 560 200" xmlns="http://www.w3.org/2000/svg"><defs><marker id="arr-r" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3 z" fill="#1565C0"/></marker></defs><rect x="10" y="10" width="95" height="65" rx="10" fill="#E3F2FD" stroke="#1565C0" stroke-width="1.5"/><text x="57" y="30" text-anchor="middle" font-size="11" font-weight="700" fill="#1565C0">① Nariz</text><text x="57" y="46" text-anchor="middle" font-size="9" fill="#1A237E">Ar aquecido,</text><text x="57" y="58" text-anchor="middle" font-size="9" fill="#1A237E">umedecido e filtrado</text><line x1="105" y1="42" x2="143" y2="42" stroke="#1565C0" stroke-width="1.5" marker-end="url(#arr-r)"/><rect x="145" y="10" width="105" height="65" rx="10" fill="#E3F2FD" stroke="#1565C0" stroke-width="1.5"/><text x="197" y="30" text-anchor="middle" font-size="11" font-weight="700" fill="#1565C0">② Faringe/Laringe</text><text x="197" y="46" text-anchor="middle" font-size="9" fill="#1A237E">Pregas vocais</text><text x="197" y="58" text-anchor="middle" font-size="9" fill="#1A237E">(responsáveis pela fala)</text><line x1="250" y1="42" x2="288" y2="42" stroke="#1565C0" stroke-width="1.5" marker-end="url(#arr-r)"/><rect x="290" y="10" width="100" height="65" rx="10" fill="#E3F2FD" stroke="#1565C0" stroke-width="1.5"/><text x="340" y="30" text-anchor="middle" font-size="11" font-weight="700" fill="#1565C0">③ Traqueia</text><text x="340" y="46" text-anchor="middle" font-size="9" fill="#1A237E">Divide-se em</text><text x="340" y="58" text-anchor="middle" font-size="9" fill="#1A237E">2 brônquios</text><line x1="390" y1="42" x2="428" y2="42" stroke="#1565C0" stroke-width="1.5" marker-end="url(#arr-r)"/><rect x="430" y="10" width="120" height="65" rx="10" fill="#E3F2FD" stroke="#1565C0" stroke-width="1.5"/><text x="490" y="30" text-anchor="middle" font-size="11" font-weight="700" fill="#1565C0">④ Pulmões</text><text x="490" y="46" text-anchor="middle" font-size="9" fill="#1A237E">Brônquios →</text><text x="490" y="58" text-anchor="middle" font-size="9" fill="#1A237E">bronquíolos</text><line x1="490" y1="75" x2="490" y2="108" stroke="#1565C0" stroke-width="1.5" marker-end="url(#arr-r)"/><rect x="310" y="110" width="240" height="65" rx="10" fill="#BBDEFB" stroke="#1565C0" stroke-width="1.5"/><text x="430" y="130" text-anchor="middle" font-size="11" font-weight="700" fill="#1565C0">⑤ Alvéolos — Troca Gasosa</text><text x="430" y="148" text-anchor="middle" font-size="9" fill="#1A237E">O₂ (oxigênio) → vai para o sangue</text><text x="430" y="162" text-anchor="middle" font-size="9" fill="#1A237E">CO₂ (gás carbônico) → eliminado</text><rect x="10" y="110" width="290" height="65" rx="10" fill="#E8EAF6" stroke="#3949AB" stroke-width="1"/><text x="20" y="130" font-size="10" font-weight="700" fill="#283593">💡 Inspiração e Expiração:</text><text x="20" y="146" font-size="9" fill="#1A237E">• Inspiração: músculos contraem → caixa torácica aumenta → ar entra</text><text x="20" y="160" font-size="9" fill="#1A237E">• Expiração: músculos relaxam → caixa torácica diminui → ar sai</text><text x="20" y="174" font-size="9" fill="#1A237E">• Diafragma e músculos intercostais controlam esse movimento</text></svg></div>'}
+      ],
+      flashcards:[
+        {q:"Quais são as três origens possíveis dos alimentos?",a:"Vegetal (plantas), Animal (animais) e Mineral (como o sal).",ctx:"Dica: pense em cada alimento que você come e tente classificar. Arroz? Vegetal. Ovo? Animal. Sal? Mineral. Em prova, podem mostrar uma imagem e pedir a origem."},
+        {q:"O que é o 'bolo alimentar'?",a:"O nome dado ao alimento depois que ele é triturado pelos dentes e misturado com a saliva na boca.",ctx:"Bolo alimentar = alimento mastigado e umedecido. Só recebe esse nome depois da mastigação. Antes, é apenas o alimento. Essa distinção cai bastante em prova!"},
+        {q:"Qual a função do pâncreas e do fígado na digestão?",a:"Pâncreas → produz suco pancreático e regula o açúcar no sangue. Fígado → produz bile, que auxilia na digestão das gorduras.",ctx:"Os dois agem no intestino delgado, não no estômago. A bile é guardada na vesícula biliar antes de ser liberada. São órgãos auxiliares — importantes mas não fazem a digestão sozinhos."},
+        {q:"O que acontece nos alvéolos?",a:"A troca gasosa: o oxigênio (O₂) passa do ar para o sangue e o gás carbônico (CO₂) é eliminado do sangue para fora.",ctx:"Alvéolo = bolsinha de ar no fundo do pulmão. É lá que o sangue 'troca' o gás ruim (CO₂) pelo bom (O₂). Essa é a função mais importante do sistema respiratório!"},
+        {q:"Qual a diferença entre inspiração e expiração?",a:"Inspiração: músculos contraem, caixa torácica aumenta, ar entra. Expiração: músculos relaxam, caixa torácica diminui, ar sai.",ctx:"Dica: 'Inspirar' = receber. 'Expirar' = liberar. Os músculos que controlam isso são o diafragma (separa tórax do abdômen) e os intercostais (entre as costelas)."},
+        {q:"Onde ocorre a digestão mais intensa e quanto tempo dura?",a:"No estômago, onde o bolo alimentar fica cerca de 3 horas misturado com o suco gástrico.",ctx:"O estômago produz o próprio suco gástrico — um líquido digestivo que quebra ainda mais os alimentos. Depois de 3 horas, o alimento segue para o intestino delgado."}
+      ],
+      quiz:[
+        {q:"Qual é o nome dado ao alimento após ser mastigado e misturado com a saliva?",opts:["Suco gástrico","Bolo alimentar","Bolo fecal","Bile"],c:1,feedback:"Bolo alimentar = alimento mastigado + saliva. O bolo fecal é o que sobra no final, no intestino grosso, e vira fezes. Não confunda os dois 'bolos'!"},
+        {q:"Onde ocorre a absorção dos nutrientes pelo sangue?",opts:["Estômago","Boca","Intestino delgado","Intestino grosso"],c:2,feedback:"No intestino delgado a digestão é concluída e os nutrientes passam para o sangue. O intestino grosso absorve apenas água e sais minerais — a absorção principal é no delgado."},
+        {q:"Qual órgão produz a bile, que ajuda a digerir as gorduras?",opts:["Pâncreas","Estômago","Vesícula biliar","Fígado"],c:3,feedback:"O fígado produz a bile. A vesícula biliar armazena a bile e a libera quando necessário. O pâncreas produz o suco pancreático — são funções diferentes!"},
+        {q:"O que acontece durante a expiração?",opts:["Os pulmões se enchem de ar","Os músculos se contraem e a caixa torácica aumenta","Os músculos relaxam e o ar sai dos pulmões","O oxigênio vai para o sangue"],c:2,feedback:"Expiração = ar saindo. Para isso, os músculos relaxam e a caixa torácica diminui, espremendo os pulmões. O oposto acontece na inspiração."},
+        {q:"Qual estrutura do sistema respiratório é responsável pela fala?",opts:["Alvéolos","Brônquios","Pregas vocais (laringe)","Traqueia"],c:2,feedback:"As pregas vocais ficam na laringe e vibram quando o ar passa, produzindo sons — e portanto a fala. Os alvéolos fazem a troca gasosa, os brônquios conduzem o ar."}
+      ]
+    },
+    {
+      num:"Módulo 4", title:"Hábitos saudáveis e alimentação equilibrada", sub:"Saúde, nutrição e estilo de vida",
+      resumo:[
+        {h:"Importância da alimentação saudável",p:"Uma alimentação equilibrada é essencial para manter a saúde. A dieta deve ser variada, incluir todos os grupos alimentares e dar preferência a alimentos obtidos diretamente da natureza — evitando produtos ultraprocessados."},
+        {h:"Hábitos que contribuem para a saúde",p:"<strong>Atividade física</strong> — reduz chances de problemas cardiovasculares e obesidade. <strong>Alimentação equilibrada</strong> — melhora imunidade e previne obesidade e desnutrição. <strong>Alimentos naturais</strong> — consumidos sem alterações. <strong>Hidratação</strong> — preferir água a refrigerantes e sucos adoçados. <strong>Sono de qualidade</strong> — fundamental para o equilíbrio físico, mental e emocional."},
+        {h:"Obesidade e desnutrição",p:"A <strong>obesidade</strong> resulta do consumo excessivo de calorias. A <strong>desnutrição</strong> resulta da falta de nutrientes essenciais. Ambas podem ser prevenidas com uma dieta equilibrada."},
+        {h:"Restrições e intolerâncias alimentares",p:"Algumas pessoas têm alergias ou intolerâncias, como a <strong>intolerância à lactose</strong> — o organismo reage negativamente à ingestão do alimento. Nesse caso, é possível usar alternativas adequadas, como leite ou derivados sem lactose."}
+      ],
+      flashcards:[
+        {q:"O que é uma alimentação equilibrada?",a:"Uma dieta variada que fornece todos os nutrientes necessários, com preferência por alimentos naturais e menos ultraprocessados.",ctx:"'Equilibrada' não significa comer pouco — significa comer alimentos dos diferentes grupos (proteínas, carboidratos, gorduras, vitaminas e minerais) nas quantidades certas."},
+        {q:"Cite três hábitos saudáveis além da alimentação.",a:"Atividade física regular, sono de qualidade e hidratação adequada (preferir água).",ctx:"Saúde = corpo + mente. Dormir bem e tomar água são hábitos que muita gente esquece, mas que fazem tanta diferença quanto a alimentação."},
+        {q:"Qual a diferença entre obesidade e desnutrição?",a:"Obesidade: excesso de calorias. Desnutrição: falta de nutrientes essenciais.",ctx:"Os dois são problemas de alimentação, mas opostos. Um é excesso, o outro é falta. Ambos prejudicam a saúde e podem ser prevenidos com uma dieta equilibrada."},
+        {q:"O que é intolerância à lactose?",a:"Condição em que o organismo reage negativamente à lactose (açúcar do leite), causando desconforto digestivo.",ctx:"Intolerância ≠ alergia. Na intolerância, o corpo não consegue digerir bem um componente do alimento. Na alergia, o sistema imune ataca o alimento como se fosse um inimigo."},
+        {q:"Por que é importante dar preferência a alimentos naturais?",a:"Porque são obtidos diretamente da natureza, sem alterações, conservando melhor seus nutrientes e evitando aditivos prejudiciais.",ctx:"Ultraprocessados têm aditivos, conservantes e muito sódio/açúcar. Quanto mais etapas de processamento, menos natural e nutritivo tende a ser o alimento."}
+      ],
+      quiz:[
+        {q:"O que caracteriza um alimento ultraprocessado?",opts:["Vem diretamente da natureza, sem alterações","Passa por muitas etapas de processamento industrial","É sempre de origem animal","Não contém carboidratos"],c:1,feedback:"Ultraprocessados passam por múltiplas etapas industriais e costumam ter muitos aditivos, sódio, açúcar e gorduras. Biscoitos recheados e refrigerantes são exemplos clássicos."},
+        {q:"Qual hábito ajuda a reduzir o risco de doenças cardiovasculares?",opts:["Consumir ultraprocessados","Dormir menos de 5 horas","Praticar atividade física regularmente","Beber refrigerantes no lugar de água"],c:2,feedback:"A atividade física fortalece o coração e os vasos sanguíneos, reduzindo o risco de doenças cardiovasculares. É um dos hábitos mais importantes para a saúde."},
+        {q:"A desnutrição é causada principalmente por:",opts:["Excesso de calorias","Falta de nutrientes essenciais","Consumo excessivo de proteínas","Muito açúcar na dieta"],c:1,feedback:"Desnutrição = falta de nutrientes. Pode ocorrer mesmo em pessoas que comem quantidade suficiente, se a qualidade da alimentação for ruim (sem vitaminas, minerais, proteínas)."},
+        {q:"Uma pessoa com intolerância à lactose deve evitar:",opts:["Frutas e verduras","Arroz e feijão","Leite e derivados com lactose","Carnes e ovos"],c:2,feedback:"A lactose é o açúcar presente no leite. Quem tem intolerância não consegue digeri-la bem. A solução é consumir versões sem lactose ou substituir por outras fontes de cálcio."},
+        {q:"O que é fundamental para o equilíbrio físico, mental e emocional?",opts:["Comer apenas proteínas","Ter um sono de boa qualidade","Evitar toda atividade física","Consumir sucos adoçados"],c:1,feedback:"O sono é quando o corpo se recupera, consolida memórias e regula emoções. Dormir mal prejudica tudo — concentração, humor, imunidade e desempenho físico."}
+      ]
+    },
+    {
+      num:"Módulo 5", title:"Recursos naturais", sub:"Renováveis, não renováveis e consumo consciente",
+      resumo:[
+        {h:"O que são recursos naturais",p:"Recursos naturais são elementos da natureza que utilizamos para viver, como água, solo, ar, plantas e minerais. Sem eles, não seria possível produzir alimentos, roupas, energia ou moradias."},
+        {h:"Recursos renováveis",p:"São recursos que a natureza repõe e não acabam (quando usados com cuidado): <strong>Água</strong> — para beber, cozinhar, higiene. <strong>Sol</strong> — gera energia solar. <strong>Vento</strong> — gera energia eólica e move embarcações. <strong>Plantas e florestas</strong> — alimentos, madeira, ar limpo. <strong>Animais</strong> — equilíbrio do meio ambiente."},
+        {h:"Recursos não renováveis",p:"Levam milhões de anos para se formar e podem acabar: <strong>Petróleo</strong> — combustíveis, plásticos. <strong>Carvão mineral</strong> — gera energia em usinas e indústrias. <strong>Gás natural</strong> — cozinha, aquecimento e geração de energia. <strong>Minérios</strong> (ouro, ferro, cobre) — objetos, máquinas e eletrônicos. <strong>Rochas</strong> — construção."},
+        {h:"Impactos ambientais e energia limpa",p:"O uso excessivo dos recursos causa impactos: desmatamento, poluição da água e do ar, perda da biodiversidade e mudanças climáticas. Gases tóxicos (monóxido de carbono, dióxido de enxofre) prejudicam a saúde. A <strong>energia limpa</strong> usa fontes renováveis: solar, eólica e hidrelétrica — com menor impacto ambiental."},
+        {h:"Consumo consciente",p:"Significa usar os recursos de forma responsável: evitar desperdícios, reutilizar materiais, reciclar resíduos e economizar água e energia. Essas atitudes preservam o planeta para as futuras gerações."}
+      ],
+      flashcards:[
+        {q:"Qual a diferença entre recursos renováveis e não renováveis?",a:"Renováveis: a natureza repõe (água, sol, vento, plantas). Não renováveis: levam milhões de anos para se formar e podem acabar (petróleo, carvão, minérios).",ctx:"Dica: pense no tempo de renovação. O sol aparece todo dia = renovável. O petróleo levou 300 milhões de anos para se formar = não renovável. Tempo de reposição é a chave!"},
+        {q:"Cite três recursos não renováveis e seus usos.",a:"Petróleo (combustíveis e plásticos), carvão mineral (energia em usinas) e gás natural (cozinhar e aquecer).",ctx:"Os três vêm do subsolo e foram formados por matéria orgânica ao longo de milhões de anos. Por isso são chamados de combustíveis fósseis."},
+        {q:"O que é energia limpa? Cite exemplos.",a:"Energia produzida com menor impacto ambiental, usando fontes renováveis: solar, eólica (vento) e hidrelétrica (água).",ctx:"'Limpa' não significa perfeito — hidrelétricas, por exemplo, alagam áreas enormes. Mas comparadas ao petróleo e carvão, poluem muito menos."},
+        {q:"Quais são os principais impactos do uso excessivo dos recursos naturais?",a:"Desmatamento, poluição da água e do ar, perda da biodiversidade e mudanças climáticas.",ctx:"Cada impacto tem uma causa específica: desmatamento → pecuária e agricultura. Poluição do ar → indústrias e veículos. Mudanças climáticas → acúmulo de gases estufa. Entender as causas ajuda a responder questões de interpretação."},
+        {q:"O que é consumo consciente? Cite três atitudes.",a:"Usar os recursos com responsabilidade: evitar desperdícios, reutilizar materiais e reciclar resíduos.",ctx:"Reutilizar = usar de novo sem transformar. Reciclar = transformar em outro produto. Economizar = usar menos. As três atitudes reduzem o impacto no meio ambiente."}
+      ],
+      quiz:[
+        {q:"Qual dos itens abaixo é um recurso NÃO renovável?",opts:["Água","Vento","Petróleo","Sol"],c:2,feedback:"O petróleo levou milhões de anos para se formar — não é possível repor em tempo humano. Água, vento e sol se renovam naturalmente. Atenção ao 'NÃO' na questão!"},
+        {q:"A energia eólica é gerada por:",opts:["Água de rios","A luz do sol","O vento","O calor do interior da Terra"],c:2,feedback:"Eólica vem de 'Éolo', deus do vento na mitologia grega. Turbinas eólicas convertem o movimento do vento em eletricidade. É uma das formas mais limpas de energia."},
+        {q:"O que é considerado consumo consciente?",opts:["Comprar o máximo possível de produtos","Usar recursos sem se preocupar com o desperdício","Reutilizar materiais e economizar água e energia","Desligar aparelhos apenas quando quebram"],c:2,feedback:"Consumo consciente = usar com responsabilidade. Reutilizar, reciclar e economizar são as três principais atitudes. O objetivo é preservar os recursos para as próximas gerações."},
+        {q:"Qual impacto ambiental está diretamente relacionado ao desmatamento?",opts:["Aumento da biodiversidade","Perda de habitats e da biodiversidade","Melhora na qualidade do ar","Aumento das chuvas"],c:1,feedback:"Quando florestas são derrubadas, os animais e plantas que vivem nelas perdem seu habitat. Sem habitat, as espécies podem se extinguir — daí a perda de biodiversidade."},
+        {q:"Qual é a principal característica da energia limpa?",opts:["É mais cara que as outras fontes","Usa fontes não renováveis","Produz maior quantidade de gases tóxicos","Causa menor impacto ambiental"],c:3,feedback:"Energia limpa = menor impacto ambiental. Usa fontes renováveis (sol, vento, água) que não se esgotam e poluem menos do que combustíveis fósseis como petróleo e carvão."}
+      ]
+    }
   ]
 };
 
 // ── estado ──
-const subjKeys = ['geo','mat','his','por'];
+const subjKeys = ['geo','mat','his','por','cie'];
 let scores = {
   geo: [{c:0,t:0,d:false},{c:0,t:0,d:false},{c:0,t:0,d:false}],
   mat: [{c:0,t:0,d:false},{c:0,t:0,d:false},{c:0,t:0,d:false}],
   his: [{c:0,t:0,d:false},{c:0,t:0,d:false},{c:0,t:0,d:false}],
-  por: [{c:0,t:0,d:false},{c:0,t:0,d:false},{c:0,t:0,d:false},{c:0,t:0,d:false},{c:0,t:0,d:false}]
+  por: [{c:0,t:0,d:false},{c:0,t:0,d:false},{c:0,t:0,d:false},{c:0,t:0,d:false},{c:0,t:0,d:false}],
+  cie: [{c:0,t:0,d:false},{c:0,t:0,d:false},{c:0,t:0,d:false}]
 };
 let curSubj='geo', curIdx=0, curActiveSubj='geo';
 
-const subjLabels = {geo:'🌍 Geografia', mat:'📐 Matemática', his:'📜 História', por:'📝 Português'};
+const subjLabels = {geo:'🌍 Geografia', mat:'📐 Matemática', his:'📜 História', por:'📝 Português', cie:'🔬 Ciências'};
 
 // ── navegação de matéria (header) ──
 function selectSubject(subj) {
