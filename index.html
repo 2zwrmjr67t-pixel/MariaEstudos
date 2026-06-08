@@ -854,6 +854,8 @@ function selectSubject(subj) {
   document.querySelector(`.snav-btn.${subj}`).classList.add('active');
   document.querySelectorAll('.subject-panel').forEach(p => p.classList.remove('active'));
   document.getElementById('panel-'+subj).classList.add('active');
+  document.getElementById('notas-view').classList.remove('active');
+  document.getElementById('painel-view').style.display = 'block';
   // se estiver no módulo view, volta ao painel
   if (document.getElementById('mod-view').style.display === 'block') {
     backToPainel();
@@ -1072,14 +1074,6 @@ function selectNotas() {
   document.getElementById('notas-view').classList.add('active');
   document.getElementById('breadcrumb').innerHTML = '<span style="color:var(--notas-color);font-weight:600">📊 Desempenho</span>';
   renderNotas();
-}
-
-// patch selectSubject to also hide notas
-const _origSelect = selectSubject;
-function selectSubject(subj) {
-  document.getElementById('notas-view').classList.remove('active');
-  document.getElementById('painel-view').style.display = 'block';
-  _origSelect(subj);
 }
 </script>
 </body>
