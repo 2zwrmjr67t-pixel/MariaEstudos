@@ -17,6 +17,7 @@
   --his-bg:#FEF3E2;--his-color:#7A4A00;--his-border:#F5C97A;
   --por-bg:#EEF0FF;--por-color:#2D3A8C;--por-border:#9BA8E8;
   --cie-bg:#E8F5E9;--cie-color:#1B5E20;--cie-border:#81C784;
+  --ing-bg:#E0F2FE;--ing-color:#075985;--ing-border:#7DD3FC;
 }
 
 /* ── DIAGRAMA SISTEMAS ── */
@@ -52,6 +53,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .snav-btn.his{color:var(--his-color)}
 .snav-btn.por{color:var(--por-color)}
 .snav-btn.cie{color:var(--cie-color)}
+.snav-btn.ing{color:var(--ing-color)}
 .snav-btn:not(.active){color:var(--text-hint)}
 .snav-btn:not(.active):hover{color:var(--text-sec)}
 @media(max-width:600px){
@@ -60,6 +62,8 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
   .breadcrumb{display:none}
   .subject-nav{padding:0 4px}
   .snav-btn{padding:8px 10px;font-size:12px;gap:3px}
+  .int-mode-tabs{flex-direction:column}
+  .int-mode-btn{font-size:12px;padding:9px 12px}
 }
 
 /* ── CONTAINER ── */
@@ -82,6 +86,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .panel-pill.his{background:var(--his-bg);color:var(--his-color)}
 .panel-pill.por{background:var(--por-bg);color:var(--por-color)}
 .panel-pill.cie{background:var(--cie-bg);color:var(--cie-color)}
+.panel-pill.ing{background:var(--ing-bg);color:var(--ing-color)}
 .panel-count{font-size:12px;color:var(--text-hint)}
 
 .mod-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px;margin-bottom:28px}
@@ -92,12 +97,14 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .mod-card.his:hover{border-color:var(--his-border)}
 .mod-card.por:hover{border-color:var(--por-border)}
 .mod-card.cie:hover{border-color:var(--cie-border)}
+.mod-card.ing:hover{border-color:var(--ing-border)}
 .mod-num{font-size:11px;font-weight:600;margin-bottom:4px;text-transform:uppercase;letter-spacing:.04em}
 .mod-num.geo{color:var(--geo-color)}
 .mod-num.mat{color:var(--mat-color)}
 .mod-num.his{color:var(--his-color)}
 .mod-num.por{color:var(--por-color)}
 .mod-num.cie{color:var(--cie-color)}
+.mod-num.ing{color:var(--ing-color)}
 .mod-title{font-size:14px;font-weight:600;color:var(--text-main);line-height:1.35;margin-bottom:10px}
 .mod-tags{display:flex;gap:4px;flex-wrap:wrap}
 .tag{font-size:10px;padding:3px 8px;border-radius:20px;font-weight:500}
@@ -106,6 +113,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .tag.his{background:var(--his-bg);color:var(--his-color)}
 .tag.por{background:var(--por-bg);color:var(--por-color)}
 .tag.cie{background:var(--cie-bg);color:var(--cie-color)}
+.tag.ing{background:var(--ing-bg);color:var(--ing-color)}
 .mod-done-badge{position:absolute;top:12px;right:12px;width:18px;height:18px;border-radius:50%;background:var(--verde-ok);display:flex;align-items:center;justify-content:center;font-size:10px;color:#fff;display:none}
 .mod-card.done .mod-done-badge{display:flex}
 
@@ -119,12 +127,14 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .mod-hero.his{background:linear-gradient(135deg,var(--his-bg) 0%,#FFFAF0 100%)}
 .mod-hero.por{background:linear-gradient(135deg,var(--por-bg) 0%,#F5F6FF 100%)}
 .mod-hero.cie{background:linear-gradient(135deg,var(--cie-bg) 0%,#F1F8E9 100%)}
+.mod-hero.ing{background:linear-gradient(135deg,var(--ing-bg) 0%,#F0F9FF 100%)}
 .mod-hero-subject{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.05em;margin-bottom:3px}
 .mod-hero-subject.geo{color:var(--geo-color)}
 .mod-hero-subject.mat{color:var(--mat-color)}
 .mod-hero-subject.his{color:var(--his-color)}
 .mod-hero-subject.por{color:var(--por-color)}
 .mod-hero-subject.cie{color:var(--cie-color)}
+.mod-hero-subject.ing{color:var(--ing-color)}
 .mod-hero-title{font-size:20px;font-weight:700;color:var(--text-main);margin-bottom:4px}
 .mod-hero-sub{font-size:13px;color:var(--text-sec)}
 
@@ -283,6 +293,26 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .int-result-label{font-size:13px;color:#7C3AED;margin-top:4px}
 .int-result-msg{font-size:14px;color:var(--int-color);margin-top:8px;font-weight:500}
 .int-result-insight{font-size:13px;color:var(--text-sec);margin-top:10px;padding:10px 14px;background:var(--branco);border-radius:9px;text-align:left;line-height:1.6}
+
+/* Modo Plano de Estudos */
+.plano-intro{background:var(--int-bg);border:1px solid var(--int-border);border-radius:12px;padding:14px 16px;margin-bottom:16px;font-size:13px;color:#5B21B6;line-height:1.6}
+.plano-intro strong{font-weight:700}
+.plano-intro-eng{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:10px;padding-top:10px;border-top:1px solid var(--int-border);flex-wrap:wrap}
+.plano-session{background:var(--branco);border:1.5px solid var(--cinza-borda);border-radius:14px;padding:16px;margin-bottom:12px;display:flex;gap:14px;align-items:flex-start;transition:border-color .15s}
+.plano-session.done{border-color:var(--int-color);background:var(--int-bg)}
+.plano-check{flex-shrink:0;width:26px;height:26px;border-radius:50%;border:2px solid var(--cinza-borda);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:13px;color:transparent;transition:all .15s;margin-top:2px;background:var(--branco);font-family:inherit}
+.plano-check:hover{border-color:var(--int-color)}
+.plano-session.done .plano-check{background:var(--int-color);border-color:var(--int-color);color:#fff}
+.plano-body{flex:1;min-width:0}
+.plano-num{font-size:11px;font-weight:700;color:var(--int-color);text-transform:uppercase;letter-spacing:.04em;margin-bottom:2px}
+.plano-title{font-size:15px;font-weight:700;color:var(--text-main);margin-bottom:6px}
+.plano-session.done .plano-title{color:var(--int-color)}
+.plano-foco{font-size:13px;color:var(--text-sec);margin-bottom:6px;line-height:1.5}
+.plano-obs{font-size:12px;color:var(--text-hint);line-height:1.55;margin-bottom:10px}
+.plano-btn{font-size:12px;padding:7px 14px;border-radius:8px;border:1.5px solid var(--int-color);background:var(--branco);color:var(--int-color);cursor:pointer;font-family:inherit;font-weight:600;transition:all .15s}
+.plano-btn:hover{background:var(--int-bg)}
+.plano-btn.eng{border-color:var(--ing-color);color:var(--ing-color)}
+.plano-btn.eng:hover{background:var(--ing-bg)}
 </style>
 </head>
 <body>
@@ -304,6 +334,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
     <button class="snav-btn his" onclick="selectSubject('his')">📜 História</button>
     <button class="snav-btn por" onclick="selectSubject('por')">📝 Português</button>
     <button class="snav-btn cie" onclick="selectSubject('cie')">🔬 Ciências</button>
+    <button class="snav-btn ing" onclick="selectSubject('ing')">🇬🇧 Inglês</button>
     <button class="snav-btn int" onclick="selectInt()">🧠 Interpretação</button>
     <button class="snav-btn notas" onclick="selectNotas()">📊 Desempenho</button>
   </div>
@@ -470,6 +501,34 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
       </div>
     </div>
 
+    <!-- ING -->
+    <div id="panel-ing" class="subject-panel">
+      <div class="panel-label">
+        <span class="panel-pill ing">🇬🇧 Inglês</span>
+        <span class="panel-count">3 módulos</span>
+      </div>
+      <div class="mod-grid">
+        <div class="mod-card ing" onclick="openMod('ing',0)">
+          <div class="mod-done-badge">✓</div>
+          <div class="mod-num ing">Módulo 1</div>
+          <div class="mod-title">Rotina diária e família</div>
+          <div class="mod-tags"><span class="tag ing">simple present</span><span class="tag ing">family</span></div>
+        </div>
+        <div class="mod-card ing" onclick="openMod('ing',1)">
+          <div class="mod-done-badge">✓</div>
+          <div class="mod-num ing">Módulo 2</div>
+          <div class="mod-title">Comparativos e localização</div>
+          <div class="mod-tags"><span class="tag ing">comparatives</span><span class="tag ing">prepositions</span></div>
+        </div>
+        <div class="mod-card ing" onclick="openMod('ing',2)">
+          <div class="mod-done-badge">✓</div>
+          <div class="mod-num ing">Módulo 3</div>
+          <div class="mod-title">Leitura e vocabulário do dia a dia</div>
+          <div class="mod-tags"><span class="tag ing">reading</span><span class="tag ing">vocabulary</span></div>
+        </div>
+      </div>
+    </div>
+
   </div><!-- /painel-view -->
 
   <!-- INTERPRETAÇÃO VIEW -->
@@ -479,7 +538,11 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
       <div class="int-hero-sub">Leia com calma · Analise a pergunta · Marque a resposta</div>
     </div>
     <div class="int-mode-tabs">
-      <button class="int-mode-btn active" id="int-btn-det" onclick="setIntMode('det')">
+      <button class="int-mode-btn active" id="int-btn-plano" onclick="setIntMode('plano')">
+        📅 Plano de Estudos
+        <span class="int-mode-desc">Cronograma de 2 semanas</span>
+      </button>
+      <button class="int-mode-btn" id="int-btn-det" onclick="setIntMode('det')">
         🔍 Modo Detetive
         <span class="int-mode-desc">O que a pergunta está pedindo?</span>
       </button>
@@ -921,21 +984,90 @@ const data = {
         {q:"Qual é a principal característica da energia limpa?",opts:["É mais cara que as outras fontes","Usa fontes não renováveis","Produz maior quantidade de gases tóxicos","Causa menor impacto ambiental"],c:3,feedback:"Energia limpa = menor impacto ambiental. Usa fontes renováveis (sol, vento, água) que não se esgotam e poluem menos do que combustíveis fósseis como petróleo e carvão."}
       ]
     }
+  ],
+  ing: [
+    {
+      num:"Módulo 1", title:"Rotina diária e família", sub:"Simple Present e vocabulário de família",
+      resumo:[
+        {h:"Simple Present para rotina (Daily Routine)",p:"Para falar de hábitos e rotina usamos o Simple Present. Com I/you/we/they o verbo fica no infinitivo: 'I wake up at 7'. Com he/she/it, acrescenta-se -s ou -es ao verbo: 'She wakes up at 7', 'He goes to school'. Verbos comuns de rotina: wake up (despertar), get up (levantar), take a shower (tomar banho), have breakfast (tomar café da manhã), go to school (ir à escola), do homework (fazer lição), go to bed (ir para a cama)."},
+        {h:"Vocabulário de família (Family)",p:"mother (mãe), father (pai), parents (pais), sister (irmã), brother (irmão), grandmother (avó), grandfather (avô), aunt (tia), uncle (tio), cousin (primo/prima). Para perguntar sobre a família: 'How many brothers and sisters do you have?'"},
+        {h:"Perguntas com Do/Does",p:"Para fazer perguntas no Simple Present usamos 'Do' com I/you/we/they e 'Does' com he/she/it. Exemplo: 'Do you have breakfast every day?' / 'Does she go to school by bus?'. Respostas curtas: 'Yes, I do.' / 'No, she doesn't.'"}
+      ],
+      flashcards:[
+        {q:"Como fica o verbo 'wake up' na terceira pessoa do singular (he/she/it)?",a:"'wakes up' — acrescenta-se -s ao verbo.",ctx:"Regra geral: he/she/it sempre recebe -s (ou -es) no Simple Present. É a mesma lógica de 'go → goes', 'do → does'."},
+        {q:"Como se diz 'Eu tomo café da manhã às 7 horas' em inglês?",a:"'I have breakfast at 7 o'clock.'",ctx:"'Have breakfast' é a expressão fixa para 'tomar café da manhã' — não se traduz palavra por palavra."},
+        {q:"Como se diz 'irmã' e 'irmão' em inglês?",a:"sister (irmã) e brother (irmão).",ctx:"Dica: 'siblings' é o termo que junta irmãos e irmãs ao mesmo tempo, sem dizer o gênero."},
+        {q:"Como formar uma pergunta no Simple Present com 'he' ou 'she'?",a:"Usando 'Does' antes do sujeito: 'Does she do her homework?'",ctx:"'Do' é para I/you/we/they. 'Does' é para he/she/it. Depois do Do/Does, o verbo principal volta ao infinitivo, sem -s: 'Does she go' (não 'goes')."},
+        {q:"Complete a resposta curta: 'Does he do his homework?' '___'",a:"'Yes, he does.' (ou 'No, he doesn't.')",ctx:"Respostas curtas repetem o auxiliar (do/does), não o verbo principal."}
+      ],
+      quiz:[
+        {q:"'She ___ up at 7 o'clock.'",opts:["wake","wakes","waked","waking"],c:1,feedback:"Com 'she' (terceira pessoa do singular), o verbo recebe -s: 'wakes up'. Essa é a regra mais importante do Simple Present."},
+        {q:"O que significa 'grandmother' em português?",opts:["avô","avó","tia","mãe"],c:1,feedback:"'Grandmother' é avó. 'Grandfather' é avô — o prefixo 'grand-' indica a geração dos pais dos seus pais."},
+        {q:"'___ you have breakfast every day?'",opts:["Do","Does","Is","Are"],c:0,feedback:"Com 'you', usa-se 'Do'. 'Does' é reservado para he/she/it. 'Is/Are' são usados com o verbo 'to be', não no Simple Present de ação."},
+        {q:"Escolha a resposta curta correta para: 'Does your brother play soccer?'",opts:["Yes, he do.","Yes, he plays.","Yes, he does.","Yes, does."],c:2,feedback:"A resposta curta correta repete o auxiliar 'does': 'Yes, he does.' Não se usa o verbo principal (plays) nem 'do' com 'he'."},
+        {q:"'My father ___ to work by car.'",opts:["go","goes","going","gone"],c:1,feedback:"'Father' equivale a 'he' — terceira pessoa do singular. Por isso o verbo 'go' recebe -es: 'goes'."}
+      ]
+    },
+    {
+      num:"Módulo 2", title:"Comparativos e localização", sub:"Comparative adjectives e prepositions of place",
+      resumo:[
+        {h:"Comparativos (Comparative Adjectives)",p:"Para adjetivos curtos (1 sílaba, ou 2 terminados em -y), acrescenta-se '-er' + 'than': 'tall → taller than', 'big → bigger than'. Para adjetivos longos, usa-se 'more + adjetivo + than': 'interesting → more interesting than'. Alguns são irregulares: 'good → better', 'bad → worse'."},
+        {h:"Preposições de lugar (Prepositions of Place)",p:"in (dentro de), on (em cima de / sobre), under (debaixo de), next to (ao lado de), between (entre), in front of (na frente de), behind (atrás de). Exemplo: 'The cat is under the table.' / 'The school is between the bakery and the bank.'"},
+        {h:"There is / There are",p:"Usamos 'There is' para algo no singular e 'There are' para o plural, ao descrever o que existe em um lugar. Exemplo: 'There is a book on the table.' / 'There are two cats in the garden.'"}
+      ],
+      flashcards:[
+        {q:"Como formar o comparativo do adjetivo 'big'?",a:"'bigger than' — dobra-se a consoante final e acrescenta '-er'.",ctx:"Adjetivos curtos terminados em consoante+vogal+consoante dobram a última letra antes do -er: big→bigger, hot→hotter."},
+        {q:"Qual é o comparativo de 'good'?",a:"'better' — é um comparativo irregular.",ctx:"Assim como em português ('bom → melhor', não 'boa-mente'), o inglês também tem irregulares: good→better, bad→worse."},
+        {q:"Como se diz 'O gato está embaixo da mesa' em inglês?",a:"'The cat is under the table.'",ctx:"'Under' = embaixo de / debaixo de. Não confundir com 'on' (em cima de)."},
+        {q:"Quando usamos 'there is' e quando usamos 'there are'?",a:"'There is' para substantivo no singular; 'there are' para substantivo no plural.",ctx:"O verbo concorda com o que vem depois, não com 'there'. 'There is A book' (singular) / 'There are TWO books' (plural)."},
+        {q:"Complete: 'The book is ___ the table and the chair.' (entre)",a:"'between'",ctx:"'Between' é usado quando há dois pontos de referência claros. Quando há mais de dois, usa-se 'among'."}
+      ],
+      quiz:[
+        {q:"'My sister is ___ than me.' (mais alta)",opts:["tall","taller","tallest","more tall"],c:1,feedback:"Adjetivo curto (tall) + '-er' + than = comparativo. 'Taller than' é a forma correta — não se usa 'more tall'."},
+        {q:"'There ___ two dogs in the yard.'",opts:["is","are","be","was"],c:1,feedback:"'Two dogs' está no plural, então o verbo precisa concordar: 'There are'. 'There is' seria usado só com 'a dog' (singular)."},
+        {q:"'The keys are ___ the table.' (em cima de)",opts:["in","on","under","behind"],c:1,feedback:"'On' indica que algo está em cima/sobre uma superfície. 'In' seria dentro de algo, e 'under' embaixo."},
+        {q:"Qual é o comparativo de 'bad'?",opts:["more bad","worse","baddest","badder"],c:1,feedback:"'Bad' é irregular: o comparativo é 'worse', não 'more bad' nem 'badder'. Vale memorizar junto com 'good → better'."},
+        {q:"'The store is ___ the bank and the bakery.' (entre)",opts:["between","next","under","behind"],c:0,feedback:"'Between' é usado quando o local está entre dois pontos de referência — exatamente o caso do banco e da padaria."}
+      ]
+    },
+    {
+      num:"Módulo 3", title:"Leitura e vocabulário do dia a dia", sub:"Reading comprehension e everyday vocabulary",
+      resumo:[
+        {h:"Estratégia de leitura em inglês",p:"A mesma técnica da aba Interpretação funciona em inglês: 1) leia a pergunta primeiro e identifique a palavra-chave; 2) volte ao texto procurando o trecho relacionado; 3) elimine as alternativas que claramente não aparecem no texto antes de escolher a resposta final."},
+        {h:"Objetos de escola (School Objects)",p:"pencil (lápis), eraser (borracha), backpack (mochila), notebook (caderno), pencil case (estojo), ruler (régua), book (livro)."},
+        {h:"Sentimentos e clima (Feelings & Weather)",p:"Sentimentos: happy (feliz), sad (triste), tired (cansado), excited (animado/entusiasmado — geralmente por algo que vai acontecer). Clima: sunny (ensolarado), rainy (chuvoso), cold (frio), hot (calor). Pergunta comum: 'What's the weather like today?' → 'It's sunny.'"}
+      ],
+      flashcards:[
+        {q:"O que significa 'backpack'?",a:"Mochila.",ctx:"'Back' (costas) + 'pack' (pacote/bolsa) — literalmente, 'bolsa das costas'."},
+        {q:"Como se diz 'Eu estou cansado' em inglês?",a:"'I am tired.'",ctx:"Sentimentos e estados usam o verbo 'to be' (am/is/are), não verbos de ação."},
+        {q:"Traduza: 'It's raining today.'",a:"'Está chovendo hoje.'",ctx:"'It's' aqui não se refere a uma pessoa ou coisa — é o 'it' impessoal usado para clima, igual em 'It's hot' (Está calor)."},
+        {q:"Qual a diferença entre 'happy' e 'excited'?",a:"'Happy' é feliz, um estado geral de bem-estar. 'Excited' é animado/entusiasmado, geralmente por algo específico que vai acontecer.",ctx:"Exemplo: 'I am happy' (estou feliz, de modo geral) x 'I am excited about my birthday' (estou animado com meu aniversário)."},
+        {q:"Antes de responder uma pergunta sobre um texto em inglês, o que você deve fazer primeiro?",a:"Ler a pergunta com atenção, identificar a palavra-chave e só depois voltar ao texto para localizar a resposta.",ctx:"É a mesma estratégia do Modo Detetive da aba Interpretação — funciona em qualquer idioma."}
+      ],
+      quiz:[
+        {q:"'Eraser' significa:",opts:["lápis","borracha","caderno","mochila"],c:1,feedback:"'Eraser' é borracha — vem de 'erase' (apagar). 'Pencil' é lápis e 'notebook' é caderno."},
+        {q:"'She is ___ because it's her birthday.'",opts:["tired","excited","cold","hungry"],c:1,feedback:"Aniversário é um evento esperado com expectativa positiva — por isso 'excited' (animada) é a opção que faz mais sentido no contexto."},
+        {q:"'What's the weather like?' 'It's ___.'",opts:["run","sunny","eat","fast"],c:1,feedback:"A pergunta é sobre o clima, então a resposta precisa ser uma condição climática. 'Sunny' (ensolarado) é a única opção que descreve o tempo."},
+        {q:"Antes de responder uma questão de leitura em inglês, o que você deve fazer primeiro?",opts:["Adivinhar a resposta","Ler a pergunta com atenção e procurar a palavra-chave","Pular direto para as alternativas","Ignorar o texto"],c:1,feedback:"Assim como em português, ler a pergunta primeiro evita perder tempo relendo o texto sem foco. A palavra-chave indica exatamente o que procurar."},
+        {q:"'Backpack' em português é:",opts:["estojo","mochila","caderno","livro"],c:1,feedback:"'Backpack' é mochila. 'Pencil case' é estojo, 'notebook' é caderno e 'book' é livro."}
+      ]
+    }
   ]
 };
 
 // ── estado ──
-const subjKeys = ['geo','mat','his','por','cie'];
+const subjKeys = ['geo','mat','his','por','cie','ing'];
 let scores = {
   geo: [{c:0,t:0,d:false},{c:0,t:0,d:false},{c:0,t:0,d:false}],
   mat: [{c:0,t:0,d:false},{c:0,t:0,d:false},{c:0,t:0,d:false}],
   his: [{c:0,t:0,d:false},{c:0,t:0,d:false},{c:0,t:0,d:false}],
   por: [{c:0,t:0,d:false},{c:0,t:0,d:false},{c:0,t:0,d:false},{c:0,t:0,d:false},{c:0,t:0,d:false}],
-  cie: [{c:0,t:0,d:false},{c:0,t:0,d:false},{c:0,t:0,d:false}]
+  cie: [{c:0,t:0,d:false},{c:0,t:0,d:false},{c:0,t:0,d:false}],
+  ing: [{c:0,t:0,d:false},{c:0,t:0,d:false},{c:0,t:0,d:false}]
 };
 let curSubj='geo', curIdx=0, curActiveSubj='geo';
 
-const subjLabels = {geo:'🌍 Geografia', mat:'📐 Matemática', his:'📜 História', por:'📝 Português', cie:'🔬 Ciências'};
+const subjLabels = {geo:'🌍 Geografia', mat:'📐 Matemática', his:'📜 História', por:'📝 Português', cie:'🔬 Ciências', ing:'🇬🇧 Inglês'};
 
 // ── navegação de matéria (header) ──
 function selectSubject(subj) {
@@ -1076,7 +1208,7 @@ const notasData = {
     {nome:'História',          icon:'📜', tri:[92,null,null], faltas:[0,null,null], destaque:true},
     {nome:'Geografia',         icon:'🌍', tri:[85,null,null], faltas:[0,null,null], destaque:true},
     {nome:'Ciências',          icon:'🔬', tri:[80,null,null], faltas:[0,null,null], destaque:true},
-    {nome:'Língua Inglesa',    icon:'🇬🇧', tri:[96,null,null], faltas:[1,null,null], destaque:false},
+    {nome:'Língua Inglesa',    icon:'🇬🇧', tri:[96,null,null], faltas:[1,null,null], destaque:true},
     {nome:'Língua Espanhola',  icon:'🇪🇸', tri:[100,null,null],faltas:[0,null,null], destaque:false},
     {nome:'Educação Física',   icon:'⚽', tri:[100,null,null], faltas:[1,null,null], destaque:false},
     {nome:'Arte',              icon:'🎨', tri:[100,null,null], faltas:[0,null,null], destaque:false},
@@ -1428,17 +1560,72 @@ const intData = {
   ]
 };
 
-let intMode = 'det';
+let intMode = 'plano';
 let detScores = { acertos: 0, total: 0, erros: [] };
 let provaIdx = 0;
 let provaScores = [];
 
+// ── PLANO DE ESTUDOS (2 semanas) ──
+const planoData = [
+  {titulo:"Diagnóstico", foco:"Modo Prova — todos os textos, sem ajuda prévia", modo:"prova",
+   obs:"Objetivo: mapear os erros recorrentes antes de qualquer estratégia. Não comente as respostas durante — só no final, juntos."},
+  {titulo:"Palavras-armadilha", foco:"Modo Detetive — exercícios 1 a 3 (NÃO, CAUSA, DIFERENÇA)", modo:"det",
+   obs:"Antes de cada resposta, peça pra ela ler a Dica em voz alta antes de marcar."},
+  {titulo:"Mais palavras-armadilha + gêneros textuais", foco:"Modo Detetive — exercícios 4 a 6 (CARACTERÍSTICA, CONSEQUÊNCIA, POR QUE)", modo:"det",
+   obs:"Revisem juntos os módulos 6 a 8 de Português (e-mail, cartão-postal, texto opinativo) antes de começar."},
+  {titulo:"Pontuação como pista", foco:"Modo Prova — refaça os Textos 2 e 3", modo:"prova",
+   obs:"Revisem os módulos 9 e 10 de Português (travessão, dois-pontos, reticências) antes de praticar."},
+  {titulo:"Treino cronometrado", foco:"Modo Detetive — reinicie e refaça tudo com um cronômetro de 10 minutos", modo:"det",
+   obs:"Foco especial nos exercícios que ela errou nas Sessões 2 e 3."},
+  {titulo:"Simulado final", foco:"Modo Prova — todos os textos, cronometrado, sem ajuda", modo:"prova",
+   obs:"Compare o resultado com a Sessão 1 — esse é o indicador real de evolução nas duas semanas."}
+];
+let planoProgress = planoData.map(() => false);
+
+function togglePlano(i) {
+  planoProgress[i] = !planoProgress[i];
+  renderPlano();
+}
+
+function renderPlano() {
+  const done = planoProgress.filter(Boolean).length;
+  const total = planoData.length;
+  let html = `
+    <div class="int-progress">
+      <div class="int-progress-bar"><div class="int-progress-fill" style="width:${Math.round(done/total*100)}%"></div></div>
+      <span class="int-progress-label">${done}/${total} sessões concluídas</span>
+    </div>
+    <div class="plano-intro">
+      📅 <strong>Cronograma de Interpretação — 2 semanas.</strong> Marque cada sessão como concluída clicando no círculo. Cada uma já leva direto pro modo certo da aba.
+      <div class="plano-intro-eng">
+        <span>🇬🇧 <strong>Reforço de inglês:</strong> pratique a aba Inglês 2x por semana, alternando os módulos.</span>
+        <button class="plano-btn eng" onclick="selectSubject('ing')">Ir para Inglês →</button>
+      </div>
+    </div>`;
+
+  html += planoData.map((s, i) => `
+    <div class="plano-session${planoProgress[i] ? ' done' : ''}">
+      <button class="plano-check" onclick="togglePlano(${i})">${planoProgress[i] ? '✓' : ''}</button>
+      <div class="plano-body">
+        <div class="plano-num">Sessão ${i + 1} · 30 min</div>
+        <div class="plano-title">${s.titulo}</div>
+        <div class="plano-foco">${s.foco}</div>
+        <div class="plano-obs">${s.obs}</div>
+        <button class="plano-btn" onclick="setIntMode('${s.modo}')">${s.modo === 'det' ? '🔍 Ir para Modo Detetive' : '📄 Ir para Modo Prova'} →</button>
+      </div>
+    </div>`).join('');
+
+  document.getElementById('int-content').innerHTML = html;
+}
+
 function setIntMode(mode) {
   intMode = mode;
+  document.getElementById('int-btn-plano').classList.toggle('active', mode === 'plano');
   document.getElementById('int-btn-det').classList.toggle('active', mode === 'det');
   document.getElementById('int-btn-prova').classList.toggle('active', mode === 'prova');
   if (mode === 'det') renderDet();
-  else renderProva();
+  else if (mode === 'prova') renderProva();
+  else renderPlano();
 }
 
 function selectInt() {
@@ -1449,7 +1636,7 @@ function selectInt() {
   document.getElementById('notas-view').classList.remove('active');
   document.getElementById('int-view').classList.add('active');
   document.getElementById('breadcrumb').innerHTML = '<span style="color:var(--int-color);font-weight:600">🧠 Interpretação</span>';
-  renderDet();
+  setIntMode('plano');
 }
 
 // ── MODO DETETIVE ──
@@ -1583,16 +1770,6 @@ function resetProva(pi) {
 function resetAllProva() {
   provaScores = [];
   renderProva();
-}
-
-function selectNotas() {
-  document.querySelectorAll('.snav-btn').forEach(b => b.classList.remove('active'));
-  document.querySelector('.snav-btn.notas').classList.add('active');
-  document.getElementById('painel-view').style.display = 'none';
-  document.getElementById('mod-view').style.display = 'none';
-  document.getElementById('notas-view').classList.add('active');
-  document.getElementById('breadcrumb').innerHTML = '<span style="color:var(--notas-color);font-weight:600">📊 Desempenho</span>';
-  renderNotas();
 }
 </script>
 </body>
