@@ -44,7 +44,11 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .breadcrumb .bc-sep{color:var(--cinza-borda)}
 
 /* ── SUBJECT TABS (header) ── */
-.subject-nav{display:flex;gap:0;padding:0 16px;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+.subject-nav-wrap{position:relative}
+/* leve gradiente à direita indicando que há mais abas para rolar */
+.subject-nav-wrap::after{content:"";position:absolute;top:0;right:0;bottom:0;width:24px;pointer-events:none;background:linear-gradient(to right,rgba(255,255,255,0),var(--branco));opacity:0;transition:opacity .2s}
+.subject-nav-wrap.scrollable::after{opacity:1}
+.subject-nav{display:flex;gap:0;padding:0 16px;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch;scroll-behavior:smooth}
 .subject-nav::-webkit-scrollbar{display:none}
 .snav-btn{display:flex;align-items:center;gap:5px;padding:9px 14px;font-size:13px;font-weight:500;cursor:pointer;border:none;background:none;color:var(--text-hint);border-bottom:2.5px solid transparent;margin-bottom:-1px;font-family:inherit;white-space:nowrap;transition:color .15s;flex-shrink:0}
 .snav-btn.active{font-weight:700;border-bottom-color:currentColor}
@@ -57,13 +61,18 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .snav-btn:not(.active){color:var(--text-hint)}
 .snav-btn:not(.active):hover{color:var(--text-sec)}
 @media(max-width:600px){
-  .header-top{padding:8px 14px}
+  .header-top{padding:8px 12px}
+  .app-title{font-size:15px}
   .app-sub{display:none}
   .breadcrumb{display:none}
-  .subject-nav{padding:0 4px}
-  .snav-btn{padding:8px 10px;font-size:12px;gap:3px}
+  .logo-dot{width:28px;height:28px;font-size:15px}
+  .subject-nav{padding:0 10px}
+  .snav-btn{padding:8px 11px;font-size:12.5px;gap:4px}
   .int-mode-tabs{flex-direction:column}
   .int-mode-btn{font-size:12px;padding:9px 12px}
+}
+@media(max-width:380px){
+  .snav-btn{padding:8px 9px;font-size:12px}
 }
 
 /* ── CONTAINER ── */
@@ -328,15 +337,15 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
     </div>
     <div class="breadcrumb" id="breadcrumb"></div>
   </div>
-  <div class="subject-nav" id="subject-nav">
-    <button class="snav-btn geo active" onclick="selectSubject('geo')">🌍 Geografia</button>
-    <button class="snav-btn mat" onclick="selectSubject('mat')">📐 Matemática</button>
-    <button class="snav-btn his" onclick="selectSubject('his')">📜 História</button>
-    <button class="snav-btn por" onclick="selectSubject('por')">📝 Português</button>
-    <button class="snav-btn cie" onclick="selectSubject('cie')">🔬 Ciências</button>
-    <button class="snav-btn ing" onclick="selectSubject('ing')">🇬🇧 Inglês</button>
-    <button class="snav-btn int" onclick="selectInt()">🧠 Interpretação</button>
-    <button class="snav-btn notas" onclick="selectNotas()">📊 Desempenho</button>
+  <div class="subject-nav-wrap" id="subject-nav-wrap">
+    <div class="subject-nav" id="subject-nav">
+      <button class="snav-btn geo active" onclick="selectSubject('geo')">🌍 Geografia</button>
+      <button class="snav-btn his" onclick="selectSubject('his')">📜 História</button>
+      <button class="snav-btn por" onclick="selectSubject('por')">📝 Português</button>
+      <button class="snav-btn cie" onclick="selectSubject('cie')">🔬 Ciências</button>
+      <button class="snav-btn int" onclick="selectInt()">🧠 Interpretação</button>
+      <button class="snav-btn notas" onclick="selectNotas()">📊 Desempenho</button>
+    </div>
   </div>
 </div>
 
@@ -353,54 +362,32 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
     <div id="panel-geo" class="subject-panel active">
       <div class="panel-label">
         <span class="panel-pill geo">🌍 Geografia</span>
-        <span class="panel-count">3 módulos</span>
+        <span class="panel-count">4 módulos</span>
       </div>
       <div class="mod-grid">
         <div class="mod-card geo" onclick="openMod('geo',0)">
           <div class="mod-done-badge">✓</div>
-          <div class="mod-num geo">Módulo 3</div>
-          <div class="mod-title">Indo e voltando na cidade</div>
-          <div class="mod-tags"><span class="tag geo">transporte</span><span class="tag geo">mobilidade</span></div>
+          <div class="mod-num geo">Módulo 6</div>
+          <div class="mod-title">Fontes de Energia</div>
+          <div class="mod-tags"><span class="tag geo">energia</span><span class="tag geo">sustentabilidade</span></div>
         </div>
         <div class="mod-card geo" onclick="openMod('geo',1)">
           <div class="mod-done-badge">✓</div>
-          <div class="mod-num geo">Módulo 4</div>
-          <div class="mod-title">Transformações dos espaços</div>
-          <div class="mod-tags"><span class="tag geo">urbanização</span><span class="tag geo">verticalização</span></div>
+          <div class="mod-num geo">Módulo 7</div>
+          <div class="mod-title">O Lixo e Seus Problemas</div>
+          <div class="mod-tags"><span class="tag geo">resíduos</span><span class="tag geo">3 Rs</span></div>
         </div>
         <div class="mod-card geo" onclick="openMod('geo',2)">
           <div class="mod-done-badge">✓</div>
-          <div class="mod-num geo">Módulo 5</div>
-          <div class="mod-title">Recursos naturais e consumo</div>
-          <div class="mod-tags"><span class="tag geo">meio ambiente</span><span class="tag geo">sustentabilidade</span></div>
+          <div class="mod-num geo">Módulo 8</div>
+          <div class="mod-title">Poluição do ar, da água e visual</div>
+          <div class="mod-tags"><span class="tag geo">poluição</span><span class="tag geo">saneamento</span></div>
         </div>
-      </div>
-    </div>
-
-    <!-- MAT -->
-    <div id="panel-mat" class="subject-panel">
-      <div class="panel-label">
-        <span class="panel-pill mat">📐 Matemática</span>
-        <span class="panel-count">3 módulos</span>
-      </div>
-      <div class="mod-grid">
-        <div class="mod-card mat" onclick="openMod('mat',0)">
+        <div class="mod-card geo" onclick="openMod('geo',3)">
           <div class="mod-done-badge">✓</div>
-          <div class="mod-num mat">Módulo 3</div>
-          <div class="mod-title">Combinações e equivalências</div>
-          <div class="mod-tags"><span class="tag mat">combinações</span><span class="tag mat">igualdade</span></div>
-        </div>
-        <div class="mod-card mat" onclick="openMod('mat',1)">
-          <div class="mod-done-badge">✓</div>
-          <div class="mod-num mat">Módulo 4</div>
-          <div class="mod-title">Figuras geométricas planas</div>
-          <div class="mod-tags"><span class="tag mat">geometria</span><span class="tag mat">área e perímetro</span></div>
-        </div>
-        <div class="mod-card mat" onclick="openMod('mat',2)">
-          <div class="mod-done-badge">✓</div>
-          <div class="mod-num mat">Módulo 5</div>
-          <div class="mod-title">Múltiplos, divisores, MMC e MDC</div>
-          <div class="mod-tags"><span class="tag mat">números</span><span class="tag mat">fatoração</span></div>
+          <div class="mod-num geo">Módulo 9</div>
+          <div class="mod-title">As Regiões do Brasil</div>
+          <div class="mod-tags"><span class="tag geo">regiões</span><span class="tag geo">IBGE</span></div>
         </div>
       </div>
     </div>
@@ -409,26 +396,32 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
     <div id="panel-his" class="subject-panel">
       <div class="panel-label">
         <span class="panel-pill his">📜 História</span>
-        <span class="panel-count">3 módulos</span>
+        <span class="panel-count">4 módulos</span>
       </div>
       <div class="mod-grid">
         <div class="mod-card his" onclick="openMod('his',0)">
           <div class="mod-done-badge">✓</div>
-          <div class="mod-num his">Módulo 3</div>
-          <div class="mod-title">A Escrita e o Registro Histórico</div>
-          <div class="mod-tags"><span class="tag his">escrita</span><span class="tag his">civilizações</span></div>
+          <div class="mod-num his">Módulo 6</div>
+          <div class="mod-title">A Formação das Primeiras Cidades</div>
+          <div class="mod-tags"><span class="tag his">agricultura</span><span class="tag his">cidades</span></div>
         </div>
         <div class="mod-card his" onclick="openMod('his',1)">
           <div class="mod-done-badge">✓</div>
-          <div class="mod-num his">Módulo 4</div>
-          <div class="mod-title">Patrimônio Histórico e Cultural</div>
-          <div class="mod-tags"><span class="tag his">patrimônio</span><span class="tag his">identidade</span></div>
+          <div class="mod-num his">Módulo 7</div>
+          <div class="mod-title">A Vida nas Primeiras Cidades</div>
+          <div class="mod-tags"><span class="tag his">Estado</span><span class="tag his">religião</span></div>
         </div>
         <div class="mod-card his" onclick="openMod('his',2)">
           <div class="mod-done-badge">✓</div>
-          <div class="mod-num his">Módulo 5</div>
-          <div class="mod-title">Das primeiras comunidades ao comércio</div>
-          <div class="mod-tags"><span class="tag his">nomadismo</span><span class="tag his">sedentarismo</span></div>
+          <div class="mod-num his">Módulo 8</div>
+          <div class="mod-title">Cidades Antigas e Cidades Atuais</div>
+          <div class="mod-tags"><span class="tag his">urbanização</span><span class="tag his">sociedade</span></div>
+        </div>
+        <div class="mod-card his" onclick="openMod('his',3)">
+          <div class="mod-done-badge">✓</div>
+          <div class="mod-num his">Módulo 9</div>
+          <div class="mod-title">Povos da América — Maias e Astecas</div>
+          <div class="mod-tags"><span class="tag his">pré-colombianos</span><span class="tag his">civilizações</span></div>
         </div>
       </div>
     </div>
@@ -437,38 +430,50 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
     <div id="panel-por" class="subject-panel">
       <div class="panel-label">
         <span class="panel-pill por">📝 Português</span>
-        <span class="panel-count">5 módulos</span>
+        <span class="panel-count">7 módulos</span>
       </div>
       <div class="mod-grid">
         <div class="mod-card por" onclick="openMod('por',0)">
           <div class="mod-done-badge">✓</div>
-          <div class="mod-num por">Módulo 6</div>
-          <div class="mod-title">Meios de comunicação, e-mail e crase</div>
-          <div class="mod-tags"><span class="tag por">comunicação</span><span class="tag por">crase</span></div>
+          <div class="mod-num por">Módulo 11</div>
+          <div class="mod-title">Reportagem e modo indicativo</div>
+          <div class="mod-tags"><span class="tag por">reportagem</span><span class="tag por">verbos</span></div>
         </div>
         <div class="mod-card por" onclick="openMod('por',1)">
           <div class="mod-done-badge">✓</div>
-          <div class="mod-num por">Módulo 7</div>
-          <div class="mod-title">Cartão-postal e concordância</div>
-          <div class="mod-tags"><span class="tag por">concordância</span><span class="tag por">gênero textual</span></div>
+          <div class="mod-num por">Módulo 12</div>
+          <div class="mod-title">Entrevista e modo subjuntivo</div>
+          <div class="mod-tags"><span class="tag por">entrevista</span><span class="tag por">subjuntivo</span></div>
         </div>
         <div class="mod-card por" onclick="openMod('por',2)">
           <div class="mod-done-badge">✓</div>
-          <div class="mod-num por">Módulo 8</div>
-          <div class="mod-title">Conjunção, MAS/MAIS e texto opinativo</div>
-          <div class="mod-tags"><span class="tag por">conjunção</span><span class="tag por">opinião</span></div>
+          <div class="mod-num por">Módulo 13</div>
+          <div class="mod-title">Propaganda e modo imperativo</div>
+          <div class="mod-tags"><span class="tag por">propaganda</span><span class="tag por">imperativo</span></div>
         </div>
         <div class="mod-card por" onclick="openMod('por',3)">
           <div class="mod-done-badge">✓</div>
-          <div class="mod-num por">Módulo 9</div>
-          <div class="mod-title">Direitos das crianças e pontuação</div>
-          <div class="mod-tags"><span class="tag por">pontuação</span><span class="tag por">direitos</span></div>
+          <div class="mod-num por">Módulo 14</div>
+          <div class="mod-title">Charge, cartum e formas nominais</div>
+          <div class="mod-tags"><span class="tag por">charge</span><span class="tag por">cartum</span></div>
         </div>
         <div class="mod-card por" onclick="openMod('por',4)">
           <div class="mod-done-badge">✓</div>
-          <div class="mod-num por">Módulo 10</div>
-          <div class="mod-title">Imagem como texto, travessão e vírgula</div>
-          <div class="mod-tags"><span class="tag por">infográfico</span><span class="tag por">pontuação</span></div>
+          <div class="mod-num por">Módulo 15</div>
+          <div class="mod-title">Tirinhas, verbos impessoais e há/a</div>
+          <div class="mod-tags"><span class="tag por">tirinha</span><span class="tag por">há/a</span></div>
+        </div>
+        <div class="mod-card por" onclick="openMod('por',5)">
+          <div class="mod-done-badge">✓</div>
+          <div class="mod-num por">Módulo 16</div>
+          <div class="mod-title">HQ e elementos da comunicação</div>
+          <div class="mod-tags"><span class="tag por">HQ</span><span class="tag por">comunicação</span></div>
+        </div>
+        <div class="mod-card por" onclick="openMod('por',6)">
+          <div class="mod-done-badge">✓</div>
+          <div class="mod-num por">Módulo 17</div>
+          <div class="mod-title">Contos, advérbio e mal/mau</div>
+          <div class="mod-tags"><span class="tag por">conto</span><span class="tag por">advérbio</span></div>
         </div>
       </div>
     </div>
@@ -477,58 +482,37 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
     <div id="panel-cie" class="subject-panel">
       <div class="panel-label">
         <span class="panel-pill cie">🔬 Ciências</span>
-        <span class="panel-count">3 módulos</span>
+        <span class="panel-count">4 módulos</span>
       </div>
       <div class="mod-grid">
         <div class="mod-card cie" onclick="openMod('cie',0)">
           <div class="mod-done-badge">✓</div>
-          <div class="mod-num cie">Módulo 3</div>
-          <div class="mod-title">Sistema Digestório e Respiratório</div>
-          <div class="mod-tags"><span class="tag cie">digestão</span><span class="tag cie">respiração</span></div>
+          <div class="mod-num cie">Módulo 6</div>
+          <div class="mod-title">Biomas Brasileiros</div>
+          <div class="mod-tags"><span class="tag cie">biomas</span><span class="tag cie">biodiversidade</span></div>
         </div>
         <div class="mod-card cie" onclick="openMod('cie',1)">
           <div class="mod-done-badge">✓</div>
-          <div class="mod-num cie">Módulo 4</div>
-          <div class="mod-title">Hábitos saudáveis e alimentação</div>
-          <div class="mod-tags"><span class="tag cie">saúde</span><span class="tag cie">nutrição</span></div>
+          <div class="mod-num cie">Módulo 7</div>
+          <div class="mod-title">Impactos Ambientais</div>
+          <div class="mod-tags"><span class="tag cie">desmatamento</span><span class="tag cie">poluição</span></div>
         </div>
         <div class="mod-card cie" onclick="openMod('cie',2)">
           <div class="mod-done-badge">✓</div>
-          <div class="mod-num cie">Módulo 5</div>
-          <div class="mod-title">Recursos naturais</div>
-          <div class="mod-tags"><span class="tag cie">meio ambiente</span><span class="tag cie">energia</span></div>
+          <div class="mod-num cie">Módulo 8</div>
+          <div class="mod-title">Um Planeta com Vida</div>
+          <div class="mod-tags"><span class="tag cie">sustentabilidade</span><span class="tag cie">ODS</span></div>
+        </div>
+        <div class="mod-card cie" onclick="openMod('cie',3)">
+          <div class="mod-done-badge">✓</div>
+          <div class="mod-num cie">Módulo 9</div>
+          <div class="mod-title">Instrumentos Ópticos e Mapas Celestes</div>
+          <div class="mod-tags"><span class="tag cie">lentes</span><span class="tag cie">astronomia</span></div>
         </div>
       </div>
     </div>
 
-    <!-- ING -->
-    <div id="panel-ing" class="subject-panel">
-      <div class="panel-label">
-        <span class="panel-pill ing">🇬🇧 Inglês</span>
-        <span class="panel-count">3 módulos</span>
-      </div>
-      <div class="mod-grid">
-        <div class="mod-card ing" onclick="openMod('ing',0)">
-          <div class="mod-done-badge">✓</div>
-          <div class="mod-num ing">Módulo 1</div>
-          <div class="mod-title">Rotina diária e família</div>
-          <div class="mod-tags"><span class="tag ing">simple present</span><span class="tag ing">family</span></div>
-        </div>
-        <div class="mod-card ing" onclick="openMod('ing',1)">
-          <div class="mod-done-badge">✓</div>
-          <div class="mod-num ing">Módulo 2</div>
-          <div class="mod-title">Comparativos e localização</div>
-          <div class="mod-tags"><span class="tag ing">comparatives</span><span class="tag ing">prepositions</span></div>
-        </div>
-        <div class="mod-card ing" onclick="openMod('ing',2)">
-          <div class="mod-done-badge">✓</div>
-          <div class="mod-num ing">Módulo 3</div>
-          <div class="mod-title">Leitura e vocabulário do dia a dia</div>
-          <div class="mod-tags"><span class="tag ing">reading</span><span class="tag ing">vocabulary</span></div>
-        </div>
-      </div>
-    </div>
-
+  
   </div><!-- /painel-view -->
 
   <!-- INTERPRETAÇÃO VIEW -->
@@ -587,75 +571,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 <script>
 const data = {
   geo: [
-    {
-      num:"Módulo 3", title:"Indo e voltando na cidade", sub:"Meios de transporte e mobilidade urbana",
-      resumo:[
-        {h:"Transporte coletivo",p:"O ônibus é o principal transporte coletivo nas cidades brasileiras — acessível e capaz de transportar muitas pessoas ao mesmo tempo. Trem e metrô funcionam sobre trilhos: o metrô opera subterrâneo ou elevado em grandes centros, enquanto o trem conecta cidades e regiões. Ambos reduzem congestionamentos."},
-        {h:"Automóveis e congestionamentos",p:"O automóvel oferece flexibilidade, mas causa congestionamentos, poluição e exige infraestrutura cara. Os congestionamentos surgem do excesso de veículos nos horários de pico e geram perda de tempo, estresse e prejuízos econômicos."},
-        {h:"Transporte aquático e aéreo",p:"Embarcações são essenciais na Amazônia e no litoral brasileiro. O avião é o mais rápido para longas distâncias, mas tem custo elevado e depende de aeroportos."},
-        {h:"Transporte de mercadorias",p:"Caminhões são o principal meio de carga no Brasil pela flexibilidade. Navios dominam o comércio internacional. Trens de carga são eficientes para grandes volumes em terra. Aviões de carga transportam itens urgentes ou perecíveis."},
-        {h:"Ontem e hoje",p:"Antes: tração animal, carroças, trens a vapor, cartas. Hoje: veículos motorizados, aviões a jato, comunicação instantânea. Os avanços trouxeram velocidade e alcance global, mas também poluição e congestionamentos."}
-      ],
-      flashcards:[
-        {q:"Qual é o principal transporte coletivo nas cidades brasileiras?",a:"O ônibus.",ctx:"Ele é o mais usado porque é acessível economicamente e consegue transportar muitas pessoas ao mesmo tempo, reduzindo o número de carros nas ruas."},
-        {q:"Qual a diferença entre metrô e trem?",a:"O metrô é subterrâneo ou elevado, usado em grandes centros. O trem conecta diferentes cidades e regiões.",ctx:"Os dois andam sobre trilhos, mas o metrô serve para circular dentro de uma cidade grande, enquanto o trem liga cidades diferentes."},
-        {q:"Por que os automóveis causam congestionamentos?",a:"Porque há mais veículos do que a infraestrutura suporta, especialmente nos horários de pico.",ctx:"Horário de pico = quando muitas pessoas saem para o trabalho/escola ou voltam para casa ao mesmo tempo."},
-        {q:"Cite 3 consequências dos congestionamentos.",a:"Perda de tempo, aumento da poluição e estresse para os motoristas (também: prejuízos econômicos).",ctx:"Atenção: causas são o que gera o congestionamento. Consequências são o que o congestionamento causa. São coisas diferentes!"},
-        {q:"Em que regiões o transporte aquático é essencial no Brasil?",a:"Na Amazônia e no litoral brasileiro.",ctx:"Nessas regiões há muita água — rios, lagos e mar — e o barco acaba sendo o único jeito de chegar a certos lugares."},
-        {q:"Qual o principal meio de transporte de cargas no Brasil?",a:"O caminhão.",ctx:"O Brasil tem uma malha rodoviária extensa, por isso o caminhão consegue chegar a praticamente qualquer lugar do país."}
-      ],
-      quiz:[
-        {q:"Qual meio de transporte é mais acessível economicamente para a população nas cidades brasileiras?",opts:["Automóvel","Avião","Ônibus","Navio"],c:2,feedback:"O ônibus é o transporte coletivo mais acessível. Automóveis têm custo alto de manutenção e combustível, e aviões são caros demais para o dia a dia."},
-        {q:"O metrô geralmente funciona de que forma?",opts:["Sobre estradas de terra","Subterrâneo ou elevado","Somente na superfície","Sobre a água"],c:1,feedback:"O metrô é construído subterrâneo (embaixo da terra) ou elevado (em cima de estruturas) para não interferir no trânsito das ruas."},
-        {q:"O que são 'horários de pico'?",opts:["Horários com menos trânsito","Horários noturnos vazios","Horários em que mais pessoas se deslocam ao mesmo tempo","Horários de manutenção das vias"],c:2,feedback:"'Pico' = momento de maior movimento — geralmente de manhã cedo e no fim da tarde, quando todos saem ou voltam ao mesmo tempo."},
-        {q:"Qual meio de transporte domina o comércio internacional de mercadorias?",opts:["Caminhão","Trem de carga","Navio cargueiro","Avião de carga"],c:2,feedback:"Navios cargueiros transportam enormes volumes entre países a um custo baixo por tonelada. Por isso dominam o comércio internacional."},
-        {q:"Qual era típico do passado e raramente visto hoje no transporte cotidiano?",opts:["Automóvel","Carroça de tração animal","Ônibus","Metrô"],c:1,feedback:"A carroça puxada por animais era o transporte comum antes dos motores. Hoje é raridade nas cidades, substituída por veículos motorizados."}
-      ]
-    },
-    {
-      num:"Módulo 4", title:"Transformações dos espaços pela sociedade", sub:"Urbanização e verticalização",
-      resumo:[
-        {h:"O espaço geográfico",p:"Desde sempre, os seres humanos modificam a natureza para atender suas necessidades. Ruas, pontes, encanamentos, iluminação e edifícios são exemplos. O resultado é o espaço geográfico — produto da interação entre elementos naturais e ações humanas."},
-        {h:"Cidades e transformações históricas",p:"A partir do século XVIII, as cidades foram transformadas com fábricas, locomotivas a vapor, casas operárias, postes de luz e infraestrutura moderna. O crescimento da frota de automóveis forçou o alargamento das ruas e criou novas profissões."},
-        {h:"Verticalização",p:"Verticalização é o processo de construção de edifícios altos para abrigar mais pessoas em menos espaço. Surgiu por dois motivos: aumento populacional nas cidades e escassez de terrenos. Gerou profissões como porteiros e zeladores."}
-      ],
-      flashcards:[
-        {q:"O que é espaço geográfico?",a:"O espaço resultante da interação entre elementos naturais e ações humanas.",ctx:"Espaço natural = natureza intocada. Espaço geográfico = quando as pessoas modificam esse espaço (constroem, plantam, etc.)."},
-        {q:"O que transformou radicalmente as cidades a partir do século XVIII?",a:"A Revolução Industrial: fábricas, locomotivas a vapor, casas operárias e infraestrutura moderna.",ctx:"Século XVIII = anos 1700. As máquinas mudaram tudo — as pessoas foram para as cidades trabalhar e elas cresceram rapidamente."},
-        {q:"O que é verticalização?",a:"O processo de construção de edifícios altos para abrigar mais pessoas em espaço reduzido.",ctx:"'Vertical' = para cima. Quando não há mais terreno disponível, a solução foi construir prédios cada vez mais altos."},
-        {q:"Quais as duas causas principais da verticalização?",a:"Aumento populacional acelerado e escassez de áreas para expansão horizontal.",ctx:"Mais gente + pouco espaço = construir para cima. Esse raciocínio de causa e efeito costuma cair em provas."},
-        {q:"Quais profissões surgiram com a verticalização?",a:"Porteiros, zeladores e profissionais de manutenção e administração de edifícios.",ctx:"Cada mudança na sociedade cria novas necessidades — e novas necessidades criam novos empregos."}
-      ],
-      quiz:[
-        {q:"O que é o espaço geográfico?",opts:["Apenas a natureza intocada","O resultado da interação entre natureza e ações humanas","Somente as cidades grandes","As áreas rurais do país"],c:1,feedback:"Espaço geográfico = natureza + ação humana. Quando o ser humano modifica a natureza (constrói uma rua, por ex.), aquele espaço vira geográfico."},
-        {q:"A verticalização surgiu como resposta a qual problema?",opts:["Desmatamento e poluição","Falta de trabalhadores","Aumento populacional e escassez de espaço","Crise no transporte"],c:2,feedback:"Com mais gente nas cidades e menos terrenos disponíveis, a solução foi construir para cima. É uma relação de causa e consequência — leia sempre esse tipo de questão com atenção."},
-        {q:"Por que as ruas das cidades precisaram ser alargadas?",opts:["Para plantação de árvores","Para o crescente uso de automóveis","Para passagem de trens","Para construção de calçadas"],c:1,feedback:"As ruas antigas eram estreitas para pedestres e carroças. Com os carros, precisaram ser ampliadas. Uma mudança na tecnologia muda a cidade inteira."},
-        {q:"Desde quando as cidades passaram por grandes transformações com fábricas e locomotivas?",opts:["Século XV","Século XVI","Século XVII","Século XVIII"],c:3,feedback:"Século XVIII = anos 1700. Foi quando a Revolução Industrial começou e as cidades começaram a se transformar rapidamente."},
-        {q:"Que nova profissão surgiu com a verticalização das cidades?",opts:["Mecânico de automóveis","Motorista de ônibus","Porteiro de edifício","Atendente de posto de gasolina"],c:2,feedback:"Prédios altos precisam de pessoas para controlar a entrada e fazer manutenção. Mecânicos e motoristas surgiram por causa dos automóveis — cada invenção cria empregos novos."}
-      ]
-    },
-    {
-      num:"Módulo 5", title:"Recursos naturais e consumo", sub:"Meio ambiente e sustentabilidade",
-      resumo:[
-        {h:"O que são recursos naturais",p:"Recursos naturais são elementos da natureza usados pelas pessoas no dia a dia: água, solo, ar, plantas e minerais. São essenciais para alimentação, produção de energia, construção de moradias e fabricação de produtos."},
-        {h:"Impactos ambientais",p:"Quando os recursos são usados em excesso ou sem cuidado, surgem impactos ambientais: desmatamento, poluição da água e do ar, perda da biodiversidade e mudanças climáticas."},
-        {h:"Sociedade de consumo e consumo consciente",p:"A sociedade de consumo é marcada pela compra frequente de produtos, gerando mais lixo e explorando mais recursos. A solução está no consumo consciente: reutilizar materiais, reciclar e comprar apenas o necessário."}
-      ],
-      flashcards:[
-        {q:"O que são recursos naturais? Dê três exemplos.",a:"Elementos da natureza usados pelas pessoas. Exemplos: água, solo, ar, plantas, minerais.",ctx:"Cuidado: recursos naturais vêm da natureza. Celular, plástico e tinta NÃO são recursos naturais — são produtos feitos COM recursos naturais."},
-        {q:"O que é impacto ambiental? Cite dois exemplos.",a:"Dano causado ao meio ambiente pelo uso excessivo ou descuidado dos recursos. Exemplos: desmatamento e poluição da água.",ctx:"Perguntas de prova costumam pedir que você cite exemplos — treinar essa lista ajuda muito."},
-        {q:"O que é a sociedade de consumo?",a:"Aquela caracterizada pela compra frequente de produtos e serviços, gerando mais lixo e maior exploração dos recursos naturais.",ctx:"'Caracterizada' = 'definida por', 'marcada por'. Quando uma pergunta usa esse termo, ela quer a definição principal do conceito."},
-        {q:"O que é consumo consciente? Cite três atitudes.",a:"Consumir de forma responsável: reutilizar materiais, reciclar e comprar apenas o necessário.",ctx:"Reutilizar = usar de novo. Reciclar = transformar em outro produto. Comprar menos = menos lixo. Cada atitude reduz o impacto no meio ambiente."},
-        {q:"Cite quatro impactos ambientais.",a:"Desmatamento, poluição da água, poluição do ar e perda da biodiversidade.",ctx:"Biodiversidade = variedade de seres vivos. Quando desmatamos, animais e plantas perdem seu habitat e podem desaparecer."}
-      ],
-      quiz:[
-        {q:"Qual dos itens abaixo NÃO é um recurso natural?",opts:["Água","Solo","Celular","Ar"],c:2,feedback:"O celular é fabricado pelo ser humano usando recursos naturais, mas ele mesmo não é um recurso natural. Atenção à palavra 'NÃO' nas questões — ela inverte completamente a resposta!"},
-        {q:"O desmatamento é um exemplo de:",opts:["Consumo consciente","Impacto ambiental","Recurso natural","Verticalização"],c:1,feedback:"O desmatamento é uma consequência do uso irresponsável dos recursos. Ele destrói florestas, prejudica animais e altera o clima — é um impacto ambiental."},
-        {q:"A sociedade de consumo é caracterizada por:",opts:["Uso sustentável da natureza","Reciclagem intensa","Compra frequente de produtos e serviços","Preservação da biodiversidade"],c:2,feedback:"'Caracterizada' pede a definição principal. A sociedade de consumo se define pela compra excessiva — que gera lixo e explora mais recursos."},
-        {q:"O que é correto fazer para reduzir o impacto ambiental do consumo?",opts:["Comprar mais produtos","Reutilizar e reciclar materiais","Ignorar os impactos","Aumentar a produção industrial"],c:1,feedback:"Reutilizar e reciclar são atitudes do consumo consciente. Quando reutiliza, evita que o item vire lixo. Quando recicla, o material volta para uso — menos recurso natural é explorado."},
-        {q:"Qual é a relação entre consumo excessivo e recursos naturais?",opts:["Não há relação","Consumo excessivo preserva os recursos","Consumo excessivo aumenta a exploração dos recursos","Consumo excessivo não gera lixo"],c:2,feedback:"Mais consumo → mais produção → mais exploração da natureza → mais lixo. É uma cadeia de causa e consequência. Entender essa relação é fundamental para questões de interpretação."}
-      ]
-    },
+
     {
       num:"Módulo 6", title:"Fontes de Energia", sub:"Matrizes energéticas e sustentabilidade",
       resumo:[
@@ -681,6 +597,7 @@ const data = {
         {q:"Sobre a matriz elétrica brasileira, é correto afirmar que:",opts:["É totalmente dependente de combustíveis fósseis","É predominantemente renovável, com destaque para a energia hidráulica","Não usa nenhuma fonte renovável","É idêntica em todos os países do mundo"],c:1,feedback:"O Brasil possui uma das matrizes elétricas mais renováveis do mundo — cerca de 88% vem de fontes renováveis, principalmente hidrelétricas."}
       ]
     },
+
     {
       num:"Módulo 7", title:"O Lixo e Seus Problemas", sub:"Produção, destinação e os 3 Rs",
       resumo:[
@@ -702,6 +619,7 @@ const data = {
         {q:"Qual é a ordem correta e o significado dos 3 Rs?",opts:["Reciclar, Reduzir, Reutilizar","Reduzir, Reutilizar, Reciclar","Reutilizar, Reciclar, Reduzir","Os 3 Rs não têm ordem específica"],c:1,feedback:"A ordem lógica é: Reduzir (evitar gerar lixo), Reutilizar (dar novo uso) e Reciclar (transformar em novo produto) — do impacto menor para o maior esforço de reprocessamento."}
       ]
     },
+
     {
       num:"Módulo 8", title:"Poluição do ar, da água e visual", sub:"Tipos de poluição e como combatê-la",
       resumo:[
@@ -726,6 +644,7 @@ const data = {
         {q:"Quais são exemplos de fontes de energia limpa?",opts:["Petróleo e carvão","Solar e eólica","Gasolina e diesel","Queima de combustíveis"],c:1,feedback:"Energia solar (do sol) e eólica (do vento) não emitem poluentes na queima, por isso ajudam a reduzir a poluição do ar — diferente de petróleo, carvão e combustíveis fósseis."}
       ]
     },
+
     {
       num:"Módulo 9", title:"As Regiões do Brasil", sub:"Regionalização do território brasileiro",
       resumo:[
@@ -751,147 +670,8 @@ const data = {
       ]
     }
   ],
-  mat: [
-    {
-      num:"Módulo 3", title:"Combinações e equivalências", sub:"Princípio multiplicativo e igualdade matemática",
-      resumo:[
-        {h:"Combinações e princípio multiplicativo",p:"Combinações são as possibilidades de escolha entre opções diferentes. Para calcular o total, usamos o Princípio Multiplicativo: multiplicamos o número de opções de cada grupo. Exemplo: 2 cores de camiseta × 4 cores de calça = 8 combinações."},
-        {h:"Árvore de possibilidades",p:"A árvore de possibilidades é um diagrama que lista todas as combinações de forma organizada. Para 3 livros em ordens diferentes: começa pelo primeiro e ramifica as opções restantes. Total: 3 × 2 × 1 = 6 ordens possíveis."},
-        {h:"Noção de equivalência",p:"A balança de dois pratos representa a igualdade matemática. Dois lados com mesmo valor = igualdade (=). Valores diferentes = desigualdade (≠). Para preservar a igualdade, tudo que fazemos de um lado devemos fazer do outro. Representação algébrica: letras representam valores desconhecidos. Exemplo: Y + 7 = 13 → Y = 6."}
-      ],
-      flashcards:[
-        {q:"O que é o Princípio Multiplicativo?",a:"É o método de calcular o total de combinações multiplicando o número de opções de cada grupo.",ctx:"Exemplo: 3 sabores de sorvete × 2 tipos de casquinha = 6 combinações. Sempre que tiver opções que se combinam, você multiplica — não soma!"},
-        {q:"Como calcular combinações com 4 camisetas e 3 calças?",a:"4 × 3 = 12 combinações possíveis.",ctx:"O princípio multiplicativo funciona para qualquer situação com escolhas independentes (uma não afeta a outra)."},
-        {q:"O que é uma árvore de possibilidades?",a:"Um diagrama que organiza e lista todas as combinações possíveis de forma visual.",ctx:"Útil para números pequenos. Para números grandes, o Princípio Multiplicativo é mais rápido. A prova pode pedir qualquer um dos dois."},
-        {q:"O que significa igualdade matemática?",a:"Que os dois lados de uma expressão têm o mesmo valor, representados pelo sinal '='.",ctx:"Pense na balança: dois pratos no mesmo nível = equilibrado = igualdade. Um prato descendo = desequilibrado = desigualdade (≠)."},
-        {q:"Se Y + 7 = 13, qual o valor de Y?",a:"Y = 6, pois 6 + 7 = 13.",ctx:"Para descobrir o valor da letra: 'qual número somado com 7 dá 13?' Ou faça: 13 − 7 = 6. Esse raciocínio vale para qualquer equação simples."}
-      ],
-      quiz:[
-        {q:"Uma lanchonete tem 3 tipos de suco e 4 tipos de sanduíche. Quantas combinações são possíveis?",opts:["7","12","3","4"],c:1,feedback:"3 × 4 = 12. O Princípio Multiplicativo diz: multiplique as opções de cada grupo. Não some — quando as escolhas se combinam, a operação é a multiplicação!"},
-        {q:"Usando os algarismos 1, 2 e 3 sem repetir, quantos números de 2 algarismos posso formar?",opts:["3","4","6","9"],c:2,feedback:"São: 12, 13, 21, 23, 31, 32 → 6 combinações. Você pode listar (como na árvore) ou calcular: 3 opções para o 1º algarismo × 2 restantes = 6."},
-        {q:"O sinal '≠' representa:",opts:["Igualdade","Desigualdade","Multiplicação","Soma"],c:1,feedback:"'≠' significa 'diferente de' — é o sinal de desigualdade. Quando os dois lados não têm o mesmo valor, usamos ≠."},
-        {q:"Se Y + 5 = 12, qual é o valor de Y?",opts:["5","6","7","17"],c:2,feedback:"Y = 7, porque 7 + 5 = 12. Para encontrar Y: 'qual número somado com 5 dá 12?' Ou faça: 12 − 5 = 7."},
-        {q:"Se 8 + 2 = 10, o que acontece se adicionarmos 3 nos dois lados?",opts:["A igualdade deixa de existir","Ficamos com 11 = 10","Ficamos com 13 = 13","Ficamos com 8 + 2 = 13"],c:2,feedback:"(8+2)+3 = 13 e 10+3 = 13. A igualdade se preserva porque fizemos a mesma coisa nos dois lados — como adicionar o mesmo peso nos dois pratos da balança."}
-      ]
-    },
-    {
-      num:"Módulo 4", title:"Figuras geométricas planas", sub:"Polígonos, triângulos, quadriláteros, área e perímetro",
-      resumo:[
-        {h:"Figuras planas e polígonos",p:"Figuras planas têm apenas duas dimensões: comprimento e largura. Polígonos são figuras planas fechadas formadas por segmentos de reta. Regulares: todos os lados e ângulos iguais (ex: quadrado, triângulo equilátero). Não regulares: lados ou ângulos diferentes (ex: retângulo, triângulo escaleno)."},
-        {h:"Triângulos",p:"Triângulos têm 3 lados, 3 vértices e 3 ângulos. Classificação pelos lados: Equilátero (3 lados iguais), Isósceles (2 lados iguais), Escaleno (3 lados diferentes)."},
-        {h:"Quadriláteros",p:"Quadriláteros têm 4 lados, 4 vértices e 4 ângulos. Tipos: Quadrado (4 lados iguais + 4 ângulos retos), Retângulo (lados opostos iguais + 4 ângulos retos), Losango (4 lados iguais + ângulos ≠ 90°), Trapézio (1 par de lados paralelos), Paralelogramo (lados opostos paralelos e iguais)."},
-        {h:"Perímetro e área",p:"Perímetro = medida do contorno → soma todos os lados. Área = medida da superfície ocupada. Área do quadrado = lado × lado. Área do retângulo = base × altura. Unidades: cm² para superfícies pequenas, m² para grandes (1 m² = 10.000 cm²)."}
-      ],
-      flashcards:[
-        {q:"Qual a diferença entre polígono regular e não regular?",a:"Regular: todos os lados e ângulos iguais. Não regular: lados ou ângulos diferentes.",ctx:"Cuidado: o retângulo tem 4 ângulos retos, mas não é regular — seus lados adjacentes têm medidas diferentes. O quadrado sim é regular."},
-        {q:"Como se classificam os triângulos quanto aos lados?",a:"Equilátero (3 lados iguais), Isósceles (2 lados iguais), Escaleno (3 lados diferentes).",ctx:"Dica: Equilátero = 'equi' (igual), todos iguais. Isósceles = 'iso' (mesmo), dois iguais. Escaleno = todos diferentes."},
-        {q:"Qual a diferença entre quadrado e losango?",a:"Os dois têm 4 lados iguais, mas o quadrado tem 4 ângulos retos (90°) e o losango tem ângulos diferentes de 90°.",ctx:"Essa diferença cai muito em prova. Quadrado: lados iguais E ângulos retos. Losango: lados iguais mas ângulos inclinados."},
-        {q:"Como calcular o perímetro de um retângulo com lados 6 cm e 4 cm?",a:"P = 6 + 4 + 6 + 4 = 20 cm.",ctx:"Perímetro é o contorno — como se você andasse em volta da figura. Retângulo tem 4 lados: 2 comprimentos e 2 larguras. Some todos."},
-        {q:"Como calcular a área de um quadrado de lado 5 cm?",a:"Área = 5 × 5 = 25 cm².",ctx:"Não confunda com perímetro (5+5+5+5 = 20 cm). Área mede a superfície; perímetro mede o contorno. São medidas totalmente diferentes!"}
-      ],
-      quiz:[
-        {q:"Um triângulo com 3 lados iguais é chamado de:",opts:["Isósceles","Escaleno","Equilátero","Retângulo"],c:2,feedback:"Equilátero vem de 'equi' (igual) + 'látero' (lado). Todos os 3 lados têm a mesma medida. Isósceles tem 2 lados iguais. Escaleno tem todos diferentes."},
-        {q:"O que diferencia o quadrado do losango?",opts:["O quadrado tem 4 lados iguais e o losango não","O quadrado tem 4 ângulos retos (90°) e o losango não","O losango tem mais lados","O quadrado não é um polígono"],c:1,feedback:"Tanto o quadrado quanto o losango têm 4 lados iguais. A diferença está nos ângulos: o quadrado tem todos em 90°, o losango tem ângulos inclinados."},
-        {q:"Um retângulo tem lados de 8 cm e 3 cm. Qual é o perímetro?",opts:["11 cm","22 cm","24 cm","16 cm"],c:1,feedback:"Perímetro = soma de todos os lados = 8 + 3 + 8 + 3 = 22 cm. Retângulo tem 4 lados: 2 de 8 cm e 2 de 3 cm. Não é só 8+3!"},
-        {q:"Um quadrado tem lado de 6 cm. Qual é a área?",opts:["12 cm²","24 cm²","36 cm²","18 cm²"],c:2,feedback:"Área do quadrado = lado × lado = 6 × 6 = 36 cm². Não confunda com perímetro (6×4 = 24 cm). Área = superfície; perímetro = contorno."},
-        {q:"Polígonos regulares são aqueles que possuem:",opts:["Apenas lados iguais","Apenas ângulos iguais","Todos os lados e ângulos iguais","Pelo menos um ângulo reto"],c:2,feedback:"Regular = lados E ângulos todos iguais. Se só um deles for igual, não é regular. O retângulo tem 4 ângulos retos mas lados diferentes — por isso não é regular."}
-      ]
-    },
-    {
-      num:"Módulo 5", title:"Múltiplos, divisores, MMC e MDC", sub:"Números primos, compostos e fatoração",
-      resumo:[
-        {h:"Múltiplos e divisores",p:"Múltiplos de um número: resultados de multiplicá-lo por 0, 1, 2, 3... São infinitos. Exemplo: múltiplos de 4 → 0, 4, 8, 12, 16... Divisores de um número: os que o dividem exatamente, sem resto. São finitos. Exemplo: divisores de 12 → 1, 2, 3, 4, 6, 12."},
-        {h:"Números primos e compostos",p:"Número primo: tem exatamente dois divisores — 1 e ele mesmo. Exemplos: 2, 3, 5, 7, 11, 13. Número composto: tem mais de dois divisores. Exemplos: 4, 6, 8, 9, 12. Atenção: o número 1 NÃO é primo nem composto!"},
-        {h:"MMC e MDC",p:"MMC (Mínimo Múltiplo Comum): o menor múltiplo que dois ou mais números têm em comum. Exemplo: MMC(4,6) = 12. MDC (Máximo Divisor Comum): o maior divisor que dois ou mais números têm em comum. Exemplo: MDC(12,18) = 6."}
-      ],
-      flashcards:[
-        {q:"Qual a diferença entre múltiplos e divisores?",a:"Múltiplos = resultados de multiplicar (infinitos). Divisores = os que dividem sem resto (finitos).",ctx:"Exemplo com o 6: Múltiplos de 6 → 0, 6, 12, 18... (infinitos). Divisores de 6 → 1, 2, 3, 6 (apenas 4). Prova pede muito essa diferença!"},
-        {q:"O que é um número primo? Cite três exemplos.",a:"Tem exatamente dois divisores: 1 e ele mesmo. Exemplos: 2, 3, 5 (ou 7, 11, 13...).",ctx:"Atenção: o número 1 NÃO é primo (tem só um divisor). O número 2 é o único primo par. Todos os outros primos são ímpares."},
-        {q:"O número 1 é primo, composto ou nenhum dos dois?",a:"Nenhum dos dois. O número 1 não é primo nem composto.",ctx:"Primo precisa de DOIS divisores. O 1 tem apenas um (ele mesmo). Por isso foi excluído. Essa é uma pergunta-armadilha clássica de prova!"},
-        {q:"O que é MMC? Dê um exemplo.",a:"Mínimo Múltiplo Comum — o menor múltiplo que dois números têm em comum. Ex: MMC(4,6) = 12.",ctx:"Múltiplos de 4: 4, 8, 12... Múltiplos de 6: 6, 12... O menor que aparece nos dois é 12. Cuidado para não confundir MMC com MDC!"},
-        {q:"O que é MDC? Dê um exemplo.",a:"Máximo Divisor Comum — o maior divisor que dois números têm em comum. Ex: MDC(12,18) = 6.",ctx:"Divisores de 12: 1,2,3,4,6,12. Divisores de 18: 1,2,3,6,9,18. Os comuns: 1,2,3,6. O maior é 6. MDC = o MAIOR divisor comum."}
-      ],
-      quiz:[
-        {q:"Quais são os múltiplos de 5 entre 10 e 30?",opts:["10, 15, 20, 25, 30","5, 10, 15, 20","15, 20, 25","10, 20, 30"],c:0,feedback:"Múltiplos de 5: 0, 5, 10, 15, 20, 25, 30... Entre 10 e 30 (incluindo): 10, 15, 20, 25, 30. Múltiplos de 5 sempre terminam em 0 ou 5."},
-        {q:"Qual dos números abaixo é primo?",opts:["4","6","9","7"],c:3,feedback:"7 é primo — seus únicos divisores são 1 e 7. Os outros: 4 = 2×2, 6 = 2×3, 9 = 3×3. Todos têm mais de dois divisores, portanto são compostos."},
-        {q:"O número 1 é:",opts:["Primo","Composto","Primo e composto","Nem primo nem composto"],c:3,feedback:"O 1 é um caso especial — não se encaixa em nenhuma das categorias. Primo precisa de dois divisores; o 1 só tem um (ele mesmo). Pegadinha clássica!"},
-        {q:"Qual é o MMC de 4 e 6?",opts:["2","6","10","12"],c:3,feedback:"Múltiplos de 4: 4, 8, 12... Múltiplos de 6: 6, 12... O menor múltiplo comum é 12. O 2 seria o MDC(4,6), não o MMC — cuidado para não confundir!"},
-        {q:"Qual é o MDC de 12 e 18?",opts:["2","3","6","9"],c:2,feedback:"Divisores de 12: 1,2,3,4,6,12. Divisores de 18: 1,2,3,6,9,18. Os comuns: 1,2,3,6. O MAIOR é 6. MDC = Máximo (maior) Divisor Comum."}
-      ]
-    }
-  ],
   his: [
-    {
-      num:"Módulo 3", title:"A Escrita e o Registro Histórico", sub:"Origem e evolução da escrita",
-      resumo:[
-        {h:"Por que a escrita surgiu?",p:"Os seres humanos sempre precisaram se comunicar. Antes da escrita, usavam a fala e faziam pinturas rupestres em pedras — algumas com mais de 50 mil anos (no Brasil, cerca de 15 mil anos). Com o desenvolvimento do comércio e das sociedades, surgiu a necessidade de registrar informações: compras, vendas, estoques, leis e ensinamentos religiosos."},
-        {h:"Os Sumérios e a escrita cuneiforme",p:"A escrita surgiu por volta de 3.300 a.C. com os sumérios, na Mesopotâmia (atual Iraque, Irã e Jordânia). Criaram a escrita cuneiforme — feita com uma ferramenta em forma de cunha em placas de argila. Foram um dos primeiros povos a desenvolver a escrita, mas não os únicos."},
-        {h:"Os Egípcios e seus três sistemas",p:"Os egípcios desenvolveram três tipos de escrita por volta de 3.000 a.C.: hieroglífica (desenhos e símbolos, usada em templos e textos religiosos), hierática (forma cursiva do dia a dia dos escribas) e demótica (mais simplificada, para atividades comuns). Pouquíssimas pessoas sabiam ler e escrever — era função dos escribas."},
-        {h:"Os Fenícios e o alfabeto",p:"O alfabeto fonético atual tem origem nos fenícios (por volta de 1200 a.C.), povo do Mediterrâneo (atual Líbano e Síria) que se destacava no comércio. Com apenas 22 letras, cada som (fonema) correspondia a uma letra. Os gregos acrescentaram as vogais, tornando-o mais parecido com o que usamos hoje."},
-        {h:"Código de Hamurabi e a escrita hoje",p:"O Código de Hamurabi é um dos primeiros conjuntos de leis da história — baseado na Lei de Talião ('olho por olho, dente por dente'). No mundo digital, a escrita continua presente em sites, redes sociais e blogs, com novas características: abreviações e emojis para agilizar a comunicação."}
-      ],
-      flashcards:[
-        {q:"Qual povo criou a escrita cuneiforme e onde viviam?",a:"Os sumérios, na Mesopotâmia (atual Iraque, Irã e Jordânia), por volta de 3.300 a.C.",ctx:"Cuneiforme vem de 'cunha' — a ferramenta usada para marcar símbolos nas placas de argila. É uma das escritas mais antigas do mundo."},
-        {q:"Quais os três tipos de escrita dos egípcios?",a:"Hieroglífica (templos/religião), hierática (escribas/dia a dia) e demótica (população/documentos comuns).",ctx:"Dica para memorizar: Hieroglífica = mais elaborada, religiosa. Hierática = mais simples. Demótica = mais popular. Cada uma tinha seu público."},
-        {q:"O que os fenícios criaram e por que foi importante?",a:"O alfabeto fonético com 22 letras, onde cada som corresponde a uma letra — facilitou muito a comunicação e o comércio.",ctx:"Os gregos melhoraram o alfabeto fenício acrescentando as vogais, criando a base do alfabeto que usamos até hoje."},
-        {q:"O que é a Lei de Talião e onde aparece?",a:"A ideia de que a punição deve ser proporcional ao crime ('olho por olho'). Aparece no Código de Hamurabi.",ctx:"Hamurabi foi um rei da Babilônia. O Código de Hamurabi é considerado um dos primeiros conjuntos de leis escritas da história."},
-        {q:"Por que a invenção da escrita foi uma revolução?",a:"Permitiu registrar e preservar informações ao longo do tempo, transmitindo conhecimento entre gerações e lugares.",ctx:"Antes da escrita, o conhecimento dependia da memória e da fala. Com ela, foi possível criar leis, registrar a história e comunicar a distância."}
-      ],
-      quiz:[
-        {q:"Qual povo é considerado um dos primeiros a desenvolver a escrita?",opts:["Egípcios","Fenícios","Sumérios","Gregos"],c:2,feedback:"Os sumérios criaram a escrita cuneiforme por volta de 3.300 a.C. na Mesopotâmia — uma das regiões mais antigas de civilização do mundo."},
-        {q:"A escrita hieroglífica egípcia era usada principalmente em:",opts:["Documentos comerciais","Registros de impostos","Templos e textos religiosos","Cartas pessoais"],c:2,feedback:"Os hieróglifos eram elaborados e de difícil execução — por isso usados em templos e textos sagrados. Para o dia a dia, os escribas usavam a escrita hierática, mais simples."},
-        {q:"O que os gregos acrescentaram ao alfabeto fenício?",opts:["As consoantes","As vogais","Os números","Os hieróglifos"],c:1,feedback:"O alfabeto fenício tinha 22 letras, mas usava principalmente consoantes. Os gregos incluíram as vogais, tornando o sistema mais completo e parecido com o que usamos hoje."},
-        {q:"O Código de Hamurabi se baseia em qual princípio?",opts:["Perdão e reconciliação","Punição proporcional ao crime (Lei de Talião)","Igualdade entre ricos e pobres","Libertação dos escravos"],c:1,feedback:"A Lei de Talião — 'olho por olho, dente por dente' — significa que a punição deve ser equivalente ao crime cometido. Foi um avanço para a época ao tentar padronizar a justiça."},
-        {q:"Como a escrita se transformou no ambiente digital?",opts:["Desapareceu completamente","Ficou restrita a poucos","Ganhou abreviações e emojis, mas continua presente","Voltou a ser apenas visual"],c:2,feedback:"A escrita digital não sumiu — adaptou-se! Abreviações agilizam a comunicação e emojis expressam emoções. A escrita continua sendo o principal meio de comunicação online."}
-      ]
-    },
-    {
-      num:"Módulo 4", title:"Patrimônio Histórico e Cultural", sub:"Preservação da memória e identidade",
-      resumo:[
-        {h:"O que é patrimônio?",p:"Patrimônio histórico e cultural é o conjunto de bens materiais e imateriais de uma família, instituição ou país transmitido entre gerações. É fundamental para preservar a memória individual e coletiva, contribuindo para a formação da identidade de um povo."},
-        {h:"Patrimônio material e imaterial",p:"Material: construções, monumentos, objetos, fotografias e bens físicos que contam a história de um povo. Imaterial: tradições, danças, festas, receitas, músicas, línguas e manifestações culturais que refletem os valores e formas de pensar de uma comunidade."},
-        {h:"O Iphan",p:"Criado em 1937, o Iphan (Instituto do Patrimônio Histórico e Artístico Nacional) é o órgão do governo brasileiro que seleciona e preserva o patrimônio cultural do país — protegendo bens, atendendo solicitações da sociedade e garantindo que as gerações futuras possam conhecer o patrimônio nacional."},
-        {h:"Exemplos e importância",p:"Exemplo de patrimônio imaterial: o frevo, dança carnavalesca de Pernambuco, inscrito pelo Iphan em 2007. Para minorias étnicas e povos indígenas, o patrimônio imaterial é fonte essencial de identidade. Preservar esses bens mantém vivas tradições e valores, contribuindo para a diversidade cultural."}
-      ],
-      flashcards:[
-        {q:"Qual a diferença entre patrimônio material e imaterial?",a:"Material = bens físicos (monumentos, objetos, fotografias). Imaterial = manifestações culturais (danças, festas, línguas, receitas).",ctx:"Um prédio histórico é material — você pode tocá-lo. O frevo é imaterial — é uma dança, uma tradição viva. Ambos são patrimônio!"},
-        {q:"O que é o Iphan e quando foi criado?",a:"Instituto do Patrimônio Histórico e Artístico Nacional, criado em 1937. Órgão do governo brasileiro que preserva o patrimônio cultural.",ctx:"O Iphan decide o que merece ser protegido como patrimônio nacional — desde monumentos até tradições culturais como o frevo."},
-        {q:"Cite um exemplo de patrimônio imaterial protegido pelo Iphan.",a:"O frevo — dança carnavalesca típica de Pernambuco, inscrito em 2007 no Livro de Registro das Formas de Expressão.",ctx:"O frevo é reconhecido pela sua importância para a identidade cultural brasileira. Os dançarinos seguram uma sombrinha e movimentam pernas e braços rapidamente."},
-        {q:"Por que preservar o patrimônio cultural é importante?",a:"Para manter a memória coletiva, a identidade dos povos e a diversidade cultural para as gerações presentes e futuras.",ctx:"Imagine se as tradições de um povo fossem esquecidas — seria perder parte da sua história e identidade. A preservação garante que isso não aconteça."},
-        {q:"Cite três das 7 Maravilhas do Mundo Moderno.",a:"Taj Mahal, Machu Picchu, Cristo Redentor, Chichén Itzá, Coliseu, Muralha da China, Ruínas de Petra (qualquer 3).",ctx:"O Cristo Redentor, no Brasil, é a única maravilha do mundo moderno nas Américas do Sul. Machu Picchu fica no Peru e Chichén Itzá no México."}
-      ],
-      quiz:[
-        {q:"Qual das opções abaixo é um exemplo de patrimônio IMATERIAL?",opts:["Uma ponte histórica","O Coliseu romano","O frevo pernambucano","Um museu de arte"],c:2,feedback:"O frevo é uma dança — uma tradição viva, não um bem físico. Por isso é imaterial. Pontes, o Coliseu e museus são estruturas físicas — patrimônio material."},
-        {q:"O Iphan foi criado em qual ano?",opts:["1822","1889","1937","1964"],c:2,feedback:"O Iphan foi criado em 1937, durante o governo Vargas, para proteger e promover o patrimônio histórico e artístico brasileiro."},
-        {q:"Qual é a principal função do Iphan?",opts:["Organizar festivais culturais","Construir novos monumentos","Selecionar e preservar o patrimônio cultural do Brasil","Ensinar história nas escolas"],c:2,feedback:"O Iphan protege bens culturais materiais e imateriais, garantindo que o patrimônio nacional seja preservado para as próximas gerações."},
-        {q:"O Cristo Redentor pertence a qual lista?",opts:["Patrimônios da UNESCO","7 Maravilhas do Mundo Antigo","7 Maravilhas do Mundo Moderno","Patrimônio Imaterial Brasileiro"],c:2,feedback:"O Cristo Redentor é uma das 7 Maravilhas do Mundo Moderno — eleito em 2007 por votação mundial. É o símbolo mais reconhecido do Brasil no exterior."},
-        {q:"Por que o patrimônio imaterial é especialmente importante para povos indígenas e minorias étnicas?",opts:["Porque é mais fácil de preservar","Porque é fonte essencial de identidade e carrega sua própria história","Porque tem mais valor econômico","Porque é registrado em livros"],c:1,feedback:"Para comunidades que muitas vezes não têm monumentos ou registros escritos, as tradições, línguas e danças são o principal elo com sua história e identidade cultural."}
-      ]
-    },
-    {
-      num:"Módulo 5", title:"Das primeiras comunidades ao comércio", sub:"Nomadismo, sedentarismo e surgimento das civilizações",
-      resumo:[
-        {h:"Primeiras comunidades humanas",p:"Os primeiros seres humanos viviam da caça, da pesca e da coleta de frutos. Dependiam da natureza para sobreviver e utilizavam ferramentas simples feitas de pedra, madeira e ossos."},
-        {h:"Os nômades",p:"Os grupos humanos eram nômades — mudavam de lugar constantemente em busca de alimentos, água e abrigo. Não tinham moradia fixa."},
-        {h:"Agricultura e domesticação dos animais",p:"Com o tempo, as pessoas aprenderam a cultivar plantas e a domesticar animais (cabras, ovelhas, bois). Isso garantiu uma fonte mais estável de alimento e mudou tudo."},
-        {h:"Comunidades sedentárias",p:"A prática da agricultura permitiu que os grupos se fixassem em um mesmo lugar, formando comunidades sedentárias. Surgiram aldeias, casas permanentes e novas formas de organização social."},
-        {h:"O surgimento do comércio e povos nômades hoje",p:"Com a produção de excedentes (alimentos além do necessário), as pessoas passaram a trocar mercadorias — dando origem ao comércio. Ainda existem povos nômades hoje, como beduínos no deserto e pastores da África e da Ásia, que se deslocam em busca de água e pastagens."}
-      ],
-      flashcards:[
-        {q:"O que eram os grupos nômades?",a:"Grupos que mudavam de lugar constantemente em busca de alimentos, água e abrigo — sem moradia fixa.",ctx:"Nômade = sem lugar fixo. Pense em 'nomear' um destino diferente todo dia. O oposto é sedentário — quem fica parado no mesmo lugar."},
-        {q:"O que permitiu que os humanos se tornassem sedentários?",a:"A descoberta da agricultura e a domesticação de animais, que garantiram uma fonte estável de alimento.",ctx:"Causa e efeito: agricultura → alimento garantido → não precisam mais se deslocar → fixam-se em um lugar → surgem aldeias. Cada etapa leva à próxima!"},
-        {q:"O que são comunidades sedentárias?",a:"Comunidades que se fixaram em um mesmo lugar, formando aldeias com casas permanentes e organização social.",ctx:"'Sedentário' vem do latim 'sedere' = sentar. Quem é sedentário 'senta' no mesmo lugar. Com as aldeias surgiram regras, líderes e divisão de tarefas."},
-        {q:"Como surgiu o comércio nas primeiras civilizações?",a:"Com a produção de excedentes (mais alimento do que o necessário), as pessoas passaram a trocar mercadorias entre si.",ctx:"Excedente = sobra. Quando você produz mais do que precisa, pode trocar o que sobra por outra coisa. Essa troca é a origem do comércio — e do dinheiro, muito depois."},
-        {q:"Cite um exemplo de povo nômade que ainda existe hoje.",a:"Beduínos (deserto) e pastores de regiões da África e da Ásia, que se deslocam em busca de água e pastagens.",ctx:"O nomadismo não desapareceu totalmente — apenas ficou raro. Esses povos mantêm sua forma de vida tradicional, deslocando-se conforme as estações e recursos disponíveis."}
-      ],
-      quiz:[
-        {q:"O que caracterizava os grupos humanos nômades?",opts:["Viviam em cidades grandes","Mudavam de lugar em busca de alimentos e abrigo","Praticavam agricultura intensiva","Tinham casas permanentes"],c:1,feedback:"Nômades não tinham lugar fixo — se deslocavam constantemente atrás de alimento, água e abrigo. Só paravam quando encontravam o que precisavam."},
-        {q:"O que tornou possível o surgimento de comunidades sedentárias?",opts:["A invenção da escrita","O comércio com outros povos","A agricultura e a domesticação de animais","A construção de cidades"],c:2,feedback:"Com a agricultura, as pessoas garantiram alimento sem precisar se deslocar. Isso permitiu fixar-se em um lugar e formar as primeiras aldeias."},
-        {q:"O que é 'excedente' de produção?",opts:["A falta de alimentos","A produção além do necessário para consumo","O lixo gerado na colheita","A divisão igualitária dos alimentos"],c:1,feedback:"Excedente = sobra. Quando produzem mais do que precisam consumir, as pessoas têm algo para trocar com outros — o que originou o comércio."},
-        {q:"Qual foi uma consequência direta da formação de comunidades sedentárias?",opts:["O fim do comércio","O retorno ao nomadismo","O surgimento de aldeias e novas formas de organização social","A extinção da caça e pesca"],c:2,feedback:"Ao se fixar, as comunidades precisaram se organizar — surgiram aldeias, regras de convivência, divisão de trabalho e lideranças. É o início da vida em sociedade."},
-        {q:"Povos nômades ainda existem hoje?",opts:["Não, o nomadismo desapareceu completamente","Sim, como beduínos e pastores da África e da Ásia","Apenas na América do Sul","Somente em regiões árticas"],c:1,feedback:"Grupos como os beduínos no deserto e pastores africanos e asiáticos continuam nômades — deslocando-se conforme as estações em busca de água e pastagens para seus rebanhos."}
-      ]
-    },
+
     {
       num:"Módulo 6", title:"A Formação das Primeiras Cidades", sub:"Agricultura, rios e o nascimento das cidades",
       resumo:[
@@ -915,6 +695,7 @@ const data = {
         {q:"Qual foi um efeito direto do crescimento da produção agrícola nas aldeias?",opts:["O retorno ao nomadismo","A extinção do comércio","Pessoas passaram a exercer outras atividades, como artesanato e administração","A diminuição da população"],c:2,feedback:"Com mais alimento disponível, nem todos precisavam produzir comida — algumas pessoas passaram a se dedicar a outras funções, tornando a sociedade mais organizada e complexa."}
       ]
     },
+
     {
       num:"Módulo 7", title:"A Vida nas Primeiras Cidades", sub:"Organização social, Estado e religião",
       resumo:[
@@ -938,6 +719,7 @@ const data = {
         {q:"No Egito Antigo, além de governar, o faraó também era considerado:",opts:["Um comerciante comum","Uma figura sagrada","Um escravo","Um estrangeiro"],c:1,feedback:"No Egito, o faraó não só governava a cidade — também era visto como uma figura sagrada, o que fortalecia enormemente sua autoridade sobre o povo."}
       ]
     },
+
     {
       num:"Módulo 8", title:"Cidades Antigas e Cidades Atuais", sub:"Transformações urbanas ao longo da história",
       resumo:[
@@ -961,6 +743,7 @@ const data = {
         {q:"Plovdiv, uma cidade milenar que ainda é importante hoje, fica em qual país?",opts:["Grécia","Bulgária","Itália","Turquia"],c:1,feedback:"Plovdiv fica na Bulgária e possui milhares de anos de história, continuando a ser uma cidade relevante na atualidade."}
       ]
     },
+
     {
       num:"Módulo 9", title:"Povos da América — Maias e Astecas", sub:"Civilizações pré-colombianas",
       resumo:[
@@ -987,190 +770,178 @@ const data = {
     }
   ],
   por: [
+
     {
-      num:"Módulo 6", title:"Meios de comunicação, e-mail e crase", sub:"Comunicação digital e gramática",
+      num:"Módulo 11", title:"Reportagem, modo indicativo e locuções verbais", sub:"Gênero jornalístico e tempos verbais",
       resumo:[
-        {h:"Mudança nos meios de comunicação",p:"Antigamente: cartas, rádio e telefone fixo — mensagens demoravam mais. Hoje: celulares, internet e aplicativos permitem comunicação instantânea com qualquer pessoa do mundo em segundos."},
-        {h:"O que é e-mail?",p:"O e-mail (correio eletrônico) é uma forma de enviar mensagens pela internet — formais ou informais, com arquivos anexos. Um e-mail tem: destinatário (endereço de quem recebe), assunto (título/resumo), mensagem (corpo com texto e arquivos) e despedida/saudação."},
-        {h:"Uso da crase (à)",p:"A crase acontece quando se junta a preposição 'a' + o artigo feminino 'a/as', formando 'à' (singular) ou 'às' (plural). Use antes de palavras femininas (Vou à escola), para indicar horas (Cheguei às 8 horas) e em expressões (à noite, às vezes). NÃO use antes de palavras masculinas (Vou a pé), verbos (Começou a estudar) ou nomes de cidades sem artigo (Vou a Curitiba)."}
+        {h:"Gênero textual reportagem",p:"A reportagem é um gênero jornalístico não literário, veiculado em jornais, revistas, TV, internet e rádio. Informa e, ao mesmo tempo, busca formar opinião. Pode ser expositiva, informativa, descritiva, narrativa ou opinativa. O <strong>repórter</strong> é quem a apresenta, abordando temas da sociedade."},
+        {h:"Reportagem × notícia",p:"A <strong>reportagem</strong> é mais longa, opinativa e assinada pelo repórter — faz parte do jornalismo opinativo e exige mais tempo para ser elaborada. A <strong>notícia</strong> é curta e impessoal, com o único objetivo de informar um fato atual — faz parte do jornalismo informativo."},
+        {h:"Modo indicativo",p:"O modo indicativo expressa <strong>certeza</strong> diante do fato. Tem três tempos: <strong>presente</strong> (o rosto da Roberta é lindo), <strong>pretérito/passado</strong> (meu avô montava a cavalo) e <strong>futuro</strong> (eu me lembrarei de tudo). Também usa as pessoas do discurso: 1ª (eu/nós), 2ª (tu/vós, você/vocês) e 3ª (ele/ela, eles/elas)."},
+        {h:"Locuções verbais",p:"A locução verbal é uma sequência de dois ou mais verbos que juntos funcionam como um só. É formada por um verbo auxiliar (conjugado) + um verbo principal numa forma nominal (infinitivo, gerúndio ou particípio). Ex.: 'Estamos fazendo o possível'. Quando o auxiliar é 'ter' ou 'haver' + particípio, forma um verbo composto: 'O meu amor tem crescido'."}
       ],
       flashcards:[
-        {q:"Qual a diferença entre comunicação 'de antigamente' e hoje?",a:"Antes: cartas, rádio, telefone fixo — lento. Hoje: celular, internet, mensagens instantâneas — comunicação em segundos com qualquer lugar.",ctx:"A mudança mais importante foi a velocidade e o alcance. Antes, uma carta levava dias. Hoje, uma mensagem chega em segundos."},
-        {q:"Quais são as partes de um e-mail?",a:"Destinatário, assunto, mensagem (corpo do e-mail) e despedida/saudação.",ctx:"O assunto é como um 'título' — deve ser claro para convencer o destinatário a abrir o e-mail. Em situações formais (escola, trabalho), caprichar no assunto é importante."},
-        {q:"Quando usar a crase (à)?",a:"Antes de palavras femininas (à escola), para indicar horas (às 8h) e em expressões fixas (à noite, às vezes).",ctx:"Dica: tente substituir por 'ao' (masculino). Se fizer sentido com 'ao', use 'à' no feminino. Ex: 'Fui ao mercado / Fui à escola'."},
-        {q:"Quando NÃO usar a crase?",a:"Antes de palavras masculinas (a pé), de verbos (começou a estudar) e de nomes de cidades sem artigo (a Curitiba).",ctx:"Cidades com artigo: 'Fui à Bahia' (a Bahia). Cidades sem artigo: 'Fui a Brasília'. Quando em dúvida, pense se a cidade usa 'a/o' antes do nome."},
-        {q:"O que representa 'à' (acento grave)?",a:"A junção da preposição 'a' com o artigo feminino 'a' — formando o acento grave (crase).",ctx:"Sem a preposição, não há crase. Exemplo: 'Ela foi à escola' (preposição + artigo). 'A escola é boa' (só artigo, sem crase)."}
+        {q:"Qual a diferença entre reportagem e notícia?",a:"A reportagem é mais longa, opinativa e assinada; a notícia é curta e impessoal, só para informar um fato.",ctx:"Regra prática: reportagem = jornalismo opinativo (aprofunda). Notícia = jornalismo informativo (só comunica o fato)."},
+        {q:"O que expressa o modo indicativo?",a:"Certeza de que uma ação aconteceu, acontece ou vai acontecer (passado, presente ou futuro).",ctx:"'Indicativo' vem de 'indicar' um fato certo. Diferente do subjuntivo, que expressa dúvida ou hipótese."},
+        {q:"O que é uma locução verbal?",a:"É a união de um verbo auxiliar (conjugado) com um verbo principal numa forma nominal (infinitivo, gerúndio ou particípio).",ctx:"Exemplo: 'vou estudar', 'estava lendo', 'tinha feito'. Só o primeiro verbo é conjugado; o segundo fica na forma nominal."},
+        {q:"Quais são as três pessoas do discurso?",a:"1ª pessoa (quem fala: eu/nós), 2ª pessoa (com quem se fala: tu/vós, você/vocês) e 3ª pessoa (de quem se fala: ele/ela, eles/elas).",ctx:"O verbo muda conforme a pessoa — por isso é importante identificá-la para conjugar corretamente."},
+        {q:"Quando uma locução verbal forma um 'verbo composto'?",a:"Quando o verbo auxiliar 'ter' ou 'haver' vem seguido do particípio do verbo principal. Ex.: 'tem crescido', 'havia chegado'.",ctx:"O particípio geralmente termina em -ado ou -ido. É a marca dos tempos compostos."}
       ],
       quiz:[
-        {q:"Qual frase usa a crase CORRETAMENTE?",opts:["Fui à pé","Comecei à estudar","Cheguei às 9 horas","Viajei à Curitiba"],c:2,feedback:"'Às 9 horas' está correto — indica hora e usa o artigo feminino plural 'as'. 'À pé' (errado: palavra masculina), 'à estudar' (errado: verbo), 'à Curitiba' (errado: cidade sem artigo)."},
-        {q:"Qual das partes do e-mail funciona como um 'título'?",opts:["Destinatário","Assunto","Mensagem","Despedida"],c:1,feedback:"O assunto é o resumo do conteúdo — é o que aparece na caixa de entrada e convence o leitor a abrir o e-mail. Um bom assunto é claro e direto."},
-        {q:"O que é o 'destinatário' em um e-mail?",opts:["O texto da mensagem","O título do e-mail","O endereço de e-mail de quem vai receber","A assinatura de quem envia"],c:2,feedback:"Destinatário = quem recebe. Remetente = quem envia. São conceitos opostos — muito cobrados em provas de interpretação de texto."},
-        {q:"Em qual dessas frases a crase está INCORRETA?",opts:["Fui à padaria","Escrevi à minha amiga","Comecei à ler o livro","Chegamos às três horas"],c:2,feedback:"'Comecei à ler' está errado — não se usa crase antes de verbo. O correto é 'comecei a ler'. Verbos nunca aceitam crase!"},
-        {q:"Qual foi a principal mudança nos meios de comunicação com a tecnologia?",opts:["As mensagens ficaram mais longas","A comunicação ficou mais lenta","A comunicação ficou mais rápida e alcançou o mundo inteiro","As cartas deixaram de existir"],c:2,feedback:"A grande revolução foi a velocidade e o alcance global. Hoje é possível falar com alguém no Japão em tempo real — algo impossível na era das cartas."}
+        {q:"A reportagem se diferencia da notícia porque:",opts:["É sempre mais curta","É mais longa, opinativa e assinada pelo repórter","Nunca traz opinião","Só aparece na televisão"],c:1,feedback:"A reportagem aprofunda o tema, é opinativa e assinada — pertence ao jornalismo opinativo. A notícia é curta e impessoal."},
+        {q:"Qual frase está no modo indicativo (certeza)?",opts:["Talvez eu vá à festa","Se eu estudasse, passaria","Eu estudo todos os dias","Quero que você venha"],c:2,feedback:"'Eu estudo todos os dias' expressa um fato certo — modo indicativo. As outras expressam dúvida, condição ou desejo (subjuntivo)."},
+        {q:"Em 'Os alunos estão estudando para a prova', a locução verbal é:",opts:["Os alunos","estão estudando","para a prova","estudando"],c:1,feedback:"'Estão estudando' é a locução verbal: verbo auxiliar (estão) + verbo principal no gerúndio (estudando)."},
+        {q:"O tempo verbal de 'Amanhã eu viajarei' é:",opts:["Presente","Pretérito (passado)","Futuro","Não é indicativo"],c:2,feedback:"'Viajarei' indica uma ação que ainda vai acontecer — futuro do modo indicativo."},
+        {q:"Qual locução verbal forma um verbo composto?",opts:["Vou viajar","Está lendo","Tenho estudado","Posso ajudar"],c:2,feedback:"'Tenho estudado' = auxiliar 'ter' + particípio 'estudado'. Essa combinação (ter/haver + particípio) forma o verbo composto."}
       ]
     },
+
     {
-      num:"Módulo 7", title:"Cartão-postal e concordância", sub:"Gênero textual e concordância verbal e nominal",
+      num:"Módulo 12", title:"Entrevista, linguagem formal/informal e modo subjuntivo", sub:"Gênero textual, registros de linguagem e verbos",
       resumo:[
-        {h:"Cartão-postal",p:"O cartão-postal é um gênero textual para mensagens curtas, geralmente durante uma viagem. Características: texto curto e simples, linguagem informal, pode ter imagem na frente. Estrutura: saudação (Olá, família!), mensagem, despedida (Abraços!) e nome do remetente."},
-        {h:"Concordância verbal",p:"A concordância verbal acontece entre o verbo e o sujeito. O verbo deve concordar em número (singular/plural) e pessoa (eu, tu, ele, nós...). Exemplos: 'O menino brinca' (singular) → 'Os meninos brincam' (plural). O verbo muda conforme quem faz a ação."},
-        {h:"Concordância nominal",p:"A concordância nominal acontece entre o substantivo e suas características (artigo, adjetivo, numeral). As palavras devem concordar em gênero (masculino/feminino) e número (singular/plural). Exemplos: 'Menino alto / Menina alta / Meninos altos / Meninas altas'."}
+        {h:"Gênero textual entrevista",p:"A entrevista é um gênero geralmente informativo, veiculado nos meios de comunicação. Há vários tipos (jornalística, de emprego, psicológica, social). Características: presença de entrevistador e entrevistado, linguagem dialógica e oral, discurso direto e mistura de linguagem formal e informal."},
+        {h:"Linguagem formal",p:"Usada em situações mais sérias (profissionais, acadêmicas) ou quando não há familiaridade. Marca: norma culta, respeito rigoroso às regras gramaticais, vocabulário extenso, pronúncia correta. Ex.: 'Você viu o que está acontecendo?'"},
+        {h:"Linguagem informal",p:"Usada em situações descontraídas, com familiaridade entre as pessoas. Marca: gírias, expressões populares, neologismos e abreviações (vc, cê, tô). Ex.: 'Nossa, cê viu o que tá acontecendo?'"},
+        {h:"Modo subjuntivo",p:"Expressa <strong>incerteza, dúvida ou condição</strong> e depende de outro verbo. Tem três tempos: <strong>presente</strong> (Espero que eu <em>fale</em> — com 'que'), <strong>pretérito imperfeito</strong> (Seria bom se eu <em>falasse</em> — com 'se') e <strong>futuro</strong> (Quando eu <em>falar</em> — com 'quando')."},
+        {h:"-ICE ou -ISSE?",p:"Palavras terminadas em <strong>-ICE</strong> são substantivos: meiguice, velhice, tolice. Palavras terminadas em <strong>-ISSE</strong> são verbos no subjuntivo: dormisse, partisse, sorrisse. Ex.: 'A sua meiguice me encanta' (substantivo) / 'Queria que você se divertisse' (verbo)."}
       ],
       flashcards:[
-        {q:"Quais são as características do cartão-postal?",a:"Texto curto, linguagem informal, pode ter imagem. Tem saudação, mensagem, despedida e nome do remetente.",ctx:"Gênero textual = tipo de texto com características próprias. O cartão-postal é informal e afetivo — diferente de uma carta formal ou um e-mail profissional."},
-        {q:"O que é concordância verbal?",a:"A relação de harmonia entre o verbo e o sujeito em número (singular/plural) e pessoa.",ctx:"Se o sujeito está no plural, o verbo também vai. 'Os alunos estudam' (certo) — 'Os alunos estuda' (errado). O verbo segue o sujeito!"},
-        {q:"O que é concordância nominal?",a:"A relação entre o substantivo e as palavras que o acompanham (artigo, adjetivo, numeral) em gênero e número.",ctx:"Tudo precisa 'combinar': 'aquele menino educado' (masculino singular) → 'aquelas meninas educadas' (feminino plural). Gênero e número sempre juntos."},
-        {q:"Corrija: 'Os aluno estuda muito.'",a:"'Os alunos estudam muito.' — sujeito e verbo concordam no plural.",ctx:"Dois erros: 'aluno' sem 's' (plural errado) e 'estuda' sem concordar com o plural. Em prova, podem aparecer frases com um ou os dois erros."},
-        {q:"'Menina bonita' → como fica no plural?",a:"'Meninas bonitas' — artigo, substantivo e adjetivo todos no feminino plural.",ctx:"Na concordância nominal, TODAS as palavras que acompanham o substantivo precisam concordar com ele. É uma regra que vale para toda a cadeia de palavras."}
+        {q:"Quais são as marcas da entrevista?",a:"Presença de entrevistador e entrevistado, linguagem dialógica e oral, discurso direto e mistura de linguagem formal e informal.",ctx:"'Dialógica' vem de diálogo — a entrevista é uma conversa registrada em texto."},
+        {q:"Quando se usa a linguagem formal?",a:"Em situações sérias (profissionais, acadêmicas) ou sem familiaridade entre as pessoas, seguindo a norma culta.",ctx:"Pense em uma redação escolar ou uma conversa com uma autoridade: pede linguagem formal."},
+        {q:"O que expressa o modo subjuntivo?",a:"Incerteza, dúvida, desejo ou condição — e depende de outro verbo.",ctx:"Palavras-pista: 'que' (presente), 'se' (pretérito imperfeito), 'quando' (futuro). Diferente do indicativo, que é certeza."},
+        {q:"Qual a diferença entre -ICE e -ISSE?",a:"-ICE forma substantivos (velhice, tolice). -ISSE forma verbos no subjuntivo (dormisse, partisse).",ctx:"Truque: se a palavra é 'coisa/qualidade', é substantivo (-ice). Se é 'ação', é verbo (-isse)."},
+        {q:"Complete com o subjuntivo: 'Se eu ___ mais, tiraria nota melhor.' (estudar)",a:"'estudasse' — pretérito imperfeito do subjuntivo, usado com 'se'.",ctx:"A partícula 'se' pede o subjuntivo. 'Estudasse' expressa uma condição (algo que não aconteceu, mas poderia)."}
       ],
       quiz:[
-        {q:"Qual frase está com concordância verbal CORRETA?",opts:["Os meninos corre no parque","A professora ensinam bem","As crianças brincam felizes","O cachorro latiu muito ruidosa"],c:2,feedback:"'As crianças brincam' — sujeito plural + verbo plural. 'Os meninos corre' (errado: plural + singular), 'A professora ensinam' (errado: singular + plural)."},
-        {q:"Qual frase apresenta concordância nominal CORRETA?",opts:["Aquele meninas são educadas","Aquelas meninas são educadas","Aquelas menina são educada","Aqueles meninas são educados"],c:1,feedback:"'Aquelas meninas são educadas' — tudo no feminino plural. Artigo (aquelas), substantivo (meninas) e adjetivo (educadas) concordam em gênero e número."},
-        {q:"O cartão-postal usa qual tipo de linguagem?",opts:["Formal e técnica","Científica","Informal e afetiva","Jornalística"],c:2,feedback:"O cartão-postal é uma mensagem pessoal e afetiva — por isso usa linguagem informal. É bem diferente de um e-mail profissional ou de um artigo de jornal."},
-        {q:"O que é o 'remetente' em um cartão-postal?",opts:["Quem recebe a mensagem","O local de onde foi enviado","Quem enviou a mensagem","O assunto do cartão"],c:2,feedback:"Remetente = quem envia. Destinatário = quem recebe. São os dois lados de qualquer comunicação — cartão, carta, e-mail."},
-        {q:"Escolha a opção com concordância CORRETA:",opts:["O aluno novo chegou","Os aluno novos chegou","O alunos novo chegaram","Os aluno novo chegou"],c:0,feedback:"'O aluno novo chegou' — tudo no masculino singular. As outras opções misturam singular e plural de forma incorreta."}
+        {q:"A entrevista se caracteriza por:",opts:["Ter apenas um participante","Presença de entrevistador e entrevistado, com linguagem dialógica","Usar somente linguagem científica","Nunca usar discurso direto"],c:1,feedback:"A entrevista é um diálogo entre entrevistador e entrevistado, com linguagem dialógica e mistura de registros formal e informal."},
+        {q:"Qual frase usa linguagem INFORMAL?",opts:["Você poderia me informar o horário?","Cê viu que horas são?","Solicito a gentileza de responder","Gostaria de saber as horas"],c:1,feedback:"'Cê viu que horas são?' usa abreviação e tom descontraído — linguagem informal. As outras seguem a norma culta (formal)."},
+        {q:"Qual frase está no modo subjuntivo?",opts:["Eu estudo todo dia","Ele viajou ontem","Tomara que ele venha","Nós chegamos cedo"],c:2,feedback:"'Tomara que ele venha' expressa desejo/incerteza com a partícula 'que' — presente do subjuntivo. As outras são fatos certos (indicativo)."},
+        {q:"Qual palavra é um SUBSTANTIVO (terminação -ice)?",opts:["dormisse","partisse","velhice","sorrisse"],c:2,feedback:"'Velhice' termina em -ice e é um substantivo (nome de uma qualidade). As outras terminam em -isse e são verbos no subjuntivo."},
+        {q:"'Quando eu ___ mais velho, viajarei o mundo.' Qual completa corretamente?",opts:["for","fosse","era","seja"],c:0,feedback:"A partícula 'quando' + ação futura pede o futuro do subjuntivo: 'for'. 'Quando eu for mais velho...'"}
       ]
     },
+
     {
-      num:"Módulo 8", title:"Conjunção, MAS/MAIS e texto opinativo", sub:"Coesão textual e escrita argumentativa",
+      num:"Módulo 13", title:"Propaganda institucional, debate e modo imperativo", sub:"A arte de convencer e argumentar",
       resumo:[
-        {h:"Conjunções",p:"Conjunções ligam ideias, palavras ou frases, garantindo a coesão (boa ligação) do texto. Principais: 'e' (soma/adição), 'mas' (ideia contrária), 'porque' (explicação), 'ou' (escolha). Locução conjuntiva: duas ou mais palavras com função de conjunção — 'por causa de', 'já que', 'assim que', 'para que'."},
-        {h:"MAS × MAIS × MÁS",p:"MAS (conjunção adversativa): indica oposição/contraste. Substitua por 'porém'. Ex: 'Queria sair, mas estava cansado.' MAIS (advérbio/adição): indica quantidade ou intensidade. Antônimo de 'menos'. Ex: 'Quero mais comida.' MÁS (adjetivo plural feminino): qualidade negativa. Ex: 'Aquelas meninas são más.'"},
-        {h:"Texto opinativo",p:"O texto opinativo expressa a opinião do autor sobre um assunto. Características: apresenta uma opinião, traz argumentos (explicações/justificativas) e pode tentar convencer o leitor. Dica: use conjunções para ligar ideias e explique sua opinião com clareza."}
+        {h:"Propaganda comercial × institucional",p:"A <strong>propaganda comercial</strong> busca vender um produto ou serviço. A <strong>propaganda institucional</strong> tem pegada social e conscientizadora, sem buscar lucro direto — como uma campanha de doação de um hospital filantrópico."},
+        {h:"Slogan",p:"É uma frase curta que representa uma marca, ajudando na rápida identificação e memorização. Destaca um valor ou a missão da marca. Exemplos famosos: 'Amo muito tudo isso' (McDonald's) e 'Just do it' (Nike)."},
+        {h:"Modo imperativo",p:"É o modo verbal usado para expressar ordens, pedidos, sugestões ou conselhos — algo que se exige do interlocutor. Muito comum em placas e avisos: 'Não pise na grama', 'Use máscara', 'Não corra nas escadas'."},
+        {h:"Debate argumentativo",p:"É um diálogo formal sobre um tema polêmico, em que os participantes defendem opiniões com argumentos. Tem a figura do <strong>mediador</strong>, que organiza as falas. Estrutura: introdução, exposição inicial, discussão, conclusão e despedida."}
       ],
       flashcards:[
-        {q:"O que são conjunções? Dê dois exemplos.",a:"Palavras que ligam ideias ou frases. Exemplos: 'e' (adição) e 'mas' (oposição).",ctx:"Conjunções são a 'cola' do texto — sem elas, as frases ficam soltas e sem sentido de relação. 'Estudei muito e passei na prova' — o 'e' mostra consequência."},
-        {q:"Qual a diferença entre MAS e MAIS?",a:"MAS indica oposição (substitua por 'porém'). MAIS indica quantidade ou intensidade (antônimo de 'menos').",ctx:"Dica rápida: se você pode substituir por 'porém', use MAS. Se você pode substituir por 'menos', use MAIS. Ex: 'Queria ir, mas estava cansado.' / 'Quero mais bolo.'"},
-        {q:"O que é uma locução conjuntiva? Dê um exemplo.",a:"Conjunto de duas ou mais palavras com função de conjunção. Ex: 'por causa de', 'já que', 'para que'.",ctx:"'Por causa de' funciona como conjunção explicativa — igual a 'porque', mas formada por três palavras. A função é a mesma, só a forma é diferente."},
-        {q:"Quais são as características do texto opinativo?",a:"Apresenta uma opinião do autor, traz argumentos que justificam a opinião e pode tentar convencer o leitor.",ctx:"Em provas de redação, você será pedido para escrever textos opinativos. Lembre-se: não basta dar a opinião — você precisa argumentar, explicar o porquê."},
-        {q:"Complete com MAS ou MAIS: 'Queria brincar, ___ tinha lição.'",a:"MAS — indica oposição entre querer brincar e ter que fazer a lição.",ctx:"'Queria brincar, PORÉM tinha lição' funciona? Sim! Então é MAS. Se fosse quantidade: 'Quero MAIS tempo para brincar' — aí seria MAIS."}
+        {q:"Qual a diferença entre propaganda comercial e institucional?",a:"A comercial busca vender um produto/serviço; a institucional busca conscientizar, sem lucro direto.",ctx:"Uma campanha de refrigerante = comercial. Uma campanha 'doe sangue' = institucional. O objetivo muda tudo."},
+        {q:"O que é um slogan?",a:"Uma frase curta que representa uma marca e ajuda na identificação e memorização.",ctx:"'Just do it' e 'Amo muito tudo isso' são slogans famosos. A força está em ser curto e marcante."},
+        {q:"Para que serve o modo imperativo?",a:"Para expressar ordens, pedidos, sugestões ou conselhos — algo dirigido ao interlocutor.",ctx:"Placas como 'Não fume' e 'Use o cinto' estão no imperativo. É o modo do 'faça' ou 'não faça'."},
+        {q:"Qual o papel do mediador em um debate?",a:"Organizar as falas, dar a palavra a cada participante e manter o respeito e o foco no tema.",ctx:"O mediador não defende um lado — ele conduz o debate de forma neutra."},
+        {q:"Quais são as etapas de um debate argumentativo?",a:"Introdução, exposição inicial, discussão, conclusão e despedida.",ctx:"O mediador abre (introdução) e fecha (despedida). No meio, cada um expõe e depois discute suas opiniões."}
       ],
       quiz:[
-        {q:"Qual conjunção indica ideia de OPOSIÇÃO?",opts:["e","ou","mas","porque"],c:2,feedback:"'Mas' é a conjunção adversativa — indica contraste entre duas ideias. 'e' soma, 'ou' dá escolha, 'porque' explica. Cada conjunção tem sua função específica."},
-        {q:"Escolha a frase com uso CORRETO de MAS/MAIS:",opts:["Quero mais bolo, mais estou de dieta","Quero mas bolo, mas estou de dieta","Quero mais bolo, mas estou de dieta","Quero mas bolo, mais estou de dieta"],c:2,feedback:"'Mais bolo' = quantidade (correto). 'Mas estou de dieta' = oposição (correto). As outras opções trocam os dois — que é o erro mais comum nesse conteúdo."},
-        {q:"O texto opinativo tem como objetivo principal:",opts:["Apenas narrar um fato","Descrever um lugar","Expressar e defender uma opinião com argumentos","Dar instruções de como fazer algo"],c:2,feedback:"Texto opinativo = opinião + argumentos. Não basta dizer 'eu acho' — é preciso justificar com razões. É a base da redação argumentativa."},
-        {q:"'Não fui à festa ____ estava doente.' Qual conjunção completa corretamente?",opts:["e","mas","ou","porque"],c:3,feedback:"'Porque' introduz uma explicação — explica o motivo de não ter ido à festa. 'Mas' indicaria oposição (não faz sentido aqui). 'E' soma. 'Ou' dá alternativa."},
-        {q:"'Por causa de' é um exemplo de:",opts:["Adjetivo","Advérbio","Conjunção simples","Locução conjuntiva"],c:3,feedback:"Locução conjuntiva = duas ou mais palavras com função de conjunção. 'Por causa de' funciona como 'porque' — é uma locução conjuntiva explicativa."}
+        {q:"Uma campanha de doação de um hospital filantrópico é um exemplo de propaganda:",opts:["Comercial","Institucional","De produto","De vendas"],c:1,feedback:"A propaganda institucional tem pegada social e conscientizadora, sem buscar lucro direto — exatamente o caso de uma campanha de doação."},
+        {q:"O que é um slogan?",opts:["Um texto longo explicativo","Uma frase curta que representa e identifica uma marca","Uma imagem sem texto","O nome do dono da empresa"],c:1,feedback:"O slogan é uma frase curta e marcante que ajuda o público a identificar e lembrar da marca, como 'Just do it'."},
+        {q:"Qual frase está no modo imperativo?",opts:["Eu uso máscara","Ele usava máscara","Use máscara","Nós usaremos máscara"],c:2,feedback:"'Use máscara' é uma ordem/instrução dirigida a alguém — modo imperativo. As outras apenas descrevem fatos (indicativo)."},
+        {q:"Em um debate, quem organiza as falas e mantém o respeito é:",opts:["O entrevistado","O mediador","O público","O narrador"],c:1,feedback:"O mediador conduz o debate de forma neutra, dando a palavra a cada participante e mantendo o foco no tema."},
+        {q:"Qual é a última etapa de um debate argumentativo?",opts:["Introdução","Discussão","Exposição inicial","Despedida"],c:3,feedback:"A despedida encerra o debate — o mediador resume as opiniões e finaliza. A introdução é a primeira etapa."}
       ]
     },
+
     {
-      num:"Módulo 9", title:"Direitos das crianças e sinais de pontuação", sub:"Cidadania e língua portuguesa",
+      num:"Módulo 14", title:"Charge, cartum e formas nominais do verbo", sub:"Gêneros do humor jornalístico e verbos",
       resumo:[
-        {h:"Direitos fundamentais das crianças",p:"Toda criança tem direito a ser criança: educação, saúde, alimentação, lazer, proteção e convivência familiar. Esses direitos garantem crescer com segurança, respeito e felicidade. Direitos fundamentais: vida, educação, saúde, proteção contra a violência, identidade e participação."},
-        {h:"Sinais de pontuação",p:"Aspas (\" \"): destacam falas, títulos ou palavras especiais. Reticências (...): indicam pausa, dúvida, suspense ou ideia incompleta. Dois-pontos (:): anunciam explicação, lista ou fala. Parênteses ( ): acrescentam informações extras. Ponto e vírgula (;): pausa maior que a vírgula. Travessão (—): indica fala de personagem."},
-        {h:"Traz, trás, atrás e detrás",p:"Traz: vem do verbo trazer (Minha mãe traz o lanche). Trás: aparece na expressão 'para trás' (Olhe para trás). Atrás: indica posição posterior ou perseguição (O cachorro correu atrás da bola). Detrás: significa 'atrás de' (O gato estava detrás da porta)."}
+        {h:"Charge × cartum",p:"Ambos são gêneros do jornalismo com humor e crítica. A <strong>charge</strong> usa personagens reais e critica um fato atual — por isso é datada (perde o sentido com o tempo). O <strong>cartum</strong> é atemporal: faz uma crítica social mais ampla, sem depender de um fato específico."},
+        {h:"Charge",p:"Gênero jornalístico centrado em questões atuais, que reflete a posição do veículo. O nome vem do francês 'charger' (exagerar, atacar). Usa figuras públicas com comportamentos exagerados para criticar um acontecimento específico."},
+        {h:"Cartum",p:"Gênero que usa humor para levantar questionamentos sobre a sociedade. O nome vem do inglês 'cartoon' (cartão). Faz uma crítica rápida através de uma imagem, levando o leitor à reflexão — sem depender de um fato do momento."},
+        {h:"Formas nominais do verbo",p:"São três: <strong>infinitivo</strong> (o 'nome' do verbo: amar, fazer, partir — terminações -AR, -ER, -IR), <strong>gerúndio</strong> (continuidade, terminação -ndo: amando, fazendo) e <strong>particípio</strong> (conclusão, terminação -ado/-ido: amado, partido). O particípio, como adjetivo, varia em gênero e número."}
       ],
       flashcards:[
-        {q:"Cite quatro direitos fundamentais das crianças.",a:"Vida, educação, saúde, proteção contra a violência, identidade e participação (qualquer 4).",ctx:"Esses direitos estão no Estatuto da Criança e do Adolescente (ECA). Em prova, podem pedir exemplos ou perguntar se uma situação respeita ou viola esses direitos."},
-        {q:"Quando se usam as reticências (...)?",a:"Para indicar pausa, dúvida, suspense ou que a ideia ficou incompleta.",ctx:"'Eu pensei, pensei e…' — as reticências criam suspense, como se a frase continuasse no ar. Muito usadas em narrativas para criar tensão."},
-        {q:"Qual a diferença entre 'traz' e 'trás'?",a:"Traz vem do verbo trazer (ação). Trás aparece na expressão 'para trás' (posição).",ctx:"Dica: 'traz' tem ação — você pode substituir por outro verbo ('ele traz = ele carrega'). 'Para trás' indica direção, não ação."},
-        {q:"Para que servem os dois-pontos (:)?",a:"Para anunciar uma explicação, uma lista ou a fala de alguém.",ctx:"Exemplos: 'Levei três coisas: lápis, borracha e caderno' (lista). 'Ela disse: Vou embora' (fala). 'O problema é simples: falta de atenção' (explicação)."},
-        {q:"Qual a diferença entre 'atrás' e 'detrás'?",a:"Atrás indica posição posterior ou perseguição. Detrás significa 'atrás de' (seguido de objeto).",ctx:"'O cachorro correu atrás' (sem especificar de quê). 'O gato estava detrás da porta' (especificando onde). 'Detrás' sempre vem acompanhado de um complemento."}
+        {q:"Qual a diferença entre charge e cartum?",a:"A charge critica um fato atual (é datada, usa personagens reais). O cartum é atemporal e faz crítica social ampla.",ctx:"Truque: charge = ligada a uma notícia do dia. Cartum = crítica que vale 'sempre'."},
+        {q:"De onde vem o nome 'charge'?",a:"Do francês 'charger', que significa 'fazer carga', 'exagerar' ou 'atacar'.",ctx:"Faz sentido: a charge exagera comportamentos de figuras públicas para criticar. Já 'cartum' vem do inglês 'cartoon'."},
+        {q:"Quais são as três formas nominais do verbo?",a:"Infinitivo (fazer), gerúndio (fazendo) e particípio (feito).",ctx:"São chamadas 'nominais' porque não indicam pessoa nem tempo por si só — funcionam quase como nomes."},
+        {q:"Como reconhecer o gerúndio?",a:"Pela terminação -ndo: amando, correndo, partindo. Indica ação em continuidade.",ctx:"Sempre que ver '-ndo' no fim do verbo, é gerúndio. Ex.: 'Ela está lendo' (continuidade da ação)."},
+        {q:"O que indica o particípio e qual sua terminação típica?",a:"Indica ação concluída; termina geralmente em -ado ou -ido. Como adjetivo, varia (amado/amada).",ctx:"Ex.: 'Terminado o jogo...' (conclusão). Quando vira adjetivo, concorda: 'porta fechada', 'portão fechado'."}
       ],
       quiz:[
-        {q:"Qual sinal de pontuação é usado para indicar a fala de um personagem em diálogo?",opts:["Reticências","Parênteses","Travessão","Dois-pontos"],c:2,feedback:"O travessão (—) é o sinal padrão para introduzir falas de personagens em narrativas. Os dois-pontos também anunciam falas, mas o travessão é específico para diálogos."},
-        {q:"'Ela disse: Parabéns pela atividade!' — Os dois-pontos indicam:",opts:["Uma pausa longa","O início de uma fala","Uma informação extra","Suspense"],c:1,feedback:"Os dois-pontos anunciam o que vem a seguir — neste caso, a fala da pessoa. Também são usados antes de listas e explicações."},
-        {q:"Qual frase usa 'traz' CORRETAMENTE?",opts:["Olhe para traz","Ele traz o livro todo dia","Fique para traz","Ela foi traz da escola"],c:1,feedback:"'Traz' vem do verbo trazer — indica ação. 'Olhe para trás' e 'fique para trás' usam 'trás' (expressão de posição). 'Atrás da escola' seria o correto na última."},
-        {q:"As reticências (...) indicam:",opts:["Fim de uma ideia","Pausa, dúvida ou ideia incompleta","Início de uma lista","Fala de personagem"],c:1,feedback:"Reticências = ideia suspensa, dúvida ou suspense. 'Eu queria ir, mas…' — o leitor sente que algo ficou por dizer. São muito usadas para criar efeito dramático."},
-        {q:"Qual é um direito fundamental das crianças?",opts:["Trabalhar desde os 5 anos","Ter acesso à educação e saúde","Ficar sem supervisão de adultos","Não precisar estudar"],c:1,feedback:"Educação e saúde são direitos fundamentais garantidos pelo ECA. Crianças têm o direito de crescer com segurança, respeito e acesso a cuidados básicos."}
+        {q:"A charge se diferencia do cartum porque:",opts:["É sempre colorida","Critica um fato atual e é datada","Nunca usa humor","Não tem imagens"],c:1,feedback:"A charge está ligada a um acontecimento específico e atual (datada). O cartum é atemporal, com crítica social mais ampla."},
+        {q:"A palavra 'charge' vem do francês e significa:",opts:["Desenhar","Exagerar / atacar","Colorir","Escrever"],c:1,feedback:"'Charger' significa 'fazer carga', 'exagerar' ou 'atacar' — combina com a função da charge de exagerar para criticar."},
+        {q:"Qual verbo está no gerúndio?",opts:["Cantar","Cantado","Cantando","Canta"],c:2,feedback:"'Cantando' termina em -ndo — é o gerúndio, que indica ação em continuidade. 'Cantar' é infinitivo e 'cantado' é particípio."},
+        {q:"Qual é uma forma nominal do verbo no PARTICÍPIO?",opts:["Correr","Correndo","Corrido","Corre"],c:2,feedback:"'Corrido' (terminação -ido) é o particípio, que indica ação concluída. 'Correr' é infinitivo e 'correndo' é gerúndio."},
+        {q:"O cartum, diferente da charge, é:",opts:["Datado","Atemporal, com crítica social ampla","Sempre sobre política do dia","Sem crítica"],c:1,feedback:"O cartum não depende de um fato específico do momento — sua crítica social é atemporal e continua fazendo sentido com o tempo."}
       ]
     },
+
     {
-      num:"Módulo 10", title:"Imagem como texto, travessão e vírgula", sub:"Leitura de imagens e pontuação avançada",
+      num:"Módulo 15", title:"Tirinhas, verbos impessoais e 'há' ou 'a'", sub:"Gênero do humor gráfico e questões gramaticais",
       resumo:[
-        {h:"Imagem também é texto",p:"As imagens comunicam ideias, sentimentos e informações — mesmo sem palavras. Infográficos combinam textos, imagens, gráficos e números para apresentar informações de forma clara, rápida e organizada."},
-        {h:"Travessão (—)",p:"O travessão indica a fala de personagens em diálogos ou destaca uma informação no texto. Exemplo: '— Vamos ao parque amanhã? — perguntou Ana.'"},
-        {h:"Vírgula (,)",p:"A vírgula separa elementos de uma lista, marca pausas e organiza informações. Exemplo: 'Comprei maçãs, bananas, laranjas e peras.'"},
-        {h:"Ponto e vírgula (;)",p:"O ponto e vírgula indica uma pausa maior que a vírgula e menor que o ponto final. Pode separar partes de uma frase que já possuem vírgulas. Exemplo: 'Na excursão estavam alunos de Porto Alegre, RS; Curitiba, PR; e Florianópolis, SC.'"}
+        {h:"Tirinhas",p:"A tirinha é um gênero textual do mesmo grupo da charge, do cartum e da história em quadrinhos. Circula socialmente com função <strong>crítico-humorística</strong> — usa o humor para fazer uma crítica ou chamar atenção para um tema, como a preservação ambiental."},
+        {h:"Verbos impessoais",p:"São verbos que só se conjugam na <strong>3ª pessoa do singular</strong>, porque não têm sujeito. Exemplos: fenômenos da natureza (chove, trovejou, ventava); o verbo 'haver' quando significa 'existir'; e 'fazer' indicando tempo ('faz cinco anos', nunca 'fazem cinco anos')."},
+        {h:"A palavra 'a'",p:"Pode ser: <strong>artigo</strong> (antes de palavra feminina: 'A história era legal'); <strong>preposição</strong> (antes de palavra masculina ou verbo, indicando distância ou tempo futuro: 'Daqui a quatro dias'); ou <strong>pronome</strong> (substitui 'ela': 'Chamei-a')."},
+        {h:"A palavra 'há'",p:"É o verbo <strong>haver</strong>, impessoal. Pode indicar <strong>existência</strong> (substituível por 'existe/existem': 'Há muitas HQs' = 'Existem muitas HQs') ou <strong>tempo passado</strong> (substituível por 'faz': 'Li isso há duas semanas' = 'faz duas semanas')."}
       ],
       flashcards:[
-        {q:"O que é um infográfico?",a:"Uma combinação de textos, imagens, gráficos e números para apresentar informações de forma clara, rápida e organizada.",ctx:"Infográficos são muito usados em jornais, revistas e sites para explicar dados complexos de forma visual. Você já viu tabelas com ícones e porcentagens — isso é um infográfico!"},
-        {q:"Para que serve o travessão em um diálogo?",a:"Para indicar a fala de um personagem — substitui as aspas nos diálogos de narrativas.",ctx:"Compare: com aspas → Ana disse: \"Vamos brincar?\". Com travessão → — Vamos brincar? — disse Ana. O travessão é mais comum em narrativas literárias."},
-        {q:"Quando usamos a vírgula?",a:"Para separar elementos de uma lista, marcar pausas e organizar informações.",ctx:"'Comprei pão, leite, ovos e queijo.' — a vírgula separa cada item da lista. Antes do 'e' final, normalmente não se usa vírgula em listas simples."},
-        {q:"Qual a diferença entre vírgula e ponto e vírgula?",a:"A vírgula faz uma pausa curta. O ponto e vírgula faz uma pausa maior — útil quando a frase já tem várias vírgulas.",ctx:"'Alunos de Porto Alegre, RS; Curitiba, PR; e Florianópolis, SC.' — o ponto e vírgula separa os grupos para não confundir com as vírgulas dentro de cada grupo."},
-        {q:"Imagens podem 'falar'? Explique.",a:"Sim — imagens comunicam ideias, sentimentos e informações mesmo sem palavras escritas.",ctx:"Uma foto de uma criança chorando comunica tristeza. Um gráfico com setas vermelhas comunica queda. A imagem é uma linguagem — só não usa letras para isso."}
+        {q:"Qual a função das tirinhas?",a:"Circular socialmente com humor e crítica (função crítico-humorística), muitas vezes sobre temas sociais.",ctx:"A tirinha faz parte do mesmo grupo da charge, do cartum e da HQ — todos usam imagem + texto para comunicar."},
+        {q:"O que é um verbo impessoal?",a:"Um verbo que só se conjuga na 3ª pessoa do singular, porque não tem sujeito.",ctx:"Exemplos: 'chove', 'há' (existir), 'faz' (tempo). Nunca vão para o plural: é 'faz dez anos', não 'fazem dez anos'."},
+        {q:"Quando 'há' pode ser trocado por 'existe/existem'?",a:"Quando indica existência. Ex.: 'Há muitos livros' = 'Existem muitos livros'.",ctx:"Esse é o teste rápido: se dá para trocar por 'existe(m)', escreve-se com H (há)."},
+        {q:"Quando 'há' pode ser trocado por 'faz'?",a:"Quando indica tempo passado. Ex.: 'Cheguei há uma hora' = 'Cheguei faz uma hora'.",ctx:"Tempo já passado → 'há' (com H). Não confundir com 'a' (preposição), usada para tempo futuro: 'daqui a uma hora'."},
+        {q:"Qual a diferença entre 'a' (preposição) e 'há' (verbo) para tempo?",a:"'A' indica tempo futuro (daqui a dois dias). 'Há' indica tempo passado (há dois dias que não o vejo).",ctx:"Regra de ouro: futuro = a (sem H). Passado = há (com H). Um dos erros mais comuns de todos!"}
       ],
       quiz:[
-        {q:"O que os infográficos têm de especial em relação a textos comuns?",opts:["Usam apenas imagens, sem texto","Combinam texto, imagens e dados para facilitar a compreensão","São mais longos e detalhados","Só aparecem em livros científicos"],c:1,feedback:"Infográficos são multimídia — texto + imagem + dados juntos. Isso facilita a compreensão de informações complexas de forma rápida e visual."},
-        {q:"'— Preciso de ajuda! — gritou Pedro.' O travessão nessa frase indica:",opts:["Uma lista de itens","Uma pausa longa","A fala de um personagem","Uma informação extra"],c:2,feedback:"O travessão introduz e encerra a fala do personagem Pedro. É o uso clássico do travessão em narrativas — diferente das aspas, que cumprem função similar."},
-        {q:"'Comprei caderno, lápis, borracha e régua.' A vírgula nessa frase serve para:",opts:["Indicar uma pausa dramática","Separar os itens de uma lista","Introduzir uma fala","Substituir o ponto final"],c:1,feedback:"A vírgula separa cada item da lista de materiais comprados. Sem ela, a frase ficaria confusa: 'Comprei caderno lápis borracha e régua.'"},
-        {q:"Quando é mais adequado usar o ponto e vírgula?",opts:["Para terminar uma frase","Para separar itens numa lista que já tem vírgulas internas","Para indicar fala de personagem","Para marcar uma pausa muito curta"],c:1,feedback:"O ponto e vírgula organiza listas complexas onde vírgulas já estão sendo usadas. Exemplo clássico: cidades com estados — 'São Paulo, SP; Rio de Janeiro, RJ.'"},
-        {q:"Uma imagem pode comunicar uma ideia mesmo sem palavras?",opts:["Não, só o texto comunica","Sim, imagens são uma forma de linguagem","Apenas se tiver legenda","Somente em filmes"],c:1,feedback:"Imagens são linguagem! Uma foto, um ícone, um gráfico — todos comunicam ideias. O conceito de 'imagem como texto' reconhece que a leitura vai além das palavras escritas."}
+        {q:"As tirinhas têm como função principal:",opts:["Ensinar matemática","Circular com humor e crítica (crítico-humorística)","Contar histórias longas e detalhadas","Registrar fatos científicos"],c:1,feedback:"A tirinha é um gênero crítico-humorístico — usa o humor para criticar ou destacar um tema, como preservação ambiental."},
+        {q:"Qual verbo é IMPESSOAL (só na 3ª pessoa do singular)?",opts:["Correr","Estudar","Chover","Brincar"],c:2,feedback:"'Chover' é um fenômeno da natureza — verbo impessoal, sem sujeito. Só se conjuga na 3ª pessoa: 'chove', 'choveu'."},
+        {q:"Qual frase está CORRETA?",opts:["Fazem cinco anos que estudo aqui","Faz cinco anos que estudo aqui","Fazem cinco anos atrás","Fazem muito tempo"],c:1,feedback:"'Faz cinco anos' é o correto — o verbo 'fazer' indicando tempo é impessoal e fica sempre no singular."},
+        {q:"Em 'Há muitos alunos na sala', a palavra 'há' pode ser trocada por:",opts:["faz","existem","daqui a","para"],c:1,feedback:"'Há' indica existência aqui, então pode ser trocado por 'existem': 'Existem muitos alunos na sala'."},
+        {q:"Qual frase indica tempo FUTURO corretamente?",opts:["Cheguei há uma hora","Daqui a uma hora sairemos","Há uma hora que espero","Estudo há dois anos"],c:1,feedback:"'Daqui a uma hora' indica futuro — usa-se 'a' (sem H). As outras usam 'há' para tempo passado ou existência."}
+      ]
+    },
+
+    {
+      num:"Módulo 16", title:"História em quadrinhos e elementos da comunicação", sub:"HQ, onomatopeia e o processo comunicativo",
+      resumo:[
+        {h:"O que é História em Quadrinhos (HQ)",p:"É a arte de narrar histórias com desenhos e textos em sequência. Tem os elementos das narrativas (enredo, personagens, tempo, lugar, desfecho) e usa linguagem verbal e não verbal. As falas aparecem em <strong>balões</strong>, cujo formato transmite intenções diferentes."},
+        {h:"A HQ no Brasil",p:"A primeira revista foi <strong>O Tico-Tico</strong> (1905). O primeiro gibi totalmente colorido foi <strong>A Turma do Pererê</strong>, de Ziraldo (1960). A HQ mais famosa do Brasil é a <strong>Turma da Mônica</strong>, de Maurício de Sousa (anos 60), hoje publicada em mais de 40 países."},
+        {h:"Onomatopeia",p:"É a figura de linguagem que reproduz sons — de objetos, pessoas ou animais. Aumenta a expressividade e é muito usada em HQs. Exemplos: 'Bum!', 'Miau', 'Tic-tac'."},
+        {h:"Os elementos da comunicação",p:"Todo ato comunicativo tem seis elementos: <strong>emissor</strong> (quem diz), <strong>receptor</strong> (a quem se diz), <strong>mensagem</strong> (o que é dito), <strong>canal</strong> (o meio), <strong>código</strong> (a língua/sistema de sinais) e <strong>referente</strong> (o assunto). Uma falha em um deles gera <strong>ruído</strong> na comunicação."}
+      ],
+      flashcards:[
+        {q:"O que é uma História em Quadrinhos?",a:"A arte de narrar histórias com desenhos e textos em sequência, com enredo, personagens, tempo, lugar e desfecho.",ctx:"As HQs combinam linguagem verbal (texto) e não verbal (desenhos). As falas ficam em balões."},
+        {q:"Qual é a HQ mais famosa do Brasil e quem a criou?",a:"A Turma da Mônica, criada por Maurício de Sousa nos anos 60.",ctx:"Hoje é publicada em mais de 40 países. A primeira revista em quadrinhos do Brasil foi 'O Tico-Tico' (1905)."},
+        {q:"O que é uma onomatopeia?",a:"Uma figura de linguagem que reproduz sons — de objetos, pessoas ou animais. Ex.: 'Bum!', 'Miau'.",ctx:"As onomatopeias são muito usadas em HQs para dar 'som' à cena. Elas aumentam a expressividade."},
+        {q:"Quais são os seis elementos da comunicação?",a:"Emissor, receptor, mensagem, canal, código e referente.",ctx:"Dica: emissor envia, receptor recebe, a mensagem é o conteúdo, o canal é o meio, o código é a língua e o referente é o assunto."},
+        {q:"O que é o 'ruído' na comunicação?",a:"Uma falha ou mau uso de um dos elementos, que faz a comunicação não ser bem-sucedida.",ctx:"Ex.: se o código (a língua) não é conhecido pelos dois lados, a mensagem não chega — isso é ruído."}
+      ],
+      quiz:[
+        {q:"As falas dos personagens em uma HQ aparecem em:",opts:["Legendas","Balões","Rodapés","Títulos"],c:1,feedback:"As falas aparecem em balões, cujo formato transmite intenções diferentes (grito, pensamento, fala normal)."},
+        {q:"Qual é a HQ brasileira mais conhecida?",opts:["O Tico-Tico","A Turma do Pererê","A Turma da Mônica","Chiquinho"],c:2,feedback:"A Turma da Mônica, de Maurício de Sousa, é a mais famosa do Brasil, publicada em mais de 40 países."},
+        {q:"'Miau', 'Bum!' e 'Tic-tac' são exemplos de:",opts:["Balões","Onomatopeias","Personagens","Legendas"],c:1,feedback:"São onomatopeias — palavras que imitam sons. São muito usadas em HQs para dar expressividade."},
+        {q:"Quem é o EMISSOR na comunicação?",opts:["Quem recebe a mensagem","Quem elabora e envia a mensagem","O meio da mensagem","O assunto"],c:1,feedback:"O emissor (ou locutor) é quem elabora e envia a mensagem. Quem recebe é o receptor."},
+        {q:"Quando um dos elementos da comunicação falha, ocorre:",opts:["Uma onomatopeia","Um balão","Um ruído","Um slogan"],c:2,feedback:"O 'ruído' acontece quando há falha em um dos elementos (emissor, código, canal...), impedindo a comunicação de dar certo."}
+      ]
+    },
+
+    {
+      num:"Módulo 17", title:"Contos, advérbio e locução adverbial, 'mal' ou 'mau'", sub:"Gênero narrativo e questões gramaticais",
+      resumo:[
+        {h:"O que é um conto",p:"É um texto narrativo curto, com poucos personagens e poucos locais. Tem espaço delimitado, tempo marcado, um narrador e um enredo. Sua estrutura tem quatro partes: apresentação, desenvolvimento, clímax (tensão) e desfecho (solução). Há vários tipos: realistas, populares, fantásticos, de terror, de humor, infantis, psicológicos e de fadas."},
+        {h:"Tipos de narrador",p:"O narrador do conto pode ser: <strong>observador</strong> (conhece a história mas não participa dela), <strong>personagem</strong> (narra e também participa) ou <strong>onisciente</strong> (sabe tudo, inclusive os pensamentos dos personagens)."},
+        {h:"Advérbio",p:"É a palavra invariável que acompanha o verbo, o adjetivo ou outro advérbio, modificando seu sentido. Classificações: lugar (aqui, lá), tempo (agora, cedo), modo (bem, devagar, e os terminados em -mente), intensidade (muito, pouco), dúvida (talvez), afirmação (sim) e negação (não, nunca)."},
+        {h:"Locução adverbial e 'mal/mau'",p:"<strong>Locução adverbial</strong>: duas ou mais palavras com função de advérbio (às pressas, de repente, por certo) — sempre escritas separadas. <strong>Mal × Mau</strong>: 'mal' é o contrário de 'bem' (advérbio, substantivo ou conjunção); 'mau' é o contrário de 'bom' (adjetivo). Ex.: 'Ele é um mau aluno' / 'Ele se comportou mal'."}
+      ],
+      flashcards:[
+        {q:"Quais são as características de um conto?",a:"Texto curto, poucos personagens, espaço delimitado, tempo marcado, narrador e enredo.",ctx:"O conto é breve — por isso não cabe muitos lugares e personagens. Sua estrutura vai da apresentação ao desfecho."},
+        {q:"Quais são os tipos de narrador?",a:"Observador (não participa), personagem (participa) e onisciente (sabe tudo).",ctx:"Dica: o onisciente é 'todo-poderoso' — conhece até os pensamentos dos personagens. O personagem está dentro da história."},
+        {q:"O que é um advérbio?",a:"Palavra invariável que acompanha o verbo, o adjetivo ou outro advérbio, modificando seu sentido.",ctx:"Ex.: 'Cheguei cedo' (tempo), 'Corri muito' (intensidade). Advérbio não varia — fica sempre igual."},
+        {q:"O que é uma locução adverbial?",a:"Um conjunto de duas ou mais palavras que juntas funcionam como advérbio. Ex.: 'às pressas', 'de repente'.",ctx:"Importante: são sempre escritas SEPARADAS. 'De repente' (certo), 'derrepente' (errado)."},
+        {q:"Qual a diferença entre 'mal' e 'mau'?",a:"'Mal' é o contrário de 'bem' (advérbio). 'Mau' é o contrário de 'bom' (adjetivo).",ctx:"Truque: troque por 'bem' ou 'bom'. Se couber 'bem', é 'mal'. Se couber 'bom', é 'mau'."}
+      ],
+      quiz:[
+        {q:"Uma característica do conto é:",opts:["Ter muitos personagens e lugares","Ser um texto narrativo curto, com poucos personagens","Não ter enredo","Ser sempre um texto científico"],c:1,feedback:"O conto é uma narrativa curta, com poucos personagens e locais, tempo marcado e um enredo bem definido."},
+        {q:"O narrador que participa da história como personagem é o narrador:",opts:["Observador","Onisciente","Personagem","Ausente"],c:2,feedback:"O narrador-personagem narra e também participa da história. O observador só narra; o onisciente sabe tudo."},
+        {q:"Qual palavra é um ADVÉRBIO de tempo?",opts:["Bonito","Cedo","Casa","Rápido"],c:1,feedback:"'Cedo' é advérbio de tempo (indica quando). Advérbios modificam o verbo — 'cheguei cedo'."},
+        {q:"Qual é a forma CORRETA da locução adverbial?",opts:["Derrepente","De repente","Derepente","Derrepenti"],c:1,feedback:"Locuções adverbiais são sempre escritas separadas: 'de repente' (certo). Escrever tudo junto é um erro comum."},
+        {q:"Qual frase usa 'mau' CORRETAMENTE?",opts:["Ele dormiu mau","Ela é uma mau pessoa","Ele é um mau aluno","Passei mau o dia todo"],c:2,feedback:"'Mau' é adjetivo (contrário de bom): 'um mau aluno'. Quando é o contrário de 'bem' (advérbio), usa-se 'mal': 'dormiu mal'."}
       ]
     }
   ],
   cie: [
-    {
-      num:"Módulo 3", title:"Sistema Digestório e Respiratório", sub:"Origem dos alimentos e funcionamento dos sistemas",
-      resumo:[
-        {h:"Origem dos alimentos",p:"Os alimentos podem ter três origens: <strong>Vegetal</strong> (frutas, verduras, legumes e grãos — vêm das plantas), <strong>Animal</strong> (carne, leite e ovos — vêm dos animais) e <strong>Mineral</strong> (como o sal — vêm de minerais da natureza). Alguns são consumidos naturalmente; outros passam por transformações, como o pão (processado) ou os biscoitos (ultraprocessados)."},
-        {h:"Alimentos e nutrientes",p:"Os alimentos fornecem nutrientes essenciais: <strong>Proteínas</strong> — constroem e reparam os tecidos (carnes, ovos, leite). <strong>Carboidratos</strong> — principal fonte de energia (arroz, batata). <strong>Lipídios</strong> — fornecem energia e estrutura (óleos e gorduras). <strong>Vitaminas e minerais</strong> — regulam o organismo e protegem contra doenças (frutas e verduras)."},
-        {h:"🫁 Sistema Digestório — como funciona",p:'<div class="diagram-wrap"><div class="diagram-title digestorio">🫁 Sistema Digestório — 5 etapas</div><svg class="diagram-svg" viewBox="0 0 560 220" xmlns="http://www.w3.org/2000/svg"><defs><marker id="arr-d" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3 z" fill="#E65100"/></marker></defs><rect x="10" y="10" width="100" height="60" rx="10" fill="#FFF3E0" stroke="#E65100" stroke-width="1.5"/><text x="60" y="30" text-anchor="middle" font-size="11" font-weight="700" fill="#E65100">① Boca</text><text x="60" y="46" text-anchor="middle" font-size="9" fill="#5D4037">Dentes trituram</text><text x="60" y="58" text-anchor="middle" font-size="9" fill="#5D4037">Saliva umidece</text><line x1="110" y1="40" x2="148" y2="40" stroke="#E65100" stroke-width="1.5" marker-end="url(#arr-d)"/><rect x="150" y="10" width="100" height="60" rx="10" fill="#FFF3E0" stroke="#E65100" stroke-width="1.5"/><text x="200" y="30" text-anchor="middle" font-size="11" font-weight="700" fill="#E65100">② Faringe/Esôfago</text><text x="200" y="46" text-anchor="middle" font-size="9" fill="#5D4037">Bolo alimentar</text><text x="200" y="58" text-anchor="middle" font-size="9" fill="#5D4037">desce até estômago</text><line x1="250" y1="40" x2="288" y2="40" stroke="#E65100" stroke-width="1.5" marker-end="url(#arr-d)"/><rect x="290" y="10" width="100" height="60" rx="10" fill="#FFF3E0" stroke="#E65100" stroke-width="1.5"/><text x="340" y="30" text-anchor="middle" font-size="11" font-weight="700" fill="#E65100">③ Estômago</text><text x="340" y="46" text-anchor="middle" font-size="9" fill="#5D4037">Suco gástrico</text><text x="340" y="58" text-anchor="middle" font-size="9" fill="#5D4037">Digestão intensa (~3h)</text><line x1="390" y1="40" x2="428" y2="40" stroke="#E65100" stroke-width="1.5" marker-end="url(#arr-d)"/><rect x="430" y="10" width="120" height="60" rx="10" fill="#FFF3E0" stroke="#E65100" stroke-width="1.5"/><text x="490" y="26" text-anchor="middle" font-size="11" font-weight="700" fill="#E65100">④ Int. Delgado</text><text x="490" y="40" text-anchor="middle" font-size="9" fill="#5D4037">Pâncreas, fígado e bile</text><text x="490" y="52" text-anchor="middle" font-size="9" fill="#5D4037">Nutrientes → sangue</text><text x="490" y="64" text-anchor="middle" font-size="9" fill="#5D4037">Digestão concluída</text><line x1="490" y1="72" x2="490" y2="118" stroke="#E65100" stroke-width="1.5" marker-end="url(#arr-d)"/><rect x="370" y="120" width="240" height="60" rx="10" fill="#FFF8E1" stroke="#E65100" stroke-width="1.5"/><text x="490" y="140" text-anchor="middle" font-size="11" font-weight="700" fill="#E65100">⑤ Intestino Grosso</text><text x="490" y="156" text-anchor="middle" font-size="9" fill="#5D4037">Absorção de água e sais minerais</text><text x="490" y="168" text-anchor="middle" font-size="9" fill="#5D4037">Bolo fecal → ânus</text><rect x="10" y="120" width="340" height="90" rx="10" fill="#FBE9E7" stroke="#BF360C" stroke-width="1"/><text x="20" y="140" font-size="10" font-weight="700" fill="#BF360C">💡 Órgãos auxiliares:</text><text x="20" y="156" font-size="9" fill="#4E342E">• Pâncreas → suco pancreático + regula açúcar no sangue</text><text x="20" y="170" font-size="9" fill="#4E342E">• Fígado → produz bile (digere gorduras)</text><text x="20" y="184" font-size="9" fill="#4E342E">• Vesícula biliar → armazena e libera a bile no int. delgado</text><text x="20" y="198" font-size="9" fill="#4E342E">• Bolo alimentar → nome dado ao alimento após a mastigação</text></svg></div>'},
-        {h:"🌬️ Sistema Respiratório — como funciona",p:'<div class="diagram-wrap"><div class="diagram-title respiratorio">🌬️ Sistema Respiratório — 5 etapas</div><svg class="diagram-svg" viewBox="0 0 560 200" xmlns="http://www.w3.org/2000/svg"><defs><marker id="arr-r" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3 z" fill="#1565C0"/></marker></defs><rect x="10" y="10" width="95" height="65" rx="10" fill="#E3F2FD" stroke="#1565C0" stroke-width="1.5"/><text x="57" y="30" text-anchor="middle" font-size="11" font-weight="700" fill="#1565C0">① Nariz</text><text x="57" y="46" text-anchor="middle" font-size="9" fill="#1A237E">Ar aquecido,</text><text x="57" y="58" text-anchor="middle" font-size="9" fill="#1A237E">umedecido e filtrado</text><line x1="105" y1="42" x2="143" y2="42" stroke="#1565C0" stroke-width="1.5" marker-end="url(#arr-r)"/><rect x="145" y="10" width="105" height="65" rx="10" fill="#E3F2FD" stroke="#1565C0" stroke-width="1.5"/><text x="197" y="30" text-anchor="middle" font-size="11" font-weight="700" fill="#1565C0">② Faringe/Laringe</text><text x="197" y="46" text-anchor="middle" font-size="9" fill="#1A237E">Pregas vocais</text><text x="197" y="58" text-anchor="middle" font-size="9" fill="#1A237E">(responsáveis pela fala)</text><line x1="250" y1="42" x2="288" y2="42" stroke="#1565C0" stroke-width="1.5" marker-end="url(#arr-r)"/><rect x="290" y="10" width="100" height="65" rx="10" fill="#E3F2FD" stroke="#1565C0" stroke-width="1.5"/><text x="340" y="30" text-anchor="middle" font-size="11" font-weight="700" fill="#1565C0">③ Traqueia</text><text x="340" y="46" text-anchor="middle" font-size="9" fill="#1A237E">Divide-se em</text><text x="340" y="58" text-anchor="middle" font-size="9" fill="#1A237E">2 brônquios</text><line x1="390" y1="42" x2="428" y2="42" stroke="#1565C0" stroke-width="1.5" marker-end="url(#arr-r)"/><rect x="430" y="10" width="120" height="65" rx="10" fill="#E3F2FD" stroke="#1565C0" stroke-width="1.5"/><text x="490" y="30" text-anchor="middle" font-size="11" font-weight="700" fill="#1565C0">④ Pulmões</text><text x="490" y="46" text-anchor="middle" font-size="9" fill="#1A237E">Brônquios →</text><text x="490" y="58" text-anchor="middle" font-size="9" fill="#1A237E">bronquíolos</text><line x1="490" y1="75" x2="490" y2="108" stroke="#1565C0" stroke-width="1.5" marker-end="url(#arr-r)"/><rect x="310" y="110" width="240" height="65" rx="10" fill="#BBDEFB" stroke="#1565C0" stroke-width="1.5"/><text x="430" y="130" text-anchor="middle" font-size="11" font-weight="700" fill="#1565C0">⑤ Alvéolos — Troca Gasosa</text><text x="430" y="148" text-anchor="middle" font-size="9" fill="#1A237E">O₂ (oxigênio) → vai para o sangue</text><text x="430" y="162" text-anchor="middle" font-size="9" fill="#1A237E">CO₂ (gás carbônico) → eliminado</text><rect x="10" y="110" width="290" height="65" rx="10" fill="#E8EAF6" stroke="#3949AB" stroke-width="1"/><text x="20" y="130" font-size="10" font-weight="700" fill="#283593">💡 Inspiração e Expiração:</text><text x="20" y="146" font-size="9" fill="#1A237E">• Inspiração: músculos contraem → caixa torácica aumenta → ar entra</text><text x="20" y="160" font-size="9" fill="#1A237E">• Expiração: músculos relaxam → caixa torácica diminui → ar sai</text><text x="20" y="174" font-size="9" fill="#1A237E">• Diafragma e músculos intercostais controlam esse movimento</text></svg></div>'}
-      ],
-      flashcards:[
-        {q:"Quais são as três origens possíveis dos alimentos?",a:"Vegetal (plantas), Animal (animais) e Mineral (como o sal).",ctx:"Dica: pense em cada alimento que você come e tente classificar. Arroz? Vegetal. Ovo? Animal. Sal? Mineral. Em prova, podem mostrar uma imagem e pedir a origem."},
-        {q:"O que é o 'bolo alimentar'?",a:"O nome dado ao alimento depois que ele é triturado pelos dentes e misturado com a saliva na boca.",ctx:"Bolo alimentar = alimento mastigado e umedecido. Só recebe esse nome depois da mastigação. Antes, é apenas o alimento. Essa distinção cai bastante em prova!"},
-        {q:"Qual a função do pâncreas e do fígado na digestão?",a:"Pâncreas → produz suco pancreático e regula o açúcar no sangue. Fígado → produz bile, que auxilia na digestão das gorduras.",ctx:"Os dois agem no intestino delgado, não no estômago. A bile é guardada na vesícula biliar antes de ser liberada. São órgãos auxiliares — importantes mas não fazem a digestão sozinhos."},
-        {q:"O que acontece nos alvéolos?",a:"A troca gasosa: o oxigênio (O₂) passa do ar para o sangue e o gás carbônico (CO₂) é eliminado do sangue para fora.",ctx:"Alvéolo = bolsinha de ar no fundo do pulmão. É lá que o sangue 'troca' o gás ruim (CO₂) pelo bom (O₂). Essa é a função mais importante do sistema respiratório!"},
-        {q:"Qual a diferença entre inspiração e expiração?",a:"Inspiração: músculos contraem, caixa torácica aumenta, ar entra. Expiração: músculos relaxam, caixa torácica diminui, ar sai.",ctx:"Dica: 'Inspirar' = receber. 'Expirar' = liberar. Os músculos que controlam isso são o diafragma (separa tórax do abdômen) e os intercostais (entre as costelas)."},
-        {q:"Onde ocorre a digestão mais intensa e quanto tempo dura?",a:"No estômago, onde o bolo alimentar fica cerca de 3 horas misturado com o suco gástrico.",ctx:"O estômago produz o próprio suco gástrico — um líquido digestivo que quebra ainda mais os alimentos. Depois de 3 horas, o alimento segue para o intestino delgado."}
-      ],
-      quiz:[
-        {q:"Qual é o nome dado ao alimento após ser mastigado e misturado com a saliva?",opts:["Suco gástrico","Bolo alimentar","Bolo fecal","Bile"],c:1,feedback:"Bolo alimentar = alimento mastigado + saliva. O bolo fecal é o que sobra no final, no intestino grosso, e vira fezes. Não confunda os dois 'bolos'!"},
-        {q:"Onde ocorre a absorção dos nutrientes pelo sangue?",opts:["Estômago","Boca","Intestino delgado","Intestino grosso"],c:2,feedback:"No intestino delgado a digestão é concluída e os nutrientes passam para o sangue. O intestino grosso absorve apenas água e sais minerais — a absorção principal é no delgado."},
-        {q:"Qual órgão produz a bile, que ajuda a digerir as gorduras?",opts:["Pâncreas","Estômago","Vesícula biliar","Fígado"],c:3,feedback:"O fígado produz a bile. A vesícula biliar armazena a bile e a libera quando necessário. O pâncreas produz o suco pancreático — são funções diferentes!"},
-        {q:"O que acontece durante a expiração?",opts:["Os pulmões se enchem de ar","Os músculos se contraem e a caixa torácica aumenta","Os músculos relaxam e o ar sai dos pulmões","O oxigênio vai para o sangue"],c:2,feedback:"Expiração = ar saindo. Para isso, os músculos relaxam e a caixa torácica diminui, espremendo os pulmões. O oposto acontece na inspiração."},
-        {q:"Qual estrutura do sistema respiratório é responsável pela fala?",opts:["Alvéolos","Brônquios","Pregas vocais (laringe)","Traqueia"],c:2,feedback:"As pregas vocais ficam na laringe e vibram quando o ar passa, produzindo sons — e portanto a fala. Os alvéolos fazem a troca gasosa, os brônquios conduzem o ar."}
-      ]
-    },
-    {
-      num:"Módulo 4", title:"Hábitos saudáveis e alimentação equilibrada", sub:"Saúde, nutrição e estilo de vida",
-      resumo:[
-        {h:"Importância da alimentação saudável",p:"Uma alimentação equilibrada é essencial para manter a saúde. A dieta deve ser variada, incluir todos os grupos alimentares e dar preferência a alimentos obtidos diretamente da natureza — evitando produtos ultraprocessados."},
-        {h:"Hábitos que contribuem para a saúde",p:"<strong>Atividade física</strong> — reduz chances de problemas cardiovasculares e obesidade. <strong>Alimentação equilibrada</strong> — melhora imunidade e previne obesidade e desnutrição. <strong>Alimentos naturais</strong> — consumidos sem alterações. <strong>Hidratação</strong> — preferir água a refrigerantes e sucos adoçados. <strong>Sono de qualidade</strong> — fundamental para o equilíbrio físico, mental e emocional."},
-        {h:"Obesidade e desnutrição",p:"A <strong>obesidade</strong> resulta do consumo excessivo de calorias. A <strong>desnutrição</strong> resulta da falta de nutrientes essenciais. Ambas podem ser prevenidas com uma dieta equilibrada."},
-        {h:"Restrições e intolerâncias alimentares",p:"Algumas pessoas têm alergias ou intolerâncias, como a <strong>intolerância à lactose</strong> — o organismo reage negativamente à ingestão do alimento. Nesse caso, é possível usar alternativas adequadas, como leite ou derivados sem lactose."}
-      ],
-      flashcards:[
-        {q:"O que é uma alimentação equilibrada?",a:"Uma dieta variada que fornece todos os nutrientes necessários, com preferência por alimentos naturais e menos ultraprocessados.",ctx:"'Equilibrada' não significa comer pouco — significa comer alimentos dos diferentes grupos (proteínas, carboidratos, gorduras, vitaminas e minerais) nas quantidades certas."},
-        {q:"Cite três hábitos saudáveis além da alimentação.",a:"Atividade física regular, sono de qualidade e hidratação adequada (preferir água).",ctx:"Saúde = corpo + mente. Dormir bem e tomar água são hábitos que muita gente esquece, mas que fazem tanta diferença quanto a alimentação."},
-        {q:"Qual a diferença entre obesidade e desnutrição?",a:"Obesidade: excesso de calorias. Desnutrição: falta de nutrientes essenciais.",ctx:"Os dois são problemas de alimentação, mas opostos. Um é excesso, o outro é falta. Ambos prejudicam a saúde e podem ser prevenidos com uma dieta equilibrada."},
-        {q:"O que é intolerância à lactose?",a:"Condição em que o organismo reage negativamente à lactose (açúcar do leite), causando desconforto digestivo.",ctx:"Intolerância ≠ alergia. Na intolerância, o corpo não consegue digerir bem um componente do alimento. Na alergia, o sistema imune ataca o alimento como se fosse um inimigo."},
-        {q:"Por que é importante dar preferência a alimentos naturais?",a:"Porque são obtidos diretamente da natureza, sem alterações, conservando melhor seus nutrientes e evitando aditivos prejudiciais.",ctx:"Ultraprocessados têm aditivos, conservantes e muito sódio/açúcar. Quanto mais etapas de processamento, menos natural e nutritivo tende a ser o alimento."}
-      ],
-      quiz:[
-        {q:"O que caracteriza um alimento ultraprocessado?",opts:["Vem diretamente da natureza, sem alterações","Passa por muitas etapas de processamento industrial","É sempre de origem animal","Não contém carboidratos"],c:1,feedback:"Ultraprocessados passam por múltiplas etapas industriais e costumam ter muitos aditivos, sódio, açúcar e gorduras. Biscoitos recheados e refrigerantes são exemplos clássicos."},
-        {q:"Qual hábito ajuda a reduzir o risco de doenças cardiovasculares?",opts:["Consumir ultraprocessados","Dormir menos de 5 horas","Praticar atividade física regularmente","Beber refrigerantes no lugar de água"],c:2,feedback:"A atividade física fortalece o coração e os vasos sanguíneos, reduzindo o risco de doenças cardiovasculares. É um dos hábitos mais importantes para a saúde."},
-        {q:"A desnutrição é causada principalmente por:",opts:["Excesso de calorias","Falta de nutrientes essenciais","Consumo excessivo de proteínas","Muito açúcar na dieta"],c:1,feedback:"Desnutrição = falta de nutrientes. Pode ocorrer mesmo em pessoas que comem quantidade suficiente, se a qualidade da alimentação for ruim (sem vitaminas, minerais, proteínas)."},
-        {q:"Uma pessoa com intolerância à lactose deve evitar:",opts:["Frutas e verduras","Arroz e feijão","Leite e derivados com lactose","Carnes e ovos"],c:2,feedback:"A lactose é o açúcar presente no leite. Quem tem intolerância não consegue digeri-la bem. A solução é consumir versões sem lactose ou substituir por outras fontes de cálcio."},
-        {q:"O que é fundamental para o equilíbrio físico, mental e emocional?",opts:["Comer apenas proteínas","Ter um sono de boa qualidade","Evitar toda atividade física","Consumir sucos adoçados"],c:1,feedback:"O sono é quando o corpo se recupera, consolida memórias e regula emoções. Dormir mal prejudica tudo — concentração, humor, imunidade e desempenho físico."}
-      ]
-    },
-    {
-      num:"Módulo 5", title:"Recursos naturais", sub:"Renováveis, não renováveis e consumo consciente",
-      resumo:[
-        {h:"O que são recursos naturais",p:"Recursos naturais são elementos da natureza que utilizamos para viver, como água, solo, ar, plantas e minerais. Sem eles, não seria possível produzir alimentos, roupas, energia ou moradias."},
-        {h:"Recursos renováveis",p:"São recursos que a natureza repõe e não acabam (quando usados com cuidado): <strong>Água</strong> — para beber, cozinhar, higiene. <strong>Sol</strong> — gera energia solar. <strong>Vento</strong> — gera energia eólica e move embarcações. <strong>Plantas e florestas</strong> — alimentos, madeira, ar limpo. <strong>Animais</strong> — equilíbrio do meio ambiente."},
-        {h:"Recursos não renováveis",p:"Levam milhões de anos para se formar e podem acabar: <strong>Petróleo</strong> — combustíveis, plásticos. <strong>Carvão mineral</strong> — gera energia em usinas e indústrias. <strong>Gás natural</strong> — cozinha, aquecimento e geração de energia. <strong>Minérios</strong> (ouro, ferro, cobre) — objetos, máquinas e eletrônicos. <strong>Rochas</strong> — construção."},
-        {h:"Impactos ambientais e energia limpa",p:"O uso excessivo dos recursos causa impactos: desmatamento, poluição da água e do ar, perda da biodiversidade e mudanças climáticas. Gases tóxicos (monóxido de carbono, dióxido de enxofre) prejudicam a saúde. A <strong>energia limpa</strong> usa fontes renováveis: solar, eólica e hidrelétrica — com menor impacto ambiental."},
-        {h:"Consumo consciente",p:"Significa usar os recursos de forma responsável: evitar desperdícios, reutilizar materiais, reciclar resíduos e economizar água e energia. Essas atitudes preservam o planeta para as futuras gerações."}
-      ],
-      flashcards:[
-        {q:"Qual a diferença entre recursos renováveis e não renováveis?",a:"Renováveis: a natureza repõe (água, sol, vento, plantas). Não renováveis: levam milhões de anos para se formar e podem acabar (petróleo, carvão, minérios).",ctx:"Dica: pense no tempo de renovação. O sol aparece todo dia = renovável. O petróleo levou 300 milhões de anos para se formar = não renovável. Tempo de reposição é a chave!"},
-        {q:"Cite três recursos não renováveis e seus usos.",a:"Petróleo (combustíveis e plásticos), carvão mineral (energia em usinas) e gás natural (cozinhar e aquecer).",ctx:"Os três vêm do subsolo e foram formados por matéria orgânica ao longo de milhões de anos. Por isso são chamados de combustíveis fósseis."},
-        {q:"O que é energia limpa? Cite exemplos.",a:"Energia produzida com menor impacto ambiental, usando fontes renováveis: solar, eólica (vento) e hidrelétrica (água).",ctx:"'Limpa' não significa perfeito — hidrelétricas, por exemplo, alagam áreas enormes. Mas comparadas ao petróleo e carvão, poluem muito menos."},
-        {q:"Quais são os principais impactos do uso excessivo dos recursos naturais?",a:"Desmatamento, poluição da água e do ar, perda da biodiversidade e mudanças climáticas.",ctx:"Cada impacto tem uma causa específica: desmatamento → pecuária e agricultura. Poluição do ar → indústrias e veículos. Mudanças climáticas → acúmulo de gases estufa. Entender as causas ajuda a responder questões de interpretação."},
-        {q:"O que é consumo consciente? Cite três atitudes.",a:"Usar os recursos com responsabilidade: evitar desperdícios, reutilizar materiais e reciclar resíduos.",ctx:"Reutilizar = usar de novo sem transformar. Reciclar = transformar em outro produto. Economizar = usar menos. As três atitudes reduzem o impacto no meio ambiente."}
-      ],
-      quiz:[
-        {q:"Qual dos itens abaixo é um recurso NÃO renovável?",opts:["Água","Vento","Petróleo","Sol"],c:2,feedback:"O petróleo levou milhões de anos para se formar — não é possível repor em tempo humano. Água, vento e sol se renovam naturalmente. Atenção ao 'NÃO' na questão!"},
-        {q:"A energia eólica é gerada por:",opts:["Água de rios","A luz do sol","O vento","O calor do interior da Terra"],c:2,feedback:"Eólica vem de 'Éolo', deus do vento na mitologia grega. Turbinas eólicas convertem o movimento do vento em eletricidade. É uma das formas mais limpas de energia."},
-        {q:"O que é considerado consumo consciente?",opts:["Comprar o máximo possível de produtos","Usar recursos sem se preocupar com o desperdício","Reutilizar materiais e economizar água e energia","Desligar aparelhos apenas quando quebram"],c:2,feedback:"Consumo consciente = usar com responsabilidade. Reutilizar, reciclar e economizar são as três principais atitudes. O objetivo é preservar os recursos para as próximas gerações."},
-        {q:"Qual impacto ambiental está diretamente relacionado ao desmatamento?",opts:["Aumento da biodiversidade","Perda de habitats e da biodiversidade","Melhora na qualidade do ar","Aumento das chuvas"],c:1,feedback:"Quando florestas são derrubadas, os animais e plantas que vivem nelas perdem seu habitat. Sem habitat, as espécies podem se extinguir — daí a perda de biodiversidade."},
-        {q:"Qual é a principal característica da energia limpa?",opts:["É mais cara que as outras fontes","Usa fontes não renováveis","Produz maior quantidade de gases tóxicos","Causa menor impacto ambiental"],c:3,feedback:"Energia limpa = menor impacto ambiental. Usa fontes renováveis (sol, vento, água) que não se esgotam e poluem menos do que combustíveis fósseis como petróleo e carvão."}
-      ]
-    },
+
     {
       num:"Módulo 6", title:"Biomas Brasileiros", sub:"Os seis grandes biomas e sua biodiversidade",
       resumo:[
@@ -1196,6 +967,7 @@ const data = {
         {q:"O Pantanal é conhecido por ser:",opts:["O maior bioma brasileiro","A maior planície alagável do mundo","O único bioma exclusivamente brasileiro","Uma savana com queimadas naturais"],c:1,feedback:"O Pantanal é a maior planície alagável do mundo — durante as chuvas, grandes áreas ficam inundadas, criando um ambiente riquíssimo em vida selvagem."}
       ]
     },
+
     {
       num:"Módulo 7", title:"Impactos Ambientais", sub:"Desmatamento e poluição do solo, água e ar",
       resumo:[
@@ -1218,6 +990,31 @@ const data = {
         {q:"Qual atitude ajuda a reduzir os impactos ambientais?",opts:["Aumentar o desmatamento", "Separar e reciclar o lixo","Desperdiçar água e energia","Evitar plantar árvores"],c:1,feedback:"Separar e reciclar o lixo é uma das atitudes de preservação ambiental que ajuda a reduzir os impactos, junto com economizar recursos e evitar queimadas."}
       ]
     },
+
+    {
+      num:"Módulo 8", title:"Um Planeta com Vida", sub:"Desenvolvimento sustentável, ODS e unidades de conservação",
+      resumo:[
+        {h:"Desenvolvimento sustentável",p:"O desenvolvimento sustentável está relacionado ao uso consciente dos recursos naturais, pensando nas gerações futuras. É fundamental refletir sobre nossas ações do dia a dia e como elas impactam o meio ambiente — em casa ou na escola. Algumas práticas importantes: cuidar do uso de água, papel e energia; participar de ações coletivas de preservação; manter os ambientes limpos (como recolher plástico nas praias); e praticar o consumo consciente."},
+        {h:"Objetivos de Desenvolvimento Sustentável (ODS)",p:"A Organização das Nações Unidas (ONU) criou a <strong>Agenda 2030</strong>, um plano global que inclui <strong>17 Objetivos de Desenvolvimento Sustentável (ODS)</strong>. Muitos países, incluindo o Brasil, estão colaborando com essa agenda para construir um mundo mais justo e sustentável."},
+        {h:"Recursos naturais e uso sustentável",p:"Os recursos naturais são elementos essenciais para a sobrevivência do ser humano e podem ser classificados em <strong>renováveis</strong> (que a natureza repõe) e <strong>não renováveis</strong> (que se esgotam). O uso sustentável dos materiais envolve identificar como usamos a água e outros recursos no dia a dia, diferenciar o que é renovável do que não é, reconhecer a importância de preservar e praticar o consumo consciente."},
+        {h:"Unidades de conservação",p:"As unidades de conservação são áreas protegidas criadas para preservar a biodiversidade e os recursos naturais, garantindo a manutenção dos ecossistemas e a vida no planeta. Suas funções principais são: proteger áreas naturais importantes, preservar a fauna e a flora, manter os serviços dos ecossistemas e garantir a vida debaixo d'água e sobre a terra."}
+      ],
+      flashcards:[
+        {q:"O que é desenvolvimento sustentável?",a:"É o uso consciente dos recursos naturais, pensando nas gerações futuras.",ctx:"A ideia central é: usar hoje sem comprometer o amanhã. Cada escolha do dia a dia (economizar água, reciclar) faz parte disso."},
+        {q:"O que é a Agenda 2030 e quantos objetivos ela tem?",a:"É um plano global criado pela ONU, com 17 Objetivos de Desenvolvimento Sustentável (ODS).",ctx:"ONU = Organização das Nações Unidas. O número 17 costuma cair em prova — vale memorizar."},
+        {q:"Qual a diferença entre recurso renovável e não renovável?",a:"Renovável: a natureza consegue repor (água, sol, vento). Não renovável: se esgota e não dá para repor em tempo humano (petróleo, carvão).",ctx:"Essa distinção conecta o módulo 8 com o módulo 5 e com Geografia — é um conceito que aparece em várias matérias."},
+        {q:"O que são unidades de conservação?",a:"Áreas protegidas criadas para preservar a biodiversidade, a fauna, a flora e os ecossistemas.",ctx:"Pense nelas como 'áreas de proteção' onde a natureza é preservada — parques nacionais são um exemplo."},
+        {q:"Cite três práticas de consumo consciente.",a:"Cuidar do uso de água, papel e energia; participar de ações coletivas de preservação; manter ambientes limpos (ex.: recolher plástico).",ctx:"Consumo consciente é agir no dia a dia — não é uma ação única, mas um conjunto de hábitos que reduzem o impacto no planeta."}
+      ],
+      quiz:[
+        {q:"O desenvolvimento sustentável está relacionado principalmente a:",opts:["Consumir o máximo de recursos possível","Usar os recursos de forma consciente, pensando nas gerações futuras","Explorar a natureza sem limites","Parar completamente de usar recursos naturais"],c:1,feedback:"Desenvolvimento sustentável = usar com consciência hoje, garantindo recursos para o futuro. Não é parar de usar, mas usar com equilíbrio."},
+        {q:"Quantos Objetivos de Desenvolvimento Sustentável (ODS) tem a Agenda 2030 da ONU?",opts:["10","15","17","20"],c:2,feedback:"A Agenda 2030 da ONU possui 17 Objetivos de Desenvolvimento Sustentável (ODS). O Brasil é um dos países que colaboram com esse plano global."},
+        {q:"Qual é a função principal de uma unidade de conservação?",opts:["Construir cidades em áreas naturais","Proteger a biodiversidade e os ecossistemas","Aumentar o desmatamento","Explorar recursos minerais"],c:1,feedback:"Unidades de conservação são áreas protegidas — sua função é preservar a fauna, a flora, os ecossistemas e a vida no planeta."},
+        {q:"Qual das opções é um recurso NÃO renovável?",opts:["A água","O vento","O petróleo","A luz do sol"],c:2,feedback:"O petróleo levou milhões de anos para se formar e não pode ser reposto em tempo humano. Água, vento e sol se renovam naturalmente. Atenção ao 'NÃO' na pergunta!"},
+        {q:"Recolher plástico em uma praia é um exemplo de:",opts:["Consumo excessivo","Ação coletiva de preservação do meio ambiente","Poluição da água","Desmatamento"],c:1,feedback:"Recolher resíduos e manter os ambientes limpos é uma ação coletiva de preservação — exatamente o tipo de prática que o desenvolvimento sustentável incentiva."}
+      ]
+    },
+
     {
       num:"Módulo 9", title:"Instrumentos Ópticos e Mapas Celestes", sub:"Lentes, telescópios e observação do céu",
       resumo:[
@@ -1243,90 +1040,19 @@ const data = {
         {q:"Qual instrumento é usado para observar objetos distantes na Terra, como animais e paisagens, sem precisar telescópio?",opts:["Lupa","Binóculo","Microscópio","Régua"],c:1,feedback:"O binóculo aproxima visualmente objetos distantes na superfície terrestre — diferente do telescópio, voltado para a observação do céu."}
       ]
     }
-  ],
-  ing: [
-    {
-      num:"Módulo 1", title:"Rotina diária e família", sub:"Simple Present e vocabulário de família",
-      resumo:[
-        {h:"Simple Present para rotina (Daily Routine)",p:"Para falar de hábitos e rotina usamos o Simple Present. Com I/you/we/they o verbo fica no infinitivo: 'I wake up at 7'. Com he/she/it, acrescenta-se -s ou -es ao verbo: 'She wakes up at 7', 'He goes to school'. Verbos comuns de rotina: wake up (despertar), get up (levantar), take a shower (tomar banho), have breakfast (tomar café da manhã), go to school (ir à escola), do homework (fazer lição), go to bed (ir para a cama)."},
-        {h:"Vocabulário de família (Family)",p:"mother (mãe), father (pai), parents (pais), sister (irmã), brother (irmão), grandmother (avó), grandfather (avô), aunt (tia), uncle (tio), cousin (primo/prima). Para perguntar sobre a família: 'How many brothers and sisters do you have?'"},
-        {h:"Perguntas com Do/Does",p:"Para fazer perguntas no Simple Present usamos 'Do' com I/you/we/they e 'Does' com he/she/it. Exemplo: 'Do you have breakfast every day?' / 'Does she go to school by bus?'. Respostas curtas: 'Yes, I do.' / 'No, she doesn't.'"}
-      ],
-      flashcards:[
-        {q:"Como fica o verbo 'wake up' na terceira pessoa do singular (he/she/it)?",a:"'wakes up' — acrescenta-se -s ao verbo.",ctx:"Regra geral: he/she/it sempre recebe -s (ou -es) no Simple Present. É a mesma lógica de 'go → goes', 'do → does'."},
-        {q:"Como se diz 'Eu tomo café da manhã às 7 horas' em inglês?",a:"'I have breakfast at 7 o'clock.'",ctx:"'Have breakfast' é a expressão fixa para 'tomar café da manhã' — não se traduz palavra por palavra."},
-        {q:"Como se diz 'irmã' e 'irmão' em inglês?",a:"sister (irmã) e brother (irmão).",ctx:"Dica: 'siblings' é o termo que junta irmãos e irmãs ao mesmo tempo, sem dizer o gênero."},
-        {q:"Como formar uma pergunta no Simple Present com 'he' ou 'she'?",a:"Usando 'Does' antes do sujeito: 'Does she do her homework?'",ctx:"'Do' é para I/you/we/they. 'Does' é para he/she/it. Depois do Do/Does, o verbo principal volta ao infinitivo, sem -s: 'Does she go' (não 'goes')."},
-        {q:"Complete a resposta curta: 'Does he do his homework?' '___'",a:"'Yes, he does.' (ou 'No, he doesn't.')",ctx:"Respostas curtas repetem o auxiliar (do/does), não o verbo principal."}
-      ],
-      quiz:[
-        {q:"'She ___ up at 7 o'clock.'",opts:["wake","wakes","waked","waking"],c:1,feedback:"Com 'she' (terceira pessoa do singular), o verbo recebe -s: 'wakes up'. Essa é a regra mais importante do Simple Present."},
-        {q:"O que significa 'grandmother' em português?",opts:["avô","avó","tia","mãe"],c:1,feedback:"'Grandmother' é avó. 'Grandfather' é avô — o prefixo 'grand-' indica a geração dos pais dos seus pais."},
-        {q:"'___ you have breakfast every day?'",opts:["Do","Does","Is","Are"],c:0,feedback:"Com 'you', usa-se 'Do'. 'Does' é reservado para he/she/it. 'Is/Are' são usados com o verbo 'to be', não no Simple Present de ação."},
-        {q:"Escolha a resposta curta correta para: 'Does your brother play soccer?'",opts:["Yes, he do.","Yes, he plays.","Yes, he does.","Yes, does."],c:2,feedback:"A resposta curta correta repete o auxiliar 'does': 'Yes, he does.' Não se usa o verbo principal (plays) nem 'do' com 'he'."},
-        {q:"'My father ___ to work by car.'",opts:["go","goes","going","gone"],c:1,feedback:"'Father' equivale a 'he' — terceira pessoa do singular. Por isso o verbo 'go' recebe -es: 'goes'."}
-      ]
-    },
-    {
-      num:"Módulo 2", title:"Comparativos e localização", sub:"Comparative adjectives e prepositions of place",
-      resumo:[
-        {h:"Comparativos (Comparative Adjectives)",p:"Para adjetivos curtos (1 sílaba, ou 2 terminados em -y), acrescenta-se '-er' + 'than': 'tall → taller than', 'big → bigger than'. Para adjetivos longos, usa-se 'more + adjetivo + than': 'interesting → more interesting than'. Alguns são irregulares: 'good → better', 'bad → worse'."},
-        {h:"Preposições de lugar (Prepositions of Place)",p:"in (dentro de), on (em cima de / sobre), under (debaixo de), next to (ao lado de), between (entre), in front of (na frente de), behind (atrás de). Exemplo: 'The cat is under the table.' / 'The school is between the bakery and the bank.'"},
-        {h:"There is / There are",p:"Usamos 'There is' para algo no singular e 'There are' para o plural, ao descrever o que existe em um lugar. Exemplo: 'There is a book on the table.' / 'There are two cats in the garden.'"}
-      ],
-      flashcards:[
-        {q:"Como formar o comparativo do adjetivo 'big'?",a:"'bigger than' — dobra-se a consoante final e acrescenta '-er'.",ctx:"Adjetivos curtos terminados em consoante+vogal+consoante dobram a última letra antes do -er: big→bigger, hot→hotter."},
-        {q:"Qual é o comparativo de 'good'?",a:"'better' — é um comparativo irregular.",ctx:"Assim como em português ('bom → melhor', não 'boa-mente'), o inglês também tem irregulares: good→better, bad→worse."},
-        {q:"Como se diz 'O gato está embaixo da mesa' em inglês?",a:"'The cat is under the table.'",ctx:"'Under' = embaixo de / debaixo de. Não confundir com 'on' (em cima de)."},
-        {q:"Quando usamos 'there is' e quando usamos 'there are'?",a:"'There is' para substantivo no singular; 'there are' para substantivo no plural.",ctx:"O verbo concorda com o que vem depois, não com 'there'. 'There is A book' (singular) / 'There are TWO books' (plural)."},
-        {q:"Complete: 'The book is ___ the table and the chair.' (entre)",a:"'between'",ctx:"'Between' é usado quando há dois pontos de referência claros. Quando há mais de dois, usa-se 'among'."}
-      ],
-      quiz:[
-        {q:"'My sister is ___ than me.' (mais alta)",opts:["tall","taller","tallest","more tall"],c:1,feedback:"Adjetivo curto (tall) + '-er' + than = comparativo. 'Taller than' é a forma correta — não se usa 'more tall'."},
-        {q:"'There ___ two dogs in the yard.'",opts:["is","are","be","was"],c:1,feedback:"'Two dogs' está no plural, então o verbo precisa concordar: 'There are'. 'There is' seria usado só com 'a dog' (singular)."},
-        {q:"'The keys are ___ the table.' (em cima de)",opts:["in","on","under","behind"],c:1,feedback:"'On' indica que algo está em cima/sobre uma superfície. 'In' seria dentro de algo, e 'under' embaixo."},
-        {q:"Qual é o comparativo de 'bad'?",opts:["more bad","worse","baddest","badder"],c:1,feedback:"'Bad' é irregular: o comparativo é 'worse', não 'more bad' nem 'badder'. Vale memorizar junto com 'good → better'."},
-        {q:"'The store is ___ the bank and the bakery.' (entre)",opts:["between","next","under","behind"],c:0,feedback:"'Between' é usado quando o local está entre dois pontos de referência — exatamente o caso do banco e da padaria."}
-      ]
-    },
-    {
-      num:"Módulo 3", title:"Leitura e vocabulário do dia a dia", sub:"Reading comprehension e everyday vocabulary",
-      resumo:[
-        {h:"Estratégia de leitura em inglês",p:"A mesma técnica da aba Interpretação funciona em inglês: 1) leia a pergunta primeiro e identifique a palavra-chave; 2) volte ao texto procurando o trecho relacionado; 3) elimine as alternativas que claramente não aparecem no texto antes de escolher a resposta final."},
-        {h:"Objetos de escola (School Objects)",p:"pencil (lápis), eraser (borracha), backpack (mochila), notebook (caderno), pencil case (estojo), ruler (régua), book (livro)."},
-        {h:"Sentimentos e clima (Feelings & Weather)",p:"Sentimentos: happy (feliz), sad (triste), tired (cansado), excited (animado/entusiasmado — geralmente por algo que vai acontecer). Clima: sunny (ensolarado), rainy (chuvoso), cold (frio), hot (calor). Pergunta comum: 'What's the weather like today?' → 'It's sunny.'"}
-      ],
-      flashcards:[
-        {q:"O que significa 'backpack'?",a:"Mochila.",ctx:"'Back' (costas) + 'pack' (pacote/bolsa) — literalmente, 'bolsa das costas'."},
-        {q:"Como se diz 'Eu estou cansado' em inglês?",a:"'I am tired.'",ctx:"Sentimentos e estados usam o verbo 'to be' (am/is/are), não verbos de ação."},
-        {q:"Traduza: 'It's raining today.'",a:"'Está chovendo hoje.'",ctx:"'It's' aqui não se refere a uma pessoa ou coisa — é o 'it' impessoal usado para clima, igual em 'It's hot' (Está calor)."},
-        {q:"Qual a diferença entre 'happy' e 'excited'?",a:"'Happy' é feliz, um estado geral de bem-estar. 'Excited' é animado/entusiasmado, geralmente por algo específico que vai acontecer.",ctx:"Exemplo: 'I am happy' (estou feliz, de modo geral) x 'I am excited about my birthday' (estou animado com meu aniversário)."},
-        {q:"Antes de responder uma pergunta sobre um texto em inglês, o que você deve fazer primeiro?",a:"Ler a pergunta com atenção, identificar a palavra-chave e só depois voltar ao texto para localizar a resposta.",ctx:"É a mesma estratégia do Modo Detetive da aba Interpretação — funciona em qualquer idioma."}
-      ],
-      quiz:[
-        {q:"'Eraser' significa:",opts:["lápis","borracha","caderno","mochila"],c:1,feedback:"'Eraser' é borracha — vem de 'erase' (apagar). 'Pencil' é lápis e 'notebook' é caderno."},
-        {q:"'She is ___ because it's her birthday.'",opts:["tired","excited","cold","hungry"],c:1,feedback:"Aniversário é um evento esperado com expectativa positiva — por isso 'excited' (animada) é a opção que faz mais sentido no contexto."},
-        {q:"'What's the weather like?' 'It's ___.'",opts:["run","sunny","eat","fast"],c:1,feedback:"A pergunta é sobre o clima, então a resposta precisa ser uma condição climática. 'Sunny' (ensolarado) é a única opção que descreve o tempo."},
-        {q:"Antes de responder uma questão de leitura em inglês, o que você deve fazer primeiro?",opts:["Adivinhar a resposta","Ler a pergunta com atenção e procurar a palavra-chave","Pular direto para as alternativas","Ignorar o texto"],c:1,feedback:"Assim como em português, ler a pergunta primeiro evita perder tempo relendo o texto sem foco. A palavra-chave indica exatamente o que procurar."},
-        {q:"'Backpack' em português é:",opts:["estojo","mochila","caderno","livro"],c:1,feedback:"'Backpack' é mochila. 'Pencil case' é estojo, 'notebook' é caderno e 'book' é livro."}
-      ]
-    }
   ]
 };
 
-// ── estado ──
-const subjKeys = ['geo','mat','his','por','cie','ing'];
+const subjKeys = ['geo','his','por','cie'];
 let scores = {
-  geo: [{c:0,t:0,d:false},{c:0,t:0,d:false},{c:0,t:0,d:false},{c:0,t:0,d:false},{c:0,t:0,d:false},{c:0,t:0,d:false},{c:0,t:0,d:false}],
-  mat: [{c:0,t:0,d:false},{c:0,t:0,d:false},{c:0,t:0,d:false}],
-  his: [{c:0,t:0,d:false},{c:0,t:0,d:false},{c:0,t:0,d:false},{c:0,t:0,d:false},{c:0,t:0,d:false},{c:0,t:0,d:false},{c:0,t:0,d:false}],
-  por: [{c:0,t:0,d:false},{c:0,t:0,d:false},{c:0,t:0,d:false},{c:0,t:0,d:false},{c:0,t:0,d:false}],
-  cie: [{c:0,t:0,d:false},{c:0,t:0,d:false},{c:0,t:0,d:false},{c:0,t:0,d:false},{c:0,t:0,d:false},{c:0,t:0,d:false}],
-  ing: [{c:0,t:0,d:false},{c:0,t:0,d:false},{c:0,t:0,d:false}]
+  geo: [{c:0,t:0,d:false},{c:0,t:0,d:false},{c:0,t:0,d:false},{c:0,t:0,d:false}],
+  his: [{c:0,t:0,d:false},{c:0,t:0,d:false},{c:0,t:0,d:false},{c:0,t:0,d:false}],
+  por: [{c:0,t:0,d:false},{c:0,t:0,d:false},{c:0,t:0,d:false},{c:0,t:0,d:false},{c:0,t:0,d:false},{c:0,t:0,d:false},{c:0,t:0,d:false}],
+  cie: [{c:0,t:0,d:false},{c:0,t:0,d:false},{c:0,t:0,d:false},{c:0,t:0,d:false}]
 };
 let curSubj='geo', curIdx=0, curActiveSubj='geo';
 
-const subjLabels = {geo:'🌍 Geografia', mat:'📐 Matemática', his:'📜 História', por:'📝 Português', cie:'🔬 Ciências', ing:'🇬🇧 Inglês'};
+const subjLabels = {geo:'🌍 Geografia', his:'📜 História', por:'📝 Português', cie:'🔬 Ciências'};
 
 // ── navegação de matéria (header) ──
 function selectSubject(subj) {
@@ -1463,11 +1189,11 @@ function resetQuiz() {
 const notasData = {
   materias: [
     {nome:'Língua Portuguesa', icon:'📝', tri:[80,null,null], faltas:[0,null,null], destaque:true},
-    {nome:'Matemática',        icon:'📐', tri:[85,null,null], faltas:[0,null,null], destaque:true},
     {nome:'História',          icon:'📜', tri:[92,null,null], faltas:[0,null,null], destaque:true},
     {nome:'Geografia',         icon:'🌍', tri:[85,null,null], faltas:[0,null,null], destaque:true},
     {nome:'Ciências',          icon:'🔬', tri:[80,null,null], faltas:[0,null,null], destaque:true},
-    {nome:'Língua Inglesa',    icon:'🇬🇧', tri:[96,null,null], faltas:[1,null,null], destaque:true},
+    {nome:'Matemática',        icon:'📐', tri:[85,null,null], faltas:[0,null,null], destaque:false},
+    {nome:'Língua Inglesa',    icon:'🇬🇧', tri:[96,null,null], faltas:[1,null,null], destaque:false},
     {nome:'Língua Espanhola',  icon:'🇪🇸', tri:[100,null,null],faltas:[0,null,null], destaque:false},
     {nome:'Educação Física',   icon:'⚽', tri:[100,null,null], faltas:[1,null,null], destaque:false},
     {nome:'Arte',              icon:'🎨', tri:[100,null,null], faltas:[0,null,null], destaque:false},
@@ -1565,254 +1291,198 @@ const intData = {
   // MODO DETETIVE: treina identificar o que a pergunta pede ANTES de responder
   det: [
     {
-      tema: "Sistema Digestório",
-      texto: "O processo de digestão começa na boca, onde os dentes trituram o alimento e a saliva o umedece. O alimento passa a se chamar bolo alimentar. Depois, segue pelo esôfago até o estômago, onde fica por cerca de três horas em contato com o suco gástrico. Em seguida, vai para o intestino delgado, onde os nutrientes são absorvidos pelo sangue. O que não foi absorvido segue para o intestino grosso.",
-      pergunta: "Segundo o texto, o que NÃO acontece no estômago?",
-      tipo: "Palavra-chave: NÃO — a resposta certa é o que o estômago NÃO faz.",
-      opts: [
-        "O alimento fica por cerca de três horas",
-        "O alimento é misturado com o suco gástrico",
-        "Os nutrientes são absorvidos pelo sangue",
-        "Ocorre uma digestão mais intensa"
-      ],
+      tema: "Fontes de Energia",
+      texto: "As fontes de energia podem ser renováveis ou não renováveis. As renováveis, como a energia solar, eólica e hidráulica, podem ser repostas pela natureza. Já as não renováveis, como o petróleo, o carvão mineral e o gás natural, existem em quantidade limitada e podem se esgotar. A energia limpa, como a solar e a eólica, gera poucos impactos ambientais, enquanto a energia suja depende da queima de combustíveis fósseis.",
+      pergunta: "Segundo o texto, qual fonte de energia NÃO é renovável?",
+      tipo: "Palavra-chave: NÃO — a resposta certa é a fonte que NÃO se repõe.",
+      opts: ["Energia solar", "Energia eólica", "Petróleo", "Energia hidráulica"],
       correta: 2,
-      explicacao: "A absorção dos nutrientes acontece no intestino delgado, não no estômago. A palavra 'NÃO' na pergunta inverte tudo — a resposta certa é justamente o que o texto coloca em outro órgão. Sempre sublinhe NÃO, EXCETO e INCORRETO antes de ler as alternativas."
+      explicacao: "O petróleo é uma fonte NÃO renovável — existe em quantidade limitada e pode se esgotar. Solar, eólica e hidráulica são renováveis. A palavra 'NÃO' inverte a pergunta: ela pede justamente a exceção. Sempre sublinhe NÃO, EXCETO e INCORRETO antes de responder."
     },
     {
-      tema: "Transporte Urbano",
-      texto: "Os meios de transporte coletivo, como ônibus e metrô, conseguem transportar muitas pessoas ao mesmo tempo, reduzindo a quantidade de veículos nas ruas. Já o automóvel particular, apesar de oferecer flexibilidade, é um dos principais causadores de congestionamentos nos horários de pico, quando muitas pessoas se deslocam ao mesmo tempo.",
-      pergunta: "A pergunta pede a CAUSA dos congestionamentos. Qual alternativa responde corretamente?",
-      tipo: "Palavra-chave: CAUSA — o que gera o congestionamento, não o que ele provoca.",
-      opts: [
-        "Perda de tempo e estresse dos motoristas",
-        "Grande quantidade de automóveis nos horários de pico",
-        "Falta de ônibus e metrô nas cidades",
-        "Presença de pedestres nas vias"
-      ],
+      tema: "O Lixo e Seus Problemas",
+      texto: "Os lixões são grandes terrenos não preparados para receber o lixo. Neles, o acúmulo de resíduos produz o chorume, um líquido escuro e poluente que contamina o solo e a água. Além disso, os lixões geram mau cheiro e atraem animais que podem transmitir doenças. Já os aterros sanitários são locais preparados adequadamente, com mantas que isolam os resíduos.",
+      pergunta: "Qual é a CONSEQUÊNCIA da existência dos lixões, segundo o texto?",
+      tipo: "Palavra-chave: CONSEQUÊNCIA — o que o lixão provoca, não o que ele é.",
+      opts: ["São terrenos preparados para o lixo", "A contaminação do solo e da água pelo chorume", "O isolamento dos resíduos com mantas", "A reciclagem automática dos materiais"],
       correta: 1,
-      explicacao: "A alternativa A descreve uma consequência (o que o congestionamento causa), não a causa. Causas e consequências são conceitos opostos — quando a pergunta pede causa, a resposta explica 'por quê acontece'. Quando pede consequência, explica 'o que gerou'."
+      explicacao: "A consequência dos lixões é a contaminação do solo e da água pelo chorume. A alternativa que descreve 'terreno preparado' e 'mantas' fala do aterro sanitário — não do lixão. CONSEQUÊNCIA é o efeito, o que acontece por causa de algo."
     },
     {
-      tema: "Patrimônio Cultural",
-      texto: "O patrimônio cultural pode ser material ou imaterial. O patrimônio material inclui construções, monumentos e objetos físicos. Já o imaterial abrange tradições, danças, receitas e línguas — manifestações vivas que são transmitidas de geração em geração. O frevo, dança típica de Pernambuco, é um exemplo de patrimônio imaterial protegido pelo Iphan.",
-      pergunta: "De acordo com o texto, qual é a DIFERENÇA entre patrimônio material e imaterial?",
-      tipo: "Palavra-chave: DIFERENÇA — a resposta precisa contrastar os dois, não explicar só um.",
-      opts: [
-        "O material é mais importante que o imaterial",
-        "O imaterial só existe no Nordeste do Brasil",
-        "O material é composto por bens físicos; o imaterial por manifestações culturais vivas",
-        "O Iphan protege apenas o patrimônio material"
-      ],
-      correta: 2,
-      explicacao: "Quando a pergunta pede 'diferença', você precisa de uma alternativa que mencione os dois lados. A alternativa C contrasta bens físicos (material) com manifestações vivas (imaterial) — exatamente o que o texto distingue. As outras falam de apenas um lado ou inventam informações."
+      tema: "As Regiões do Brasil",
+      texto: "O IBGE divide o Brasil em cinco regiões: Norte, Nordeste, Centro-Oeste, Sudeste e Sul. A região Norte é a maior em extensão territorial e abriga grande parte da Floresta Amazônica. Já a região Sudeste é a mais populosa e industrializada do país. Existe ainda outra forma de dividir o Brasil, a regionalização geoeconômica, que considera aspectos históricos, sociais e econômicos.",
+      pergunta: "Qual é a DIFERENÇA entre a região Norte e a região Sudeste, segundo o texto?",
+      tipo: "Palavra-chave: DIFERENÇA — a resposta precisa contrastar as duas regiões.",
+      opts: ["As duas são igualmente povoadas", "O Norte é a maior em território; o Sudeste é a mais populosa e industrializada", "O Sudeste tem a Floresta Amazônica", "O Norte é a mais industrializada"],
+      correta: 1,
+      explicacao: "Quando a pergunta pede 'diferença', a resposta precisa contrastar os dois lados. O texto diz: Norte = maior em território (Amazônia); Sudeste = mais populosa e industrializada. A alternativa correta menciona ambos. As outras invertem ou inventam informações."
     },
     {
-      tema: "Recursos Naturais",
-      texto: "Recursos naturais renováveis são aqueles que a natureza é capaz de repor em um tempo razoável, como a água, o sol e o vento. Já os não renováveis, como o petróleo e o carvão mineral, levaram milhões de anos para se formar e não podem ser repostos em escala humana. Por isso, o uso consciente desses recursos é fundamental para as gerações futuras.",
-      pergunta: "Qual é a principal CARACTERÍSTICA que diferencia um recurso renovável de um não renovável, segundo o texto?",
-      tipo: "Palavra-chave: CARACTERÍSTICA — a resposta deve ser um atributo, não um exemplo.",
-      opts: [
-        "Os renováveis são mais caros de explorar",
-        "Os não renováveis causam mais poluição",
-        "Os renováveis podem ser repostos pela natureza; os não renováveis, não",
-        "Os renováveis incluem petróleo e carvão"
-      ],
-      correta: 2,
-      explicacao: "A pergunta pede a CARACTERÍSTICA — o atributo que define cada tipo. O texto deixa claro: renovável = a natureza repõe. Não renovável = não dá para repor. A alternativa C captura exatamente essa distinção. Exemplos (petróleo, água) não são características — são apenas casos de cada tipo."
+      tema: "Povos da América — Maias e Astecas",
+      texto: "Os maias e os astecas foram importantes civilizações da América antes da chegada dos europeus. Os maias organizavam-se em cidades-Estado independentes, cada uma com seu próprio governante. Já os astecas formaram um grande império centralizado, com capital em Tenochtitlán, e cobravam tributos dos povos que dominavam. Ambos eram politeístas e desenvolveram conhecimentos de matemática e astronomia.",
+      pergunta: "Qual é a principal CARACTERÍSTICA que diferencia a organização política dos maias e dos astecas?",
+      tipo: "Palavra-chave: CARACTERÍSTICA — um atributo, não um exemplo isolado.",
+      opts: ["Os maias tinham um império; os astecas, cidades-Estado", "Os maias eram cidades-Estado independentes; os astecas, um império centralizado", "Ambos formavam um único império", "Nenhum dos dois tinha governante"],
+      correta: 1,
+      explicacao: "A característica que diferencia os dois é a organização política: maias = cidades-Estado independentes; astecas = império centralizado. A alternativa correta descreve esse atributo. A primeira inverte os dois — atenção para não trocar as informações."
     },
     {
-      tema: "Primeiras Civilizações",
-      texto: "Os primeiros grupos humanos eram nômades: mudavam de lugar constantemente em busca de alimentos, água e abrigo. Com o surgimento da agricultura e a domesticação de animais, as pessoas passaram a ter uma fonte estável de alimento e puderam se fixar em um lugar. Assim surgiram as primeiras comunidades sedentárias, com aldeias, casas permanentes e novas formas de organização social.",
-      pergunta: "Qual foi a CONSEQUÊNCIA do surgimento da agricultura para os grupos humanos?",
-      tipo: "Palavra-chave: CONSEQUÊNCIA — o que a agricultura provocou, não o que a causou.",
-      opts: [
-        "Os grupos passaram a ser mais nômades",
-        "A caça e a pesca desapareceram completamente",
-        "Os grupos puderam se fixar e formar comunidades sedentárias",
-        "Surgiram os recursos naturais não renováveis"
-      ],
-      correta: 2,
-      explicacao: "A consequência da agricultura foi permitir que as pessoas se fixassem — formando aldeias e comunidades sedentárias. Isso é o que o texto descreve como efeito. A alternativa A é o oposto do que aconteceu. A B inventa informação. A D não tem relação. CONSEQUÊNCIA = o que aconteceu depois, por causa de algo."
+      tema: "Impactos Ambientais",
+      texto: "O desmatamento é a retirada da vegetação natural para dar lugar à agricultura, à pecuária e às construções. Essa prática causa a destruição de habitats, a perda da biodiversidade, a erosão do solo e contribui para o aquecimento global, pois as árvores deixam de absorver o gás carbônico. Para reduzir esses impactos, é importante plantar árvores, reciclar o lixo e evitar queimadas.",
+      pergunta: "Segundo o texto, POR QUE o desmatamento contribui para o aquecimento global?",
+      tipo: "Palavra-chave: POR QUE — a resposta indica um motivo, não um resultado qualquer.",
+      opts: ["Porque aumenta o número de árvores", "Porque as árvores deixam de absorver o gás carbônico", "Porque melhora a qualidade do solo", "Porque diminui a agricultura"],
+      correta: 1,
+      explicacao: "A pergunta 'por que' pede o motivo. O texto explica: sem árvores, o gás carbônico não é mais absorvido e se acumula na atmosfera, aquecendo o planeta. As outras alternativas contradizem o texto ou não têm relação com a causa apontada."
     },
     {
-      tema: "Escrita e Comunicação",
-      texto: "Antes da escrita, as pessoas dependiam da fala e de pinturas rupestres para se comunicar. Com o desenvolvimento das sociedades e do comércio, surgiu a necessidade de registrar informações de forma permanente. A escrita permitiu guardar leis, ensinamentos religiosos e registros históricos. Hoje, no ambiente digital, a escrita continua presente em sites, blogs e redes sociais.",
-      pergunta: "Segundo o texto, POR QUE a escrita surgiu?",
-      tipo: "Palavra-chave: POR QUE — a resposta deve indicar uma razão/motivo, não um resultado.",
-      opts: [
-        "Para substituir as pinturas rupestres por algo mais bonito",
-        "Porque as pessoas queriam se comunicar mais rapidamente",
-        "Por causa da necessidade de registrar informações de forma permanente com o desenvolvimento do comércio",
-        "Para criar o alfabeto fenício com 22 letras"
-      ],
-      correta: 2,
-      explicacao: "A pergunta 'por que' pede a motivação — o motivo que levou ao surgimento da escrita. O texto diz claramente: foi a necessidade de registrar informações com o desenvolvimento do comércio e das sociedades. A alternativa A confunde causa com estética. A B não está no texto. A D é uma consequência posterior, não a causa."
+      tema: "Reportagem e Notícia",
+      texto: "A reportagem e a notícia são gêneros jornalísticos, mas têm diferenças. A reportagem é um texto mais longo, opinativo e assinado pelo repórter, que desenvolve um tema de forma aprofundada. Já a notícia é um texto curto e impessoal, cujo único objetivo é informar rapidamente um fato atual. Por isso, a notícia faz parte do jornalismo informativo, e a reportagem, do jornalismo opinativo.",
+      pergunta: "Qual é a DIFERENÇA entre reportagem e notícia, de acordo com o texto?",
+      tipo: "Palavra-chave: DIFERENÇA — contrastar os dois gêneros, não descrever só um.",
+      opts: ["As duas são curtas e impessoais", "A reportagem é longa e opinativa; a notícia é curta e informativa", "A notícia é sempre assinada pelo repórter", "A reportagem só informa fatos rápidos"],
+      correta: 1,
+      explicacao: "A pergunta pede a diferença, então a resposta precisa contrastar os dois. O texto é claro: reportagem = longa e opinativa; notícia = curta e informativa. A alternativa correta menciona ambos os lados. As demais confundem as características dos dois gêneros."
     }
   ],
 
   // MODO PROVA: texto completo + questões estilo avaliação real
   prova: [
     {
-      tema: "Sistema Respiratório",
+      tema: "Biomas Brasileiros",
       badge: "Ciências · 5º ano",
-      texto: `O sistema respiratório é responsável por captar o oxigênio do ar e eliminar o gás carbônico produzido pelo organismo. O ar entra pelo nariz, onde é aquecido, umedecido e filtrado. Em seguida, passa pela faringe e pela laringe — onde ficam as pregas vocais, responsáveis pela fala. Depois, segue pela traqueia, que se divide em dois brônquios, um para cada pulmão. Dentro dos pulmões, os brônquios se ramificam em bronquíolos, que terminam nos alvéolos. É nos alvéolos que ocorre a troca gasosa: o oxigênio passa para o sangue e o gás carbônico é eliminado do organismo. Esse processo acontece graças aos movimentos de inspiração (o ar entra) e expiração (o ar sai), controlados principalmente pelo diafragma e pelos músculos intercostais.`,
+      texto: "O Brasil possui seis biomas, cada um com características próprias. A Amazônia é o maior bioma brasileiro e a maior floresta tropical do planeta, com clima quente e úmido. O Cerrado é conhecido como a savana brasileira, com árvores de troncos retorcidos e uma estação seca e outra chuvosa. A Caatinga é o único bioma exclusivamente brasileiro, de clima semiárido, onde plantas como os cactos armazenam água para sobreviver. O Pampa, localizado no Rio Grande do Sul, é formado por extensos campos de gramíneas. O Pantanal é a maior planície alagável do mundo, que fica inundada durante o período das chuvas. A Mata Atlântica, originalmente no litoral, hoje teve grande parte de sua vegetação desmatada.",
       questoes: [
         {
-          enunciado: "Qual é a função principal do sistema respiratório, segundo o texto?",
+          enunciado: "Segundo o texto, qual é o único bioma exclusivamente brasileiro?",
           keyword: null,
           opts: [
-            "Produzir o gás carbônico necessário ao organismo",
-            "Captar o oxigênio e eliminar o gás carbônico",
-            "Aquecer e filtrar o sangue nos pulmões",
-            "Controlar os movimentos do diafragma"
+            "Amazônia",
+            "Cerrado",
+            "Caatinga",
+            "Pampa"
+          ],
+          correta: 2,
+          feedback: "✅ Correto! O texto afirma diretamente que a Caatinga é 'o único bioma exclusivamente brasileiro'. Quando o texto traz uma informação com a palavra 'único', ela costuma virar pergunta — vale sublinhar.",
+          feedbackErro: "❌ Releia o trecho sobre a Caatinga: o texto diz que ela é 'o único bioma exclusivamente brasileiro'. Os outros biomas também existem, mas não são exclusivos do Brasil."
+        },
+        {
+          enunciado: "De acordo com o texto, qual bioma é a maior planície alagável do mundo?",
+          keyword: null,
+          opts: [
+            "Amazônia",
+            "Pantanal",
+            "Cerrado",
+            "Mata Atlântica"
           ],
           correta: 1,
-          feedback: "✅ Correto! O texto começa explicando exatamente isso: captar oxigênio e eliminar gás carbônico. Em provas, a resposta para 'qual é a função principal' costuma estar na primeira frase do texto — é lá que o autor apresenta o conceito central.",
-          feedbackErro: "❌ Releia a primeira frase do texto — ela define a função principal do sistema. Em interpretação, a introdução do texto quase sempre responde 'o que é' ou 'para que serve'."
+          feedback: "✅ Correto! O texto diz que o Pantanal é 'a maior planície alagável do mundo', que fica inundada nas chuvas. Localize no texto o trecho que fala de cada bioma — a resposta está sempre lá.",
+          feedbackErro: "❌ Cuidado para não confundir 'maior floresta' (Amazônia) com 'maior planície alagável' (Pantanal). O texto descreve o Pantanal como a área que fica inundada durante as chuvas."
         },
         {
-          enunciado: "De acordo com o texto, onde ficam as pregas vocais?",
+          enunciado: "Qual bioma está localizado no Rio Grande do Sul, segundo o texto?",
           keyword: null,
           opts: [
-            "Na traqueia",
-            "Nos alvéolos",
-            "Na laringe",
-            "No diafragma"
+            "Pampa",
+            "Caatinga",
+            "Amazônia",
+            "Pantanal"
           ],
-          correta: 2,
-          feedback: "✅ Correto! O texto diz: 'laringe — onde ficam as pregas vocais'. Esse tipo de pergunta testa se você leu com atenção os detalhes, não só a ideia geral. Vale reler o trecho específico antes de responder.",
-          feedbackErro: "❌ O texto menciona as pregas vocais em um trecho específico. Releia com calma: 'passa pela faringe e pela laringe — onde ficam as pregas vocais'. A resposta estava no detalhe."
-        },
-        {
-          enunciado: "O que acontece nos alvéolos, segundo o texto?",
-          keyword: null,
-          opts: [
-            "O ar é aquecido e filtrado",
-            "Os brônquios se dividem em bronquíolos",
-            "O diafragma controla a respiração",
-            "O oxigênio passa para o sangue e o gás carbônico é eliminado"
-          ],
-          correta: 3,
-          feedback: "✅ Correto! A troca gasosa acontece nos alvéolos — é o momento mais importante do processo respiratório. O texto descreve exatamente isso. Quando uma pergunta usa 'segundo o texto', a resposta está literalmente escrita — não precisa inventar nada.",
-          feedbackErro: "❌ O texto tem um trecho específico sobre os alvéolos: 'É nos alvéolos que ocorre a troca gasosa'. A resposta estava escrita — basta localizar o trecho que fala sobre o órgão mencionado na pergunta."
-        },
-        {
-          enunciado: "Qual NÃO é uma função descrita no texto para o nariz?",
-          keyword: "NÃO",
-          opts: [
-            "Aquecer o ar",
-            "Filtrar o ar",
-            "Realizar a troca gasosa",
-            "Umedecer o ar"
-          ],
-          correta: 2,
-          feedback: "✅ Correto! O nariz aquece, umedece e filtra o ar — mas a troca gasosa acontece nos alvéolos. A palavra NÃO inverte a lógica da questão: você precisa encontrar o que o nariz NÃO faz, não o que faz. Sempre destaque o NÃO antes de ler as alternativas.",
-          feedbackErro: "❌ A palavra NÃO é a chave da questão. O texto diz que o nariz aquece, umedece e filtra. A troca gasosa acontece nos alvéolos — então o nariz NÃO realiza troca gasosa. Sublinhe sempre o NÃO, EXCETO e INCORRETO nas perguntas."
+          correta: 0,
+          feedback: "✅ Correto! O texto localiza o Pampa 'no Rio Grande do Sul', formado por campos de gramíneas. Perguntas de localização se respondem procurando o nome do lugar no texto.",
+          feedbackErro: "❌ O texto diz que o Pampa fica no Rio Grande do Sul. É um bioma de campos de gramíneas — bem diferente da Caatinga (semiárida) ou da Amazônia (floresta)."
         }
       ]
     },
     {
-      tema: "Nomadismo e Sedentarismo",
+      tema: "A Vida nas Primeiras Cidades",
       badge: "História · 5º ano",
-      texto: `Durante milhares de anos, os seres humanos viveram como nômades: grupos que se deslocavam constantemente em busca de alimentos, água e abrigo. Essa forma de vida dependia completamente da natureza — quando os recursos de uma região se esgotavam, o grupo se movia para outro lugar. Com o tempo, as pessoas descobriram que podiam cultivar plantas e domesticar animais. Essa mudança foi fundamental: ao garantir uma fonte estável de alimento, os grupos deixaram de precisar se deslocar o tempo todo. Passaram a se fixar em um lugar, construir habitações permanentes e organizar comunidades — dando origem ao que chamamos de vida sedentária. Com a fixação, surgiu outro fenômeno importante: a produção de excedentes. Quando um grupo produzia mais alimento do que precisava consumir, o excedente podia ser trocado com outros grupos. Essas trocas deram origem ao comércio.`,
+      texto: "Com o crescimento das primeiras cidades, surgiram novas formas de organização social. Cada grupo tinha uma função: os reis e faraós governavam; os líderes religiosos realizavam os rituais; os escribas registravam informações por meio da escrita; os camponeses produziam os alimentos; e os trabalhadores manuais construíam templos e muralhas. Essa divisão do trabalho fez surgir as desigualdades sociais, pois alguns grupos tinham mais poder e riquezas. Com o tempo, alguns líderes passaram a concentrar o poder, dando origem ao Estado — o conjunto de instituições que criava leis, cobrava impostos e mantinha a segurança. A religião também era muito importante: a maioria dos povos era politeísta e muitos governantes afirmavam governar com a vontade dos deuses.",
       questoes: [
         {
-          enunciado: "Por que os grupos nômades se deslocavam constantemente?",
-          keyword: "Por que",
+          enunciado: "Segundo o texto, qual grupo era responsável por registrar informações por meio da escrita?",
+          keyword: null,
           opts: [
-            "Para conhecer novas regiões e culturas",
-            "Porque preferiam não construir habitações",
-            "Em busca de alimentos, água e abrigo",
-            "Para escapar de grupos inimigos"
+            "Os camponeses",
+            "Os escribas",
+            "Os trabalhadores manuais",
+            "Os líderes religiosos"
           ],
-          correta: 2,
-          feedback: "✅ Correto! O texto diz claramente: 'grupos que se deslocavam constantemente em busca de alimentos, água e abrigo'. Perguntas com 'por que' pedem motivação — e o texto deu a resposta logo na primeira linha. Treine localizar a resposta no texto antes de escolher.",
-          feedbackErro: "❌ A pergunta pede o motivo do deslocamento. Releia o início do texto — ele explica exatamente por que os nômades se moviam. Alternativas que não estão no texto são armadilhas."
+          correta: 1,
+          feedback: "✅ Correto! O texto atribui essa função aos escribas: 'os escribas registravam informações por meio da escrita'. Quando a pergunta cita uma função, procure no texto quem a exercia.",
+          feedbackErro: "❌ Releia a lista de funções. Os escribas eram os que registravam informações por meio da escrita. Os camponeses produziam alimentos e os líderes religiosos faziam os rituais."
         },
         {
-          enunciado: "Qual foi a CAUSA que permitiu o surgimento das comunidades sedentárias?",
+          enunciado: "O que foi a CAUSA do surgimento das desigualdades sociais, segundo o texto?",
           keyword: "CAUSA",
           opts: [
-            "O esgotamento dos recursos naturais",
-            "A descoberta da agricultura e domesticação de animais",
-            "O surgimento do comércio entre grupos",
-            "A construção de habitações permanentes"
+            "A criação da escrita pelos escribas",
+            "A divisão do trabalho, em que alguns grupos tinham mais poder e riquezas",
+            "O politeísmo dos povos antigos",
+            "A cobrança de impostos pelo Estado"
           ],
           correta: 1,
-          feedback: "✅ Correto! A causa foi a agricultura e domesticação de animais — isso gerou alimento estável, que eliminou a necessidade de se deslocar. O comércio e as habitações permanentes são consequências, não causas. CAUSA = o que veio antes e gerou o efeito.",
-          feedbackErro: "❌ CAUSA e CONSEQUÊNCIA são opostos. A causa é o que veio primeiro e gerou a mudança. O texto mostra a sequência: agricultura → alimento estável → fixação → comunidades sedentárias. O comércio e as habitações vieram depois — são consequências."
+          feedback: "✅ Correto! O texto liga diretamente: 'Essa divisão do trabalho fez surgir as desigualdades sociais'. A divisão do trabalho é a causa; a desigualdade é a consequência. CAUSA = o que veio antes e gerou o efeito.",
+          feedbackErro: "❌ CAUSA é o que gera o efeito. O texto diz que 'a divisão do trabalho fez surgir as desigualdades sociais'. A cobrança de impostos veio depois, com o Estado — não é a causa das desigualdades."
         },
         {
-          enunciado: "O que eram os 'excedentes', segundo o texto?",
+          enunciado: "De acordo com o texto, o que era o Estado?",
           keyword: null,
           opts: [
-            "Os animais domesticados pelos grupos",
-            "As habitações construídas permanentemente",
-            "Os alimentos produzidos além do necessário para consumo",
-            "Os grupos que continuaram sendo nômades"
+            "Um grupo de camponeses",
+            "O conjunto de instituições que criava leis, cobrava impostos e mantinha a segurança",
+            "Um templo construído pelos trabalhadores",
+            "Um tipo de escrita usada pelos escribas"
           ],
-          correta: 2,
-          feedback: "✅ Correto! O texto define excedente com clareza: 'mais alimento do que precisava consumir'. Quando o texto define um termo, a alternativa correta costuma parafrasear essa definição — não inventa outra.",
-          feedbackErro: "❌ O texto define 'excedente' diretamente: 'quando um grupo produzia mais alimento do que precisava consumir'. Em interpretação, nunca invente o significado — sempre encontre a definição no texto."
-        },
-        {
-          enunciado: "Qual foi a CONSEQUÊNCIA direta da produção de excedentes, segundo o texto?",
-          keyword: "CONSEQUÊNCIA",
-          opts: [
-            "Os grupos voltaram a ser nômades",
-            "As pessoas pararam de domesticar animais",
-            "Surgiu o comércio através da troca de excedentes",
-            "Os grupos começaram a cultivar plantas"
-          ],
-          correta: 2,
-          feedback: "✅ Correto! O texto mostra a sequência: excedente → troca → comércio. CONSEQUÊNCIA é o que aconteceu depois, em resultado de algo. Cultivar plantas é a causa do excedente — não sua consequência. A sequência importa muito em perguntas de causa e efeito.",
-          feedbackErro: "❌ CONSEQUÊNCIA = o que aconteceu depois, por causa de algo. O texto mostra: excedentes → trocas → comércio. Cultivar plantas veio antes dos excedentes — é a causa, não a consequência. Atenção à ordem dos eventos no texto."
+          correta: 1,
+          feedback: "✅ Correto! O texto define o Estado como 'o conjunto de instituições que criava leis, cobrava impostos e mantinha a segurança'. Quando o texto define um termo, a resposta certa costuma repetir essa definição.",
+          feedbackErro: "❌ O texto define o Estado com clareza: instituições que criavam leis, cobravam impostos e mantinham a segurança. Não invente o significado — procure a definição no próprio texto."
         }
       ]
     },
     {
-      tema: "Alimentação e Nutrientes",
-      badge: "Ciências · 5º ano",
-      texto: `Os alimentos que ingerimos fornecem ao nosso organismo substâncias chamadas nutrientes. Cada nutriente tem uma função específica: as proteínas constroem e reparam os tecidos do corpo; os carboidratos são a principal fonte de energia para as atividades do dia a dia; os lipídios (gorduras) também fornecem energia e participam da estrutura das células; as vitaminas e os minerais regulam o funcionamento do organismo e ajudam a proteger contra doenças. Uma alimentação equilibrada deve incluir todos esses grupos de nutrientes nas quantidades adequadas. Quando a alimentação é pobre em nutrientes essenciais, o organismo pode desenvolver a desnutrição. Quando há consumo excessivo de calorias, pode ocorrer a obesidade. Ambas as condições prejudicam a saúde e podem ser prevenidas com escolhas alimentares conscientes.`,
+      tema: "Charge e Cartum",
+      badge: "Português · 5º ano",
+      texto: "A charge e o cartum são gêneros do jornalismo que usam humor e crítica. A charge usa personagens reais e critica um fato atual, geralmente presente nas notícias do dia. Por isso, a charge é datada: seu sentido pode se perder com o passar do tempo, quando o fato deixa de ser lembrado. Já o cartum é atemporal — faz uma crítica social mais ampla, que não depende de um acontecimento específico. Enquanto a charge precisa ser entendida no contexto de uma notícia, o cartum continua fazendo sentido em qualquer época.",
       questoes: [
         {
-          enunciado: "Segundo o texto, qual é a função dos carboidratos?",
+          enunciado: "Segundo o texto, por que a charge é considerada 'datada'?",
           keyword: null,
           opts: [
-            "Construir e reparar os tecidos do corpo",
-            "Regular o funcionamento do organismo",
-            "Ser a principal fonte de energia",
-            "Participar da estrutura das células"
-          ],
-          correta: 2,
-          feedback: "✅ Correto! O texto é direto: 'os carboidratos são a principal fonte de energia para as atividades do dia a dia'. Quando a pergunta cita um nutriente específico, localize o trecho do texto que fala sobre ele — a resposta estará ali.",
-          feedbackErro: "❌ O texto lista a função de cada nutriente. Releia com calma o trecho sobre carboidratos: 'os carboidratos são a principal fonte de energia'. Construir tecidos é função das proteínas — é fácil confundir quando não se lê com atenção."
-        },
-        {
-          enunciado: "De acordo com o texto, o que DIFERENCIA desnutrição de obesidade?",
-          keyword: "DIFERENCIA",
-          opts: [
-            "A desnutrição afeta crianças; a obesidade afeta adultos",
-            "A desnutrição vem da falta de nutrientes; a obesidade do excesso de calorias",
-            "Ambas têm as mesmas causas, mas efeitos diferentes",
-            "A obesidade é causada pela falta de proteínas"
+            "Porque nunca usa humor",
+            "Porque seu sentido pode se perder quando o fato deixa de ser lembrado",
+            "Porque não critica nada",
+            "Porque é atemporal"
           ],
           correta: 1,
-          feedback: "✅ Correto! O texto diferencia claramente: 'alimentação pobre em nutrientes → desnutrição' e 'consumo excessivo de calorias → obesidade'. Perguntas sobre diferença exigem que a resposta mencione os dois lados — alternativas que falam só de um não respondem à pergunta.",
-          feedbackErro: "❌ A pergunta pede a diferença entre os dois — então a resposta deve mencionar ambos. Releia os dois últimos períodos do texto: cada um explica uma condição. A alternativa certa contrasta as causas de cada uma."
+          feedback: "✅ Correto! O texto explica: a charge é datada porque 'seu sentido pode se perder com o passar do tempo'. Ela depende de um fato atual — quando o fato é esquecido, a charge perde o sentido.",
+          feedbackErro: "❌ Releia o trecho sobre a charge. Ela é 'datada' porque depende de um fato atual — quando esse fato é esquecido, a charge perde o sentido. 'Atemporal' é característica do cartum, não da charge."
+        },
+        {
+          enunciado: "Qual é a DIFERENÇA entre a charge e o cartum, de acordo com o texto?",
+          keyword: "DIFERENÇA",
+          opts: [
+            "A charge não tem humor; o cartum tem",
+            "A charge critica um fato atual e é datada; o cartum é atemporal e faz crítica ampla",
+            "As duas dependem de uma notícia do dia",
+            "O cartum é datado e a charge é atemporal"
+          ],
+          correta: 1,
+          feedback: "✅ Correto! A pergunta pede a diferença, e o texto contrasta os dois: charge = fato atual, datada; cartum = atemporal, crítica ampla. A resposta correta menciona os dois lados. A última alternativa inverte tudo.",
+          feedbackErro: "❌ Cuidado para não inverter: a CHARGE é datada (fato atual) e o CARTUM é atemporal. A pergunta pede a diferença, então a resposta precisa contrastar corretamente os dois gêneros."
         },
         {
           enunciado: "Qual alternativa apresenta uma informação que NÃO está no texto?",
           keyword: "NÃO está no texto",
           opts: [
-            "As proteínas constroem e reparam os tecidos",
-            "Os carboidratos são a principal fonte de energia",
-            "A melhor dieta é a que elimina completamente os lipídios",
-            "Vitaminas e minerais protegem contra doenças"
+            "A charge usa personagens reais",
+            "O cartum faz uma crítica social ampla",
+            "A charge e o cartum nunca usam imagens",
+            "A charge depende do contexto de uma notícia"
           ],
           correta: 2,
-          feedback: "✅ Correto! O texto nunca diz que se deve eliminar os lipídios — ao contrário, coloca-os como nutrientes necessários. Questões que pedem o que 'NÃO está no texto' testam se você inventou informação ou se leu com cuidado. Desconfie de alternativas com palavras absolutas como 'completamente', 'sempre', 'nunca'.",
-          feedbackErro: "❌ Essa questão pede o que NÃO está no texto. Releia cada alternativa e verifique se ela aparece no texto. A alternativa sobre 'eliminar completamente os lipídios' nunca foi mencionada — e contradiz o texto, que coloca os lipídios como nutrientes importantes."
+          feedback: "✅ Correto! O texto nunca diz que os dois 'nunca usam imagens' — ao contrário, charge e cartum são gêneros visuais. Questões que pedem o que 'NÃO está no texto' testam se você inventou informação. Desconfie de palavras absolutas como 'nunca'.",
+          feedbackErro: "❌ Essa questão pede o que NÃO está no texto. Verifique cada alternativa: a ideia de que 'nunca usam imagens' não aparece e contradiz os gêneros, que são justamente visuais. As outras três estão no texto."
         }
       ]
     }
@@ -1826,17 +1496,17 @@ let provaScores = [];
 
 // ── PLANO DE ESTUDOS (2 semanas) ──
 const planoData = [
-  {titulo:"Diagnóstico", foco:"Modo Prova — todos os textos, sem ajuda prévia", modo:"prova",
+  {titulo:"Diagnóstico", foco:"Modo Prova — os três textos, sem ajuda prévia", modo:"prova",
    obs:"Objetivo: mapear os erros recorrentes antes de qualquer estratégia. Não comente as respostas durante — só no final, juntos."},
-  {titulo:"Palavras-armadilha", foco:"Modo Detetive — exercícios 1 a 3 (NÃO, CAUSA, DIFERENÇA)", modo:"det",
-   obs:"Antes de cada resposta, peça pra ela ler a Dica em voz alta antes de marcar."},
-  {titulo:"Mais palavras-armadilha + gêneros textuais", foco:"Modo Detetive — exercícios 4 a 6 (CARACTERÍSTICA, CONSEQUÊNCIA, POR QUE)", modo:"det",
-   obs:"Revisem juntos os módulos 6 a 8 de Português (e-mail, cartão-postal, texto opinativo) antes de começar."},
-  {titulo:"Pontuação como pista", foco:"Modo Prova — refaça os Textos 2 e 3", modo:"prova",
-   obs:"Revisem os módulos 9 e 10 de Português (travessão, dois-pontos, reticências) antes de praticar."},
+  {titulo:"Palavras-armadilha (parte 1)", foco:"Modo Detetive — exercícios 1 a 3 (NÃO, CONSEQUÊNCIA, DIFERENÇA)", modo:"det",
+   obs:"Antes de cada resposta, peça pra ela ler a Dica em voz alta e sublinhar a palavra-chave da pergunta."},
+  {titulo:"Palavras-armadilha (parte 2)", foco:"Modo Detetive — exercícios 4 a 6 (CARACTERÍSTICA, POR QUE, DIFERENÇA)", modo:"det",
+   obs:"Revisem juntos os módulos de História (6 e 7) e Ciências (6 e 7) antes de começar."},
+  {titulo:"Leitura de texto longo", foco:"Modo Prova — refaça os Textos 1 e 2 (Biomas e Primeiras Cidades)", modo:"prova",
+   obs:"Foco em localizar no texto o trecho que responde cada pergunta, sublinhando antes de marcar."},
   {titulo:"Treino cronometrado", foco:"Modo Detetive — reinicie e refaça tudo com um cronômetro de 10 minutos", modo:"det",
-   obs:"Foco especial nos exercícios que ela errou nas Sessões 2 e 3."},
-  {titulo:"Simulado final", foco:"Modo Prova — todos os textos, cronometrado, sem ajuda", modo:"prova",
+   obs:"Foco especial nos exercícios que ela errou nas sessões anteriores."},
+  {titulo:"Simulado final", foco:"Modo Prova — os três textos, cronometrado, sem ajuda", modo:"prova",
    obs:"Compare o resultado com a Sessão 1 — esse é o indicador real de evolução nas duas semanas."}
 ];
 let planoProgress = planoData.map(() => false);
@@ -1856,10 +1526,6 @@ function renderPlano() {
     </div>
     <div class="plano-intro">
       📅 <strong>Cronograma de Interpretação — 2 semanas.</strong> Marque cada sessão como concluída clicando no círculo. Cada uma já leva direto pro modo certo da aba.
-      <div class="plano-intro-eng">
-        <span>🇬🇧 <strong>Reforço de inglês:</strong> pratique a aba Inglês 2x por semana, alternando os módulos.</span>
-        <button class="plano-btn eng" onclick="selectSubject('ing')">Ir para Inglês →</button>
-      </div>
     </div>`;
 
   html += planoData.map((s, i) => `
@@ -2030,6 +1696,25 @@ function resetAllProva() {
   provaScores = [];
   renderProva();
 }
+
+// ── HEADER: indicador de rolagem das abas ──
+function updateNavScrollHint() {
+  const nav = document.getElementById('subject-nav');
+  const wrap = document.getElementById('subject-nav-wrap');
+  if (!nav || !wrap) return;
+  const canScroll = nav.scrollWidth > nav.clientWidth + 4;
+  const atEnd = nav.scrollLeft + nav.clientWidth >= nav.scrollWidth - 4;
+  wrap.classList.toggle('scrollable', canScroll && !atEnd);
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  const nav = document.getElementById('subject-nav');
+  if (nav) nav.addEventListener('scroll', updateNavScrollHint, { passive: true });
+  window.addEventListener('resize', updateNavScrollHint);
+  updateNavScrollHint();
+  // abre na matéria padrão (Geografia)
+  selectSubject('geo');
+});
 </script>
 </body>
 </html>
