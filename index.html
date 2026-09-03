@@ -340,6 +340,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
   <div class="subject-nav-wrap" id="subject-nav-wrap">
     <div class="subject-nav" id="subject-nav">
       <button class="snav-btn geo active" onclick="selectSubject('geo')">🌍 Geografia</button>
+      <button class="snav-btn mat" onclick="selectSubject('mat')">📐 Matemática</button>
       <button class="snav-btn his" onclick="selectSubject('his')">📜 História</button>
       <button class="snav-btn por" onclick="selectSubject('por')">📝 Português</button>
       <button class="snav-btn cie" onclick="selectSubject('cie')">🔬 Ciências</button>
@@ -388,6 +389,34 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
           <div class="mod-num geo">Módulo 9</div>
           <div class="mod-title">As Regiões do Brasil</div>
           <div class="mod-tags"><span class="tag geo">regiões</span><span class="tag geo">IBGE</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- MAT -->
+    <div id="panel-mat" class="subject-panel">
+      <div class="panel-label">
+        <span class="panel-pill mat">📐 Matemática</span>
+        <span class="panel-count">3 módulos</span>
+      </div>
+      <div class="mod-grid">
+        <div class="mod-card mat" onclick="openMod('mat',0)">
+          <div class="mod-done-badge">✓</div>
+          <div class="mod-num mat">Módulo 5</div>
+          <div class="mod-title">Múltiplos, Divisores e Números Primos</div>
+          <div class="mod-tags"><span class="tag mat">divisibilidade</span><span class="tag mat">primos</span></div>
+        </div>
+        <div class="mod-card mat" onclick="openMod('mat',1)">
+          <div class="mod-done-badge">✓</div>
+          <div class="mod-num mat">Módulo 6</div>
+          <div class="mod-title">Frações, Decimais e Porcentagens</div>
+          <div class="mod-tags"><span class="tag mat">frações</span><span class="tag mat">porcentagem</span></div>
+        </div>
+        <div class="mod-card mat" onclick="openMod('mat',2)">
+          <div class="mod-done-badge">✓</div>
+          <div class="mod-num mat">Módulo 7</div>
+          <div class="mod-title">Pesquisa e Análise de Dados</div>
+          <div class="mod-tags"><span class="tag mat">gráficos</span><span class="tag mat">tabelas</span></div>
         </div>
       </div>
     </div>
@@ -670,7 +699,84 @@ const data = {
       ]
     }
   ],
-  his: [
+  mat: [
+    {
+      num:"Módulo 5", title:"Múltiplos, Divisores e Números Primos", sub:"Critérios de divisibilidade, primos, compostos e fatoração",
+      resumo:[
+        {h:"Múltiplos e divisores",p:"Múltiplos de um número são os resultados de multiplicá-lo por 0, 1, 2, 3... São infinitos. Exemplo: M(4) = {0, 4, 8, 12, 16...}. Divisores são os números que dividem o valor de forma exata, sem resto. São finitos. Exemplo: D(12) = {1, 2, 3, 4, 6, 12}."},
+        {h:"Critérios de divisibilidade",p:"Regras rápidas para saber se um número é divisível por outro, sem precisar dividir: <strong>por 2</strong> — termina em número par (0, 2, 4, 6, 8); <strong>por 3</strong> — a soma dos algarismos é múltiplo de 3; <strong>por 5</strong> — termina em 0 ou 5; <strong>por 10</strong> — termina exatamente em 0."},
+        {h:"Números primos e compostos",p:"Número primo: tem exatamente dois divisores — 1 e ele mesmo. Exemplos: 2, 3, 5, 7, 11. Número composto: tem mais de dois divisores. Exemplos: 4, 6, 8, 9. Atenção: o número 1 não é primo nem composto — ele tem só um divisor (ele mesmo)."},
+        {h:"Fatoração prima, MMC e MDC",p:"A fatoração prima decompõe um número em seus fatores primos (ex.: 12 = 2 × 2 × 3). O MMC (Mínimo Múltiplo Comum) é o menor múltiplo que dois ou mais números têm em comum — essencial para somar frações com denominadores diferentes. O MDC (Máximo Divisor Comum) é o maior divisor que dois ou mais números têm em comum — usado para simplificar frações."}
+      ],
+      flashcards:[
+        {q:"Qual a diferença entre múltiplos e divisores?",a:"Múltiplos são os resultados de multiplicar um número (infinitos). Divisores são os números que o dividem sem deixar resto (finitos).",ctx:"Todo número tem infinitos múltiplos, mas só um número limitado de divisores — essa é a diferença que mais cai em prova."},
+        {q:"Como saber se um número é divisível por 3, sem fazer a conta?",a:"Somando os algarismos do número: se o resultado for múltiplo de 3, o número original também é.",ctx:"Exemplo: 141 → 1+4+1 = 6, que é múltiplo de 3. Logo, 141 é divisível por 3. Esse critério economiza muito tempo na prova."},
+        {q:"O que é um número primo? Cite três exemplos.",a:"É o número que tem exatamente dois divisores: 1 e ele mesmo. Exemplos: 2, 3, 5, 7, 11.",ctx:"O 2 é o único número primo par — todos os outros primos são ímpares."},
+        {q:"O número 1 é primo, composto ou nenhum dos dois?",a:"Nenhum dos dois — o 1 tem apenas um divisor (ele mesmo), e primo exige exatamente dois.",ctx:"Essa é uma pegadinha clássica de prova. Decore: 1 não é primo nem composto."},
+        {q:"Para que serve o MMC?",a:"Para encontrar o menor múltiplo comum entre dois ou mais números — muito usado para somar ou subtrair frações com denominadores diferentes.",ctx:"MMC = Mínimo Múltiplo Comum. Pense em 'M' de múltiplo — trabalha com múltiplos, não com divisores."},
+        {q:"Para que serve o MDC?",a:"Para encontrar o maior divisor comum entre dois ou mais números — muito usado para simplificar frações.",ctx:"MDC = Máximo Divisor Comum. Cuidado para não trocar com o MMC: MDC usa divisores, é sempre um número igual ou menor que os números comparados."}
+      ],
+      quiz:[
+        {q:"Quais são os divisores de 18?",opts:["1, 2, 3, 6, 9, 18","1, 3, 6, 9","2, 3, 6, 9, 18","1, 2, 9, 18"],c:0,feedback:"Divisores de 18: 1, 2, 3, 6, 9, 18 — todos os números que dividem 18 sem deixar resto."},
+        {q:"Um número que termina em 0 é divisível por:",opts:["Apenas por 2","Apenas por 5","Por 2, 5 e 10","Por nenhum desses"],c:2,feedback:"Terminar em 0 satisfaz três critérios ao mesmo tempo: divisível por 2 (é par), por 5 (termina em 0 ou 5) e por 10 (termina exatamente em 0)."},
+        {q:"Qual das opções abaixo é um número composto?",opts:["7","11","9","13"],c:2,feedback:"9 tem os divisores 1, 3 e 9 — mais de dois, portanto é composto. Os demais (7, 11, 13) são primos, com exatamente dois divisores."},
+        {q:"O número 1 é classificado como:",opts:["Primo","Composto","Nem primo nem composto","Primo e composto ao mesmo tempo"],c:2,feedback:"O 1 tem apenas um divisor (ele mesmo). Como número primo precisa de exatamente dois divisores, o 1 fica de fora das duas categorias — pegadinha clássica de prova."},
+        {q:"Qual é o MDC de 18 e 24?",opts:["3","6","9","12"],c:1,feedback:"Divisores de 18: 1,2,3,6,9,18. Divisores de 24: 1,2,3,4,6,8,12,24. Os comuns: 1,2,3,6. O MAIOR é 6 — por isso MDC(18,24) = 6."}
+      ]
+    },
+    {
+      num:"Módulo 6", title:"Frações, Decimais e Porcentagens", sub:"Leitura, equivalência, comparação e cálculo de porcentagem",
+      resumo:[
+        {h:"Leitura e escrita de frações",p:"Uma fração representa partes de um todo dividido em partes iguais. O <strong>numerador</strong> (número de cima) indica quantas partes foram escolhidas; o <strong>denominador</strong> (número de baixo) indica em quantas partes o todo foi dividido. Exemplo: 3/4 se lê 'três quartos'."},
+        {h:"Fração própria, imprópria e número misto",p:"<strong>Fração própria</strong>: numerador menor que o denominador (ex.: 2/5) — vale menos que 1 inteiro. <strong>Fração imprópria</strong>: numerador maior que o denominador (ex.: 7/4) — vale mais que 1 inteiro, e pode ser transformada em <strong>número misto</strong> (7/4 = 1 e 3/4)."},
+        {h:"Frações equivalentes e reta numérica",p:"Frações equivalentes representam a mesma quantidade, mesmo com números diferentes: 1/2 = 2/4 = 4/8. As frações também podem ser localizadas na reta numérica entre 0 e 1 — quanto mais à direita, maior a fração."},
+        {h:"Comparação e ordenação de frações",p:"Com o mesmo denominador, compare direto os numeradores: 2/5 < 4/5. Com denominadores diferentes, primeiro transforme em frações equivalentes com o mesmo denominador para depois comparar."},
+        {h:"Frações decimais e números decimais",p:"Frações com denominador 10, 100 ou 1.000 podem ser escritas como números decimais: 3/10 = 0,3; 25/100 = 0,25; 7/1000 = 0,007."},
+        {h:"Porcentagem e cálculo de porcentagem",p:"Porcentagem significa 'de cada 100' e usa o símbolo %. 100% é o todo, 50% é a metade (divide por 2), 25% é um quarto (divide por 4), 10% é a décima parte (divide por 10). Exemplos: 50% de 20 = 10; 10% de 80 = 8; 25% de 40 = 10."}
+      ],
+      flashcards:[
+        {q:"Numa fração como 3/4, o que indicam o numerador e o denominador?",a:"O numerador (3) indica quantas partes foram escolhidas. O denominador (4) indica em quantas partes o todo foi dividido.",ctx:"O numerador fica em cima, o denominador embaixo — como o 'chão' que sustenta a fração."},
+        {q:"Qual a diferença entre fração própria e imprópria?",a:"Própria: numerador menor que o denominador, vale menos que 1 (ex.: 2/5). Imprópria: numerador maior que o denominador, vale mais que 1 (ex.: 7/4).",ctx:"Truque rápido: se o numerador é 'menor', a fração é 'menor que 1' — própria. Se é maior, passa de 1 inteiro — imprópria."},
+        {q:"Como comparar 2/7 e 5/7?",a:"Como o denominador é igual, basta comparar os numeradores: 5/7 é maior que 2/7.",ctx:"Só compare os numeradores direto quando o denominador for o MESMO. Denominadores diferentes exigem transformar em frações equivalentes primeiro."},
+        {q:"Como transformar 25/100 em número decimal?",a:"25/100 = 0,25 — porque o denominador é 100, os dois últimos algarismos ficam depois da vírgula.",ctx:"Denominador 10 → 1 casa decimal. Denominador 100 → 2 casas decimais. Denominador 1000 → 3 casas decimais."},
+        {q:"Como calcular 50% de um valor rapidamente?",a:"Dividindo o valor por 2, pois 50% é a metade do todo. Ex.: 50% de 20 = 20 ÷ 2 = 10.",ctx:"50% = metade (÷2). 25% = um quarto (÷4). 10% = dividir por 10. Decorar esses três atalhos resolve a maioria das questões de porcentagem."},
+        {q:"Por que 7/4 pode virar o número misto 1 e 3/4?",a:"Porque 7/4 é uma fração imprópria (numerador maior que o denominador) — ela vale mais que 1 inteiro, e o 'excesso' vira a parte fracionária do número misto.",ctx:"4/4 = 1 inteiro. Sobram 3/4. Por isso 7/4 = 1 inteiro e 3/4."}
+      ],
+      quiz:[
+        {q:"Na fração 5/8, o denominador é:",opts:["5","8","13","3"],c:1,feedback:"O denominador é o número de baixo — 8. Ele indica em quantas partes o todo foi dividido."},
+        {q:"Qual das frações abaixo é imprópria (vale mais que 1 inteiro)?",opts:["3/5","2/9","9/4","1/2"],c:2,feedback:"9/4 tem numerador maior que o denominador — é imprópria e vale mais que 1 inteiro (equivale a 2 e 1/4). As demais são próprias, valem menos que 1."},
+        {q:"Para comparar 3/8 e 5/8, você deve:",opts:["Somar os dois numeradores","Comparar direto os numeradores, pois o denominador é igual","Transformar em números mistos","Multiplicar os denominadores"],c:1,feedback:"Como o denominador já é o mesmo (8), basta comparar os numeradores: 5/8 é maior que 3/8. Só é preciso 'igualar' denominadores quando eles forem diferentes."},
+        {q:"O número decimal correspondente a 7/1000 é:",opts:["0,7","0,07","0,007","7,000"],c:2,feedback:"Denominador 1000 → 3 casas decimais depois da vírgula: 7/1000 = 0,007."},
+        {q:"Quanto é 25% de 40?",opts:["4","10","20","25"],c:1,feedback:"25% equivale a 1/4 — divida 40 por 4: 40 ÷ 4 = 10. Atalho: 25% sempre é 'dividir por 4'."}
+      ]
+    },
+    {
+      num:"Módulo 7", title:"Pesquisa e Análise de Dados", sub:"Tabelas, gráficos e leitura de infográficos",
+      resumo:[
+        {h:"Leitura e interpretação de dados",p:"Pesquisar é coletar informações e organizá-las para entender melhor uma situação. Depois de coletados, os dados são organizados em tabelas para facilitar a leitura. Exemplo: numa pesquisa sobre esportes preferidos, uma tabela simples mostra cada esporte e o número de alunos que o escolheu."},
+        {h:"Tabela de dupla entrada",p:"É uma tabela que cruza duas informações ao mesmo tempo — por exemplo, o animal de estimação preferido separado por meninos e meninas, com uma coluna de total. Ela facilita comparar subgrupos dentro da mesma pesquisa."},
+        {h:"Gráfico de barras e gráfico de colunas",p:"O <strong>gráfico de barras</strong> usa barras <strong>horizontais</strong> para comparar quantidades. O <strong>gráfico de colunas</strong> usa colunas <strong>verticais</strong> para comparar quantidades. Os dois servem para o mesmo tipo de comparação — a diferença é só a direção das barras."},
+        {h:"Gráfico pictórico e gráfico de linhas",p:"O <strong>gráfico pictórico</strong> usa desenhos ou ícones para representar os dados (cada figura vale uma quantidade). O <strong>gráfico de linhas</strong> mostra como um dado muda ao longo do tempo — por exemplo, a temperatura máxima em cada dia da semana."},
+        {h:"Gráfico de setores (pizza) e infográfico",p:"O <strong>gráfico de setores</strong> (ou de pizza) mostra as partes de um todo em porcentagens — as fatias sempre somam 100%. O <strong>infográfico</strong> combina textos curtos, imagens, números e gráficos para apresentar uma informação de forma rápida e visual."}
+      ],
+      flashcards:[
+        {q:"O que é uma tabela de dupla entrada?",a:"Uma tabela que cruza duas informações ao mesmo tempo, como preferência separada por meninos e meninas, com uma coluna de total.",ctx:"'Dupla entrada' = duas informações lidas juntas. Isso permite comparar subgrupos, não só o total geral."},
+        {q:"Qual a diferença entre gráfico de barras e gráfico de colunas?",a:"O gráfico de barras usa barras horizontais. O gráfico de colunas usa colunas verticais. Os dois comparam quantidades — só muda a direção.",ctx:"Armadilha clássica de prova: 'barras' = deitado (horizontal); 'colunas' = em pé (vertical), como colunas de um prédio."},
+        {q:"O que caracteriza um gráfico pictórico?",a:"Usa desenhos ou ícones para representar os dados — cada figura equivale a uma quantidade fixa.",ctx:"Exemplo: cada desenho de bicicleta representa 1 aluno que vem de bicicleta para a escola."},
+        {q:"Para que serve o gráfico de linhas?",a:"Para mostrar como um dado muda ao longo do tempo, como a variação de temperatura durante a semana.",ctx:"Se a pergunta falar em 'ao longo do tempo', 'evolução' ou 'variação', pense logo em gráfico de linhas."},
+        {q:"No gráfico de setores (pizza), quanto somam todas as partes?",a:"100% — porque o gráfico de setores representa o todo dividido em porcentagens.",ctx:"Cada fatia é uma porcentagem do total; some todas as fatias e o resultado tem que dar sempre 100%."},
+        {q:"O que é um infográfico?",a:"Uma forma de apresentar informações combinando textos curtos, imagens, números e gráficos.",ctx:"O infográfico não é só texto nem só imagem — é a combinação dos dois com dados, para facilitar o entendimento rápido."}
+      ],
+      quiz:[
+        {q:"Uma tabela que cruza duas informações ao mesmo tempo (como meninos e meninas) é chamada de:",opts:["Tabela simples","Tabela de dupla entrada","Gráfico pictórico","Infográfico"],c:1,feedback:"A tabela de dupla entrada organiza duas variáveis ao mesmo tempo, permitindo comparar subgrupos dentro da pesquisa."},
+        {q:"Qual gráfico usa colunas verticais para comparar quantidades?",opts:["Gráfico de barras","Gráfico de colunas","Gráfico de linhas","Gráfico de setores"],c:1,feedback:"O gráfico de colunas usa barras na vertical (em pé). O gráfico de barras, por sua vez, usa barras na horizontal (deitadas) — não confunda os dois nomes!"},
+        {q:"Qual gráfico é mais adequado para mostrar a variação da temperatura ao longo de uma semana?",opts:["Gráfico pictórico","Gráfico de setores","Gráfico de linhas","Tabela de dupla entrada"],c:2,feedback:"O gráfico de linhas mostra como um dado muda ao longo do tempo — ideal para acompanhar variações, como temperatura dia a dia."},
+        {q:"Num gráfico de setores (pizza), as fatias representam:",opts:["Números aleatórios sem relação entre si","Partes de um todo, que somam 100%","Apenas o maior valor da pesquisa","A ordem cronológica dos dados"],c:1,feedback:"O gráfico de setores divide o todo (100%) em fatias proporcionais — cada fatia é uma porcentagem do total pesquisado."},
+        {q:"Um infográfico se caracteriza por combinar:",opts:["Apenas números", "Apenas imagens, sem texto","Textos curtos, imagens, números e gráficos","Somente texto longo"],c:2,feedback:"O infográfico une elementos variados — textos curtos, imagens, números e gráficos — para comunicar uma informação de forma rápida e visual."}
+      ]
+    }
+  ],
+his: [
 
     {
       num:"Módulo 6", title:"A Formação das Primeiras Cidades", sub:"Agricultura, rios e o nascimento das cidades",
@@ -1043,16 +1149,17 @@ const data = {
   ]
 };
 
-const subjKeys = ['geo','his','por','cie'];
+const subjKeys = ['geo','mat','his','por','cie'];
 let scores = {
   geo: [{c:0,t:0,d:false},{c:0,t:0,d:false},{c:0,t:0,d:false},{c:0,t:0,d:false}],
+  mat: [{c:0,t:0,d:false},{c:0,t:0,d:false},{c:0,t:0,d:false}],
   his: [{c:0,t:0,d:false},{c:0,t:0,d:false},{c:0,t:0,d:false},{c:0,t:0,d:false}],
   por: [{c:0,t:0,d:false},{c:0,t:0,d:false},{c:0,t:0,d:false},{c:0,t:0,d:false},{c:0,t:0,d:false},{c:0,t:0,d:false},{c:0,t:0,d:false}],
   cie: [{c:0,t:0,d:false},{c:0,t:0,d:false},{c:0,t:0,d:false},{c:0,t:0,d:false}]
 };
 let curSubj='geo', curIdx=0, curActiveSubj='geo';
 
-const subjLabels = {geo:'🌍 Geografia', his:'📜 História', por:'📝 Português', cie:'🔬 Ciências'};
+const subjLabels = {geo:'🌍 Geografia', mat:'📐 Matemática', his:'📜 História', por:'📝 Português', cie:'🔬 Ciências'};
 
 // ── navegação de matéria (header) ──
 function selectSubject(subj) {
@@ -1192,7 +1299,7 @@ const notasData = {
     {nome:'História',          icon:'📜', tri:[92,null,null], faltas:[0,null,null], destaque:true},
     {nome:'Geografia',         icon:'🌍', tri:[85,null,null], faltas:[0,null,null], destaque:true},
     {nome:'Ciências',          icon:'🔬', tri:[80,null,null], faltas:[0,null,null], destaque:true},
-    {nome:'Matemática',        icon:'📐', tri:[85,null,null], faltas:[0,null,null], destaque:false},
+    {nome:'Matemática',        icon:'📐', tri:[85,null,null], faltas:[0,null,null], destaque:true},
     {nome:'Língua Inglesa',    icon:'🇬🇧', tri:[96,null,null], faltas:[1,null,null], destaque:false},
     {nome:'Língua Espanhola',  icon:'🇪🇸', tri:[100,null,null],faltas:[0,null,null], destaque:false},
     {nome:'Educação Física',   icon:'⚽', tri:[100,null,null], faltas:[1,null,null], destaque:false},
